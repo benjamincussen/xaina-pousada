@@ -1,0 +1,286 @@
+<!doctype html><html lang="es"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Corsarios</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Alegreya+Sans:wght@500;700;800&display=swap">
+<style>
+/* Juego de una pantalla: barra de los capitanes arriba, el mar al centro y el puente de mando (plan de 4 fases) abajo. Un solo aspecto: noche de madera, latón y pergamino. */
+:root{
+  --deep:#071c26; --sea:#0e3a4a; --parch:#efe2c2; --parch2:#e0cb9c; --ink:#2b1b0e; --wood:#5b3a1f; --wood2:#3a2311; --brass:#d9a441; --blood:#b8322a; --navy:#1f5fa8; --foam:#e9f3ee; --muted:#7d6a48;
+  --display:"Pirata One","IM Fell English SC",Georgia,serif; --body:"Alegreya Sans","Trebuchet MS",system-ui,sans-serif;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--deep);color:var(--foam);font-family:var(--body);overflow:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer;color:inherit}
+button:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+#app{height:100%;position:relative;overflow:hidden}
+#hud{position:absolute;top:0;left:0;right:0;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;padding-top:calc(env(safe-area-inset-top,0px) + 6px);padding-bottom:6px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));background:linear-gradient(rgba(36,21,10,.94),rgba(36,21,10,.82));border-bottom:2px solid var(--brass)}
+.sc{display:flex;flex-direction:column;gap:3px;min-width:0}
+.sc.foe{align-items:flex-end;text-align:right}
+.sc b{font-family:var(--display);font-weight:400;font-size:19px;line-height:1;color:var(--parch);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.sc small{font-size:11.5px;color:var(--parch2);font-weight:800;letter-spacing:.03em}
+.hp{height:9px;width:100%;background:rgba(0,0,0,.55);border-radius:5px;overflow:hidden;border:1px solid rgba(217,164,65,.55)}
+.hp i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#2f9e6e,#7fe0a8);transition:width .5s}
+.foe .hp i{background:linear-gradient(90deg,#ff8b6b,#d6412f);margin-left:auto}
+.turn{display:flex;flex-direction:column;align-items:center;gap:2px}
+.turn b{font-family:var(--display);font-weight:400;font-size:21px;color:var(--brass);line-height:1}
+.turn small{font-size:11px;font-weight:800;color:var(--parch2);white-space:nowrap}
+.flagbtn{border:0;background:rgba(0,0,0,.3);border-radius:8px;font-size:11px;font-weight:800;padding:3px 8px;color:var(--parch2)}
+#stage{position:absolute;inset:0}
+#app.inmenu #hud,#app.inmenu #panel{display:none}
+#cv{position:absolute;inset:0;display:block}
+#panel{position:absolute;left:0;right:0;bottom:0;z-index:2;background:linear-gradient(rgba(58,35,17,.94),rgba(36,21,10,.97));border-top:2px solid var(--brass);padding-top:10px;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 7px);padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:7px}
+#panel.lock{pointer-events:none}
+#panel.lock #tray{opacity:.5}
+#slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;max-width:560px;width:100%;margin-inline:auto}
+.slot{position:relative;background:linear-gradient(#f4e8c9,#e2cfa3);border-radius:10px;padding:4px;display:grid;grid-template-columns:24px minmax(0,1fr) 24px;gap:3px;align-items:center;box-shadow:inset 0 0 0 2px rgba(91,58,31,.35),0 2px 0 rgba(0,0,0,.35)}
+.slot.sel{box-shadow:inset 0 0 0 3px #4cc9f0,0 0 12px rgba(76,201,240,.7)}
+.slot.drop{box-shadow:inset 0 0 0 3px #7fe0a8,0 0 14px rgba(127,224,168,.9);transform:scale(1.04)}
+.tok,.mv{touch-action:none}
+#dragGhost{position:fixed;z-index:9;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:12px;background:linear-gradient(#fff7df,#e8d4a4);box-shadow:0 8px 20px rgba(0,0,0,.5);display:grid;place-items:center;color:var(--ink);pointer-events:none}
+#dragGhost svg{width:30px;height:30px}
+.slot.on{box-shadow:inset 0 0 0 3px var(--brass),0 0 14px rgba(217,164,65,.75)}
+.slot .n{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--wood2);color:var(--brass);font-family:var(--display);font-size:12px;border-radius:8px;padding:0 7px;line-height:16px}
+.mv{height:40px;border:2px dashed rgba(91,58,31,.45);border-radius:8px;background:transparent;display:grid;place-items:center;color:var(--ink);padding:0}
+.mv.f{border:2px solid rgba(91,58,31,.6);background:#fff7df}
+.mv svg{width:28px;height:28px}
+.gun{height:40px;border:0;border-radius:6px;background:rgba(91,58,31,.16);display:grid;place-items:center;padding:0;color:rgba(43,27,14,.55)}
+.gun.on{background:#ff8a1f;color:#2a1205;box-shadow:0 0 12px rgba(255,138,31,.95)}
+.gun{position:relative}
+.gun svg{width:20px;height:20px}
+.gun em{position:absolute;bottom:1px;left:0;right:0;font-style:normal;font-size:9px;font-weight:800;line-height:1;color:#2a1205}
+.gun.amC{background:#b48cff;box-shadow:0 0 12px rgba(180,140,255,.95)}
+.gun.amG{background:#ff6b5a;box-shadow:0 0 12px rgba(255,107,90,.95)}
+.tbtns{display:flex;gap:4px}
+.gun.l svg{transform:scaleX(-1)}
+.hook{position:absolute;top:-9px;right:-4px;width:22px;height:22px;border:2px solid var(--wood2);border-radius:50%;background:#e8d9b5;padding:0;display:grid;place-items:center;color:var(--wood2)}
+.hook svg{width:13px;height:13px}
+.hook.on{background:var(--blood);color:#fff}
+#tray{display:flex;gap:7px;align-items:stretch;max-width:560px;width:100%;margin-inline:auto}
+.tok{flex:1;display:flex;align-items:center;justify-content:center;gap:4px;background:linear-gradient(#f6eacb,#d6bb86);border:0;border-radius:12px;height:46px;color:var(--ink);font-family:var(--display);font-size:24px;box-shadow:0 3px 0 #7c5b2c;padding:0}
+.tok svg{width:28px;height:28px}
+.tok:disabled{opacity:.38}
+.tok:active:not(:disabled),#go:active{transform:translateY(2px);box-shadow:0 1px 0 #7c5b2c}
+#go{flex:1.7;border:0;border-radius:12px;background:linear-gradient(#cf4c37,#8e2a1f);color:#fff;font-family:var(--display);font-size:23px;box-shadow:0 3px 0 #5a160f;position:relative;overflow:hidden;line-height:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+#go small{font-family:var(--body);font-weight:800;font-size:11px;opacity:.9}
+#go .bar{position:absolute;left:0;bottom:0;height:5px;background:var(--brass);transition:width .2s linear}
+.ov{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(3,12,18,.6);padding-block:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));z-index:5}
+.card{background:radial-gradient(circle at 30% 20%,#f8eed4,#e4d0a2 70%,#d4bb85);color:var(--ink);border-radius:16px;width:min(100%,470px);max-height:100%;overflow:auto;padding:20px 18px;box-shadow:0 18px 50px rgba(0,0,0,.6),inset 0 0 0 3px rgba(91,58,31,.5);display:flex;flex-direction:column;gap:12px}
+.card h2{font-family:var(--display);font-weight:400;font-size:34px;margin:0;color:var(--wood2);line-height:1;text-wrap:balance}
+.card p{margin:0;font-size:15px;line-height:1.45;font-weight:500}
+.card .lead{font-size:15.5px;color:#4a3420}
+.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;border:0;border-radius:12px;padding:11px 12px;font-family:var(--display);font-size:23px;background:linear-gradient(#cf4c37,#8e2a1f);color:#fff;box-shadow:0 3px 0 #5a160f;line-height:1.05}
+.btn small{font-family:var(--body);font-size:12.5px;font-weight:700;opacity:.92}
+.btn.alt{background:linear-gradient(#3d7aa6,#1f4a6b);box-shadow:0 3px 0 #10283a}
+.btn.gold{background:linear-gradient(#e6b24c,#a8741c);box-shadow:0 3px 0 #6b4a10;color:#2a1708}
+.btn.ghost{background:transparent;color:var(--wood2);box-shadow:none;border:2px solid rgba(91,58,31,.45);font-size:19px}
+.btn:disabled{filter:grayscale(.8);opacity:.55}
+.row{display:flex;gap:8px}
+.row > *{flex:1}
+#menu{background:linear-gradient(rgba(3,12,18,.15),rgba(3,12,18,.55));align-items:stretch}
+.mwrap{width:min(100%,430px);margin-inline:auto;display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.ttl{text-align:center;margin-top:4vh}
+.ttl h1{font-family:var(--display);font-weight:400;font-size:clamp(64px,19vw,104px);margin:0;color:var(--parch);line-height:.9;text-shadow:0 5px 0 #2a170a,0 0 34px rgba(0,0,0,.65);letter-spacing:.02em}
+.ttl p{margin:6px 0 0;font-weight:800;font-size:14px;color:var(--parch2);letter-spacing:.14em;text-transform:uppercase;text-shadow:0 2px 6px rgba(0,0,0,.8)}
+.mbtns{display:flex;flex-direction:column;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:6px;align-self:center;background:rgba(20,10,4,.7);border:1px solid rgba(217,164,65,.6);border-radius:20px;padding:5px 12px;font-weight:800;color:var(--brass);font-size:15px}
+.coin{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff3b0,#e0a92e 60%,#9a6a10);display:inline-block;flex:none}
+.toggles{display:flex;gap:8px;justify-content:center}
+.tg{border:1px solid rgba(217,164,65,.6);background:rgba(20,10,4,.7);color:var(--parch2);border-radius:20px;padding:6px 12px;font-weight:800;font-size:13px}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opt{flex:1;min-width:88px;border:2px solid rgba(91,58,31,.4);background:rgba(255,255,255,.35);border-radius:10px;padding:8px 6px;font-weight:800;font-size:14px;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:2px}
+.opt small{font-weight:700;font-size:11.5px;color:var(--muted)}
+.opt.on{border-color:var(--blood);background:#fff7e0;box-shadow:0 0 0 2px rgba(184,50,42,.25)}
+.lbl{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ship{display:flex;gap:10px;align-items:center;border:2px solid rgba(91,58,31,.3);border-radius:12px;padding:8px;background:rgba(255,255,255,.3)}
+.ship canvas{width:84px;height:56px;flex:none;background:#0f4f63;border-radius:8px}
+.ship .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.ship .info b{font-family:var(--display);font-weight:400;font-size:20px;line-height:1}
+.ship .info small{font-size:12px;font-weight:700;color:#5a4428}
+.ship .b2{border:0;border-radius:10px;padding:8px 10px;font-weight:800;font-size:13px;background:linear-gradient(#cf4c37,#8e2a1f);color:#fff;white-space:nowrap}
+.ship .b2.use{background:linear-gradient(#3d7aa6,#1f4a6b)}
+.ship .b2:disabled{filter:grayscale(.8);opacity:.55}
+.tag{font-size:11px;font-weight:800;color:#2f7d4f;white-space:nowrap}
+.up{display:flex;align-items:center;gap:10px;border-top:1px dashed rgba(91,58,31,.35);padding-top:8px}
+.up .info{flex:1;min-width:0}
+.up .info b{font-weight:800;font-size:15px;display:block}
+.up .info small{font-size:12px;font-weight:700;color:#5a4428}
+.pips{display:flex;gap:3px;margin-top:3px}
+.pips i{width:10px;height:10px;border-radius:50%;background:rgba(91,58,31,.25)}
+.pips i.on{background:var(--brass);box-shadow:inset 0 0 0 1px #8a5d12}
+.hl{position:relative;z-index:3;animation:hl 1.1s ease-in-out infinite;outline:3px solid #4cc9f0;outline-offset:2px}
+@keyframes hl{0%,100%{box-shadow:0 0 0 0 rgba(76,201,240,.9)}50%{box-shadow:0 0 0 10px rgba(76,201,240,0)}}
+#coach{position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));top:calc(env(safe-area-inset-top,0px) + 74px);z-index:4;max-width:460px;margin-inline:auto;background:radial-gradient(circle at 30% 20%,#f8eed4,#e4d0a2);color:var(--ink);border-radius:14px;padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.55),inset 0 0 0 3px rgba(91,58,31,.5);display:flex;flex-direction:column;gap:8px}
+#coach p{margin:0;font-weight:700;font-size:15px;line-height:1.4}
+#coach .btn{font-size:19px;padding:8px}
+.lpips{display:flex;gap:8px;justify-content:center}
+.lpips i{width:18px;height:18px;border-radius:50%;border:2px solid var(--wood);display:inline-block}
+.lpips i.on{background:#2f9e6e}.lpips i.miss{background:var(--blood)}
+.custom{display:flex;flex-direction:column;gap:8px}
+.custom canvas{width:100%;max-width:100%;aspect-ratio:300/140;border-radius:12px}
+.cn{display:flex;flex-direction:column;gap:4px;font-weight:800;font-size:13px;color:var(--muted)}
+.cn input{font:inherit;font-size:16px;font-weight:700;color:var(--ink);padding:8px 10px;border-radius:10px;border:2px solid rgba(91,58,31,.4);background:#fffaf0}
+.cr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cr span{font-weight:800;font-size:13px;color:var(--muted);min-width:96px}
+.sw{width:34px;height:34px;border-radius:50%;border:3px solid rgba(91,58,31,.35);background:var(--sw);padding:0}
+.sw.on{border-color:var(--ink);box-shadow:0 0 0 3px var(--brass)}
+.rules{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:14.5px;line-height:1.4}
+.rules b{color:var(--wood2)}
+#duel .card{align-items:center;text-align:center}
+.vs{display:flex;align-items:center;justify-content:center;gap:14px;width:100%}
+.fighter{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.fighter b{font-family:var(--display);font-weight:400;font-size:20px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.dots{display:flex;gap:4px}
+.dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--wood);display:inline-block}
+.dots i.on{background:var(--blood)}
+.swords{width:54px;height:54px;flex:none}
+.swords.hit{animation:clash .35s}
+@keyframes clash{0%{transform:scale(1)}40%{transform:scale(1.35) rotate(-10deg)}100%{transform:scale(1)}}
+.track{position:relative;width:100%;height:30px;border-radius:15px;background:linear-gradient(#5b3a1f,#3a2311);box-shadow:inset 0 2px 6px rgba(0,0,0,.6);overflow:hidden}
+.zone{position:absolute;top:0;bottom:0;background:linear-gradient(#7fe0a8,#2f9e6e);opacity:.9}
+.needle{position:absolute;top:-2px;bottom:-2px;width:6px;margin-left:-3px;background:#fff6d6;border-radius:3px;box-shadow:0 0 8px #fff}
+#dMsg{min-height:22px;font-weight:800;font-size:16px}
+@media (prefers-reduced-motion:reduce){.swords.hit{animation:none}}
+@media (max-width:370px){.tok{font-size:20px}.slot{grid-template-columns:17px minmax(0,1fr) 17px}.sc b{font-size:16px}}
+</style>
+
+<div id="app">
+  <header id="hud">
+    <div class="sc me"><b id="mName">Tú</b><div class="hp"><i id="mHp"></i></div><small id="mMeta">Balandra</small></div>
+    <div class="turn"><b id="tTurn">Turno 1</b><small id="tPhase">Planifica tu turno</small><div class="tbtns"><button class="flagbtn" id="bLoad" type="button" hidden>+1 bala</button><button class="flagbtn" id="bReplay" type="button" hidden>Repetir</button><button class="flagbtn" id="bQuit" type="button">Rendirse</button></div></div>
+    <div class="sc foe"><b id="fName">Rival</b><div class="hp"><i id="fHp"></i></div><small id="fMeta">Balandra</small></div>
+  </header>
+  <main id="stage"><canvas id="cv" aria-label="Mar de la batalla"></canvas></main>
+  <footer id="panel">
+    <div id="slots"></div>
+    <div id="tray">
+      <button class="tok" type="button" data-m="L" aria-label="Girar a babor"></button>
+      <button class="tok" type="button" data-m="F" aria-label="Avanzar"></button>
+      <button class="tok" type="button" data-m="R" aria-label="Girar a estribor"></button>
+      <button id="go" type="button">¡Zarpar!<small id="goSub">35 s</small><span class="bar" id="goBar"></span></button>
+    </div>
+  </footer>
+</div>
+
+<section class="ov" id="menu">
+  <div class="mwrap">
+    <div class="ttl"><h1>Corsarios</h1><p>Batallas navales por turnos</p></div>
+    <div class="mbtns">
+      <span class="chip"><i class="coin"></i><span id="mGold">0</span> doblones</span>
+      <button class="btn" id="bCamp" type="button">Campaña<small id="campSub"></small></button>
+      <button class="btn gold" id="bDaily" type="button">Desafío del día<small id="dailySub"></small></button>
+      <button class="btn alt" id="bQuick" type="button">Batalla rápida<small>Elige el rival y la dificultad</small></button>
+      <div class="row"><button class="btn gold" id="bYard" type="button">Astillero</button><button class="btn alt" id="bHelp" type="button">Cómo se juega</button></div>
+      <div class="toggles"><button class="tg" id="bSnd" type="button">Sonido: sí</button><button class="tg" id="bMus" type="button">Música: sí</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="ov" id="pick" hidden>
+  <div class="card">
+    <h2>Batalla rápida</h2>
+    <span class="lbl">Capitán rival</span>
+    <div class="opts" id="pLevel"></div>
+    <span class="lbl">Mar</span>
+    <div class="opts" id="pSea"></div>
+    <span class="lbl">Modo</span>
+    <div class="opts" id="pMode"></div>
+    <span class="lbl">Barco rival</span>
+    <div class="opts" id="pShip"></div>
+    <p class="lead" id="pInfo"></p>
+    <button class="btn" id="pGo" type="button">¡A la mar!</button>
+    <button class="btn ghost" id="pBack" type="button">Volver</button>
+  </div>
+</section>
+
+<section class="ov" id="yard" hidden>
+  <div class="card">
+    <h2>Astillero</h2>
+    <span class="chip" style="align-self:flex-start"><i class="coin"></i><span id="yGold">0</span> doblones</span>
+    <span class="lbl">Tu barco</span>
+    <div id="yCustom" class="custom"></div>
+    <span class="lbl">Tus barcos</span>
+    <div id="yShips" style="display:flex;flex-direction:column;gap:8px"></div>
+    <span class="lbl" id="yUpT">Mejoras</span>
+    <div id="yUps" style="display:flex;flex-direction:column;gap:8px"></div>
+    <button class="btn ghost" id="yBack" type="button">Volver</button>
+  </div>
+</section>
+
+<section class="ov" id="help" hidden>
+  <div class="card">
+    <h2>Cómo se juega</h2>
+    <ol class="rules">
+      <li>Cada turno tiene <b>4 fases</b>. <b>Arrastra</b> las fichas de abajo (girar a babor, avanzar, girar a estribor) a la casilla que quieras. Puedes dejar casillas vacías: en esa fase tu barco se queda quieto y solo lo mueve el mar (útil en un remolino). Tocar una ficha la pone en la casilla marcada o en la primera libre; tocar una casilla llena la vacía.</li>
+      <li>Al girar, el barco avanza una casilla y luego se corre hacia el lado del giro.</li>
+      <li>Los <b>cañones</b> a cada lado de la casilla disparan hacia ese costado en esa fase, hasta 3 casillas. Cada disparo usa balas.</li>
+      <li>Al tocar <b>¡Zarpar!</b> los dos barcos ejecutan su plan al mismo tiempo: primero se mueven, después el mar los mueve y al final disparan. Tienes que adivinar dónde va a estar el rival.</li>
+      <li><b>Viento</b> (flechas): te empuja una casilla. <b>Remolino</b>: cada fase que estás en él te lleva en diagonal a su esquina opuesta (dos casillas) y te gira un cuarto de vuelta, aunque no uses ficha. <b>Rocas</b>: chocar hace daño. Las rocas altas tapan las balas; por encima de las bajas se dispara.</li>
+      <li>Toca un cañón varias veces para elegir la munición: <b>Bala</b> (daño, 3 casillas), <b>Cadena</b> (rompe velas: el rival recibe menos fichas el turno siguiente) o <b>Metralla</b> (solo 2 casillas, le baja tripulación: así gana menos abordajes y, si queda poca, recarga menos).</li>
+      <li>Mares: <b>Archipiélago</b> (islas que tapan paso y balas), <b>Niebla</b> (solo ves cerca de tu barco) y <b>Tormenta</b> (el viento cambia cada turno). En <b>Flotas</b> peleas 2 contra 2 con un aliado.</li>
+      <li>Los puntos rojos muestran por dónde anduvo el rival. Con <b>Repetir turno</b> vuelves a ver lo que pasó.</li>
+      <li>Cada turno se recargan las fichas y solo <b>2 balas</b> (4 en el galeón, que dispara doble). Elige bien cuándo disparar. Las fichas y balas que no usas se guardan.</li>
+      <li><b>Gancho</b>: si en esa fase quedas pegado al rival, lo abordas y se decide en un duelo de espadas. Conviene cuando tienes más vida.</li>
+      <li>Ganas hundiendo al rival o en el abordaje. Con los doblones mejoras y compras barcos en el astillero.</li>
+    </ol>
+    <button class="btn alt" id="bTut" type="button">Jugar el tutorial</button>
+    <button class="btn" id="hBack" type="button">Entendido</button>
+  </div>
+</section>
+
+<section class="ov" id="result" hidden>
+  <div class="card" style="text-align:center;align-items:center">
+    <h2 id="rTitle">¡Victoria!</h2>
+    <p class="lead" id="rText"></p>
+    <span class="chip" id="rGold"><i class="coin"></i><span>+0</span></span>
+    <div class="row" style="width:100%"><button class="btn alt" id="rAgain" type="button">Revancha</button><button class="btn" id="rOk" type="button">Seguir</button></div>
+  </div>
+</section>
+
+<section class="ov" id="quit" hidden>
+  <div class="card" style="text-align:center;align-items:center">
+    <h2>¿Rendirse?</h2>
+    <p class="lead">Si izas la bandera blanca pierdes esta batalla.</p>
+    <div class="row" style="width:100%"><button class="btn alt" id="qNo" type="button">Seguir peleando</button><button class="btn" id="qYes" type="button">Rendirse</button></div>
+  </div>
+</section>
+
+<section class="ov" id="load" hidden>
+  <div class="card" style="align-items:center;text-align:center">
+    <h2>Cargar cañón</h2>
+    <p class="lead">Toca <b>¡Cargar!</b> cuando la aguja esté en la zona verde. Tres aciertos seguidos y tienes una bala extra. El reloj del turno sigue corriendo.</p>
+    <div class="lpips" id="lPips"></div>
+    <div class="track"><div class="zone" id="lZone"></div><div class="needle" id="lNeedle"></div></div>
+    <div id="lMsg" style="min-height:22px;font-weight:800;font-size:16px"></div>
+    <button class="btn" id="lHit" type="button">¡Cargar!</button>
+  </div>
+</section>
+<div id="coach" hidden><p id="cText"></p><button class="btn alt" id="cNext" type="button">Siguiente</button></div>
+
+<section class="ov" id="duel" hidden>
+  <div class="card">
+    <h2>¡Abordaje!</h2>
+    <div class="vs">
+      <div class="fighter"><b id="dMe">Tú</b><div class="dots" id="dMeDots"><i></i><i></i></div></div>
+      <svg class="swords" id="dSw" viewBox="0 0 64 64" aria-hidden="true"><g stroke="#2b1b0e" stroke-width="3" stroke-linecap="round"><path d="M10 54 L46 12" /><path d="M54 54 L18 12"/></g><g fill="#d9a441" stroke="#2b1b0e" stroke-width="2"><rect x="6" y="46" width="14" height="6" rx="2" transform="rotate(-50 13 49)"/><rect x="44" y="46" width="14" height="6" rx="2" transform="rotate(50 51 49)"/></g></svg>
+      <div class="fighter"><b id="dFoe">Rival</b><div class="dots" id="dFoeDots"><i></i><i></i></div></div>
+    </div>
+    <p class="lead" style="text-align:center">Toca <b>¡Estocada!</b> cuando la aguja esté en la zona verde. Gana el primero en sumar 2 golpes.</p>
+    <div class="track"><div class="zone" id="dZone"></div><div class="needle" id="dNeedle"></div></div>
+    <div id="dMsg"></div>
+    <button class="btn" id="dHit" type="button">¡Estocada!</button>
+  </div>
+</section>
+
+<script src="engine.js"></script>
+<script src="sfx.js"></script>
+<script src="gfx.js"></script>
+<script src="main.js"></script>
+<script src="extras.js"></script>
+<script src="peerjs.min.js"></script>
+<script src="p2p.js"></script>
+<script src="online.js"></script>
+
+</body></html>
