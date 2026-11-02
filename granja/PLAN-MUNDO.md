@@ -17,17 +17,17 @@ Zona del mapa reservada para el Mundo: **x > 3000**, el océano al este del mapa
   - Rutas punteadas desde nuestro puerto y barcos yendo y volviendo a cada colonia.
   - Tocar una isla abre su ciudad. 🌍 lleva la cámara al mar del mundo; tocarlo otra vez abre el panel.
 
-- **v93: fases 1 y 2.**
+- **v96: fases 1 y 2.**
   - Vida en las islas: vecinos paseando, humo de chimeneas, gaviotas, y obra con andamios y grúa ("En obra") 2 min después de fundar o mejorar una colonia.
   - Expediciones navales animadas: al atacar, la flota (2–8 barcos según los de guerra) sale del fuerte, cruza el mar en 45 s, combate 12 s frente a la isla (humo, chispas y 💥, sin heridos) y vuelve con el cartel del resultado; el aviso de victoria o derrota sale al terminar el combate.
   - Ataques enemigos visibles: los saqueos de las ciudades del mundo llegan en barcos con su bandera hasta nuestro puerto, con aviso "⚠️ Barcos de … vienen", y si la defensa gana se ve "¡Defendimos!".
 
 ## Próximas fases (grandes, una por ronda)
-1. ~~Vida en las islas~~ (hecho en v93):
+1. ~~Vida en las islas~~ (hecho en v96):
    - vecinos caminando, humo, faroles de noche y gaviotas;
    - las colonias crecen a la vista nivel a nivel (andamios, obra en curso);
    - nombres propios de barrio.
-2. ~~Expediciones navales animadas~~ (hecho en v93):
+2. ~~Expediciones navales animadas~~ (hecho en v96):
    - al atacar, la flota sale del fuerte, cruza el mar hasta la isla, hay un combate de dibujo animado (humo, chispas, nadie muere) y vuelve;
    - el resultado llega al llegar.
    - Los ataques enemigos también se ven venir: barcos con su bandera que cruzan hacia nosotros, con aviso en pantalla.
