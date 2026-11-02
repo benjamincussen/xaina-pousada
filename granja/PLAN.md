@@ -579,3 +579,13 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
   - Se ve un barco 🛳️ viajando a esa ciudad en el mapa del mundo.
 - **Más mundo:** dos ciudades nuevas, Ilhas Gêmeas (comerciante) y Cidade Real (guerrera y fuerte), y una isla libre más (Cabo Leste). Hay que explorarlas.
 - **Mapa del mundo:** barquitos ⛵ van y vienen a cada colonia; aparecen 🤝 sobre las ciudades amigas y ⚔️ sobre las hostiles.
+
+## Versión 83: Negocios (negocios.js, extensión escrita por un agente de esta sesión)
+
+- Botón 🏪 (nivel 12) y hoja "Negocios". Cuatro negocios que construye el jugador o el Concejo (Comercio, con el tesoro):
+  - **Banco** (Ciudad Nueva, 3000): cada 10 min paga al tesoro el 2% del tesoro (tope 2000).
+  - **Mercado Grande** (Ciudad Nueva, 4000): cada 5 min paga al jugador un bono del 5% del valor del granero (tope 600).
+  - **Escuela de Oficios** (Campos del Oeste, 2500): cada 10 min rinde al tesoro 0,25/min por vecino adulto sin empleo.
+  - **Chocolatería** (Campos del Oeste, 3500): bombón (210) con chocolate caliente + leche + azúcar, cola de 3; el Concejo encarga pagando los ingredientes.
+- Dibujos propios (banco con columnas y $, mercado con toldo y cajones, escuela con campanario y chicos entrando, chocolatería con humo), carteles "Se vende", tocar abre la hoja; todo por hooks EXT (sin tocar game.js).
+- Prueba `tests/negocios.js`: 3 h simuladas: Banco 18 pagos (8 557), Mercado 36 bonos (8 178), Escuela 17 pagos (7 116); el Concejo construyó la Escuela solo y encargó bombones; 0 errores.
