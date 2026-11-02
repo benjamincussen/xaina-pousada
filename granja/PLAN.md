@@ -718,3 +718,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 ## Versión 104: Arreglo — camiones, tren y autitos sin Alcaldía
 
 - Los camiones de reparto (v79), el tren de carga (v93) y los autitos (v103) se dibujaban dentro del bloque de monedas del Concejo, así que no aparecían en partidas sin Alcaldía. Ahora `coinFlights` corre siempre y solo las partes del Concejo (monedas al tesoro, camión del Comercio) exigen Alcaldía. Probado con una partida sin Concejo: camión visible tras cobrar en el Ingenio.
+
+## Versión 105: Ayudantes 4 — Vendedor y Lucía con presupuesto
+
+- Oficio 💰 **Vendedor**: vende hasta 10 unidades de cada sobra (por encima del stock objetivo y de lo que piden pedidos y recetas) cuando el precio del día está en buen momento (≥1,2×). Viene por defecto en el ayudante 22.
+- **Presupuesto de Lucía por hora** (hoja de la arquitecta: Solo con mi OK / 500 / 2000 / 10000): aprueba sola las propuestas que entran en el presupuesto (queda en su registro como "aprobado por Lucía", con aviso y cámara); el resto espera el OK. Por defecto, manual.
+- Pruebas: 2 calles aprobadas solas dentro del presupuesto, vendedor vende 6 lotes (+1146), hojas sin errores; smoke y fuzz sin errores.
