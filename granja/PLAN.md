@@ -200,3 +200,10 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Hora del cuento: con el Colegio, de día una cuentacuentos lee a 6 niños sobre una alfombra en el Barrio Escolar.
 - Canasta de los vecinos (huerto comunitario): con 6+ vecinos, cada 10 min hay una canasta en la entrada de la ciudad; tocarla da 4 cosechas (sincronizado en co-op).
 - Texto de inauguración neutro en género (PT/ES).
+
+## Versión grande 35: Diario de los ayudantes, desfile y pescador (2026-11-03.36)
+- Diario de los ayudantes (en Ayudantes): las últimas 8 acciones con nombre, icono, producto y hace cuánto ("Nina empezó a hacer Pan", "Juca cobró arriendo de las casas (4×)"). Se sincroniza en co-op.
+- Globito sobre la cabeza de cada ayudante con lo que acaba de hacer (icono + producto).
+- Desfile del Colegio: cada 20 min los niños desfilan con tambor y banderitas por la avenida del Barrio Escolar.
+- Pescador del lago (orilla sureste): tocarlo compra 3 pescados por 60 monedas, 1 vez cada 10 min.
+- Robustez: migrate crea corrales que falten en partidas viejas.
