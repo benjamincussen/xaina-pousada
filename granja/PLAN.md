@@ -386,3 +386,8 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Ayudantes: ahora se pueden contratar hasta 16 (Rosa, Davi, Lia, Beto, Mel, Caio, Iara, Téo; 7.000 a 20.000 monedas).
 - Oficio nuevo 🏙️ Ciudad (por defecto en los ayudantes 9, 12 y 15): cobra todos los arriendos (casas, torres, aeropuerto, colonia, puerto), atiende solicitudes de vecinos y misiones, ayuda a vecinos, toma canastas y tesoros y carga el barco de exportación solo con productos que sobran. Nunca compra terrenos ni obras.
 - Panel de Ayudantes → "Atentos a la ciudad": vecinos y felicidad, arriendos esperando, lotes libres, próxima obra posible y próximo terreno (solo informa; la compra es decisión del jugador).
+
+## Versión 66: Tres rutas de exportación, Estadio y Cine de la Ciudad (2026-11-03.66)
+- Puerto de Carga: cada 15 min llegan 3 barcos con ruta propia (Isla del Sol 2,2×, Puerto de la Sierra 2,6× pide más, Gran Ciudad 3× pide mucho más); cada ruta se cumple una vez por ronda (S.expR, compatible con S.exp viejo). Los barcos cargados zarpan hacia su destino. Los ayudantes de Ciudad cargan cualquier ruta solo con productos sobrantes.
+- Centro Moderno: Estadio (nv 17; hinchada, jugadores y pelota en vivo; arriendo 450) y Cine de la Ciudad (nv 16; marquesina con luces; arriendo 320).
+- Revisión completa: textos PT/ES sin faltantes, prueba larga de 3 h de juego sin errores, co-op con acciones nuevas idéntico en ambos teléfonos.
