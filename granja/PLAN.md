@@ -32,3 +32,10 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 
 ## Próxima versión grande (en preparación)
 - [ ] Ideas en evaluación: invernadero de flores, pizzería, puerto pesquero, parque de diversiones, eventos de la ciudad (fiesta, mercado nocturno), mascotas, profesiones de los vecinos
+
+## Versión grande 3: "Equipo" (2026-11-03.2)
+- [x] Actualización automática sin botón (recarga sola cuando nadie está tocando, vuelve a la misma sala)
+- [x] Ayudantes con oficios: Scout, Pedidos, Sembrador, Recolector (hasta 8 ayudantes)
+- [x] Plan del scout por cadena (paleta → azúcar → caña) y sin llenar el molino de ración
+- [x] Cuentas de los ayudantes (gastado / ganado)
+- [x] Campo Grande: +24 parcelas (mapa más grande al sur)

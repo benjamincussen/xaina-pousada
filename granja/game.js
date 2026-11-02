@@ -48,6 +48,9 @@ const TX = {
     sound: 'Som', music: 'Música', ambient: 'Sons do sítio', on: 'sim', off: 'não',
     lvlCap: '+50 lugares no celeiro', lvlTitle: l => `Nível ${l}!`, lvlCoins: c => `+${c} moedas de prêmio`, lvlUnlocked: 'Liberado agora', lvlNext: l => `No nível ${l}`, lvlNothing: 'Prêmio em moedas, +50 lugares no celeiro e encomendas que pagam mais.', lvlRoad: 'Próximos níveis', great: 'Que bom!',
     newsT: "Novidades", newsSub: "O que mudou no sítio. Toque em “Ver” para ir até lá.", newsGo: "Ver", n_people: "Muito mais gente", n_peopleD: "Vizinhos, visitantes, turistas, crianças e trabalhadores nos prédios. Toque numa pessoa para conversar.", n_escolar: "Bairro Escolar (nível 10)", n_escolarD: "Mapa maior ao sul: Colégio com relógio e bandeira, Parque infantil com balanço e escorregador, Campo de futebol e 6 lotes novos.", n_big: "Casas de dois andares", n_bigD: "Toque numa casa e amplie: chegam mais 2 moradores e o aluguel dobra.", n_bairro: "Bairro Novo (nível 8)", n_bairroD: "Avenida de pedra, 10 lotes para casas, vizinhos com nome, praça com coreto e posto de saúde.", n_fair: "Feira do bairro", n_fairD: "4 barracas: vizinhos e turistas compram pelo preço cheio.", n_roads: "Ruas de pedra", n_roadsD: "Pinte ruas com o dedo (as primeiras 30 grátis). Dão bônus nas encomendas.", n_dup: "Prédios em dobro e melhorias", n_dupD: "Até 3 de cada prédio de produção e melhorias de velocidade (nível 2 e 3).", n_goals: "Metas com prêmio", n_goalsD: "17 metas para os dois, e a dica do que fazer agora no topo da tela.", n_truck: "Caminhão, adubo e ração premium", n_truckD: "O caminhão entrega sozinho; adubo e ração deixam tudo 2x mais rápido por 10 min.", n_night: "Dia, noite e chuva", n_nightD: "A cada 16 min anoitece e os postes acendem; a chuva rega a plantação.",
+    team: "Equipe", teamHint: "Escolha o ofício de cada ajudante. Com 4 ou mais, eles se dividem sozinhos.", role_todo: "Faz tudo", role_scout: "Scout", role_pedidos: "Pedidos", role_planta: "Plantador", role_colhe: "Coletor", roleD_todo: "Faz um pouco de cada coisa.", roleD_scout: "Vê o que falta, entrega as encomendas e vende as sobras.", roleD_pedidos: "Pede nos prédios o que as encomendas e as obras precisam (primeiro o açúcar, depois o picolé).", roleD_planta: "Planta o que falta e alimenta os animais.", roleD_colhe: "Colhe plantas, árvores, animais, prédios, colmeias e aluguéis (rápido!).", scoutList: "Lista do scout: o que falta", scoutNone: "Nada faltando agora.", ledger: "Contas dos ajudantes", ledgerD: (a, b) => `Gastaram ${a} moedas (sementes, ração) e ganharam ${b} moedas (encomendas, vendas, aluguéis) neste turno.`,
+    n_team: "Equipe com ofícios (até 8 ajudantes)", n_teamD: "Scout (vê o que falta e entrega), Pedidos (faz nos prédios), Plantador (planta e alimenta animais) e Coletor (colhe tudo, rápido). Escolha o ofício de cada um.", n_chain: "Ajudantes mais espertos", n_chainD: "Agora seguem a cadeia: para o picolé fazem primeiro o açúcar com a cana. Não enchem o moinho de ração. E você vê a lista do que falta e quanto gastaram e ganharam.", n_lavoura: "Lavoura Grande: +24 canteiros (nível 11)", n_lavouraD: "O mapa cresceu de novo: um campo enorme no sul com celeiro, caixa d’água e espantalho.", n_auto: "Atualiza sozinho", n_autoD: "Sem botão: quando sai versão nova, o jogo recarrega sozinho quando você não está mexendo, e volta para a mesma sala.",
+    land_lavoura: 'Lavoura Grande', landDesc_lavoura: 'Campo enorme no extremo sul: mais 24 canteiros para plantar muito mais.',
     land_escolar: 'Bairro Escolar', landDesc_escolar: 'Mais um bairro ao sul: Colégio, Parque infantil, Campo de futebol e 6 lotes para casas.', serv_colegio: 'Colégio', servD_colegio: 'As crianças vão à escola: +20 de felicidade', serv_parque: 'Parque infantil', servD_parque: 'Balanço, escorregador e areia: +15 de felicidade', serv_campo: 'Campo de futebol', servD_campo: 'Peladas todo dia: +10 de felicidade',
     bigTitle: 'Ampliar casa', bigHint: 'Segundo andar: chegam mais 2 moradores e o aluguel dobra.', bigBtn: 'Ampliar', bigDone: (a, b) => `Casa ampliada! ${a} e ${b} chegaram.`, livesHere: n => `Moram aqui: ${n}`,
     land_bairro: 'Bairro Novo', landDesc_bairro: 'Um bairro com avenida e 12 lotes: construa casas, chegam vizinhos que pagam aluguel e dão bônus nas encomendas.',
@@ -77,7 +80,7 @@ const TX = {
     animals: 'Animais', buyHen: 'Mais uma galinha', buyCow: 'Mais uma vaca', haveN: (n, m) => `${n} de ${m}`, decos: 'Decoração', decoBonus: n => `Cada decoração faz as encomendas pagarem 5% a mais. Agora: +${n}%`,
     deco_banco: 'Banco de madeira', deco_flores: 'Canteiro de flores', deco_espantalho: 'Espantalho', deco_fonte: 'Fonte', bought: 'Comprado', newDeco: n => `${n} enfeitando o sítio!`,
     joiningOpen: c => `A sala ${c} já está aberta. Entrando nela…`, roomWaiting: c => `Sala ${c}: esperando seu amigo entrar`, blocked: 'A sala existe, mas a conexão entre os celulares não abriu. Tentem os dois no mesmo Wi-Fi e entrem de novo.',
-    addSlot: 'Mais um espaço na fila', slotsMax: 'Fila no máximo', newVersion: 'Tem uma versão nova do jogo.', update: 'Atualizar',
+    addSlot: 'Mais um espaço na fila', slotsMax: 'Fila no máximo', newVersion: 'Tem uma versão nova do jogo.', update: 'Atualizar', updDone: 'Jogo atualizado sozinho ✨',
     sellOne: 'Vender 1', sellAll: 'Vender tudo', each: n => `${n} cada`, barnFullHint: 'O celeiro está cheio. Toque no Celeiro e venda alguma coisa.', sold: (q, k, c) => `Vendeu ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
     helperTitle: 'Ajudante Juca', helperAria: 'Ajudante', helperLocked: n => `Entregue ${n} encomendas e vocês ganham o Juca, um ajudante que cuida do sítio.`, helperProg: (d, n) => `${d} de ${n} encomendas entregues`,
     helperWon: 'Vocês ganharam um ajudante: o Juca!', shiftBtn: 'Pagar um turno de 20 min', working: t => `O Juca está trabalhando. Ainda ${t}.`, resting: 'O Juca está descansando. Pague um turno para ele trabalhar.',
@@ -117,6 +120,9 @@ const TX = {
     sound: 'Sonido', music: 'Música', ambient: 'Sonidos del campo', on: 'sí', off: 'no',
     lvlCap: '+50 espacios en el granero', lvlTitle: l => `¡Nivel ${l}!`, lvlCoins: c => `+${c} monedas de premio`, lvlUnlocked: 'Se desbloquea ahora', lvlNext: l => `En el nivel ${l}`, lvlNothing: 'Premio en monedas, +50 espacios en el granero y pedidos que pagan más.', lvlRoad: 'Próximos niveles', great: '¡Genial!',
     newsT: "Novedades", newsSub: "Lo que cambió en la granja. Toca “Ver” para ir hasta allá.", newsGo: "Ver", n_people: "Mucha más gente", n_peopleD: "Vecinos, visitantes, turistas, niños y trabajadores en los edificios. Toca a una persona para conversar.", n_escolar: "Barrio Escolar (nivel 10)", n_escolarD: "Mapa más grande al sur: Colegio con reloj y bandera, Parque infantil con columpios y tobogán, Cancha de fútbol y 6 lotes nuevos.", n_big: "Casas de dos pisos", n_bigD: "Toca una casa y amplíala: llegan 2 vecinos más y el arriendo se duplica.", n_bairro: "Barrio Nuevo (nivel 8)", n_bairroD: "Avenida de piedra, 10 lotes para casas, vecinos con nombre, plaza con glorieta y posta de salud.", n_fair: "Feria del barrio", n_fairD: "4 puestos: vecinos y turistas compran a precio completo.", n_roads: "Calles de piedra", n_roadsD: "Pinta calles con el dedo (las primeras 30 gratis). Dan bono en los pedidos.", n_dup: "Edificios dobles y mejoras", n_dupD: "Hasta 3 de cada edificio de producción y mejoras de velocidad (nivel 2 y 3).", n_goals: "Metas con premio", n_goalsD: "17 metas para los dos, y el consejo de qué hacer ahora arriba en la pantalla.", n_truck: "Camión, abono y ración premium", n_truckD: "El camión entrega solo; abono y ración hacen todo 2x más rápido por 10 min.", n_night: "Día, noche y lluvia", n_nightD: "Cada 16 min anochece y se encienden los faroles; la lluvia riega los cultivos.",
+    team: "Equipo", teamHint: "Elige el oficio de cada ayudante. Con 4 o más, se reparten solos.", role_todo: "Hace todo", role_scout: "Scout", role_pedidos: "Pedidos", role_planta: "Sembrador", role_colhe: "Recolector", roleD_todo: "Hace un poco de cada cosa.", roleD_scout: "Ve lo que falta, entrega los pedidos y vende las sobras.", roleD_pedidos: "Pide en los edificios lo que necesitan los pedidos y las obras (primero el azúcar, después la paleta).", roleD_planta: "Siembra lo que falta y alimenta a los animales.", roleD_colhe: "Recoge cultivos, árboles, animales, edificios, colmenas y arriendos (¡rápido!).", scoutList: "Lista del scout: lo que falta", scoutNone: "No falta nada ahora.", ledger: "Cuentas de los ayudantes", ledgerD: (a, b) => `Gastaron ${a} monedas (semillas, ración) y ganaron ${b} monedas (pedidos, ventas, arriendos) en este turno.`,
+    n_team: "Equipo con oficios (hasta 8 ayudantes)", n_teamD: "Scout (ve lo que falta y entrega), Pedidos (hace en los edificios), Sembrador (siembra y alimenta animales) y Recolector (recoge todo, rápido). Elige el oficio de cada uno.", n_chain: "Ayudantes más inteligentes", n_chainD: "Ahora siguen la cadena: para la paleta hacen primero el azúcar con la caña. No llenan el molino de ración. Y ves la lista de lo que falta y cuánto gastaron y ganaron.", n_lavoura: "Campo Grande: +24 parcelas (nivel 11)", n_lavouraD: "El mapa creció otra vez: un campo enorme al sur con granero, estanque de agua y espantapájaros.", n_auto: "Se actualiza solo", n_autoD: "Sin botón: cuando sale una versión nueva, el juego se recarga solo cuando no estás tocando nada, y vuelve a la misma sala.",
+    land_lavoura: 'Campo Grande', landDesc_lavoura: 'Campo enorme al extremo sur: 24 parcelas más para sembrar mucho más.',
     land_escolar: 'Barrio Escolar', landDesc_escolar: 'Otro barrio al sur: Colegio, Parque infantil, Cancha de fútbol y 6 lotes para casas.', serv_colegio: 'Colegio', servD_colegio: 'Los niños van al colegio: +20 de felicidad', serv_parque: 'Parque infantil', servD_parque: 'Columpios, tobogán y arena: +15 de felicidad', serv_campo: 'Cancha de fútbol', servD_campo: 'Partidos todos los días: +10 de felicidad',
     bigTitle: 'Ampliar casa', bigHint: 'Segundo piso: llegan 2 vecinos más y el arriendo se duplica.', bigBtn: 'Ampliar', bigDone: (a, b) => `¡Casa ampliada! Llegaron ${a} y ${b}.`, livesHere: n => `Viven aquí: ${n}`,
     land_bairro: 'Barrio Nuevo', landDesc_bairro: 'Un barrio con avenida y 12 lotes: construye casas, llegan vecinos que pagan arriendo y dan bono en los pedidos.',
@@ -146,7 +152,7 @@ const TX = {
     animals: 'Animales', buyHen: 'Una gallina más', buyCow: 'Una vaca más', haveN: (n, m) => `${n} de ${m}`, decos: 'Decoración', decoBonus: n => `Cada decoración hace que los pedidos paguen 5% más. Ahora: +${n}%`,
     deco_banco: 'Banco de madera', deco_flores: 'Macizo de flores', deco_espantalho: 'Espantapájaros', deco_fonte: 'Fuente', bought: 'Comprado', newDeco: n => `¡${n} adornando la granja!`,
     joiningOpen: c => `La sala ${c} ya está abierta. Entrando…`, roomWaiting: c => `Sala ${c}: esperando que entre tu amigo`, blocked: 'La sala existe, pero la conexión entre los celulares no se abrió. Prueben los dos en el mismo Wi-Fi y vuelvan a entrar.',
-    addSlot: 'Un espacio más en la fila', slotsMax: 'Fila al máximo', newVersion: 'Hay una versión nueva del juego.', update: 'Actualizar',
+    addSlot: 'Un espacio más en la fila', slotsMax: 'Fila al máximo', newVersion: 'Hay una versión nueva del juego.', update: 'Actualizar', updDone: 'Juego actualizado solo ✨',
     sellOne: 'Vender 1', sellAll: 'Vender todo', each: n => `${n} c/u`, barnFullHint: 'El granero está lleno. Toca el Granero y vende algo.', sold: (q, k, c) => `Vendiste ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
     helperTitle: 'Ayudante Juca', helperAria: 'Ayudante', helperLocked: n => `Entreguen ${n} pedidos y se ganan a Juca, un ayudante que cuida la granja.`, helperProg: (d, n) => `${d} de ${n} pedidos entregados`,
     helperWon: '¡Se ganaron un ayudante: Juca!', shiftBtn: 'Pagar un turno de 20 min', working: t => `Juca está trabajando. Le quedan ${t}.`, resting: 'Juca está descansando. Págale un turno para que trabaje.',
@@ -217,6 +223,7 @@ const LANDS = {
   praia: { lvl: 9, cost: 2000, r: { x: 1110, y: 40, w: 370, h: 1650 }, sx: 1290, sy: 420 },
   bairro: { lvl: 8, cost: 1500, r: { x: 20, y: 1730, w: 1460, h: 570 }, sx: 740, sy: 1900 },
   escolar: { lvl: 10, cost: 2500, r: { x: 20, y: 2330, w: 1460, h: 570 }, sx: 740, sy: 2470 },
+  lavoura: { lvl: 11, cost: 1500, r: { x: 20, y: 2930, w: 1460, h: 470 }, sx: 1100, sy: 3150 },
 };
 const TREES = [['laranja', 740, 210], ['laranja', 860, 210], ['laranja', 980, 210], ['manga', 740, 380], ['manga', 860, 380], ['manga', 980, 380]];
 const FRUIT = { laranja: { t: 90, y: 3, xp: 4 }, manga: { t: 140, y: 2, xp: 5 }, coco: { t: 180, y: 2, xp: 6 } };
@@ -273,7 +280,10 @@ const roadBonus = S => Math.min(10, Math.floor(((S.roads && S.roads.length) || 0
 const decoBonus = S => Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5 + roadBonus(S) + popBonus(S);
 function roadOk(S, gx, gy) { const x = gx * RD + RD / 2, y = gy * RD + RD / 2; if (x < 20 || y < 50 || x > WW - 20 || y > WH - 20) return false; for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR({ x, y }, Ld.r)) return false; return true; }
 captureDefaults.later = true;
-const HELPER_NAMES = ['Juca', 'Nina', 'Tonho', 'Bia'], HELPER_LOOKS = ['cap', 'cap2', 'cap3', 'cap4'], hireCost = n => [0, 400, 900, 1600][n] || 0;
+const HELPER_NAMES = ['Juca', 'Nina', 'Tonho', 'Bia', 'Lalo', 'Cris', 'Duda', 'Zeca'], HELPER_LOOKS = ['cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4'], hireCost = n => [0, 400, 900, 1600, 2400, 3200, 4200, 5500][n] || 0;
+// oficios da equipe: todo = faz de tudo; scout = vê o que falta, entrega e vende sobras; pedidos = faz nos prédios; sembrador = planta e alimenta os animais; recolector = colhe e recolhe tudo
+const ROLES = ['todo', 'scout', 'pedidos', 'planta', 'colhe'], ROLE_IC = { todo: '⭐', scout: '🔍', pedidos: '📋', planta: '🌱', colhe: '🧺' };
+function roleOf(S, hh) { const r = S.helper.roles && S.helper.roles[hh]; if (ROLES.includes(r)) return r; const n = hCount(S); if (n < 4) return 'todo'; return ['scout', 'pedidos', 'planta', 'colhe', 'colhe', 'planta', 'colhe', 'pedidos'][hh] || 'colhe'; }
 const PROJ = {
   pousada: { lvl: 7, cost: 800, need: { pao: 6, suco: 3 }, t: 300, inc: 60, x: 200, y: 1640, w: 170, h: 110 },
   mercado: { lvl: 8, cost: 1500, need: { queijo: 4, mel: 3 }, t: 480, inc: 100, x: 560, y: 1640, w: 160, h: 96 },
@@ -314,9 +324,10 @@ PENS.galinheiro.t = 50; PENS.estabulo.t = 90; // ritmo mais rápido
 const BARN = { x: 548, y: 205, w: 124, h: 96 }, HOUSE = { x: 96, y: 205, w: 120, h: 86 }, BOARD = { x: 320, y: 905, w: 120, h: 70 };
 const LV = [0, 12, 35, 70, 120, 190, 280, 400, 550, 750, 1000, 1300];
 for (let l = 12; l < 40; l++) LV.push(LV[l - 1] + 300 + (l - 11) * 160); // níveis até 40
-const MAXPLOTS = 12, PLOT0 = 6, WW = 1500, WH = 2920;
-const plotRect = i => ({ x: 168 + FIELD.dx + (i % 3) * 104, y: 290 + FIELD.dy + Math.floor(i / 3) * 82, w: 96, h: 72 });
-const plotCost = np => Math.round(25 * Math.pow(1.55, np - PLOT0));
+const MAXPLOTS = 36, FIELD1 = 12, PLOT0 = 6, WW = 1500, WH = 3420;
+const plotRect = i => i < FIELD1 ? { x: 168 + FIELD.dx + (i % 3) * 104, y: 290 + FIELD.dy + Math.floor(i / 3) * 82, w: 96, h: 72 } : { x: 100 + ((i - FIELD1) % 6) * 104 + (i - FIELD1 >= 6 * 2 ? 0 : 0), y: 3000 + Math.floor((i - FIELD1) / 6) * 82, w: 96, h: 72 };
+const plotCost = np => np < FIELD1 ? Math.round(25 * Math.pow(1.55, np - PLOT0)) : 150 + (np - FIELD1) * 30;
+const plotOk = (S, i) => i < FIELD1 || !!(S.land && S.land.lavoura);
 const capCost = cap => Math.round(60 + Math.max(0, cap - 100) / 50 * 70);
 
 // ---------- estado ----------
@@ -338,6 +349,7 @@ function migrate(S) {
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
   if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (typeof S.truck !== 'number') S.truck = 0; if (!S.goals || typeof S.goals !== 'object') S.goals = {}; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
+  while (S.plots.length < MAXPLOTS) S.plots.push({ c: null, p: 0 });
   if (!Array.isArray(S.homes)) S.homes = []; if (!Array.isArray(S.reqs)) S.reqs = []; if (!Array.isArray(S.fair)) S.fair = [null, null, null, null];
   if (!Array.isArray(S.roads)) S.roads = []; if (typeof S.roadFree !== 'number') S.roadFree = ROAD_FREE;
   if (typeof S.silos !== 'number') S.silos = 0;
@@ -410,6 +422,11 @@ function drawCampo(g, x, y, T) { g.fillStyle = '#5fb64a'; g.fillRect(x - 130, y 
   const bx = x + Math.sin(T * 0.9) * 90, by = y - 50 + Math.sin(T * 1.7) * 30; const ps = [[-60, 0], [-30, 1], [30, 2], [70, 3]];
   ps.forEach(([dx, i]) => { const kx = x + dx * 0.4 + (bx - x) * 0.6 + Math.sin(T + i) * 20, ky = y - 50 + Math.cos(T * 1.3 + i) * 34 + 10; kid(g, kx, ky, i < 2 ? '#e0533d' : '#3d7fd6', T, i); });
   g.fillStyle = '#fff'; g.beginPath(); g.arc(bx, by, 5, 0, 6.283); g.fill(); g.strokeStyle = '#222'; g.lineWidth = 1; g.stroke(); }
+function drawLavoura(g, T, S) { // celeiro de apoio, espantalho e caixa d'água do campo grande
+  house(g, 1000, 3120, 140, 100, '#d9483b', '#8a2a20', 40); g.fillStyle = '#fff'; g.fillRect(980, 3070, 40, 50); g.strokeStyle = '#d9483b'; g.lineWidth = 4; g.beginPath(); g.moveTo(980, 3070); g.lineTo(1020, 3120); g.moveTo(1020, 3070); g.lineTo(980, 3120); g.stroke();
+  g.fillStyle = '#7a4b25'; rr(g, 940, 3130, 120, 20, 6); g.fill(); g.fillStyle = '#fff'; g.font = '900 11px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText(L('land_lavoura').toUpperCase(), 1000, 3144);
+  g.fillStyle = '#8a8a8a'; g.fillRect(1196, 3060, 6, 90); g.fillRect(1254, 3060, 6, 90); g.fillStyle = '#5aa0d0'; rr(g, 1186, 3010, 84, 54, 8); g.fill(); g.fillStyle = 'rgba(255,255,255,.4)'; g.fillRect(1192, 3018, 70, 6);
+  const sx = 760, sy = 3280, sw = Math.sin(T * 1.5) * 0.08; g.save(); g.translate(sx, sy); g.rotate(sw); g.fillStyle = '#7a4b25'; g.fillRect(-3, -70, 6, 70); g.fillRect(-28, -56, 56, 5); g.fillStyle = '#e0533d'; rr(g, -14, -60, 28, 30, 6); g.fill(); g.fillStyle = '#f2d38a'; g.beginPath(); g.arc(0, -72, 11, 0, 6.283); g.fill(); g.beginPath(); g.ellipse(0, -82, 18, 5, 0, 0, 6.283); g.fill(); g.restore(); }
 function drawTruck(g, x, y, d, T) { g.save(); g.translate(x, y); g.scale(d, 1); g.fillStyle = 'rgba(0,0,0,.2)'; g.beginPath(); g.ellipse(0, 4, 46, 8, 0, 0, 6.283); g.fill();
   g.fillStyle = '#3f8fd1'; rr(g, -44, -44, 58, 40, 6); g.fill(); g.fillStyle = '#ffffff'; g.fillRect(-38, -36, 46, 4); g.fillStyle = '#e0533d'; rr(g, 14, -34, 30, 30, 6); g.fill(); g.fillStyle = '#bfe9ff'; g.fillRect(24, -30, 16, 12);
   g.fillStyle = '#ffd23f'; g.fillRect(40, -12, 5, 5); for (const wx of [-28, 28]) { g.fillStyle = '#2b2b2b'; g.beginPath(); g.arc(wx, -2, 9, 0, 6.283); g.fill(); g.fillStyle = '#aaa'; g.beginPath(); g.arc(wx, -2, 3.5, 0, 6.283); g.fill(); }
@@ -476,7 +493,7 @@ function apply(S, a, now) {
     const o = S.orders.find(x => x.id === a.id); if (!o || o.w > now) return fail('');
     Object.assign(o, { id: S.oid++, w: now + 40000 }, genOrder(S));
   } else if (a.a === 'buyPlot') {
-    if (S.np >= MAXPLOTS) return fail(''); const c = plotCost(S.np); if (S.coins < c) return fail(L('noCoins'));
+    if (S.np >= MAXPLOTS) return fail(''); if (!plotOk(S, S.np)) return fail(L('needLand', L('land_lavoura'))); const c = plotCost(S.np); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; S.np++; out.fx.push(['coins', -c]);
   } else if (a.a === 'land') {
     const Ld = LANDS[a.k]; if (!Ld || S.land[a.k]) return fail('');
@@ -549,6 +566,8 @@ function apply(S, a, now) {
   } else if (a.a === 'silo') {
     if (S.silos >= SILOS.length) return fail(''); const c = siloCost(S.silos); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; S.silos++; S.cap += 100; out.fx.push(['coins', -c]); out.fx.push(['silo', S.silos - 1]);
+  } else if (a.a === 'role') {
+    const hh = a.h | 0; if (hh < 0 || hh >= hCount(S) || !ROLES.includes(a.r)) return fail(''); if (!Array.isArray(S.helper.roles)) S.helper.roles = []; for (let i = 0; i < hCount(S); i++) if (!S.helper.roles[i]) S.helper.roles[i] = roleOf(S, i); S.helper.roles[hh] = a.r;
   } else if (a.a === 'hire') {
     const n = hCount(S); if (!n || n >= HELPER_NAMES.length) return fail(''); const c = hireCost(n); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; S.helper.n = n + 1; out.fx.push(['coins', -c]); out.fx.push(['hired', n]);
@@ -586,7 +605,7 @@ function apply(S, a, now) {
     const c = q * sellPrice(k); take(S, { [k]: q }); S.coins += c; out.fx.push(['coins', c]); out.fx.push(['sold', q, k, c]);
   } else if (a.a === 'shift') {
     if (!S.helper.on) return fail(''); const SH = SHIFTS[a.d | 0] || SHIFTS[0], sc = SH.cost * hCount(S); if (S.coins < sc) return fail(L('noCoins'));
-    S.coins -= sc; S.helper.until = Math.max(now, S.helper.until || 0) + SH.min * 60000; out.fx.push(['coins', -sc]);
+    S.coins -= sc; if (!(S.helper.until > now)) S.helper.led = { sp: 0, ea: 0 }; S.helper.until = Math.max(now, S.helper.until || 0) + SH.min * 60000; out.fx.push(['coins', -sc]);
   } else if (a.a === 'autosell') { S.helper.sell = S.helper.sell === false; 
   } else if (a.a === 'cap') {
     const c = capCost(S.cap); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; S.cap += 50;
@@ -792,7 +811,7 @@ function editHit(S, w) {
   for (const [k, B] of Object.entries(BUILD)) { if ((B.land && !S.land[B.land]) || !dupOwned(S, B)) continue; if (inR(w, bRect(B))) return { k, x: B.x, y: B.y }; }
   for (const [k, P] of Object.entries(PENS)) if (inR(w, penRect(P))) return { k, x: P.x, y: P.y };
   for (let i = 0; i < S.silos; i++) if (Math.abs(w.x - SILOS[i].x) < 30 && w.y > SILOS[i].y - 110 && w.y < SILOS[i].y + 8) return { k: 's' + i, x: SILOS[i].x, y: SILOS[i].y };
-  const a = plotRect(0), b = plotRect(MAXPLOTS - 1); if (w.x > a.x && w.x < b.x + b.w && w.y > a.y && w.y < b.y + b.h) return { k: 'campo', x: FIELD.dx, y: FIELD.dy };
+  const a = plotRect(0), b = plotRect(FIELD1 - 1); if (w.x > a.x && w.x < b.x + b.w && w.y > a.y && w.y < b.y + b.h) return { k: 'campo', x: FIELD.dx, y: FIELD.dy };
   return null;
 }
 function tapAt(p) {
@@ -808,7 +827,7 @@ function tapAt(p) {
   for (const t of treeList(S)) if (Math.hypot(p.x - t.x, p.y - (t.y - 40)) < 52) return treeReady(S, t.i, now) ? void act({ a: 'tree', i: t.i }) : openSheet('rush', { t: 'tree', i: t.i });
   if (S.land.sul) { for (const [hx, hy] of HIVES) if (Math.abs(p.x - hx) < 34 && p.y > hy - 60 && p.y < hy + 12) return void act({ a: 'hive' });
     if (p.x > BOAT.x - 120 && p.x < BOAT.x + 120 && p.y > BOAT.y - 70 && p.y < BOAT.y + 50) return openSheet('boat'); }
-  for (let i = 0; i < MAXPLOTS; i++) if (inR(p, plotRect(i))) {
+  for (let i = 0; i < MAXPLOTS; i++) if (plotOk(S, i) && inR(p, plotRect(i))) {
     const pl = S.plots[i];
     if (i >= S.np) return openSheet('shop');
     if (!pl.c) return openSheet('seeds', i);
@@ -883,11 +902,16 @@ function boostCards(S) { const now = nowS(); return `<span class="lbl">${L('boos
     <button class="btn" type="button" data-boost="${k}" ${S.coins < B.cost ? 'disabled' : ''}>${img('coin')} ${B.cost}</button></div></div>`).join(''); }
 function fairFx(i) { SND.coin(); burst(fairX(i), FAIR.y - 60, 'coin'); const n = NPCS.list[Math.floor(Math.random() * NPCS.list.length)]; if (n) { n.tx = fairX(i); n.ty = FAIR.y + 26; n.wait = 3; n.say = L('fairBuy'); n.sayT = 2.5; } }
 // novidades: aparece uma vez por versão grande, com botão para ir ver cada coisa
-const NEWS_ID = 'cidade-viva-1';
-const NEWS = [['n_people', 'farm'], ['n_escolar', 'escolar'], ['n_big', 'bairro'], ['n_bairro', 'bairro'], ['n_fair', 'fair'], ['n_roads', 'road'], ['n_dup', 'shop'], ['n_goals', 'goals'], ['n_truck', 'shop'], ['n_night', null]];
+const NEWS_ID = 'equipe-1';
+const NEWS = [['n_team', 'helper'], ['n_chain', 'helper'], ['n_lavoura', 'lavoura'], ['n_auto', null], ['n_people', 'farm'], ['n_escolar', 'escolar'], ['n_big', 'bairro'], ['n_bairro', 'bairro'], ['n_fair', 'fair'], ['n_roads', 'road'], ['n_dup', 'shop'], ['n_goals', 'goals'], ['n_truck', 'shop'], ['n_night', null]];
 function maybeNews() { let seen = ''; try { seen = localStorage.getItem('sitio-news') || ''; } catch (e) {} if (seen === NEWS_ID) return; try { localStorage.setItem('sitio-news', NEWS_ID); } catch (e) {} setTimeout(() => { if (G.S && !SH) openSheet('news'); }, 900); }
-function newsGo(k) { closeSheet(); const S = G.S; if (k === 'shop' || k === 'goals') return openSheet(k); if (k === 'road') return setRoad(true);
+function newsGo(k) { closeSheet(); const S = G.S; if (k === 'shop' || k === 'goals' || k === 'helper') return openSheet(k); if (k === 'road') return setRoad(true);
   const at = k === 'farm' ? [320, 700] : k === 'fair' ? [FAIR.x, FAIR.y - 60] : LANDS[k] ? (S.land[k] ? [LANDS[k].r.x + LANDS[k].r.w / 2, LANDS[k].r.y + LANDS[k].r.h / 2] : [LANDS[k].sx, LANDS[k].sy]) : null; if (at) { CAM.z = Math.max(zMin(), 0.6); CAM.x = at[0]; CAM.y = at[1]; clampCam(); } }
+function teamHtml(S, now) { const n = hCount(S), led = S.helper.led || { sp: 0, ea: 0 }, pl = makePlan(S, now), miss = pl.order.filter(k => pl.miss[k] > 0).slice(0, 8);
+  return `<span class="lbl">${L('team')}</span><p class="sub">${L('teamHint')}</p>` + Array.from({ length: n }, (_, hh) => { const r = roleOf(S, hh);
+    return `<div class="card" style="padding:8px 10px"><b>${HELPER_NAMES[hh]} · ${ROLE_IC[r]} ${L('role_' + r)}</b><small>${L('roleD_' + r)}</small><div class="row" style="flex-wrap:wrap;gap:4px">${ROLES.map(x => `<button class="btn ${x === r ? '' : 'gray'}" type="button" data-role="${hh}" data-r="${x}" style="font-size:13px;padding:6px 8px;flex:0 0 auto">${ROLE_IC[x]} ${L('role_' + x)}</button>`).join('')}</div></div>`; }).join('')
+    + `<div class="card"><b>🔍 ${L('scoutList')}</b>${miss.length ? needHtml(S, Object.fromEntries(miss.map(k => [k, pl.miss[k] + (S.inv[k] || 0)]))) : `<small>${L('scoutNone')}</small>`}</div>`
+    + `<div class="card"><b>${L('ledger')}</b><small>${L('ledgerD', led.sp, led.ea)}</small></div>`; }
 function reqCard(o) { const S = G.S, now = nowS(), nm = resName(o.who);
   return o.w > now ? `<div class="card"><p class="sub">${L('reqWait', fmtT(Math.ceil((o.w - now) / 1000)))}</p></div>`
     : `<div class="card"><b>${L('reqFrom', nm)}</b>${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>${img('coin')}${o.c}</span><span>${img('star')}${o.x}</span></span><span style="flex:1"></span><button class="btn" type="button" data-req="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`; }
@@ -916,8 +940,23 @@ function orderNeeds(S, now) { const need = {}; for (const o of S.orders.concat(S
   for (const [pk, P] of Object.entries(PROJ)) if (!S.city[pk] && P.lvl <= S.lvl && S.land[P.land || 'vila']) for (const [k, q] of Object.entries(P.need)) need[k] = (need[k] || 0) + q; return need; }
 function findRecipe(S, out) { for (const [b, B] of Object.entries(BUILD)) { if (B.base || !okB(S, B)) continue; const i = B.rec.findIndex(r => r.o === out && okR(S, r)); if (i >= 0) { const best = fam(S, b).map(x => [x, S.bld[x].q.length / qCap(S, x)]).sort((p, q) => p[1] - q[1])[0][0]; return { b: best, i, r: B.rec[i] }; } } return null; }
 const queued = (S, b, out) => fam(S, famOf(b)).reduce((a, x) => a + S.bld[x].q.filter(j => BUILD[x].rec[j.r].o === out).length, 0) * (BUILD[b].rec.find(r => r.o === out) || { k: 1 }).k;
+// plano do scout: tudo o que falta, descendo pela cadeia (picolé -> açúcar -> cana), já contando o que está na fila, plantado ou nos animais
+function growing(S, k) { let n = 0; for (let i = 0; i < S.np; i++) { const pl = S.plots[i]; if (pl.c === k) n += CROPS[k].y; } return n; }
+function penMaking(S, out) { for (const [pk, P] of Object.entries(PENS)) if (P.out === out && P.lvl <= S.lvl) return S.pens[pk].a.filter(f => f).length; return 0; }
+function makePlan(S, now) { const need = {}, miss = {}, order = [];
+  const want = (k, q, d) => { if (q <= 0 || d > 5) return; need[k] = (need[k] || 0) + q; const R = !CROPS[k] && findRecipe(S, k);
+    const mm = Math.max(0, need[k] - ((S.inv[k] || 0) + (R ? queued(S, R.b, k) : 0) + (CROPS[k] ? growing(S, k) : 0) + penMaking(S, k)));
+    const add = mm - (miss[k] || 0); miss[k] = mm; if (!order.includes(k)) order.push(k); if (add <= 0) return;
+    if (R) { const runs = Math.ceil(add / R.r.k); for (const [ik, iq] of Object.entries(R.r.i)) want(ik, iq * runs, d + 1); }
+    else for (const [pk, P] of Object.entries(PENS)) if (P.out === k && P.lvl <= S.lvl) want(P.feed, Math.min(add, S.pens[pk].a.length), d + 1); };
+  for (const [k, q] of Object.entries(orderNeeds(S, now))) want(k, q, 0);
+  for (const [pk, P] of Object.entries(PENS)) if (P.lvl <= S.lvl) { const hungry = S.pens[pk].a.filter(f => !f).length; if (hungry) want(P.feed, hungry, 1); }
+  return { need, miss, order }; }
 // escolhe o que plantar: primeiro o que falta para as encomendas, depois o que falta para a ração
-function pickCrop(S, now, fallback) {
+function pickCrop(S, now, fallback) { const pl = G.plan || makePlan(S, now), crops = pl.order.filter(k => CROPS[k] && CROPS[k].lvl <= S.lvl && pl.miss[k] > 0);
+  if (crops.length) return crops[0];
+  return fallback && CROPS[fallback] && CROPS[fallback].lvl <= S.lvl ? fallback : 'trigo'; }
+function pickCropOld(S, now, fallback) {
   const want = {}, add = (k, q) => { if (q > 0 && CROPS[k] && CROPS[k].lvl <= S.lvl) want[k] = (want[k] || 0) + q; };
   for (const [k, q] of Object.entries(orderNeeds(S, now))) { const miss = q - (S.inv[k] || 0); if (miss <= 0) continue; if (CROPS[k]) add(k, miss); else { const R = findRecipe(S, k); if (R) for (const [ik, iq] of Object.entries(R.r.i)) add(ik, iq * Math.ceil(miss / R.r.k) - (S.inv[ik] || 0)); } }
   for (const [pk, P] of Object.entries(PENS)) if (P.lvl <= S.lvl && (S.inv[P.feed] || 0) < S.pens[pk].a.length) { const R = findRecipe(S, P.feed); if (R) for (const [ik, iq] of Object.entries(R.r.i)) add(ik, iq * 2 - (S.inv[ik] || 0)); }
@@ -933,45 +972,51 @@ function surplusSale(S, now, all) {
   let best = null, bs = 0; for (const [k, q] of Object.entries(S.inv)) { const sur = q - (need[k] || 0) - (ingr.has(k) ? 6 : 1); if (sur > bs) { bs = sur; best = k; } }
   return best ? { a: 'sell', k: best, q: all ? bs : Math.min(bs, Math.max(3, Math.ceil(S.cap * 0.15))) } : null;
 }
-function helperTask(S, now) {
-  applyLayout(S);
-  const tries = [], at = (x, y) => ({ x: x - 10, y: y - 10, w: 20, h: 20 });
-  for (const o of S.orders) if (o.w <= now && has(S, Object.fromEntries(o.it))) tries.push([{ a: 'deliver', id: o.id }, at(BOARD.x, BOARD.y)]);
-  for (const o of S.reqs || []) if (o.w <= now && has(S, Object.fromEntries(o.it))) { const hp = LOTS[resHome(o.who)] || [740, 2040]; tries.push([{ a: 'req', id: o.id }, at(hp[0], hp[1] + 20)]); }
-  S.plots.forEach((pl, i) => { if (i < S.np && plotReady(pl, now)) tries.push([{ a: 'harvest', i }, plotRect(i), pl.c]); });
-  for (const k of Object.keys(BUILD)) { const q = S.bld[k].q; if (q.length && q[0].e <= now) tries.push([{ a: 'collect', b: k }, at(BUILD[k].x, BUILD[k].y)]); }
-  for (const [k, P] of Object.entries(PENS)) if (P.lvl <= S.lvl) { const st = S.pens[k], ready = st.a.some(f => f && now >= f + P.t * 1000), hungry = st.a.some(f => !f) && (S.inv[P.feed] || 0) > 0; if (ready || hungry) tries.push([{ a: 'pen', k }, at(P.x, P.y)]); }
-  treeList(S).forEach(t => { if (treeReady(S, t.i, now)) tries.push([{ a: 'tree', i: t.i }, at(t.x, t.y)]); });
-  if (S.land.sul) { if (HIVES.some((h, i) => hiveReady(S, i, now))) tries.push([{ a: 'hive' }, at(HIVES[0][0], HIVES[0][1])]);
-    if ((S.boat.e && S.boat.e <= now) || (!S.boat.e && (S.inv.milho || 0) >= 4)) tries.push([{ a: 'boat' }, at(BOAT.x - 40, BOAT.y)]); }
-  for (const k of Object.keys(PROJ)) if (rentNow(S, k, now) > 0) tries.push([{ a: 'rent', k }, at(PROJ[k].x, PROJ[k].y)]);
-  (S.homes || []).forEach((h, i) => { if (homeRent(S, i, now) >= HOME_INC * 2) tries.push([{ a: 'homeRent', i }, at(LOTS[i][0], LOTS[i][1])]); });
-  if (S.helper.sell !== false && invCount(S) >= S.cap * 0.85) { const sale = surplusSale(S, now); if (sale) tries.push([sale, at(BARN.x, BARN.y)]); }
-  // fazer nos prédios o que as encomendas pedem
-  for (const [k, q] of Object.entries(orderNeeds(S, now))) { if (CROPS[k]) continue; const R = findRecipe(S, k); if (!R) continue; const miss = q - (S.inv[k] || 0) - queued(S, R.b, k);
-    if (miss > 0 && S.bld[R.b].q.length < qCap(S, R.b) && has(S, R.r.i)) tries.push([{ a: 'craft', b: R.b, r: R.i }, at(BUILD[R.b].x, BUILD[R.b].y)]); }
-  // ração para os animais
-  for (const [pk, P] of Object.entries(PENS)) if (P.lvl <= S.lvl) { const R = findRecipe(S, P.feed); if (R && (S.inv[P.feed] || 0) + queued(S, R.b, P.feed) < S.pens[pk].a.length && S.bld[R.b].q.length < qCap(S, R.b) && has(S, R.r.i)) tries.push([{ a: 'craft', b: R.b, r: R.i }, at(BUILD[R.b].x, BUILD[R.b].y)]); }
-  S.plots.forEach((pl, i) => { if (i < S.np && !pl.c) { const c = pickCrop(S, now, pl.last); if (S.coins >= CROPS[c].cost + 10) tries.push([{ a: 'plant', i, c }, plotRect(i)]); } });
+function helperTask(S, now, role) {
+  applyLayout(S); role = role || 'todo'; const can = r => role === 'todo' || role === r;
+  const tries = [], at = (x, y) => ({ x: x - 10, y: y - 10, w: 20, h: 20 }), plan = G.plan = makePlan(S, now);
+  if (can('scout')) { for (const o of S.orders) if (o.w <= now && has(S, Object.fromEntries(o.it))) tries.push([{ a: 'deliver', id: o.id }, at(BOARD.x, BOARD.y)]);
+    for (const o of S.reqs || []) if (o.w <= now && has(S, Object.fromEntries(o.it))) { const hp = LOTS[resHome(o.who)] || [740, 2040]; tries.push([{ a: 'req', id: o.id }, at(hp[0], hp[1] + 20)]); }
+    if (S.helper.sell !== false && invCount(S) >= S.cap * 0.85) { const sale = surplusSale(S, now); if (sale) tries.push([sale, at(BARN.x, BARN.y)]); } }
+  if (can('colhe')) {
+    S.plots.forEach((pl, i) => { if (i < S.np && plotReady(pl, now)) tries.push([{ a: 'harvest', i }, plotRect(i), pl.c]); });
+    for (const k of Object.keys(BUILD)) { const q = S.bld[k].q; if (q.length && q[0].e <= now) tries.push([{ a: 'collect', b: k }, at(BUILD[k].x, BUILD[k].y)]); }
+    for (const [k, P] of Object.entries(PENS)) if (P.lvl <= S.lvl && S.pens[k].a.some(f => f && now >= f + P.t * 1000)) tries.push([{ a: 'pen', k }, at(P.x, P.y)]);
+    treeList(S).forEach(t => { if (treeReady(S, t.i, now)) tries.push([{ a: 'tree', i: t.i }, at(t.x, t.y)]); });
+    if (S.land.sul) { if (HIVES.some((h, i) => hiveReady(S, i, now))) tries.push([{ a: 'hive' }, at(HIVES[0][0], HIVES[0][1])]); if (S.boat.e && S.boat.e <= now) tries.push([{ a: 'boat' }, at(BOAT.x - 40, BOAT.y)]); }
+    for (const k of Object.keys(PROJ)) if (rentNow(S, k, now) > 0) tries.push([{ a: 'rent', k }, at(PROJ[k].x, PROJ[k].y)]);
+    (S.homes || []).forEach((h, i) => { if (homeRent(S, i, now) >= HOME_INC * 2) tries.push([{ a: 'homeRent', i }, at(LOTS[i][0], LOTS[i][1])]); }); }
+  if (can('pedidos')) { // primeiro o que as encomendas precisam (e os intermediários, como o açúcar), depois a ração
+    for (const k of plan.order) { if (CROPS[k] || !(plan.miss[k] > 0)) continue; const R = findRecipe(S, k); if (!R || !has(S, R.r.i)) continue; const b = fam(S, famOf(R.b)).find(x => S.bld[x].q.length < qCap(S, x)); if (b) tries.push([{ a: 'craft', b, r: R.i }, at(BUILD[b].x, BUILD[b].y)]); } }
+  if (can('planta')) {
+    for (const [k, P] of Object.entries(PENS)) if (P.lvl <= S.lvl && S.pens[k].a.some(f => !f) && (S.inv[P.feed] || 0) > 0 && !S.pens[k].a.some(f => f && now >= f + P.t * 1000)) tries.push([{ a: 'pen', k }, at(P.x, P.y)]);
+    if (S.land.sul && !S.boat.e && (S.inv.milho || 0) >= 4 && !(plan.miss.milho > 0)) tries.push([{ a: 'boat' }, at(BOAT.x - 40, BOAT.y)]);
+    S.plots.forEach((pl, i) => { if (i < S.np && !pl.c) { const c = pickCrop(S, now, pl.last); if (S.coins >= CROPS[c].cost + 10) tries.push([{ a: 'plant', i, c }, plotRect(i)]); } }); }
   let blocked = false;
-  for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; const nc = pickCrop(S, now, crop); if (CROPS[nc] && S.coins >= CROPS[nc].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: nc }, now); if (re.ok) { S.plots[a.i].last = nc; res.fx.push(...re.fx); } } }
-      S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
+  for (const [a, r, crop] of tries) { const c0 = S.coins, res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') S.plots[a.i].last = crop; if (a.a === 'plant') S.plots[a.i].last = a.c;
+      const d = S.coins - c0, L2 = S.helper.led = S.helper.led || { sp: 0, ea: 0 }; if (d < 0) L2.sp -= d; else L2.ea += d;
+      S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-03.1';
-async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
+const BUILD_V = '2026-11-03.2';
+// atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
+let UPD = null, lastTouch = Date.now(); addEventListener('pointerdown', () => { lastTouch = Date.now(); }, { capture: true });
+async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { let tried = ''; try { tried = sessionStorage.getItem('sitio-upd-try') || ''; } catch (e) {} if (tried !== j.v) UPD = j.v; } } catch (e) {} }
+function doUpdate(v) { if (G.S && G.mode !== 'guest') storeFarm(G.S); flushSave();
+  try { if (G.S) sessionStorage.setItem('sitio-resume', JSON.stringify({ fid: G.S.fid, mode: G.mode, code: NET.code || '' })); sessionStorage.setItem('sitio-upd-try', v || ''); sessionStorage.setItem('sitio-upd-done', '1'); } catch (e) {}
+  location.replace(location.pathname + '?u=' + encodeURIComponent(v || Date.now())); }
+setInterval(() => { if (!UPD) return; const idle = Date.now() - lastTouch > 6000 && !SH && !G.edit && !G.road && !G.paint; if (idle || !G.S) { const v = UPD; UPD = null; doUpdate(v); } }, 2000);
 $('vTag').textContent = 'v ' + BUILD_V;
-setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
-$('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S);
-  try { if (G.S) sessionStorage.setItem('sitio-resume', JSON.stringify({ fid: G.S.fid, mode: G.mode, code: NET.code || '' })); } catch (e) {}
-  location.href = location.href.split('#')[0]; };
+setTimeout(checkVersion, 4000); setInterval(checkVersion, 60000);
+try { if (sessionStorage.getItem('sitio-upd-done')) { sessionStorage.removeItem('sitio-upd-done'); setTimeout(() => toast(L('updDone'), 3500), 1500); } } catch (e) {}
+$('bUpd').onclick = () => doUpdate(UPD);
 let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   const S = G.S, now = Date.now(); helperClock++; if (ensureReqs(S, now)) { S.rev++; saveSoon(); broadcast(); }
   if (rainTick(S, now)) { S.rev++; saveSoon(); broadcast(); }
   { const tr = truckTick(S, now); if (tr && tr.ok) { ensureOrders(S); S.rev++; saveSoon(); broadcast(); playFx(tr.fx); toast(L('truckDone'), 2000); } }
   { const fi = fairTick(S, now); if (fi >= 0) { S.rev++; saveSoon(); broadcast(); fairFx(fi); } }
-  if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { let r = null; for (let hh = 0; hh < hCount(S); hh++) { const rr = helperTask(S, now); if (rr && rr.ok) { S.helper.ps[hh] = [S.helper.x, S.helper.y]; if (r && r.ok) playFx(r.fx.filter(f => f[0] !== 'coins')); r = rr; } else if (!r) r = rr; } if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
+  if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { let r = null; for (let hh = 0; hh < hCount(S); hh++) { const role = roleOf(S, hh); let rr = helperTask(S, now, role); if ((role === 'colhe' || role === 'planta') && rr && rr.ok) for (let x = 0; x < (role === 'planta' ? 4 : 2); x++) { const r2 = helperTask(S, now, role); if (!(r2 && r2.ok)) break; rr.fx.push(...r2.fx); } if (rr && rr.ok) { S.helper.ps[hh] = [S.helper.x, S.helper.y]; if (r && r.ok) playFx(r.fx.filter(f => f[0] !== 'coins')); r = rr; } else if (!r) r = rr; } if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
 
 const NET = { api: null, room: null, sub: null, code: null, role: null, guestPeer: null,
   async leave() { if (this.sub) this.sub(); this.sub = null; const r = this.room; this.room = null; this.guestPeer = null; if (r) try { await r.leave(); } catch (e) {} } };
@@ -1221,11 +1266,12 @@ function renderSheet() {
         : `<div class="card"><p class="sub">${H.until > now ? L('working', fmtT(Math.ceil((H.until - now) / 1000))) : L('resting')}</p><span class="lbl">${L('shiftLbl')}</span>
           <div class="row">${SHIFTS.map((x, i) => `<button class="btn${i === 2 ? '' : ' blue'}" type="button" data-shift="${i}" style="flex:1;font-size:15px;flex-direction:column;gap:2px" ${S.coins < x.cost * hCount(S) ? 'disabled' : ''}>${L('sh' + i)}<small style="font-family:var(--body);font-size:12px">${img('coin').replace('<img', '<img style="width:13px;height:13px;vertical-align:-2px"')} ${x.cost * hCount(S)}</small></button>`).join('')}</div>
           <button class="btn gray" type="button" data-autosell="1" style="font-size:15px">${S.helper.sell === false ? '☐' : '☑'} ${L('autoSell')}</button><small>${L('autoSellHint')}</small></div>
-          <div class="card"><p class="sub">${L('helpersN', hCount(S), HELPER_NAMES.length)} · ${HELPER_NAMES.slice(0, hCount(S)).join(', ')}</p><p class="sub">${L('helpersWork')}</p>
+          ${teamHtml(S, now)}
+          <div class="card"><p class="sub">${L('helpersN', hCount(S), HELPER_NAMES.length)}</p>
           ${hCount(S) < HELPER_NAMES.length ? `<button class="btn blue" type="button" data-hire="1" ${S.coins < hireCost(hCount(S)) ? 'disabled' : ''}>${L('hire', HELPER_NAMES[hCount(S)])} · ${img('coin')} ${hireCost(hCount(S))}</button>` : ''}</div>`);
   } else if (SH.type === 'shop') {
     t.textContent = L('shop');
-    h = `<div class="card"><div class="row"><b style="flex:1">${L('newPlot')}</b>${S.np >= MAXPLOTS ? `<small>${L('allBought')}</small>` : `<button class="btn" type="button" data-buyplot="1" ${S.coins < plotCost(S.np) ? 'disabled' : ''}>${img('coin')} ${plotCost(S.np)}</button>`}</div><small>${L('plotsOf', S.np, MAXPLOTS)}</small></div>
+    h = `<div class="card"><div class="row"><b style="flex:1">${L('newPlot')}</b>${S.np >= MAXPLOTS ? `<small>${L('allBought')}</small>` : !plotOk(S, S.np) ? `<small>${L('land_lavoura')} · ${L('lvl', LANDS.lavoura.lvl)}</small>` : `<button class="btn" type="button" data-buyplot="1" ${S.coins < plotCost(S.np) ? 'disabled' : ''}>${img('coin')} ${plotCost(S.np)}</button>`}</div><small>${L('plotsOf', S.np, MAXPLOTS)}</small></div>
       <div class="card"><div class="row"><b style="flex:1">${L('bigBarn')}</b><button class="btn blue" type="button" data-cap="1" ${S.coins < capCost(S.cap) ? 'disabled' : ''}>${img('coin')} ${capCost(S.cap)}</button></div><small>${L('fitsNow', S.cap)}</small></div>
       <span class="lbl">${L('animals')}</span>${Object.entries(PENS).filter(([, P]) => P.lvl <= S.lvl).map(([k]) => { const n = S.pens[k].a.length, m = PEN_MAX[k];
         return `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(PENS[k].out)}</span><div style="flex:1"><b>${L(k === 'galinheiro' ? 'buyHen' : 'buyCow')}</b><br><small>${N(k)} · ${L('haveN', n, m)}</small></div>
@@ -1282,6 +1328,7 @@ $('sBody').addEventListener('click', e => {
   if (d.silo) act({ a: 'silo' });
   if (d.dup) act({ a: 'dup', k: d.dup });
   if (d.home) act({ a: 'home' });
+  if (d.role) act({ a: 'role', h: +d.role, r: d.r });
   if (d.big) act({ a: 'homeBig', i: +d.big });
   if (d.news) { newsGo(d.news); return; }
   if (d.newsopen) { openSheet('news'); return; }
@@ -1475,7 +1522,7 @@ function draw(T, dt) {
   const S = G.S, now = nowS(); applyLayout(S);
   cx.setTransform(DPR, 0, 0, DPR, 0, 0); cx.fillStyle = '#5aa83c'; cx.fillRect(0, 0, innerWidth, innerHeight);
   cx.setTransform(DPR * CAM.z, 0, 0, DPR * CAM.z, DPR * (innerWidth / 2 - CAM.x * CAM.z), DPR * (innerHeight / 2 - CAM.y * CAM.z));
-  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia', 'bairro', 'escolar'].map(k => lands[k] ? 1 : 0).join(','); const rkey = !S || G.road ? 'live' : S.roads.length + ':' + S.roads.reduce((a, b) => (a * 31 + b) % 1000003, 7), fk = key + '|' + rkey; if (!BG || (fk !== BGKEY && !(BGKEY.split('|')[0] === key && performance.now() - BGT < 1500))) { BG = makeBg(lands, rkey === 'live' ? null : S); BGKEY = fk; BGT = performance.now(); } cx.drawImage(BG, 0, 0, WW, WH); if (S && G.road) drawRoads(cx, S, true);
+  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia', 'bairro', 'escolar', 'lavoura'].map(k => lands[k] ? 1 : 0).join(','); const rkey = !S || G.road ? 'live' : S.roads.length + ':' + S.roads.reduce((a, b) => (a * 31 + b) % 1000003, 7), fk = key + '|' + rkey; if (!BG || (fk !== BGKEY && !(BGKEY.split('|')[0] === key && performance.now() - BGT < 1500))) { BG = makeBg(lands, rkey === 'live' ? null : S); BGKEY = fk; BGT = performance.now(); } cx.drawImage(BG, 0, 0, WW, WH); if (S && G.road) drawRoads(cx, S, true);
   const lvl = S ? S.lvl : 1;
   // lago com brilho
   cx.strokeStyle = 'rgba(255,255,255,.45)'; cx.lineWidth = 2; for (let i = 0; i < 3; i++) { const r = ((T * 12 + i * 20) % 60); cx.globalAlpha = 1 - r / 60; cx.beginPath(); cx.ellipse(62, 400, r * 0.6, r, 0, 0, 6.283); cx.stroke(); } cx.globalAlpha = 1;
@@ -1571,6 +1618,7 @@ function draw(T, dt) {
       if (st) { for (let q = 0; q < Math.min(3, st.q); q++) cx.drawImage(iconCanvas(st.k), x - 34 + q * 22, y - 60, 24, 24); cx.fillStyle = '#fff'; cx.font = '900 11px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText('×' + st.q, x, y - 12); } }
     cx.fillStyle = '#7a4b25'; rr(cx, FAIR.x - 60, FAIR.y + 6, 120, 20, 6); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 11px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('fair').toUpperCase(), FAIR.x, FAIR.y + 20); }
   if (!lands.escolar) saleSign(cx, LANDS.escolar.sx, LANDS.escolar.sy, 'escolar', S);
+  if (!lands.lavoura) saleSign(cx, LANDS.lavoura.sx, LANDS.lavoura.sy, 'lavoura', S); else drawLavoura(cx, T, S);
   for (const [k, V] of Object.entries(SERV)) { if (!lands[V.land || 'bairro']) continue; const x = V.x, y = V.y;
     if (!S.serv[k]) { cx.setLineDash([8, 6]); cx.strokeStyle = 'rgba(255,255,255,.6)'; cx.lineWidth = 3; rr(cx, x - 80, y - 90, 160, 90, 12); cx.stroke(); cx.setLineDash([]); cx.fillStyle = 'rgba(58,36,18,.8)'; rr(cx, x - 64, y - 58, 128, 26, 8); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('serv_' + k) + ' · ' + V.cost, x, y - 40); continue; }
     if (k === 'colegio') { drawColegio(cx, x, y, T); }
@@ -1584,6 +1632,7 @@ function draw(T, dt) {
   if (!lands.bairro) saleSign(cx, LANDS.bairro.sx, LANDS.bairro.sy, 'bairro', S);
   // canteiros
   for (let i = 0; i < MAXPLOTS; i++) {
+    if (!S && i >= FIELD1 || S && !plotOk(S, i)) continue;
     const r = plotRect(i), pl = S ? S.plots[i] : { c: null }, locked = !S || i >= S.np;
     if (!locked) { cx.fillStyle = '#6b4120'; rr(cx, r.x - 3, r.y - 3, r.w + 6, r.h + 6, 12); cx.fill(); }
     cx.fillStyle = locked ? 'rgba(120,80,40,.25)' : '#8a5a33'; rr(cx, r.x, r.y, r.w, r.h, 10); cx.fill();
@@ -1652,7 +1701,7 @@ function draw(T, dt) {
     for (const t of treeList(S)) { cx.beginPath(); cx.arc(t.x, t.y - 40, 50, 0, 6.283); cx.strokeStyle = 'rgba(255,255,255,.9)'; cx.stroke(); }
     if (S.land.sul) HIVES.forEach(([x, y]) => box(x - 28, y - 62, 56, 72));
     for (const [k, D] of Object.entries(DECOS)) if (S.deco[k]) box(D.x - 36, D.y - 80, 72, 88, G.dragPos && G.dragPos.k === 'd_' + k);
-    const a = plotRect(0), b = plotRect(MAXPLOTS - 1); box(a.x - 8, a.y - 8, b.x + b.w - a.x + 16, b.y + b.h - a.y + 16, G.dragPos && G.dragPos.k === 'campo'); cx.restore(); }
+    const a = plotRect(0), b = plotRect(FIELD1 - 1); box(a.x - 8, a.y - 8, b.x + b.w - a.x + 16, b.y + b.h - a.y + 16, G.dragPos && G.dragPos.k === 'campo'); cx.restore(); }
   // nuvens (sombras passando)
   for (let i = 0; i < 5; i++) { const x = ((T * 10 + i * 300) % (WW + 300)) - 150, y = 180 + i * 260; cx.fillStyle = 'rgba(30,60,20,.08)'; cx.beginPath(); cx.ellipse(x, y, 90, 36, 0, 0, 6.283); cx.ellipse(x + 60, y + 10, 60, 28, 0, 0, 6.283); cx.fill();
     // a nuvem branca fica acima da sua sombra
@@ -1663,7 +1712,7 @@ function draw(T, dt) {
   for (const [pg, col] of [[G.partnerPing, '#9b5de5'], [G.myPing, '#ffb020']]) if (pg && Date.now() - pg[2] < 900) { const p = (Date.now() - pg[2]) / 900; cx.strokeStyle = col; cx.globalAlpha = 1 - p; cx.lineWidth = 4; cx.beginPath(); cx.arc(pg[0], pg[1], 10 + p * 26, 0, 6.283); cx.stroke(); cx.globalAlpha = 1; }
   // o Juca
   if (S && S.helper && S.helper.on) for (let hh = 0; hh < hCount(S); hh++) { const H = S.helper, working = H.until > now; AV.hs = AV.hs || []; const av = AV.hs[hh] = AV.hs[hh] || { x: HELPER_HOME.x + 40 + hh * 30, y: HELPER_HOME.y + 10, tx: 0, ty: 0, t: 0 };
-    const pp = H.ps && H.ps[hh]; if (working && pp) { av.tx = pp[0] + hh * 6; av.ty = pp[1]; } else if (working && hh === 0) { av.tx = H.x; av.ty = H.y; } else { av.tx = HELPER_HOME.x + 40 + hh * 30; av.ty = HELPER_HOME.y + 10 + (hh % 2) * 14; } stepAv(av, dt); drawAv(cx, av, HELPER_NAMES[hh], HELPER_LOOKS[hh], T, false);
+    const pp = H.ps && H.ps[hh]; if (working && pp) { av.tx = pp[0] + hh * 6; av.ty = pp[1]; } else if (working && hh === 0) { av.tx = H.x; av.ty = H.y; } else { av.tx = HELPER_HOME.x + 40 + hh * 30; av.ty = HELPER_HOME.y + 10 + (hh % 2) * 14; } stepAv(av, dt); drawAv(cx, av, ROLE_IC[roleOf(S, hh)] + ' ' + HELPER_NAMES[hh], HELPER_LOOKS[hh % 8], T, false);
     if (!working) { cx.fillStyle = '#fff'; cx.strokeStyle = '#3a2412'; cx.lineWidth = 3; cx.font = '900 14px Nunito, sans-serif'; cx.textAlign = 'left'; const zz = 'z' + (Math.floor(T * 2) % 3 ? 'z' : '') + (Math.floor(T * 2) % 3 === 2 ? 'Z' : ''); cx.strokeText(zz, av.x + 12, av.y - 60); cx.fillText(zz, av.x + 12, av.y - 60); } }
   if (S && S.truck) { const e = (Date.now() - (S.truckAt || 0)) / 8000; if (e >= 1 || e < 0) drawTruck(cx, TRUCK.x, TRUCK.y, -1, T);
     else { const go = e < 0.5, q = go ? e * 2 : (1 - e) * 2, y = TRUCK.y + q * (1540 - TRUCK.y); drawTruck(cx, 382, y, go ? 1 : -1, T); } }
