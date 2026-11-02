@@ -150,3 +150,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Festival de la Cosecha en otoño (+1 por parcela cosechada)
 - [x] Vecinos con perrito
 - [x] Apicultor con abejas en las colmenas
+
+## Versión grande 25: "Estaciones vivas" (2026-11-03.26)
+- [x] Verano: sombrillas, bañistas y nadadores en la playa
+- [x] Primavera: flores que brotan por todo el mapa
+- [x] Invierno: puesto de chocolate caliente + receta en la Cocina
