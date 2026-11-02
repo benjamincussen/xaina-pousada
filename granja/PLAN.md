@@ -274,3 +274,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Opción en Ayudantes "Recoger regalos de la ciudad" (apagada por defecto): los ayudantes (scout/todo) toman la canasta de los vecinos, cavan el tesoro y ayudan a vecinos. Solo acciones gratis: nunca compran (pulgas, flores, pescador) ni gastan ingredientes (sopa). Aparece en el diario.
 - Medalla nueva "Ayudas en la comunidad" (5/25/80): ayudar a vecinos, donar a la sopa y regalar flores.
 - Avisos naranjas con textos propios por evento (vecino, tesoro, canasta, panadero).
+
+## Versión grande 49: Minimapa con eventos y cine en la playa (2026-11-03.50)
+- Minimapa en el sheet del mapa 🗺️: todo el mundo en pequeño (tierras sin comprar oscurecidas), rectángulo de lo que se ve y los íconos de los eventos activos; tocarlo lleva la cámara a ese punto.
+- El aviso naranja se oculta solo si el evento ya se hizo (por ejemplo, lo hizo un ayudante o el otro jugador).
+- Cine en la playa: en las noches de verano, pantalla en la arena con dibujos y vecinos en toallas de colores.
