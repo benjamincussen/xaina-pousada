@@ -744,3 +744,11 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - Las tres etiquetas del gráfico de crecimiento quedan alineadas (izquierda, centro, derecha) sin cortarse.
 - El tren de carga silba al salir de la estación si la cámara está cerca.
+
+## Versión 109: El mapa crece hacia el oeste — Sierra Nevada, Minas de Oro y Rancho
+
+- `XMIN` pasa de −3000 a −4500 (el pasto, los tufos y la cerca se extienden solos; el camino del oeste llega hasta el borde). Tres terrenos nuevos en x −4480…−3020:
+  - **Sierra Nevada** (nivel 24, 26000): tres montañas con nieve permanente, pinos, copos; **Estación de Esquí** (servicio: +25 felicidad, 20 empleos, 3 turistas más) con telesilla de cabinas subiendo y esquiadores bajando; entradas cada 12 min (350 × felicidad, ×1,5 en invierno).
+  - **Minas de Oro** (nivel 24, 28000): suelo rocoso con pepitas, dos cerros con túneles; **Mina de Oro** (oro ×2 con pan; piedras preciosas ×2 con piedra + herramienta); la Joyería hace anillos de oro (oro + piedra preciosa).
+  - **Rancho de Ovejas** (nivel 22, 22000): pasto cercado, lagunita, 12 ovejas paseando que balan; **Rancho** (lana ×4 con alimento de vaca); la Tejeduría hace tela con lana (×3, 70 s).
+- Prueba `tests/oeste2.js`: compra de los 3, oro, piedras, lana, anillo de oro, tela de lana, Estación de Esquí (empleos 469), cámara hasta −3750; smoke, fuzz, partida vieja y soak sin errores; capturas.
