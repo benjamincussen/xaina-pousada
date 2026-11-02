@@ -403,3 +403,11 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - **Impuestos en la Alcaldía:** con la Alcaldía construida, cada vecino con empleo paga 0,25 monedas por minuto (se acumulan hasta 2 horas). Aparece una moneda sobre la Alcaldía; tócala para cobrar. Los ayudantes de Ciudad y "todo" cobran solos cuando hay 30 o más. La tarjeta "Atentos" muestra cuánto hay por cobrar.
 - **Marina con yates:** en el Puerto de Carga hay un muelle con 6 yates de colores y una lancha que pasea por el mar.
 - **Fiesta de la Ciudad Nueva:** cada 40 minutos hay un show de 3 minutos en la calle de la Ciudad Nueva, con banda, público bailando y notas musicales. Cuenta para el álbum de eventos (ahora 21; premio final con 21).
+
+## Versión 69: Parque Eólico, emojis en co-op y meta del viento
+
+- **Parque Eólico (Valle Verde, nivel 15):** proyecto de 5500 monedas que pide pan, miel y tela. Al terminar, aparecen cinco molinos gigantes girando. Da renta (360 cada 5 minutos), 10 empleos y +5 de felicidad, como los demás proyectos.
+- **Emojis con tu amigo:** en co-op, toca el aviso "Jugando con…" de arriba y elige un emoji (👋❤️😂👍🎉🙏😮🌾). Aparece unos segundos sobre tu personaje en la pantalla del otro. Va por la presencia y no toca la partida; los emojis viejos no se repiten al reconectar.
+- **Meta nueva:** "Construir el Parque Eólico" (premio de 2000).
+- **Novedades:** el botón "Ver" lleva directo al proyecto.
+- **Fiesta de la Ciudad Nueva (v68):** el escenario se movió a la calle libre del sur para no tapar las casas.
