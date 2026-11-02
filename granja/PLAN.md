@@ -758,3 +758,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Desierto** (suroeste, nivel 25, 30000): dunas, 24 cactus con flor, arena; **Oasis** (dátiles ×4) con laguna y palmeras; **Vidriería** (vidrio ×2 con piedra + caña, 90); caravana de 4 camellos que cruza las dunas.
 - **Bosque** (entre la Cantera y el Parque Nacional, nivel 23, 24000): 84 árboles de tres tipos, 6 ciervos paseando, **Apiario del Bosque** (miel ×3 con girasol) y **Casa del Guardabosques** (servicio: +15, 10 empleos).
 - Ahora son 33 terrenos. Pruebas: compra, producción en los 3 edificios, servicio, hojas sin errores; smoke y fuzz sin errores; capturas.
+
+## Versión 111: Oficios para las tierras nuevas
+
+- Siete oficios más (chocolatero, viticultor, buscador de oro, pastor, vidriero, apicultor, cuidador del oasis): los vecinos van de día a las fábricas del cacao, el viñedo, las minas de oro, el rancho, el desierto y el bosque (`jobPos` genérico por `BUILD`) y piden esos productos en sus pedidos.
