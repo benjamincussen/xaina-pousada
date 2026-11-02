@@ -57,3 +57,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Parque de Diversiones (nivel 13, mapa más grande): rueda gigante, carrusel con caballitos, Dulcería (algodón de azúcar, palomitas); entradas dan monedas
 - [x] Estaciones del año cada 30 min (pétalos, sol, hojas, más lluvia en invierno)
 - [x] De noche los vecinos vuelven a casa y se encienden las ventanas
+
+## Versión grande 7: "Tren" (2026-11-03.7)
+- [x] Tren de colores con estación: pasa cada 2 min, paga pasajes, +8 felicidad
+- [x] Vecinos con oficio (panadero, pescador, profesora, doctora, feriante…) que van a trabajar de día
+- [x] Regalo del día (monedas + productos)
+- [x] Precios más bajos (Barrio Escolar 1800, Campo Grande 1200, Parque 2200, bus 1400)
