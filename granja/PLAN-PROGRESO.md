@@ -14,13 +14,19 @@ Objetivo de Benjamin: llevar el juego "al siguiente nivel": mapa enorme, dinero 
 | **A — "graphics/economía"** (esta) | economía y producción, casas y terrenos, mapa (sur/oeste), negocios, gráficas, ayudantes/arquitecta, pruebas | `game.js`, `negocios.js`, `tests/` |
 | **B — "Corsario/mundo"** | mundo exterior: ciudades vecinas y colonias dibujadas en el mar del este, comercio exterior por el mapa del mundo, rutas y barcos, militar, más ciudades | `mundo.js` (+ hooks de una línea avisando) |
 
-## Hecho (en vivo)
-- v76 Economía viva: monedas que vuelan, pill del tesoro, hoja Economía, venta autónoma de sobras a vecinos, Aserradero/Tostadora/Ladrillera, café.
-- v77 Mapa al sur (WH 6400): Barrio Sur (18 lotes) y Zona Industrial (ración, azúcar, telas, depósito).
-- v78 Suroeste: Campo Sur (+24 parcelas, 108 en total) y Cantera (hierro, herramientas, herrería).
-- Sistema EXT para extensiones.
+## Hecho (en vivo) — sesión A
+- v76 Economía viva · v77 Mapa al sur (Barrio Sur, Zona Industrial) · v78 Suroeste (Campo Sur, Cantera) · v79 Logística visible · v80 HUD móvil · v81 Precios del día · v83 Negocios (negocios.js) · v84 Torres y población · v85 Gráficas 2 · v86 Ayudantes 3 (Industria, 24) · v87 Rendimiento · v88/89 Diario de la ciudad · v90 Estaciones + riego + fuzz · v91 Árboles por estación.
+- Sistema EXT para extensiones; pruebas en `tests/` (smoke, fuzz, logística, precios, torres, ayudantes3, estaciones, negocios, hud-movil).
 
-## Próximas versiones — sesión A
+## Próximas versiones — sesión A (ronda 2)
+1. **v92 Más al sur**: el mapa crece otra franja (WH 7900) con Plantación de cacao (cultivo + Fábrica de chocolate), Lago del Sur (muelle, botes, turismo) y Barrio Alto (12 lotes en la colina). Más terrenos para que el Alcalde siga comprando.
+2. **v93 Ferrocarril de carga**: tren de mercancías que une Zona Industrial, Cantera y Puerto de Carga; vagones con lo producido; exportación +20% cuando llega el tren.
+3. **v94 Escuela y niños 2**: más bebés con torres, guardería grande, niños yendo al colegio del Barrio Sur, "Día del niño".
+4. **v95 Clima 2**: viento (molinos y banderas), niebla en invierno, arcoíris; sequía corta que la irrigación evita.
+5. **v96 Balance y tutorial**: pasada de precios/tiempos con la simulación de 8 h; guía "¿qué hago ahora?" para los sistemas nuevos.
+6. **Continuo**: fuzz en cada versión, rendimiento, revisión de textos PT/ES.
+
+## Hecho antes (ronda 1)
 1. **v79 Negocios** (`negocios.js`, ya en desarrollo por un agente): Banco (interés al tesoro), Mercado Grande (bono de ventas), Escuela de Oficios (oficios nuevos → tesoro), Chocolatería (bombón); el Concejo los construye; hoja 🏪. Pulido de la Cantera (cerros con nieve, mina más grande).
 2. **v80 Logística visible**: camiones de reparto entre fábricas, depósito y granero (los productos "viajan"); trabajadores que van y vuelven de la Zona Industrial; humo/luces de noche en la industria; "tablero de producción" con lo que cada fábrica hizo en la última hora.
 3. **v81 Mercado con precios del día**: tablero de precios que sube y baja por demanda (lo que piden pedidos, feria, vecinos y exportación); el Comercio del Concejo vende cuando el precio está alto; ventas del jugador con bonus "buen momento".

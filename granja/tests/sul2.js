@@ -1,0 +1,8 @@
+// v92: cacao, Lago del Sur, Barrio Alto. node tests/sul2.js [carpeta]
+const { open, richFarm, simulate, openSheets, shot } = require('./lib'); const out = process.argv[2] || '/tmp';
+(async () => { const { pg, errs, close } = await open(); await richFarm(pg, { skipLands: ['cacau', 'lagoSul', 'bairroAlto'], coins: 300000, homes: 58, inv: { cacau: 12, leite: 20, trigo: 50, milho: 50, pao: 40 } });
+  const r = await pg.evaluate(() => { const S = G.S, o = {}; S.lvl = 21; o.WH = WH; o.lots = LOTS.length; o.l1 = act({ a: 'land', k: 'cacau' }).ok; o.l2 = act({ a: 'land', k: 'lagoSul' }).ok; o.l3 = act({ a: 'land', k: 'bairroAlto' }).ok; o.np0 = S.np; for (let i = 0; i < 30; i++) act({ a: 'buyPlot' }, true); o.np = S.np; S.plots[108] = { c: null, p: 0 }; o.plant = act({ a: 'plant', i: 108, c: 'cacau' }).ok; delete S.serv.clube; o.choc = apply(S, { a: 'craft', b: 'chocolateFab', r: 0 }, Date.now()).ok; o.clube = act({ a: 'serv', k: 'clube' }).ok; o.home = act({ a: 'home' }).ok; o.lotLand58 = lotLand(58); o.happy = happy(S); return o; });
+  console.log(JSON.stringify(r)); const sim = await simulate(pg, 3, 200000); console.log('sim', JSON.stringify(sim));
+  const sheets = await openSheets(pg, ['map', 'city', 'seeds', ['land', 'lagoSul'], ['bld', 'chocolateFab']]); console.log(JSON.stringify(sheets));
+  await shot(pg, 740, 6700, 0.6, out + '/sul2-cacau.png'); await shot(pg, -750, 7000, 0.45, out + '/sul2-lago.png'); await shot(pg, 740, 7500, 0.6, out + '/sul2-alto.png');
+  console.log('errors', errs.length, errs.slice(0, 5)); await close(); process.exit(errs.length || !r.l1 || !r.l2 || !r.l3 || !r.plant || !r.choc || !r.clube ? 1 : 0); })();

@@ -640,3 +640,12 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - Las copas (árbol redondo y de copa ancha, incluidos los del fondo) siguen la estación: flores rosas en primavera, verde pleno en verano, naranja/rojo en otoño y verde pálido en invierno; los pinos quedan verdes. El fondo en caché se renueva al cambiar la estación.
 - Capturas de primavera, otoño e invierno; smoke sin errores.
+
+## Versión 92: Más al sur — Plantación de Cacao, Lago del Sur y Barrio Alto
+
+- El mundo crece otra franja (WH 7900). Tres terrenos nuevos para que el Alcalde siga comprando:
+  - **Plantación de Cacao** (nivel 20, 14000): 16 parcelas (108–123, `MAXPLOTS` 124), cultivo nuevo cacao (240 s) y Fábrica de Chocolate (chocolate caliente ×4 con cacao + leche).
+  - **Lago del Sur** (nivel 20, 15000): lago enorme con orilla, nenúfares, cocoteros, brillos animados y el **Club del Lago** (servicio: +20 felicidad, 20 empleos, muelle con botecitos).
+  - **Barrio Alto** (nivel 21, 18000): 12 lotes (58–69) en una colina con curvas de nivel, avenida con rotonda, faroles y flores.
+- "Ir a…", textos PT/ES, Novedades, lámparas y malla de calles para Lúcia.
+- Prueba `tests/sul2.js`: compra de los 3 terrenos, 30 parcelas hasta 114, cacao sembrado, chocolate producido, Club comprado, casa en el Barrio Alto, 3 h simuladas (187 decisiones, 65 casas), hojas sin errores; smoke y fuzz sin errores; capturas.
