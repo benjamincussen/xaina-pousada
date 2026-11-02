@@ -80,3 +80,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Casa de los jugadores ampliable en 2 etapas (piso con balcón florido, anexo con bandera)
 - [x] Tormenta con relámpagos y trueno; arcoíris con olla de oro después de la lluvia
 - [x] Concurso del día en la feria con trofeos
+
+## Versión grande 11: "Isla" (2026-11-03.11)
+- [x] Decoración libre: bancas, faroles, árboles, jardineras, estatuas, piletas, glorietas, molinetes (cada 5 = +1 felicidad)
+- [x] Expedición en barco a la Isla Misteriosa (cofre con tesoros, el scout la recoge)
+- [x] Semana temática: un tipo de producto paga +50% cada semana
