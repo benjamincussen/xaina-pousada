@@ -16,10 +16,10 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] 11. Turistas que llegan a la Pousada y compran
 - [x] 12. Ciclo día/noche con faroles en las calles
 - [x] 13. Clima: lluvia que riega (cultivos y árboles +30 s)
-- [ ] 14. Animación de personajes y NPC (caminar, saludar, trabajar)
+- [x] 14. Animación: los vecinos caminan, saludan con la mano al hablar
 - [x] 15. Feria del pueblo: puestos donde los vecinos compran tus productos
 - [x] 16. Camión de reparto que entrega pedidos automáticamente
 - [x] 17. Logros co-op y metas semanales con premios
 - [x] 18. Guía "¿qué hago ahora?" con flechas y consejos
-- [ ] 19. Optimización de rendimiento (celulares) y carga más rápida
+- [x] 19. Optimización de rendimiento (celulares) y carga más rápida
 - [ ] 20. Pulido final, balance de precios y resumen con capturas

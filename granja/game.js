@@ -681,7 +681,7 @@ function drawNpc(g, n, T) { const x = n.x, y = n.y, sc = n.kid ? 0.78 : 0.92, st
   g.strokeStyle = '#3a4a5a'; g.lineWidth = 6; g.lineCap = 'round'; g.beginPath(); g.moveTo(-4, -14 - bob); g.lineTo(-4 + step * 4, -1); g.moveTo(4, -14 - bob); g.lineTo(4 - step * 4, -1); g.stroke();
   if (n.long) { g.fillStyle = n.hr; g.beginPath(); g.ellipse(-d * 2, -34 - bob, 11, 15, 0, 0, 6.283); g.fill(); }
   g.fillStyle = n.sh; rr(g, -10, -32 - bob, 20, 20, 6); g.fill();
-  g.strokeStyle = '#e8b890'; g.lineWidth = 5; g.beginPath(); g.moveTo(-10, -28 - bob); g.lineTo(-14, -18 - bob + step * 3); g.moveTo(10, -28 - bob); g.lineTo(14, -18 - bob - step * 3); g.stroke();
+  g.strokeStyle = '#e8b890'; g.lineWidth = 5; g.beginPath(); g.moveTo(-10, -28 - bob); g.lineTo(-14, -18 - bob + step * 3); g.moveTo(10, -28 - bob); if (n.sayT > 0) { const wv = Math.sin(T * 10) * 4; g.lineTo(17 + wv, -44 - bob); } else g.lineTo(14, -18 - bob - step * 3); g.stroke();
   g.fillStyle = '#e8b890'; g.beginPath(); g.arc(0, -40 - bob, 9, 0, 6.283); g.fill(); g.fillStyle = '#3a2412'; g.beginPath(); g.arc(d * 3, -41 - bob, 1.6, 0, 6.283); g.fill();
   if (n.hat) { g.fillStyle = '#f2d38a'; g.beginPath(); g.ellipse(0, -46 - bob, 14, 4, 0, 0, 6.283); g.fill(); g.beginPath(); g.arc(0, -47 - bob, 8, Math.PI, 0); g.fill(); g.fillStyle = n.sh; g.fillRect(-8, -49 - bob, 16, 2.5); }
   else { g.fillStyle = n.hr; g.beginPath(); g.arc(0, -44 - bob, 9.5, Math.PI, 0); g.fill(); }
@@ -904,7 +904,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.28';
+const BUILD_V = '2026-11-02.29';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -1254,7 +1254,7 @@ $('sBody').addEventListener('click', e => {
 });
 
 // ---------- desenho ----------
-let BG = null, BGKEY = '';
+let BG = null, BGKEY = '', BGT = 0;
 function seeded(n) { let a = n >>> 0; return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 function rr(g, x, y, w, h, r) { g.beginPath(); if (g.roundRect) g.roundRect(x, y, w, h, r); else g.rect(x, y, w, h); }
 function bush(g, x, y, s, c1 = '#3f8f2e', c2 = '#5cb844') { g.fillStyle = 'rgba(0,0,0,.15)'; g.beginPath(); g.ellipse(x, y + 4, 20 * s, 6 * s, 0, 0, 6.283); g.fill();
@@ -1270,16 +1270,17 @@ function lampPts(S) { const pts = []; if (S.land.bairro) for (let x = 100; x < 1
   for (let y = 760; y < 1500; y += 240) pts.push([352, y]); for (const k of S.roads || []) { const gx = k % 100, gy = Math.floor(k / 100); if ((gx * 3 + gy * 5) % 7 === 0) pts.push([gx * RD + RD - 4, gy * RD + 6]); } return pts; }
 function lamps(g, S, nf, T) { for (const [x, y] of lampPts(S)) { g.fillStyle = 'rgba(0,0,0,.18)'; g.beginPath(); g.ellipse(x, y, 7, 3, 0, 0, 6.283); g.fill(); g.fillStyle = '#3a3a44'; g.fillRect(x - 2, y - 56, 4, 56); g.fillRect(x - 6, y - 4, 12, 4);
   g.fillStyle = nf > 0.05 ? `rgba(255,214,120,${0.6 + 0.4 * nf})` : '#e8eef2'; g.beginPath(); g.moveTo(x - 7, y - 56); g.lineTo(x + 7, y - 56); g.lineTo(x + 5, y - 68); g.lineTo(x - 5, y - 68); g.closePath(); g.fill(); g.fillStyle = '#3a3a44'; g.fillRect(x - 8, y - 71, 16, 4); } }
-function drawRoads(g, S) {
+function drawRoads(g, S, cull) {
+  let rs = S.roads; if (cull) { const hw = innerWidth / CAM.z / 2 + RD, hh = innerHeight / CAM.z / 2 + RD; rs = rs.filter(k => { const x = (k % 100) * RD, y = Math.floor(k / 100) * RD; return Math.abs(x - CAM.x) < hw && Math.abs(y - CAM.y) < hh; }); }
   const set = new Set(S.roads), has2 = (x, y) => set.has(roadKey(x, y));
   if (G.road) { g.save(); g.strokeStyle = 'rgba(255,255,255,.18)'; g.lineWidth = 1; g.beginPath(); for (let x = 0; x <= WW; x += RD) { g.moveTo(x, 0); g.lineTo(x, WH); } for (let y = 0; y <= WH; y += RD) { g.moveTo(0, y); g.lineTo(WW, y); } g.stroke(); g.restore(); }
-  g.fillStyle = 'rgba(70,50,30,.25)'; for (const k of S.roads) { const x = (k % 100) * RD, y = Math.floor(k / 100) * RD; g.fillRect(x - 3, y - 1, RD + 6, RD + 6); }
-  g.fillStyle = '#cdb88f'; for (const k of S.roads) { const x = (k % 100) * RD, y = Math.floor(k / 100) * RD; g.fillRect(x, y, RD, RD); }
-  for (const k of S.roads) { const gx = k % 100, gy = Math.floor(k / 100), x = gx * RD, y = gy * RD;
+  g.fillStyle = 'rgba(70,50,30,.25)'; for (const k of rs) { const x = (k % 100) * RD, y = Math.floor(k / 100) * RD; g.fillRect(x - 3, y - 1, RD + 6, RD + 6); }
+  g.fillStyle = '#cdb88f'; for (const k of rs) { const x = (k % 100) * RD, y = Math.floor(k / 100) * RD; g.fillRect(x, y, RD, RD); }
+  for (const k of rs) { const gx = k % 100, gy = Math.floor(k / 100), x = gx * RD, y = gy * RD;
     for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) { const h = ((gx * 7 + gy * 13 + i * 3 + j * 5) % 7) / 7; g.fillStyle = h < 0.5 ? '#d9c6a0' : '#bfa67b'; rr(g, x + 2 + i * 10 + ((j % 2) ? 3 : 0) - 1, y + 2 + j * 10, 8, 7, 2); g.fill(); }
     g.fillStyle = '#9c8762'; if (!has2(gx, gy - 1)) g.fillRect(x, y, RD, 3); if (!has2(gx, gy + 1)) g.fillRect(x, y + RD - 3, RD, 3); if (!has2(gx - 1, gy)) g.fillRect(x, y, 3, RD); if (!has2(gx + 1, gy)) g.fillRect(x + RD - 3, y, 3, RD); }
 }
-function makeBg(lands) {
+function makeBg(lands, S) {
   const c = document.createElement('canvas'), K = 1.5; c.width = WW * K; c.height = WH * K; const g = c.getContext('2d'); g.scale(K, K); const R = seeded(7);
   // grama em ladrilhos com leve variação de tom
   for (let y = 0; y < WH; y += 40) for (let x = 0; x < WW; x += 40) { const v = R(); g.fillStyle = v < 0.33 ? '#72c44c' : v < 0.66 ? '#6fc149' : '#75c74f'; g.fillRect(x, y, 40, 40); }
@@ -1322,6 +1323,7 @@ function makeBg(lands) {
       g.fillStyle = '#9c8762'; g.fillRect(x, y, w, 3); g.fillRect(x, y + h - 3, w, 3); };
     st(40, 2010, 1420, 48); st(298, 1690, 44, 320); st(1040, 2058, 44, 230); st(208, 2058, 44, 230);
     g.fillStyle = '#e3c58f'; g.beginPath(); g.ellipse(740, 2034, 70, 34, 0, 0, 6.283); g.fill(); g.strokeStyle = '#b8935a'; g.lineWidth = 6; g.stroke(); }
+  if (S && S.roads.length) drawRoads(g, S);
   // cerca em volta de tudo
   g.strokeStyle = '#a8743f'; g.lineWidth = 4; g.strokeRect(10, 24, WW - 20, WH - 34); g.fillStyle = '#8a5a2b';
   for (let x = 10; x <= WW - 10; x += 32) { g.fillRect(x - 3, 12, 6, 20); g.fillRect(x - 3, WH - 22, 6, 20); } for (let y = 24; y <= WH - 10; y += 32) { g.fillRect(4, y - 4, 12, 8); g.fillRect(WW - 16, y - 4, 12, 8); }
@@ -1409,7 +1411,7 @@ function draw(T, dt) {
   const S = G.S, now = nowS(); applyLayout(S);
   cx.setTransform(DPR, 0, 0, DPR, 0, 0); cx.fillStyle = '#5aa83c'; cx.fillRect(0, 0, innerWidth, innerHeight);
   cx.setTransform(DPR * CAM.z, 0, 0, DPR * CAM.z, DPR * (innerWidth / 2 - CAM.x * CAM.z), DPR * (innerHeight / 2 - CAM.y * CAM.z));
-  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia', 'bairro'].map(k => lands[k] ? 1 : 0).join(','); if (!BG || key !== BGKEY) { BG = makeBg(lands); BGKEY = key; } cx.drawImage(BG, 0, 0, WW, WH); if (S && (S.roads.length || G.road)) drawRoads(cx, S);
+  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia', 'bairro'].map(k => lands[k] ? 1 : 0).join(','); const rkey = !S || G.road ? 'live' : S.roads.length + ':' + S.roads.reduce((a, b) => (a * 31 + b) % 1000003, 7), fk = key + '|' + rkey; if (!BG || (fk !== BGKEY && !(BGKEY.split('|')[0] === key && performance.now() - BGT < 1500))) { BG = makeBg(lands, rkey === 'live' ? null : S); BGKEY = fk; BGT = performance.now(); } cx.drawImage(BG, 0, 0, WW, WH); if (S && G.road) drawRoads(cx, S, true);
   const lvl = S ? S.lvl : 1;
   // lago com brilho
   cx.strokeStyle = 'rgba(255,255,255,.45)'; cx.lineWidth = 2; for (let i = 0; i < 3; i++) { const r = ((T * 12 + i * 20) % 60); cx.globalAlpha = 1 - r / 60; cx.beginPath(); cx.ellipse(62, 400, r * 0.6, r, 0, 0, 6.283); cx.stroke(); } cx.globalAlpha = 1;
