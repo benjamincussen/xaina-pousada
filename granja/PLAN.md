@@ -371,3 +371,18 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Causa: al recargar (por ejemplo con la actualización automática), la presencia vieja de la misma aba queda ~30 s en el servidor MQTT ("fantasma"). Entonces: el host recibía "sala ocupada" y se metía como invitado en su propio fantasma; la invitada podía seguir al host fantasma (estado congelado) y el host podía escuchar al fantasma de Ana en vez de a ella (sus acciones no llegaban).
 - Arreglo en relay.js: cada aba tiene un id que sobrevive al recargar (sessionStorage 'sitio-dev'); se ignora la presencia de la propia aba y de cada jugador queda solo la más nueva (ordenadas por tiempo). Compatible con teléfonos con la versión anterior.
 - Probado: re-entrada del host con el fantasma presente (antes "taken", ahora entra), la invitada ve solo el host actual, y coop2/resume/coopbig sin errores.
+
+
+## Versión 64: Arquitecta Lúcia (de la sesión de arquitectura, integrada sobre la expansión) (2026-11-03.65)
+- Nueva empleada: Lúcia, la arquitecta (Menú o Ayudantes, nivel 5, 600 monedas). Camina por la ciudad (se la toca en el mapa para abrir sus propuestas).
+- Escucha a los vecinos: cada propuesta viene con la frase de un vecino (o de ella) explicando por qué.
+- Propuestas (hasta 3 abiertas, una nueva cada ~90 s): calles hasta las casas, la feria, los edificios de la ciudad, servicios y la estación (trazado recto que esquiva edificios, canteros, lago y lotes; usa primero las calles gratis); faroles cerca de casas sin luz; jardineras de flores frente a las casas; árboles de sombra en la avenida; bancas en la plaza; fuente en el centro del barrio; estatua en la avenida escolar; glorieta junto al lago; molinetes en el parque; adornos fijos de la granja; ordenar el huerto (alinear árboles, sin costo); pintar casas vecinas del mismo color; ampliar una casa; plantar un árbol en el huerto.
+- El jugador aprueba (paga solo lo aprobado), rechaza (no vuelve a proponer lo mismo por 30 min) o va a ver el lugar en el mapa. Al aprobar, Lúcia va a la obra y martilla; queda en "Obras aprobadas".
+- Todo pasa por `apply()` (acciones `archHire`, `archOk`, `archNo`), así que funciona igual en co-op; las ideas se generan solo en el host.
+- Probado con Playwright: contratar, 20 ideas generadas en una ciudad de nivel 10, aprobación de 3 calles (25 celdas, usando las 30 gratis) y de faroles/flores/árboles con descuento correcto de monedas, sin errores de consola.
+
+## Versión 65: Hasta 16 ayudantes y oficio "Ciudad" (pedido de Benjamin) (2026-11-03.65)
+- Integrada la Arquitecta Lúcia (de la sesión de arquitectura) sobre la gran expansión; textos en español con "tú".
+- Ayudantes: ahora se pueden contratar hasta 16 (Rosa, Davi, Lia, Beto, Mel, Caio, Iara, Téo; 7.000 a 20.000 monedas).
+- Oficio nuevo 🏙️ Ciudad (por defecto en los ayudantes 9, 12 y 15): cobra todos los arriendos (casas, torres, aeropuerto, colonia, puerto), atiende solicitudes de vecinos y misiones, ayuda a vecinos, toma canastas y tesoros y carga el barco de exportación solo con productos que sobran. Nunca compra terrenos ni obras.
+- Panel de Ayudantes → "Atentos a la ciudad": vecinos y felicidad, arriendos esperando, lotes libres, próxima obra posible y próximo terreno (solo informa; la compra es decisión del jugador).
