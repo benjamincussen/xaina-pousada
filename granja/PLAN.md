@@ -165,3 +165,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Cartas de agradecimiento de los vecinos en el buzón (con regalito)
 - [x] Pedidos de vecinos según su oficio
 - [x] Animalitos raros: pavo real y alpacas
+
+## Versión grande 28: "Bicicletas" (2026-11-03.29)
+- [x] Carrera de bicicletas en la avenida con apuesta
+- [x] Aniversario semanal de la granja con regalo
+- [x] Misiones de Juca: 12 misiones en orden con premios
