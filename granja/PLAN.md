@@ -343,3 +343,11 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Iluminación por frame: noche con mezcla `multiply` (conserva el contraste) + atardecer/amanecer anaranjado; charcos de luz en el piso bajo los faroles; luciérnagas de noche; sombras de nubes pasando de día (ambas se apagan en "Menos animaciones").
 - Canvas sin alfa y suavizado de imagen en alta calidad.
 - Medido en Chromium headless (sin GPU), granja nivel 14 con todas las tierras: tiempo por frame igual (mediana ~3 ms antes y después); construir el fondo pasó de ~250 ms a ~360 ms una sola vez.
+
+## Versión grande 61: Arquitecta Lúcia (2026-11-03.62)
+- Nueva empleada: Lúcia, la arquitecta (Menú o Ayudantes, nivel 5, 600 monedas). Camina por la ciudad (se la toca en el mapa para abrir sus propuestas).
+- Escucha a los vecinos: cada propuesta viene con la frase de un vecino (o de ella) explicando por qué.
+- Propuestas (hasta 3 abiertas, una nueva cada ~90 s): calles hasta las casas, la feria, los edificios de la ciudad, servicios y la estación (trazado recto que esquiva edificios, canteros, lago y lotes; usa primero las calles gratis); faroles cerca de casas sin luz; jardineras de flores frente a las casas; árboles de sombra en la avenida; bancas en la plaza; fuente en el centro del barrio; estatua en la avenida escolar; glorieta junto al lago; molinetes en el parque; adornos fijos de la granja; ordenar el huerto (alinear árboles, sin costo); pintar casas vecinas del mismo color; ampliar una casa; plantar un árbol en el huerto.
+- El jugador aprueba (paga solo lo aprobado), rechaza (no vuelve a proponer lo mismo por 30 min) o va a ver el lugar en el mapa. Al aprobar, Lúcia va a la obra y martilla; queda en "Obras aprobadas".
+- Todo pasa por `apply()` (acciones `archHire`, `archOk`, `archNo`), así que funciona igual en co-op; las ideas se generan solo en el host.
+- Probado con Playwright: contratar, 20 ideas generadas en una ciudad de nivel 10, aprobación de 3 calles (25 celdas, usando las 30 gratis) y de faroles/flores/árboles con descuento correcto de monedas, sin errores de consola.
