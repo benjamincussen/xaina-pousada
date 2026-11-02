@@ -217,3 +217,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Discurso del alcalde: con la Alcaldía, cada 15 min (1 min) el alcalde con sombrero de copa habla desde el estrado con datos reales de la ciudad (vecinos, felicidad, calles) y los vecinos se juntan.
 - Mercado de pulgas en la villa: cada 30 min por 5 min; tocarlo compra un lote sorpresa de 3 cosas por 40 monedas (1 por mercado, sincronizado en co-op).
 - Cumpleaños de los ayudantes: cada media hora le toca a uno; usa gorro de fiesta y hace el doble de trabajo por 5 minutos.
+
+## Versión grande 38: Mudanzas, concurso de jardines y regata en el lago (2026-11-03.39)
+- Camión de mudanza: al construir una casa llega un camión azul "MUDANZA", deja cajas y la familia las lleva adentro (45 s).
+- Concurso de jardines: con 4+ casas, cada 30 min una casa gana una escarapela con trofeo; +5 felicidad de la ciudad.
+- Regata en el lago: cada 10 min tres botecitos a remo compiten de lado a lado, con línea de llegada.
