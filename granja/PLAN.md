@@ -661,3 +661,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Viento** (`WIND`, ráfagas con tres ondas lentas, más fuerte en otoño/invierno y con lluvia): mueve árboles y palmeras, acelera el molino y el Parque Eólico, arrastra pétalos y hojas.
 - **Invierno:** nieve cayendo (se apaga en "Menos animaciones") y niebla baja en amaneceres y atardeceres.
 - Captura de invierno al atardecer; smoke sin errores.
+
+## Versión 95: Guía y metas para todo lo nuevo
+
+- La dica 💡 del mapa (`nextTip`) ahora sugiere: contratar a Lúcia, aprobar sus propuestas, instalar el riego, vender lo que está en buen momento (con flecha al tablero de precios), comprar el terreno que ya se puede (flecha al cartel) y leer el Diario cuando hay 10+ novedades.
+- 7 metas nuevas con premio: arquitecta, riego, Barrio Sur, 100 parcelas, Ferrocarril, Cacao y Club del Lago.
