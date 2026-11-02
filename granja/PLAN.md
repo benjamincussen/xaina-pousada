@@ -603,3 +603,10 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Cada casa tiene un detalle según el lote: chimenea, toldo a rayas o jardineras con flores.
 - La laguna del Campo Sur brilla; con lluvia aparecen charcos que se expanden; al amanecer y al atardecer las sombras se alargan (`SUN_K`).
 - Pruebas: smoke y logística sin errores; capturas del barrio y la granja.
+
+## Versión 86: Ayudantes 3 — oficio Industria y hasta 24 ayudantes
+
+- Nuevo oficio 🏭 **Industria**: recoge lo listo en las fábricas lejanas (Zona Industrial, Valle Verde, Oeste, Cantera, sierra, playa) y pone a producir lo que falta en los pedidos, lo que baja del stock objetivo y lo que vale mucho (herramientas, muebles, joyas). Nunca compra.
+- Hasta **24 ayudantes** (8 nombres nuevos; costos 22 000–36 000); los nuevos vienen con oficios Industria por defecto.
+- Lúcia propone árboles de sombra y bancas en el Barrio Sur.
+- Prueba `tests/ayudantes3.js`: 24 contratados, 4 con Industria, 12 tareas de Industria llenan las colas (ración 4, azúcar 3, aserradero 2), ideas de Lúcia para el sur, hojas sin errores.
