@@ -684,3 +684,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Cuando se construye o amplía una casa (nueva, grande, departamento, torre) o un servicio, aparece durante 1 minuto un **andamio** con dos obreros martillando (chispas, martillazos si estás cerca) y una barra de progreso; la obra se "destapa" de arriba a abajo (`scaffold`, `S.servAt`, `h.u`).
 - Al comprar un terreno, una **franja ✨ con el nombre** y confeti aparece en el cartel durante 40 s (`S.landAt`).
 - Pruebas: compra de terreno, casa, servicio y ampliación con marcas de tiempo; smoke, fuzz y torres sin errores; capturas.
+
+## Versión 99: Turismo en el Lago del Sur
+
+- Con el Club del Lago, cada 10 min cruza el lago un **bote con turistas** (estela, cartel) y al terminar el viaje pagan entrada: 260 × (1 + 10% por torre, hasta 10) × felicidad de la ciudad, con aviso y moneda flotante (`S.lagoTot` acumula). También pasean 3 turistas más por la ciudad.
+- Pruebas: viaje visible, 10 turistas, pago al terminar; smoke sin errores.
