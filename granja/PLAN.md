@@ -116,3 +116,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Botón 🗺️ para ir directo a cada lugar del mapa
 - [x] Resumen "Mientras no estabas" (monedas, pedidos, vecinos, niveles)
 - [x] Nombre de la ciudad con arco de bienvenida en la entrada de la villa
+
+## Versión grande 18: "Sierra" (2026-11-03.19)
+- [x] Sierra (nivel 15, mapa más grande): montañas nevadas, cascada, mirador
+- [x] Mina: piedras y piedras preciosas
+- [x] Navidad en diciembre: luces en las casas y árbol en la pileta del barrio
