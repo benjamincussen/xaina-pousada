@@ -27,6 +27,11 @@ Zona del mapa reservada para el Mundo: **x > 3000**, el océano al este del mapa
   - Embajadores cada 18–32 min llegan en barco con 🕊️ a nuestro puerto con: tratado de paz (+20 de relación), comercio (compran 15 de lo que piden a 1,8×), tributo (pagar o perder relación) o alianza (2000; no atacan más y el 30% de su ejército nos defiende). Esperan 20 min.
   - Ranking de ciudades y "Noticias del mundo" en el panel 🌍.
 
+- **Fase 4: exploración profunda.**
+  - 6 islotes con ruinas en el mar: tocar uno manda una expedición en barco (1500 + 300 por expedición, máx. +3000), que vuelve en 60 s con monedas, minerales, dinero para el tesoro o una reliquia (+3% a las colonias, hasta 10). Se recargan cada 90 min; el Alcalde también las manda (el premio va al tesoro).
+  - Segundo anillo del mundo: al explorar las 12 primeras islas, el océano se agranda hasta x 18800 con Porto Gelo, Ilha do Fogo, Vila Jade y 3 islas libres.
+  - Pendiente: el mundo en el minimapa (se pidió un hook `EXT.mini` en paintMini a la otra sesión).
+
 ## Próximas fases (grandes, una por ronda)
 1. ~~Vida en las islas~~ (hecho en v96):
    - vecinos caminando, humo, faroles de noche y gaviotas;
@@ -40,7 +45,7 @@ Zona del mapa reservada para el Mundo: **x > 3000**, el océano al este del mapa
    - alianzas y guerras entre ellas, con ataques visibles entre islas;
    - embajadores que llegan en barco con propuestas: tratado, comercio o tributo;
    - ranking de ciudades.
-4. **Exploración profunda:**
+4. ~~Exploración profunda~~ (hecho, salvo el minimapa):
    - islas del tesoro y ruinas;
    - mapa del mundo en el minimapa;
    - zonas nuevas al norte y al sur (otro tramo de océano) cuando se exploró todo.

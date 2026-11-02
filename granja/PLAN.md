@@ -768,3 +768,10 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Volcán** (nivel 25, 32000): cono con cráter, lava y humo (brilla de noche), **Taller de Obsidiana** (obsidiana ×2 con piedra; collar de obsidiana y oro en la Joyería) y **Termas** (servicio: +20, 12 empleos, piscinas con vapor y bañistas, entradas cada 12 min).
 - **Ruinas Antiguas** (nivel 24, 26000): columnas, senderos de piedra; cada 20 min aparece una X con pala (tocar = 300 monedas, piedra preciosa u obsidiana), también en la agenda del mapa; **Museo de las Ruinas** (+20, 12 empleos) con oficio arqueólogo.
 - Pruebas: compra, producción, collar, servicios, tesoro por toque (300) y rechazo de repetición, agenda; smoke y fuzz sin errores; capturas.
+## Versión 0 (sesión "Corsario", mundo.js): islas del tesoro y segundo anillo del mundo
+
+- **Islas del tesoro:**
+  - 6 islotes con ruinas en el mar del este, con 💎 y una X roja. Tocar uno manda una expedición en barco que vuelve con monedas, minerales, dinero para el tesoro de la ciudad o una **reliquia** (+3% de rendimiento en todas las colonias, hasta 10).
+  - Cada islote se recarga cada 90 min. El Alcalde del Concejo también manda expediciones; ese premio va al tesoro.
+- **Segundo anillo del mundo:** al explorar las 12 primeras islas, el mar se amplía hacia el este (hasta x 18800) con Porto Gelo (comerciante), Ilha do Fogo (guerrera), Vila Jade (agricultora) y 3 islas libres para colonias. El mapa del panel 🌍 se reescala para mostrarlas.
+- Solo `mundo.js`. Campos nuevos en `S.mu`: `tres`, `tresN`, `texp`, `relics`.
