@@ -539,3 +539,10 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Zona Industrial (nivel 18, 9000):** piso de asfalto con galpones de techo serrado y chimenea: Fábrica de Ración (ración ×9 rápida), Ingenio de Azúcar (azúcar ×6), Fábrica de Telas (tela ×4 y redes) y el **Depósito** (servicio: +300 de espacio en el granero, 14 empleos, +5 de felicidad). Los ayudantes y el Concejo los usan solos (son `BUILD`/`SERV` normales).
 - "Ir a…" tiene los dos lugares; la arquitecta conoce las avenidas nuevas para trazar calles; Novedades.
 - Pruebas (Playwright): compra de ambos terrenos, Depósito (+300), producción en las 3 fábricas, 3 h de Concejo, hojas de terreno/mapa/ciudad/Concejo/fábricas sin errores de consola; capturas del barrio con casas y vecinos y de la zona industrial.
+
+## Versión 78: Suroeste — Campo Sur y Cantera (hierro y herramientas)
+
+- **Campo Sur (nivel 19, 10000):** +24 parcelas (84–107; `MAXPLOTS` 108), huerto de árboles y una laguna, en el suroeste (x −1480…−20, y 4960…6360). La Secretaría del Campo compra las parcelas sola.
+- **Cantera (nivel 19, 12000):** cerros de piedra con suelo rocoso; la **Pedreira/Cantera** (fábrica) saca piedra ×6 y **hierro** (ítem nuevo, 25) con pan y caña; la **Herrería** hace **herramientas** (140) con 3 hierros + 2 maderas (del Aserradero). Dibujos: túnel, carrito que va y viene, chispas en el yunque, humo.
+- "Ir a…", textos PT/ES, Novedades.
+- Pruebas: compra de los 4 terrenos nuevos, 30 parcelas compradas hasta el tope 108, producción en Cantera y Herrería, hojas sin errores; capturas de ambos lugares.
