@@ -184,3 +184,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Banda en la glorieta de la Plaza al atardecer, con notas musicales y sonido.
 - Bomberos: con la Posta de salud, cada 15 min el camión con sirena cruza la avenida del barrio.
 - Novedades (PT/ES) actualizadas.
+
+## Versión grande 32: Guardería, cartero y helados (2026-11-03.33)
+- Guardería (Panel de la ciudad, Barrio Escolar, nivel 11, 2200): +3 cupos de bebés, +10 felicidad; de día los bebés gatean en el patio con la cuidadora.
+- Cartero en bicicleta: cada 4 min recorre la avenida del barrio y lanza cartas a las casas.
+- Carrito de helados en la playa: tocarlo vende 1 helado de mango o paleta de naranja al doble del precio (máx. 6 cada 10 min, sincronizado en co-op).
