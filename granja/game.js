@@ -2100,7 +2100,7 @@ function helperTask(S, now, role, hh) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; logHelper(S, now, hh | 0, a, crop); return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : poor ? { poor: true } : null;
 }
-const BUILD_V = '2026-11-03.103';
+const BUILD_V = '2026-11-03.104';
 // sons de cada lugar: ondas na praia, pássaros na serra e no sítio, crianças no bairro escolar (com 'Sons do sítio' ligado)
 setInterval(() => { if (!G.S || !AMB || document.hidden) return; const x = CAM.x, y = CAM.y; if (x > 1150) SND.wave(); else if (y > 3930) { if (Math.random() < 0.7) SND.bird(); } else if (y > 2330 && y < 2930 && G.S.serv && (G.S.serv.parque || G.S.serv.campo)) { if (Math.random() < 0.4) SND.kids(); } else if (Math.hypot((x - LAKE.x) / LAKE.rx, (y - LAKE.y) / LAKE.ry) < 1.6 && G.S.land.sul) { if (Math.random() < 0.3) SND.splash(); } }, 3200);
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
@@ -2136,11 +2136,12 @@ function cvActPos(S, e) { const k = e[2], a = e[3]; try {
   if (k === 'serv' && SERV[a]) return [SERV[a].x, SERV[a].y]; if (k === 'animal' && PENS[a]) return [PENS[a].x, PENS[a].y]; if (k === 'buyPlot') { const r = plotRect(Math.max(0, S.np - 1)); return [r.x + r.w / 2, r.y + r.h / 2]; } if (k === 'buyTree') { const t = S.xt && S.xt[S.xt.length - 1]; return t ? [t.x, t.y] : null; }
   if (k === 'up' && BUILD[a]) return [BUILD[a].x, BUILD[a].y]; if (k === 'silo') return [SILOS[0].x, SILOS[0].y]; if (k.slice(0, 3) === 'mil') return [FORT.x, FORT.y]; if (k === 'mineUp') return [MINE.x, MINE.y]; } catch (err) {} return null; }
 function coinFlights(S, T, dt) { const C = S.cv, now = Date.now(), hw = innerWidth / CAM.z / 2 + 200, hh = innerHeight / CAM.z / 2 + 200, vis = (x, y) => Math.abs(x - CAM.x) < hw && Math.abs(y - CAM.y) < hh;
+  const CV = !!(C && cvOn(S));
   // entrada (a cada 20 s): de até 5 fontes visíveis até a Prefeitura
-  const b = Math.floor(now / 20000); if (G.coinB !== b) { G.coinB = b; if (!CALM) { const src = []; (S.homes || []).forEach((h, i) => { if (h && LOTS[i] && S.land[lotLand(i)]) src.push(LOTS[i]); }); for (const [k, P] of Object.entries(PROJ)) if (S.city[k] && S.city[k].e <= now) src.push([P.x, P.y - 40]); for (const [k, V] of Object.entries(SERV)) if (S.serv[k] && k !== 'prefeitura') src.push([V.x, V.y - 40]);
+  const b = Math.floor(now / 20000); if (CV && G.coinB !== b) { G.coinB = b; if (!CALM) { const src = []; (S.homes || []).forEach((h, i) => { if (h && LOTS[i] && S.land[lotLand(i)]) src.push(LOTS[i]); }); for (const [k, P] of Object.entries(PROJ)) if (S.city[k] && S.city[k].e <= now) src.push([P.x, P.y - 40]); for (const [k, V] of Object.entries(SERV)) if (S.serv[k] && k !== 'prefeitura') src.push([V.x, V.y - 40]);
       const near = src.filter(p => vis(p[0], p[1])); for (let i = 0; i < Math.min(5, near.length); i++) { const p = near[(b * 7 + i * 13) % near.length]; coinFly(p[0], p[1] - 30, CVG.x, CVG.y - 60, 1 + (i % 2)); } } }
   // saída: cada decisão nova do Conselho manda moedas da Prefeitura até a obra
-  if ((C.seq || 0) > (G.cvSeqSeen || 0)) { const nNew = Math.min(6, (C.seq || 0) - (G.cvSeqSeen || 0)); if (G.cvSeqSeen) for (let i = nNew - 1; i >= 0; i--) { const e = C.log[i]; if (!e || !e[4]) continue; const p = cvActPos(S, e); if (p && (vis(p[0], p[1]) || vis(CVG.x, CVG.y))) coinFly(CVG.x, CVG.y - 60, p[0], p[1] - 20, Math.min(6, 1 + Math.floor(e[4] / 400))); } G.cvSeqSeen = C.seq || 0; }
+  if (CV && (C.seq || 0) > (G.cvSeqSeen || 0)) { const nNew = Math.min(6, (C.seq || 0) - (G.cvSeqSeen || 0)); if (G.cvSeqSeen) for (let i = nNew - 1; i >= 0; i--) { const e = C.log[i]; if (!e || !e[4]) continue; const p = cvActPos(S, e); if (p && (vis(p[0], p[1]) || vis(CVG.x, CVG.y))) coinFly(CVG.x, CVG.y - 60, p[0], p[1] - 20, Math.min(6, 1 + Math.floor(e[4] / 400))); } G.cvSeqSeen = C.seq || 0; }
   // desenho das moedas (arco com brilho)
   for (let i = COINS.length - 1; i >= 0; i--) { const c = COINS[i]; c.t += dt / c.d; if (c.t < 0) continue; if (c.t >= 1) { COINS.splice(i, 1); continue; } const u = c.t, k = u * u * (3 - 2 * u), x = c.x0 + (c.x1 - c.x0) * k, y = c.y0 + (c.y1 - c.y0) * k - Math.sin(u * Math.PI) * 90; cx.save(); cx.globalAlpha = u < 0.15 ? u / 0.15 : u > 0.85 ? (1 - u) / 0.15 : 1; cx.fillStyle = 'rgba(255,220,80,.35)'; cx.beginPath(); cx.arc(x, y, 15, 0, 6.283); cx.fill(); cx.drawImage(iconCanvas('coin'), x - 11, y - 11, 22, 22); cx.restore(); }
   // trem de carga: da Zona Industrial ao Porto de Cargas, com os últimos produtos nos vagões
@@ -2150,7 +2151,7 @@ function coinFlights(S, T, dt) { const C = S.cv, now = Date.now(), hw = innerWid
   // caminhões de entrega: da fábrica até o celeiro, com o produto em cima
   for (let i = TRUCKS.length - 1; i >= 0; i--) { const tr = TRUCKS[i]; tr.t += dt / tr.d; if (tr.t >= 1) { TRUCKS.splice(i, 1); continue; } const u = tr.t, k = u < 0.1 ? u * 5 * u : u > 0.9 ? 1 - (1 - u) * 5 * (1 - u) : (u - 0.1) / 0.8 * 0.95 + 0.05, x = tr.x0 + (tr.x1 - tr.x0) * k, y = tr.y0 + (tr.y1 - tr.y0) * k; if (!vis(x, y)) continue; drawTruck(cx, x, y, tr.x1 >= tr.x0 ? 1 : -1, T); cx.drawImage(iconCanvas(tr.k), x - 12, y - 58, 24, 24); }
   // caminhão da Secretaria de Comércio saindo com as sobras
-  if (C.truck && now - C.truck[0] < 7000) { const u = (now - C.truck[0]) / 7000, x = CVG.x + 60 + u * 1400, y = CVG.y + 40; if (vis(x, y)) { drawTruck(cx, x, y, 1, T); cx.fillStyle = '#fff'; cx.strokeStyle = 'rgba(58,36,18,.35)'; cx.lineWidth = 2; rr(cx, x - 30, y - 92, 60, 26, 10); cx.fill(); cx.stroke(); cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillStyle = '#3a2412'; cx.fillText('📦 → 🏰', x, y - 74); } }
+  if (CV && C.truck && now - C.truck[0] < 7000) { const u = (now - C.truck[0]) / 7000, x = CVG.x + 60 + u * 1400, y = CVG.y + 40; if (vis(x, y)) { drawTruck(cx, x, y, 1, T); cx.fillStyle = '#fff'; cx.strokeStyle = 'rgba(58,36,18,.35)'; cx.lineWidth = 2; rr(cx, x - 30, y - 92, 60, 26, 10); cx.fill(); cx.stroke(); cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillStyle = '#3a2412'; cx.fillText('📦 → 🏰', x, y - 74); } }
 }
 function ecoCard(S) { const f = cvFlow(S); if (!f) return ''; const now = Date.now(), pv = S.cv.prev, sum = o => Object.values(o).reduce((a, b) => a + b, 0), mix = (a, b) => { const o = {}; for (const src of [a, b]) if (src) for (const [k, v] of Object.entries(src)) o[k] = (o[k] || 0) + v; return o; };
   const IN = mix(f.in, pv && pv.in), OUT = mix(f.out, pv && pv.out), ti = sum(IN), to = sum(OUT), mins = Math.max(1, Math.round((now - (pv ? pv.t0 : f.t0)) / 60000)), bar = (k, v, tot, col, lab) => `<div class="row" style="gap:6px;margin:3px 0"><small style="width:118px">${lab}</small><div style="flex:1;height:10px;border-radius:5px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${Math.round(v / Math.max(1, tot) * 100)}%;background:${col}"></i></div><small style="width:58px;text-align:right"><b>${Math.round(v).toLocaleString()}</b></small></div>`;
@@ -3670,7 +3671,7 @@ function draw(T, dt) {
       cx.restore(); } }
   // dinheiro em movimento: moedas voam das casas/empregos até a Prefeitura e da Prefeitura até cada obra; caminhão do comércio
   for (const h of EXT.draw) h(cx, S, T, dt, now);
-  if (S && cvOn(S) && S.cv) coinFlights(S, T, dt);
+  if (S) coinFlights(S, T, dt);
   { const nf0 = nightF(Date.now()); SUN_K = 0.16 + 0.55 * Math.min(1, nf0 * (1 - nf0) * 4); WIND = windNow(Date.now()); }
   drawFogos(cx, S, T);
   if (G.fest100 && Date.now() - G.fest100 < 25000 && !CALM) { if (Math.random() < 0.08) { const bx = CAM.x + (Math.random() - 0.5) * innerWidth / CAM.z * 0.8, by = CAM.y - innerHeight / CAM.z * (0.1 + Math.random() * 0.3), col = ['#ff2d7a', '#ffc400', '#1fa0ff', '#2fd05a', '#ff6a00', '#b04dff'][Math.floor(Math.random() * 6)]; for (let q = 0; q < 24; q++) { const a = q / 24 * 6.283, v = 90 + Math.random() * 90; SPARK.push({ x: bx, y: by, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 20, t: 0, c: q % 4 ? col : '#ffffff' }); } if (AMB && Math.random() < 0.4) try { SND.pop(); } catch (e) {} } }

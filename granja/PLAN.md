@@ -714,3 +714,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Autitos de colores (3 por avenida, dos sentidos, sombra, faros encendidos y luz trasera de noche) en las avenidas del Barrio Sur (2), Barrio Alto y Ciudad Universitaria; solo se dibujan si están cerca de la cámara y se apagan con "Menos animaciones".
 - Bandada de 7 pájaros en V que cruza el cielo cada 45 s de día, con aleteo.
 - Smoke y fuzz sin errores; captura.
+
+## Versión 104: Arreglo — camiones, tren y autitos sin Alcaldía
+
+- Los camiones de reparto (v79), el tren de carga (v93) y los autitos (v103) se dibujaban dentro del bloque de monedas del Concejo, así que no aparecían en partidas sin Alcaldía. Ahora `coinFlights` corre siempre y solo las partes del Concejo (monedas al tesoro, camión del Comercio) exigen Alcaldía. Probado con una partida sin Concejo: camión visible tras cobrar en el Ingenio.
