@@ -417,3 +417,10 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - **Plaza de food trucks (Centro Moderno):** tres camiones (tacos, hamburguesas y helado) con fila de vecinos que cambia, y mesitas con sombrilla. De noche la plaza se ilumina.
 - **Mapa con personajes:** el minimapa muestra una bolita con tu inicial (naranja) y la de tu amigo (morada). En co-op aparece el botón "📍 Ir a donde está…", que lleva la cámara hasta él.
 - **Parque Eólico de noche:** los molinos parpadean con luces rojas de aviación.
+
+## Versión 71: Pedidos de los food trucks
+
+- **Pedidos de los food trucks:** toca la plaza del Centro y se abre la hoja de los tres camiones (Tacos, Hamburguesas, Heladito). Cada uno pide ingredientes (maíz, queso, pan, zanahoria, leche, helado…) y paga un 40% más que su valor, más 20 monedas y 6 de XP. Los pedidos cambian cada 30 minutos; cada camión acepta una entrega por ronda.
+- **Indicadores en la plaza:** una moneda sobre el camión cuando ya tienes todo, y un ✓ cuando ya entregaste.
+- **Ayudantes de Ciudad:** entregan solos, pero solo si sobra stock (guardan lo que piden los pedidos y la mitad de su meta de stock). Queda en el diario del equipo y en el de jugadores (🚚).
+- **Co-op:** los pedidos se calculan por la hora, así que el anfitrión y el invitado ven los mismos.
