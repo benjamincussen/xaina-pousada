@@ -155,3 +155,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Verano: sombrillas, bañistas y nadadores en la playa
 - [x] Primavera: flores que brotan por todo el mapa
 - [x] Invierno: puesto de chocolate caliente + receta en la Cocina
+
+## Versión grande 26: "Álbum" (2026-11-03.27)
+- [x] Álbum de productos con premios cada 10
+- [x] Silo gigante (+500)
+- [x] Prueba de partidas antiguas (cargan sin errores)

@@ -72,6 +72,7 @@ const TX = {
     bdayT: "Aniversário no bairro", bdayOver: "A festa já acabou.", bdayBtn: "Levar um bolo de presente", bdayDone: "Vocês já levaram o presente. Obrigado!", needBolo: "Precisa de um bolo de cenoura", n_morango: "Morango, geleia e torta (nível 12)", n_morangoD: "Plante morango: a Cozinha da Vó faz geleia e a Padaria faz torta de morango.", n_bday: "Aniversários dos vizinhos", n_bdayD: "De vez em quando um vizinho faz festa em casa com balões e todos vão. Toque na casa e leve um bolo: paga o triplo.", n_trainlight: "Trem com farol de noite", n_trainlightD: "De noite o trem acende o farol.", bdaySub: (n, c) => `Hoje é aniversário de ${n}! Levem um bolo de presente: paga ${c} moedas.`, bdayThanks: (n, c) => `${n} adorou o bolo! +${c} moedas`,
     harvNow: "Festival da Colheita! Cada canteiro colhido agora dá +1.", n_harv: "Festival da Colheita", n_harvD: "No outono, a cada 10 minutos, 2 minutos de festival com abóboras e fardos de feno: cada canteiro colhido dá 1 a mais.", n_dogs: "Vizinhos com cachorrinho", n_dogsD: "Alguns vizinhos passeiam com seu cachorrinho pelas ruas.", n_bee: "Apicultor nas colmeias", n_beeD: "Um apicultor de roupa protetora cuida das colmeias com as abelhas voando em volta.",
     n_verao: "Verão na praia", n_veraoD: "No verão a praia enche de guarda-sóis, toalhas e banhistas, e tem gente nadando no mar.", n_prima: "Primavera florida", n_primaD: "Na primavera brotam flores por todo o mapa.", n_choc: "Chocolate quente no inverno", n_chocD: "No inverno abre uma barraca de chocolate quente. A Cozinha da Vó também faz chocolate quente (leite e açúcar).",
+    albumT: "Álbum de produtos", bigsiloT: "Silo gigante", bigsiloD: "Um silo enorme ao lado do celeiro: +500 lugares de uma vez.", bigsiloGot: "Silo gigante pronto! +500 lugares no celeiro.", n_album: "Álbum de produtos", n_albumD: "No Menu: todos os produtos do jogo; cada um que vocês conseguem entra no álbum. A cada 10, um prêmio em moedas.", n_bigsilo: "Silo gigante (nível 14)", n_bigsiloD: "Na Loja: um silo enorme ao lado do celeiro, +500 lugares de uma vez.", n_old: "Partidas antigas protegidas", n_oldD: "Testei que partidas bem antigas continuam abrindo sem problemas com todas as novidades.", albumSub: (n, t) => `Vocês já conseguiram ${n} de ${t} produtos.`, albumGoal: m => `${m} produtos no álbum`, albumGot: (m, c) => `Álbum: ${m} produtos! +${c} moedas`,
     land_lavoura: 'Lavoura Grande', landDesc_lavoura: 'Campo enorme no extremo sul: mais 24 canteiros para plantar muito mais.',
     land_escolar: 'Bairro Escolar', landDesc_escolar: 'Mais um bairro ao sul: Colégio, Parque infantil, Campo de futebol e 6 lotes para casas.', serv_colegio: 'Colégio', servD_colegio: 'As crianças vão à escola: +20 de felicidade', serv_parque: 'Parque infantil', servD_parque: 'Balanço, escorregador e areia: +15 de felicidade', serv_campo: 'Campo de futebol', servD_campo: 'Peladas todo dia: +10 de felicidade',
     bigTitle: 'Ampliar casa', bigHint: 'Segundo andar: chegam mais 2 moradores e o aluguel dobra.', bigBtn: 'Ampliar', bigDone: (a, b) => `Casa ampliada! ${a} e ${b} chegaram.`, livesHere: n => `Moram aqui: ${n}`,
@@ -167,6 +168,7 @@ const TX = {
     bdayT: "Cumpleaños en el barrio", bdayOver: "La fiesta ya terminó.", bdayBtn: "Llevar un pastel de regalo", bdayDone: "Ya llevaron el regalo. ¡Gracias!", needBolo: "Necesitas un pastel de zanahoria", n_morango: "Frutillas, mermelada y tarta (nivel 12)", n_morangoD: "Siembra frutillas: la Cocina de la Abuela hace mermelada y la Panadería hace tarta de frutilla.", n_bday: "Cumpleaños de los vecinos", n_bdayD: "De vez en cuando un vecino hace una fiesta en su casa con globos y todos van. Toca la casa y lleva un pastel: paga el triple.", n_trainlight: "Tren con farol de noche", n_trainlightD: "De noche el tren enciende su farol.", bdaySub: (n, c) => `¡Hoy está de cumpleaños ${n}! Lleven un pastel de regalo: paga ${c} monedas.`, bdayThanks: (n, c) => `¡A ${n} le encantó el pastel! +${c} monedas`,
     harvNow: "¡Festival de la Cosecha! Cada parcela cosechada da +1.", n_harv: "Festival de la Cosecha", n_harvD: "En otoño, cada 10 minutos, 2 minutos de festival con zapallos y fardos de paja: cada parcela cosechada da 1 más.", n_dogs: "Vecinos con perrito", n_dogsD: "Algunos vecinos pasean con su perrito por las calles.", n_bee: "Apicultor en las colmenas", n_beeD: "Un apicultor con traje protector cuida las colmenas con las abejas volando alrededor.",
     n_verao: "Verano en la playa", n_veraoD: "En verano la playa se llena de sombrillas, toallas y bañistas, y hay gente nadando en el mar.", n_prima: "Primavera florida", n_primaD: "En primavera brotan flores por todo el mapa.", n_choc: "Chocolate caliente en invierno", n_chocD: "En invierno abre un puesto de chocolate caliente. La Cocina de la Abuela también hace chocolate caliente (leche y azúcar).",
+    albumT: "Álbum de productos", bigsiloT: "Silo gigante", bigsiloD: "Un silo enorme junto al granero: +500 espacios de una vez.", bigsiloGot: "¡Silo gigante listo! +500 espacios en el granero.", n_album: "Álbum de productos", n_albumD: "En el Menú: todos los productos del juego; cada uno que consiguen entra al álbum. Cada 10, un premio en monedas.", n_bigsilo: "Silo gigante (nivel 14)", n_bigsiloD: "En la Tienda: un silo enorme junto al granero, +500 espacios de una vez.", n_old: "Partidas antiguas protegidas", n_oldD: "Probé que las partidas muy antiguas siguen abriendo sin problemas con todas las novedades.", albumSub: (n, t) => `Ya consiguieron ${n} de ${t} productos.`, albumGoal: m => `${m} productos en el álbum`, albumGot: (m, c) => `¡Álbum: ${m} productos! +${c} monedas`,
     land_lavoura: 'Campo Grande', landDesc_lavoura: 'Campo enorme al extremo sur: 24 parcelas más para sembrar mucho más.',
     land_escolar: 'Barrio Escolar', landDesc_escolar: 'Otro barrio al sur: Colegio, Parque infantil, Cancha de fútbol y 6 lotes para casas.', serv_colegio: 'Colegio', servD_colegio: 'Los niños van al colegio: +20 de felicidad', serv_parque: 'Parque infantil', servD_parque: 'Columpios, tobogán y arena: +15 de felicidad', serv_campo: 'Cancha de fútbol', servD_campo: 'Partidos todos los días: +10 de felicidad',
     bigTitle: 'Ampliar casa', bigHint: 'Segundo piso: llegan 2 vecinos más y el arriendo se duplica.', bigBtn: 'Ampliar', bigDone: (a, b) => `¡Casa ampliada! Llegaron ${a} y ${b}.`, livesHere: n => `Viven aquí: ${n}`,
@@ -416,7 +418,7 @@ function migrate(S) {
   if (!S.deco || typeof S.deco !== 'object') S.deco = {};
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
-  if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (typeof S.truck !== 'number') S.truck = 0; if (!S.goals || typeof S.goals !== 'object') S.goals = {}; if (!Array.isArray(S.miss)) S.miss = []; if (typeof S.train !== 'number') S.train = 0; if (!S.pets || typeof S.pets !== 'object') S.pets = {}; if (!S.medals || typeof S.medals !== 'object') S.medals = {}; if (!Array.isArray(S.decor)) S.decor = []; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
+  if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (typeof S.truck !== 'number') S.truck = 0; if (!S.goals || typeof S.goals !== 'object') S.goals = {}; if (!Array.isArray(S.miss)) S.miss = []; if (typeof S.train !== 'number') S.train = 0; if (!S.pets || typeof S.pets !== 'object') S.pets = {}; if (!S.medals || typeof S.medals !== 'object') S.medals = {}; if (!Array.isArray(S.decor)) S.decor = []; if (!S.seen || typeof S.seen !== 'object') { S.seen = {}; for (const k of Object.keys(S.inv || {})) if (ITEMS[k]) S.seen[k] = 1; } if (!S.albumR || typeof S.albumR !== 'object') S.albumR = {}; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
   while (S.plots.length < MAXPLOTS) S.plots.push({ c: null, p: 0 });
   if (!Array.isArray(S.homes)) S.homes = []; if (!Array.isArray(S.reqs)) S.reqs = []; if (!Array.isArray(S.fair)) S.fair = [null, null, null, null];
   if (!Array.isArray(S.roads)) S.roads = []; if (typeof S.roadFree !== 'number') S.roadFree = ROAD_FREE;
@@ -439,7 +441,7 @@ const hiveReady = (S, i, now) => S.land.sul && now >= S.hives[i] + HIVE_T * 1000
 const invCount = S => Object.values(S.inv).reduce((a, b) => a + b, 0);
 const has = (S, need) => Object.entries(need).every(([k, q]) => (S.inv[k] || 0) >= q);
 function take(S, need) { for (const [k, q] of Object.entries(need)) { S.inv[k] -= q; if (S.inv[k] <= 0) delete S.inv[k]; } }
-const give = (S, k, q) => { S.inv[k] = (S.inv[k] || 0) + q; };
+const give = (S, k, q) => { S.inv[k] = (S.inv[k] || 0) + q; if (S.seen && !S.seen[k] && ITEMS[k]) S.seen[k] = 1; };
 const plotReady = (pl, now) => pl.c && now >= pl.p + CROPS[pl.c].t * 1000;
 function addXp(S, x, out) { S.xp += x; while (S.lvl < LV.length && S.xp >= LV[S.lvl]) { S.lvl++; S.coins += 50 * S.lvl; S.cap += 50; out.fx.push(['lvl', S.lvl]); } }
 function unlockedItems(S) {
@@ -625,6 +627,10 @@ function genMiss(S) { const items = unlockedItems(S).filter(k => !CROPS[k]), k =
   return { it: [[k, q]], c: Math.round(val * 1.8), x: Math.round(val / 4) + 5 }; }
 function ensureMiss(S, now) { if (!S.land.bairro) return false; let ch = false; while (S.miss.length < 3) { S.miss.push({ id: S.oid++, w: now, ...genMiss(S) }); ch = true; } return ch; }
 const BUS = { cost: 1400, lvl: 10 };
+// álbum de produtos: cada produto novo conseguido entra no álbum; prêmios a cada 10
+const ALBUM_STEP = 10, albumN = S => Object.keys(S.seen || {}).filter(k => ITEMS[k]).length;
+// silo gigante ao lado do celeiro: +500 lugares
+const BIGSILO = { cost: 5000, lvl: 14, x: 1030, y: 650 };
 // festival da colheita: no outono, a cada 10 min, 2 min de festa em que cada canteiro colhido dá +1
 const harvFest = ms => season(ms) === 2 && (ms / 1000) % 600 < 120;
 // aniversário de vizinho: a cada 25 min um vizinho faz festa em casa por 4 min; levar um bolo paga o triplo
@@ -848,6 +854,10 @@ function apply(S, a, now) {
     const h = S.homes[a.i | 0]; if (!h || h.big) return fail(''); if (S.coins < BIG_COST) return fail(L('noCoins')); S.coins -= BIG_COST; h.big = 1; addXp(S, 8, out); out.fx.push(['homeBig', a.i | 0]);
   } else if (a.a === 'cityName') {
     const n = String(a.n || '').replace(/[<>&"`]/g, '').trim().slice(0, 24); if (!n) return fail(''); S.cityName = n; out.fx.push(['cityName', n]);
+  } else if (a.a === 'album') {
+    const m = a.m | 0; if (m <= 0 || m % ALBUM_STEP || S.albumR[m] || albumN(S) < m) return fail(''); S.albumR[m] = 1; const c = m * 40; S.coins += c; out.fx.push(['coins', c]); out.fx.push(['album', m, c]);
+  } else if (a.a === 'bigsilo') {
+    if (S.bigsilo) return fail(''); if (!S.land.leste) return fail(L('needLand', L('land_leste'))); if (S.lvl < BIGSILO.lvl) return fail(L('unlockAt', BIGSILO.lvl)); if (S.coins < BIGSILO.cost) return fail(L('noCoins')); S.coins -= BIGSILO.cost; S.bigsilo = 1; S.cap += 500; out.fx.push(['bigsilo']);
   } else if (a.a === 'bday') {
     const b = bdWho(S, now); if (!b || b.n !== a.n || S.bdGift === b.n) return fail(''); if (!(S.inv.bolo > 0)) return fail(L('needBolo')); take(S, { bolo: 1 }); S.bdGift = b.n; const c = ITEMS.bolo.v * 3; S.coins += c; S.cityHp = Math.min(20, (S.cityHp || 0) + 1); addXp(S, 10, out); out.fx.push(['coins', c]); out.fx.push(['bday', resName(b.id), c]);
   } else if (a.a === 'bal') {
@@ -1258,6 +1268,8 @@ function playFx(fx) {
     if (f[0] === 'boost') { SND.lvl(); toast(L('boostDone_' + f[1]), 3000); }
     if (f[0] === 'req') { SND.coin(); const n = NPCS.list.find(x => x.id === 'h' + f[1]); if (n) { n.say = L('reqThanks'); n.sayT = 3; burst(n.x, n.y - 40, 'coin'); } }
     if (f[0] === 'cityName') { SND.pops(); toast(L('cityNamed', f[1]), 3000); }
+    if (f[0] === 'album') { SND.lvl(); toast(L('albumGot', f[1], f[2]), 3000); }
+    if (f[0] === 'bigsilo') { SND.hammer(); closeSheet(); CAM.x = BIGSILO.x; CAM.y = BIGSILO.y - 80; clampCam(); toast(L('bigsiloGot'), 3500); }
     if (f[0] === 'bday') { SND.pops(); toast(L('bdayThanks', f[1], f[2]), 3500); }
     if (f[0] === 'bal') { SND.lvl(); closeSheet(); CAM.x = BAL.x; CAM.y = BAL.y - 200; clampCam(); toast(L('balGot'), 3500); }
     if (f[0] === 'ref') { SND.lvl(); closeSheet(); CAM.x = REF.x - 120; CAM.y = REF.y - 80; clampCam(); toast(L('refGot'), 3500); }
@@ -1281,8 +1293,8 @@ function boostCards(S) { const now = nowS(); return `<span class="lbl">${L('boos
     <button class="btn" type="button" data-boost="${k}" ${S.coins < B.cost ? 'disabled' : ''}>${img('coin')} ${B.cost}</button></div></div>`).join(''); }
 function fairFx(i) { SND.coin(); burst(fairX(i), FAIR.y - 60, 'coin'); const n = NPCS.list[Math.floor(Math.random() * NPCS.list.length)]; if (n) { n.tx = fairX(i); n.ty = FAIR.y + 26; n.wait = 3; n.say = L('fairBuy'); n.sayT = 2.5; } }
 // novidades: aparece uma vez por versão grande, com botão para ir ver cada coisa
-const NEWS_ID = 'verao-1', NEWS_N = 3;
-const NEWS = [['n_verao', 'praia'], ['n_prima', null], ['n_choc', null], ['n_harv', 'farm'], ['n_dogs', 'bairro'], ['n_bee', 'sul'], ['n_morango', null], ['n_bday', 'bairro'], ['n_trainlight', null], ['n_photo', null], ['n_snd2', null], ['n_gear', 'helper'], ['n_ponte', 'serra'], ['n_newsshort', null], ['n_small', null], ['n_bal', 'city'], ['n_fut', 'escolar'], ['n_hike', 'serra'], ['n_joia', 'serra'], ['n_ref', 'city'], ['n_serra', 'serra'], ['n_natal', null], ['n_map', null], ['n_away', null], ['n_cityname', 'city'], ['n_star', null], ['n_obs', 'city'], ['n_bike', 'shop'], ['n_hotel', 'diversao'], ['n_tele', 'city'], ['n_arrow', 'farm'], ['n_carn', 'vila'], ['n_vote', 'city'], ['n_cozinha', 'lavoura'], ['n_apt', 'bairro'], ['n_mkt', 'fair'], ['n_race', 'sul'], ['n_cine', 'city'], ['n_baby', 'bairro'], ['n_fire', null], ['n_coin', 'farm'], ['n_decor', 'shop'], ['n_exped', 'praia'], ['n_theme', 'orders'], ['n_casa', 'farm'], ['n_storm', 'farm'], ['n_contest', 'orders'], ['n_fish', 'sul'], ['n_medals', null], ['n_bichos', 'shop'], ['n_plane', null], ['n_tour', null], ['n_farol', 'praia'], ['n_fast', null], ['n_snd', null], ['n_train', 'city'], ['n_jobs', 'bairro'], ['n_daily', null], ['n_cheap', 'shop'], ['n_park', 'diversao'], ['n_season', null], ['n_home', 'bairro'], ['n_porto', 'praia'], ['n_miss', 'city'], ['n_bus', 'city'], ['n_pref', 'escolar'], ['n_estufa', 'lavoura'], ['n_pizza', 'lavoura'], ['n_festa', 'bairro'], ['n_pets', 'farm'], ['n_team', 'helper'], ['n_chain', 'helper'], ['n_lavoura', 'lavoura'], ['n_auto', null], ['n_people', 'farm'], ['n_escolar', 'escolar'], ['n_big', 'bairro'], ['n_bairro', 'bairro'], ['n_fair', 'fair'], ['n_roads', 'road'], ['n_dup', 'shop'], ['n_goals', 'goals'], ['n_truck', 'shop'], ['n_night', null]];
+const NEWS_ID = 'album-1', NEWS_N = 3;
+const NEWS = [['n_album', null], ['n_bigsilo', 'shop'], ['n_old', null], ['n_verao', 'praia'], ['n_prima', null], ['n_choc', null], ['n_harv', 'farm'], ['n_dogs', 'bairro'], ['n_bee', 'sul'], ['n_morango', null], ['n_bday', 'bairro'], ['n_trainlight', null], ['n_photo', null], ['n_snd2', null], ['n_gear', 'helper'], ['n_ponte', 'serra'], ['n_newsshort', null], ['n_small', null], ['n_bal', 'city'], ['n_fut', 'escolar'], ['n_hike', 'serra'], ['n_joia', 'serra'], ['n_ref', 'city'], ['n_serra', 'serra'], ['n_natal', null], ['n_map', null], ['n_away', null], ['n_cityname', 'city'], ['n_star', null], ['n_obs', 'city'], ['n_bike', 'shop'], ['n_hotel', 'diversao'], ['n_tele', 'city'], ['n_arrow', 'farm'], ['n_carn', 'vila'], ['n_vote', 'city'], ['n_cozinha', 'lavoura'], ['n_apt', 'bairro'], ['n_mkt', 'fair'], ['n_race', 'sul'], ['n_cine', 'city'], ['n_baby', 'bairro'], ['n_fire', null], ['n_coin', 'farm'], ['n_decor', 'shop'], ['n_exped', 'praia'], ['n_theme', 'orders'], ['n_casa', 'farm'], ['n_storm', 'farm'], ['n_contest', 'orders'], ['n_fish', 'sul'], ['n_medals', null], ['n_bichos', 'shop'], ['n_plane', null], ['n_tour', null], ['n_farol', 'praia'], ['n_fast', null], ['n_snd', null], ['n_train', 'city'], ['n_jobs', 'bairro'], ['n_daily', null], ['n_cheap', 'shop'], ['n_park', 'diversao'], ['n_season', null], ['n_home', 'bairro'], ['n_porto', 'praia'], ['n_miss', 'city'], ['n_bus', 'city'], ['n_pref', 'escolar'], ['n_estufa', 'lavoura'], ['n_pizza', 'lavoura'], ['n_festa', 'bairro'], ['n_pets', 'farm'], ['n_team', 'helper'], ['n_chain', 'helper'], ['n_lavoura', 'lavoura'], ['n_auto', null], ['n_people', 'farm'], ['n_escolar', 'escolar'], ['n_big', 'bairro'], ['n_bairro', 'bairro'], ['n_fair', 'fair'], ['n_roads', 'road'], ['n_dup', 'shop'], ['n_goals', 'goals'], ['n_truck', 'shop'], ['n_night', null]];
 function maybeDaily() { if (!G.S || G.mode === 'guest') return; const day = Math.floor((Date.now() - 3 * 3600000) / 86400000); if (G.S.daily === day) return; let n = 0; const tryOpen = () => { if (!G.S || G.S.daily === day) return; if (!SH && $('ovRoom').hidden && !G.tour) openSheet('daily'); else if (++n < 30) setTimeout(tryOpen, 3000); }; setTimeout(tryOpen, 2500); }
 function snapOf(S) { return { coins: S.coins, done: S.done || 0, res: residents(S).length, lvl: S.lvl, babies: S.babies || 0, homes: (S.homes || []).length, t: Date.now() }; }
 setInterval(() => { if (G.S) try { localStorage.setItem('sitio-snap-' + G.S.fid, JSON.stringify(snapOf(G.S))); } catch (e) {} }, 10000);
@@ -1386,7 +1398,7 @@ function helperTask(S, now, role) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-03.26';
+const BUILD_V = '2026-11-03.27';
 // sons de cada lugar: ondas na praia, pássaros na serra e no sítio, crianças no bairro escolar (com 'Sons do sítio' ligado)
 setInterval(() => { if (!G.S || !AMB || document.hidden) return; const x = CAM.x, y = CAM.y; if (x > 1150) SND.wave(); else if (y > 3930) { if (Math.random() < 0.7) SND.bird(); } else if (y > 2330 && y < 2930 && G.S.serv && (G.S.serv.parque || G.S.serv.campo)) { if (Math.random() < 0.4) SND.kids(); } else if (Math.hypot((x - LAKE.x) / LAKE.rx, (y - LAKE.y) / LAKE.ry) < 1.6 && G.S.land.sul) { if (Math.random() < 0.3) SND.splash(); } }, 3200);
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
@@ -1616,6 +1628,10 @@ function renderSheet() {
       <div class="card"><span class="lbl">${L('lvlUnlocked')}</span><p style="margin:0;font-weight:800">${news ? news.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <div class="card"><span class="lbl">${L('lvlNext', l + 1)}</span><p style="margin:0;font-weight:700">${nxt ? nxt.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <button class="btn" type="button" data-close="1">${L('great')}</button>`;
+  } else if (SH.type === 'album') {
+    t.textContent = L('albumT'); const n = albumN(S), tot = Object.keys(ITEMS).length, ms = []; for (let m = ALBUM_STEP; m <= tot; m += ALBUM_STEP) ms.push(m);
+    h = `<p class="sub">${L('albumSub', n, tot)}</p>` + ms.filter(m => !S.albumR[m]).slice(0, 2).map(m => `<div class="card"><div class="row"><b style="flex:1">📗 ${L('albumGoal', m)} · ${img('coin').replace('<img', '<img style="width:18px;height:18px;vertical-align:-3px"')} ${m * 40}</b>${n >= m ? `<button class="btn" type="button" data-album="${m}">${L('claim')}</button>` : `<small>${n}/${m}</small>`}</div></div>`).join('')
+      + `<div class="grid" style="grid-template-columns:repeat(5,1fr)">${Object.keys(ITEMS).map(k => `<div class="tile" style="padding:6px;${S.seen[k] ? '' : 'filter:grayscale(1) brightness(.6);opacity:.5'}">${img(k)}<small style="font-size:10px">${S.seen[k] ? N(k) : '?'}</small></div>`).join('')}</div>`;
   } else if (SH.type === 'bday') {
     const b = bdWho(S, Date.now()); t.textContent = L('bdayT'); h = !b ? `<p class="sub">${L('bdayOver')}</p>` : `<div class="card" style="text-align:center"><div style="font-size:56px">🎂🎈</div><p class="sub">${L('bdaySub', resName(b.id), ITEMS.bolo.v * 3)}</p>${needHtml(S, { bolo: 1 })}${S.bdGift === b.n ? `<small>${L('bdayDone')}</small>` : `<button class="btn" type="button" data-bday="${b.n}" ${S.inv.bolo > 0 ? '' : 'disabled'}>${L('bdayBtn')}</button>`}</div>`;
   } else if (SH.type === 'map') {
@@ -1729,6 +1745,7 @@ function renderSheet() {
       ${S.land.bairro || S.land.escolar ? `<span class="lbl">${L('homes')}</span><div class="card"><p class="sub">${L('homesN', S.homes.length, LOTS.length, residents(S).length)}</p><small>${L('homeHint')}</small>${S.homes.length < LOTS.length ? `<button class="btn" type="button" data-home="1" ${S.coins < homeCost(S.homes.length) ? 'disabled' : ''}>${L('homeBuy')} · ${img('coin')} ${homeCost(S.homes.length)}</button>` : ''}</div>` : ''}
       <span class="lbl">${L('roads')}</span><div class="card"><p class="sub">${L('roadInfo', S.roads.length, roadBonus(S))}</p><button class="btn blue" type="button" data-roadmode="1">${L('roadBtn')}</button></div>
       ${DUP_TYPES.some(k => okB(S, BUILD[k])) ? `<span class="lbl">${L('dups')}</span><p class="sub">${L('dupHint')}</p>${DUP_TYPES.map(k => dupCard(S, k)).join('')}` : ''}
+      <div class="card"><div class="row"><span style="font-size:30px">🏭</span><div style="flex:1"><b>${L('bigsiloT')} (+500)</b><br><small>${L('bigsiloD')}</small></div>${S.bigsilo ? `<small>${L('landOwned')}</small>` : S.lvl < BIGSILO.lvl ? `<small>${L('lvl', BIGSILO.lvl)}</small>` : `<button class="btn" type="button" data-bigsilo="1" ${S.coins < BIGSILO.cost ? 'disabled' : ''}>${img('coin')} ${BIGSILO.cost}</button>`}</div></div>
       <span class="lbl">${L('silos')}</span><div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center"><img src="${siloIcon()}" alt=""></span><div style="flex:1"><b>${L('silo')} (+100)</b><br><small>${L('siloHint', S.silos)}</small></div>
         ${S.silos >= SILOS.length ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-silo="1" ${S.coins < siloCost(S.silos) ? 'disabled' : ''}>${img('coin')} ${siloCost(S.silos)}</button>`}</div></div>
       ${S.lvl >= 4 ? `<span class="lbl">${L('trees')}</span><p class="sub">${L('treesN', S.xt.length, XT_MAX)}</p><div class="grid">${[['laranja', 'buyTreeL'], ['manga', 'buyTreeM']].map(([k, lb]) => `<button class="tile" type="button" data-tree="${k}" ${S.xt.length >= XT_MAX || S.coins < treeCost(k) ? 'disabled' : ''}>${img(k)}${L(lb)}<small>${img('coin').replace('<img', '<img style="width:14px;height:14px;vertical-align:-2px"')} ${treeCost(k)}</small></button>`).join('')}</div>` : ''}
@@ -1752,6 +1769,7 @@ function renderSheet() {
       <button class="btn blue" type="button" data-newsopen="1">✨ ${L('newsT')}</button>
       <button class="btn blue" type="button" data-photo="1">📸 ${L('photoBtn')}</button>
       <button class="btn blue" type="button" data-tour="1">🎈 ${L('tourBtn')}</button>
+      <button class="btn blue" type="button" data-albumopen="1">📗 ${L('albumT')} (${albumN(S)})</button>
       <button class="btn blue" type="button" data-medalsopen="1">🏅 ${L('medalsT')}</button>
       <button class="btn gray" type="button" data-exit="1">${L('backHome')}</button>`;
   }
@@ -1802,6 +1820,9 @@ $('sBody').addEventListener('click', e => {
   if (d.obs) act({ a: 'obs' });
   if (d.ref) act({ a: 'ref' });
   if (d.bal) act({ a: 'bal' });
+  if (d.album) act({ a: 'album', m: +d.album });
+  if (d.albumopen) { openSheet('album'); return; }
+  if (d.bigsilo) act({ a: 'bigsilo' });
   if (d.bday) { const r = act({ a: 'bday', n: +d.bday }); if (r.ok) closeSheet(); }
   if (d.deco2) { setDecor(d.deco2); return; }
   if (d.decoropen) { openSheet('decor'); return; }
@@ -2224,6 +2245,7 @@ function draw(T, dt) {
   }
   // silos
   if (S) for (let i = 0; i < S.silos; i++) siloShape(cx, SILOS[i].x, SILOS[i].y);
+  if (S && S.bigsilo) { const x = BIGSILO.x, y = BIGSILO.y; shadow(cx, x, y, 90); const gr = cx.createLinearGradient(x - 36, 0, x + 36, 0); gr.addColorStop(0, '#d8dde2'); gr.addColorStop(0.5, '#ffffff'); gr.addColorStop(1, '#a8b0b8'); cx.fillStyle = gr; cx.fillRect(x - 36, y - 160, 72, 160); cx.fillStyle = '#c0583e'; cx.beginPath(); cx.arc(x, y - 160, 36, Math.PI, 0); cx.fill(); cx.strokeStyle = 'rgba(0,0,0,.15)'; cx.lineWidth = 2; for (let k = 0; k < 6; k++) { cx.beginPath(); cx.moveTo(x - 36, y - 20 - k * 24); cx.lineTo(x + 36, y - 20 - k * 24); cx.stroke(); } cx.fillStyle = '#7a4b25'; cx.fillRect(x - 10, y - 30, 20, 30); }
   // decorações
   if (S) for (const k of Object.keys(DECOS)) if (S.deco[k]) drawDeco(cx, k, DECOS[k].x, DECOS[k].y, T);
   // quadro de encomendas
