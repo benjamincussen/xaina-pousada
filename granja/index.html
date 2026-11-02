@@ -41,6 +41,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-o
 #bCv{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:calc(env(safe-area-inset-bottom) + 228px);z-index:3;width:58px;height:58px;border-radius:50%;font-size:28px;box-shadow:0 4px 0 rgba(0,0,0,.25),0 6px 16px rgba(0,0,0,.25)}
 #hud[hidden] ~ #bCv{display:none}
 #hTreas{transition:transform .25s,background .25s}#hTreas.up{transform:scale(1.08);background:#dff5c8}
+@media (max-width:560px){#hTreas{position:absolute;left:max(10px,env(safe-area-inset-left));top:calc(env(safe-area-inset-top) + 60px);font-size:14px;padding:3px 9px 3px 5px;gap:4px}#hTreas>span:first-child{font-size:15px}#hTreasD{font-size:10px}}
 body:has(#sheet:not([hidden])) #bCv{display:none}
 body:has(#sheet:not([hidden])) #bMap{display:none}
 #bRoad{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:calc(env(safe-area-inset-bottom) + 88px);z-index:3;width:58px;height:58px;border-radius:50%;box-shadow:0 4px 0 rgba(0,0,0,.25),0 6px 16px rgba(0,0,0,.25)}
@@ -172,7 +173,7 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 <script src="peerjs.min.js"></script>
 <script>
 // carrega sempre a versão mais nova do jogo, mesmo se esta página estiver guardada no celular
-(function () { var FALL = '2026-11-03.79', done = false;
+(function () { var FALL = '2026-11-03.80', done = false;
   function go(v) { ['relay.js', 'p2p.js', 'game.js', 'mundo.js', 'negocios.js'].reduce(function (p, f) { return p.then(function () { return new Promise(function (res, rej) { var s = document.createElement('script'); s.src = f + '?v=' + encodeURIComponent(v); s.onload = res; s.onerror = rej; document.body.appendChild(s); }); }); }, Promise.resolve()).catch(function () { if (v !== FALL) go(FALL); }); }
   var t = setTimeout(function () { if (!done) { done = true; go(FALL); } }, 2500);
   fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) { if (!done) { done = true; clearTimeout(t); go((j && j.v) || FALL); } }).catch(function () { if (!done) { done = true; clearTimeout(t); go(FALL); } });

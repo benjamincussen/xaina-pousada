@@ -555,3 +555,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Noche en la industria:** las fábricas nuevas encienden las ventanas.
 - **Cantera:** cerros con nieve y sombra, estilo sierra.
 - Prueba `tests/logistica.js`: producción y cobro en 6 fábricas (30 productos), 6 camiones en vuelo, 20 vecinos con oficio nuevo, 2 h simuladas, hojas sin errores, capturas de camiones, noche y cantera.
+
+## Versión 80: Arreglo del HUD en celular (reporte de la otra sesión)
+
+- En pantallas de hasta 560 px la píldora 🏛️ del tesoro pasa a una segunda fila (debajo del nivel y las monedas), compacta y con el número abreviado (47.1k). Prueba `tests/hud-movil.js` a 390×800: sin superposición con monedas ni botones.

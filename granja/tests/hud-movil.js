@@ -1,0 +1,6 @@
+// HUD en celular angosto (390x800, dpr 2): la píldora del tesoro no debe tapar nada. node tests/hud-movil.js [carpeta]
+const { chromium } = require('playwright'); const { open, richFarm } = require('./lib'); const out = process.argv[2] || '/tmp';
+(async () => { const { pg, errs, close } = await open(); await pg.setViewportSize({ width: 390, height: 800 }); await richFarm(pg);
+  await pg.evaluate(() => { cvTick(G.S, Date.now()); G.S.cv.t = 47123; treasPill(G.S); resize(); }); await pg.waitForTimeout(600);
+  const r = await pg.evaluate(() => { const b = id => document.getElementById(id).getBoundingClientRect(); const t = b('hTreas'), c = b('hCoins'), m = b('bMenu'), h = b('bHelper'); const ov = (a, b) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top; return { treas: [Math.round(t.left), Math.round(t.top), Math.round(t.width)], txt: document.getElementById('hTreasN').textContent, overlapCoins: ov(t, c), overlapMenu: ov(t, m), overlapHelper: ov(t, h), rightEdgeOk: t.right <= 390 }; });
+  console.log(JSON.stringify(r)); await pg.screenshot({ path: out + '/hud-390.png' }); console.log('errors', errs.length); await close(); process.exit(r.overlapCoins || r.overlapMenu || r.overlapHelper || !r.rightEdgeOk ? 1 : 0); })();

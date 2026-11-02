@@ -2033,7 +2033,7 @@ function helperTask(S, now, role, hh) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; logHelper(S, now, hh | 0, a, crop); return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : poor ? { poor: true } : null;
 }
-const BUILD_V = '2026-11-03.79';
+const BUILD_V = '2026-11-03.80';
 // sons de cada lugar: ondas na praia, pássaros na serra e no sítio, crianças no bairro escolar (com 'Sons do sítio' ligado)
 setInterval(() => { if (!G.S || !AMB || document.hidden) return; const x = CAM.x, y = CAM.y; if (x > 1150) SND.wave(); else if (y > 3930) { if (Math.random() < 0.7) SND.bird(); } else if (y > 2330 && y < 2930 && G.S.serv && (G.S.serv.parque || G.S.serv.campo)) { if (Math.random() < 0.4) SND.kids(); } else if (Math.hypot((x - LAKE.x) / LAKE.rx, (y - LAKE.y) / LAKE.ry) < 1.6 && G.S.land.sul) { if (Math.random() < 0.3) SND.splash(); } }, 3200);
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
@@ -2352,7 +2352,7 @@ $('icHelper').src = icon('helper'); $('icMove').src = icon('move'); $('icRoad').
 let SH = null;
 function openSheet(type, arg) { SH = { type, arg }; $('sheet').hidden = false; renderSheet(); }
 function closeSheet() { SH = null; $('sheet').hidden = true; }
-function treasPill(S) { const el = $('hTreas'); if (!el) return; const on = S && cvOn(S) && S.cv; el.hidden = !on; if (!on) return; const t = Math.floor(S.cv.t || 0); el.querySelector('#hTreasN').textContent = t.toLocaleString(); el.querySelector('#hTreasD').textContent = '+' + cvInc(S) + '/min'; if (G.treasLast != null && t > G.treasLast) { el.classList.add('up'); clearTimeout(G.treasT); G.treasT = setTimeout(() => el.classList.remove('up'), 900); } G.treasLast = t; }
+function treasPill(S) { const el = $('hTreas'); if (!el) return; const on = S && cvOn(S) && S.cv; el.hidden = !on; if (!on) return; const t = Math.floor(S.cv.t || 0); el.querySelector('#hTreasN').textContent = innerWidth < 560 && t >= 10000 ? (t / 1000).toFixed(t >= 100000 ? 0 : 1) + 'k' : t.toLocaleString(); el.querySelector('#hTreasD').textContent = '+' + cvInc(S) + '/min'; if (G.treasLast != null && t > G.treasLast) { el.classList.add('up'); clearTimeout(G.treasT); G.treasT = setTimeout(() => el.classList.remove('up'), 900); } G.treasLast = t; }
 setInterval(() => { if (G.S) treasPill(G.S); }, 1000);
 function refresh() {
   const S = G.S; if (!S) return;
