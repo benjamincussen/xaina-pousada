@@ -238,3 +238,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Club de jardinería: con 12+ vecinos, cada 5 min tres vecinos con regadera riegan las parcelas; lo que está creciendo avanza 20 s (lo aplica el host, sincronizado).
 - Ballenas: cada 3 min aparece una ballena en el mar junto a la playa, lanza un chorro y muestra la cola.
 - Castañas en otoño: carrito de castañas asadas con humo junto a la feria del barrio.
+
+## Versión grande 42: Precio del día, muñecos de nieve y baile en ronda (2026-11-03.43)
+- Precio del día: cada 30 min un producto (valor ≥ 12) paga +50% en el granero; tarjeta 🔥 arriba del Granero con cuenta regresiva y etiqueta +50% en el producto. Afecta también a la venta de sobrantes de los ayudantes.
+- Muñecos de nieve en invierno (granja, villa, barrios) con bufanda, gorro o sombrero, y niños jugando.
+- Baile en ronda durante la fiesta del barrio alrededor de la fuente (sombreros de paja y faldas).
+- Novedades: "barn" abre el Granero.
