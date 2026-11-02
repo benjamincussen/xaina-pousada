@@ -106,3 +106,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Hotel de turistas de 4 pisos en el Parque (más turistas, renta alta)
 - [x] Teleférico con cabinas de colores de la granja al faro
 - [x] Flecha amarilla de ayuda en el mapa para la próxima acción
+
+## Versión grande 16: "Estrellas" (2026-11-03.17)
+- [x] Cielo estrellado y estrellas fugaces: tocar = deseo con monedas
+- [x] Observatorio con telescopio (doble de estrellas, +8 felicidad)
+- [x] Ciclistas en la avenida; loros y búho como animalitos
