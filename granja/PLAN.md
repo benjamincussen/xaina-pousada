@@ -250,3 +250,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Montones de hojas en otoño por la granja, villa y barrios, con niños saltando en ellos.
 - Ayudantes: al vender sobrantes con el granero lleno priorizan el producto del precio del día (🔥 +50%).
 - Novedades: destino 'lake' centra la cámara en el lago.
+
+## Versión grande 44: Desfile de mascotas, guardia de tránsito y florería (2026-11-03.45)
+- Desfile de mascotas: con 3+ casas, cada 25 min seis vecinos pasean perros y gatos con moño por la avenida del barrio.
+- Guardia de tránsito: con el Colegio, de día una guardia con chaleco y señal PARE/OK; paso de cebra y niños con mochila cruzando.
+- Florería en primavera (villa): comprar un ramo por 40 monedas para regalar a un vecino da +1 felicidad (hasta +20) y +5 XP, cada 10 min. Sincronizado.
