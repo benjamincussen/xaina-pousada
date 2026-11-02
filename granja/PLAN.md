@@ -518,3 +518,14 @@ Pedido de Benjamin: más rápido, más grande y más autónomo; ver las otras ci
   - Hacen más cosas por turno: 1 + nivel/2.
   - Prueba: con 100.000 donados, en 2 h simuladas gastó ~55.000 (2 exploraciones, 47 animales, 13 parcelas, 9 servicios, 4 silos, murallas, torres y soldados).
 - Fuzz con las hojas nuevas (mundo, urbe): 0 errores.
+
+## Versión 76: Economía viva — el dinero se ve moverse (esta sesión toma el control del proyecto)
+
+Pedido de Benjamin: ver el dinero usándose y moviéndose, más recursos y producción, y ciudadanos que comercian solos.
+
+- **Monedas que vuelan:** cada 20 s salen monedas de hasta 5 casas/empleos/servicios visibles hacia la Alcaldía (ingreso del tesoro); cada decisión nueva del Concejo manda monedas de la Alcaldía hasta la obra (casa, terreno, servicio, animal, parcela, árbol, fábrica, silo, fuerte, mina). Solo se dibujan las que están cerca de la cámara; se apagan con "Menos animaciones".
+- **Indicador 🏛️ en el HUD:** tesoro de la ciudad y "+N/min"; late en verde cuando sube; toca para abrir el Concejo.
+- **Economía en el panel del Concejo:** de dónde entró el dinero (casas y empleos, tus donaciones, minerales, comercio con vecinos, colonias) y en qué lo gastó cada cargo, en barras, últimos 10–20 min (`S.cv.flow` y `S.cv.prev`; se registra en `cvAdd(S, c, src)` y en `cvDo`). Funciona también con la simulación offline (usa la hora simulada).
+- **Comercio autónomo:** la Secretaría de Comercio vende cada minuto hasta 3 lotes de sobras del granero (misma regla de "sobra" que los ayudantes: nunca lo que piden pedidos, recetas o metas de stock) a la ciudad vecina con mejor relación (Villa Aurora o las del Mundo); paga según la relación (+hasta 50%), **60% para ti y 40% al tesoro**, +1 de relación; sale un camión 📦→🏰 desde la Alcaldía; queda en Decisiones ("vendió sobras…").
+- **Producción nueva:** Aserradero (Valle Verde, nv 14): madera (pan como insumo) y muebles (madera + tela); Tostadora (Valle Verde, nv 14): café tostado a partir de café, cultivo nuevo (nv 14, 200 s) con su planta y su ícono; Ladrillera (Campos del Oeste, nv 15): ladrillos con piedra + caña. **10 ladrillos en el granero dejan la próxima casa 25% más barata** (también para el Concejo). Dibujos propios (sierra que gira, chimenea con humo, horno) e íconos nuevos.
+- **Pruebas (Playwright):** ciudad nivel 20 con todo comprado, 3 h simuladas en 84 ms: 151 decisiones, 3 ventas a vecinos (2314), flujo de entrada/salida por fuente y por cargo, 23 monedas en vuelo frente a la Alcaldía, casa con descuento por ladrillos, café sembrado, las 3 fábricas producen, 11 hojas abiertas sin errores de consola.

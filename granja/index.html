@@ -40,6 +40,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-o
 #hud[hidden] ~ #bMap{display:none}
 #bCv{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:calc(env(safe-area-inset-bottom) + 228px);z-index:3;width:58px;height:58px;border-radius:50%;font-size:28px;box-shadow:0 4px 0 rgba(0,0,0,.25),0 6px 16px rgba(0,0,0,.25)}
 #hud[hidden] ~ #bCv{display:none}
+#hTreas{transition:transform .25s,background .25s}#hTreas.up{transform:scale(1.08);background:#dff5c8}
 body:has(#sheet:not([hidden])) #bCv{display:none}
 body:has(#sheet:not([hidden])) #bMap{display:none}
 #bRoad{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:calc(env(safe-area-inset-bottom) + 88px);z-index:3;width:58px;height:58px;border-radius:50%;box-shadow:0 4px 0 rgba(0,0,0,.25),0 6px 16px rgba(0,0,0,.25)}
@@ -117,6 +118,7 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 <div id="hud" hidden>
   <div class="lvl" id="hLvl" aria-label="Nível"><b id="hLvlN">1</b></div>
   <button class="pill" id="hCoins" type="button" aria-label="Moedas"><img id="icCoin" alt=""><span id="hCoinsN">0</span></button>
+  <button class="pill" id="hTreas" type="button" aria-label="Tesouro da cidade" hidden><span style="font-size:18px">🏛️</span><span id="hTreasN">0</span><small id="hTreasD" style="font-size:11px;color:#2f7f26"></small></button>
   <div class="sp"></div>
   <button class="ib" id="bHelper" type="button" aria-label="Ajudante"><img id="icHelper" alt=""></button>
   <button class="ib" id="bOrders" type="button" aria-label="Encomendas"><img id="icOrders" alt=""><span class="dot" id="dOrders"></span></button>
@@ -170,7 +172,7 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 <script src="peerjs.min.js"></script>
 <script>
 // carrega sempre a versão mais nova do jogo, mesmo se esta página estiver guardada no celular
-(function () { var FALL = '2026-11-03.75', done = false;
+(function () { var FALL = '2026-11-03.76', done = false;
   function go(v) { ['relay.js', 'p2p.js', 'game.js', 'mundo.js'].reduce(function (p, f) { return p.then(function () { return new Promise(function (res, rej) { var s = document.createElement('script'); s.src = f + '?v=' + encodeURIComponent(v); s.onload = res; s.onerror = rej; document.body.appendChild(s); }); }); }, Promise.resolve()).catch(function () { if (v !== FALL) go(FALL); }); }
   var t = setTimeout(function () { if (!done) { done = true; go(FALL); } }, 2500);
   fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) { if (!done) { done = true; clearTimeout(t); go((j && j.v) || FALL); } }).catch(function () { if (!done) { done = true; clearTimeout(t); go(FALL); } });
