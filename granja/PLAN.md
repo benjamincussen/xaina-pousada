@@ -85,3 +85,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Decoración libre: bancas, faroles, árboles, jardineras, estatuas, piletas, glorietas, molinetes (cada 5 = +1 felicidad)
 - [x] Expedición en barco a la Isla Misteriosa (cofre con tesoros, el scout la recoge)
 - [x] Semana temática: un tipo de producto paga +50% cada semana
+
+## Versión grande 12: "Cine" (2026-11-03.13)
+- [x] Cine al aire libre en el barrio (de noche, los vecinos van a ver la función)
+- [x] Nacen bebés con la ciudad feliz: la población crece
+- [x] Fogatas en las noches de invierno
+- [x] Monedas perdidas en el suelo para recoger
