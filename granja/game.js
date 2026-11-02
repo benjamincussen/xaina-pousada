@@ -51,7 +51,7 @@ const TX = {
     city: 'Cidade', cityBtn: 'Painel da cidade', happyL: 'Felicidade', happyHint: 'Quanto mais feliz a cidade, mais rendem os aluguéis (até 1,5x).', cityPop: (p, m) => `${p} moradores · aluguéis x${m}`, serv_praca: 'Praça', servD_praca: 'Bancos, árvores e coreto: +15 de felicidade', serv_posto: 'Posto de saúde', servD_posto: 'Cuida dos vizinhos: +20 de felicidade', servDone: (n, h) => `${n} inaugurado! Felicidade: ${h}`, hpFrom: 'Sobe com: decorações, ruas, obras da vila, praça e posto.', incomeH: n => `Aluguéis: ~${n} moedas por hora`,
     upTitle: 'Melhorar prédio', upHint: (l, p) => `Nível ${l}: tudo fica ${p}% mais rápido (vale para as cópias também).`, upBtn: 'Melhorar', upDone: (n, l) => `${n} agora é nível ${l}!`, upMax: 'Nível máximo', bLvl: l => `Nv ${l}`,
     boosts: 'Impulsos', boost_abono: 'Adubo mágico', boostD_abono: 'Plantas crescem 2x mais rápido por 10 min', boost_racao: 'Ração premium', boostD_racao: 'Animais produzem 2x mais rápido por 10 min', boostDone_abono: 'Adubo ativo: plante agora!', boostDone_racao: 'Ração premium ativa: alimente os animais!', boostLeft: t => `Ativo: ${t}`,
-    tourist: 'Turista',
+    tourist: 'Turista', rainNow: 'Está chovendo! A chuva regou a plantação (+30 s).',
     fair: 'Feira do bairro', fairSub: 'Coloque produtos nas barracas: vizinhos e turistas compram pelo preço cheio (mais que vender no celeiro). Com a Pousada pronta chegam turistas.', fairEmpty: 'Barraca vazia: escolha o que vender', fairTake: 'Retirar', fairBuy: 'Vou levar!', fairSold: n => `Vendido na feira: ${n} moedas`, stall: i => `Barraca ${i}`,
     npcSad: 'Falta uma praça por aqui…', npcHappy: 'Amo morar nesta cidade!',
     reqs: 'Pedidos dos vizinhos', reqSub: 'Os vizinhos pedem em pessoa e pagam o dobro. Toque no vizinho com o balão.', reqFrom: n => `${n} quer:`, reqThanks: 'Obrigado, vizinho!', reqWait: t => `Novo pedido em ${t}`,
@@ -115,7 +115,7 @@ const TX = {
     city: 'Ciudad', cityBtn: 'Panel de la ciudad', happyL: 'Felicidad', happyHint: 'Mientras más feliz la ciudad, más rinden los arriendos (hasta 1,5x).', cityPop: (p, m) => `${p} vecinos · arriendos x${m}`, serv_praca: 'Plaza', servD_praca: 'Bancos, árboles y glorieta: +15 de felicidad', serv_posto: 'Posta de salud', servD_posto: 'Cuida a los vecinos: +20 de felicidad', servDone: (n, h) => `¡${n} inaugurada! Felicidad: ${h}`, hpFrom: 'Sube con: decoraciones, calles, obras de la villa, plaza y posta.', incomeH: n => `Arriendos: ~${n} monedas por hora`,
     upTitle: 'Mejorar edificio', upHint: (l, p) => `Nivel ${l}: todo sale ${p}% más rápido (también en las copias).`, upBtn: 'Mejorar', upDone: (n, l) => `¡${n} ahora es nivel ${l}!`, upMax: 'Nivel máximo', bLvl: l => `Nv ${l}`,
     boosts: 'Impulsos', boost_abono: 'Abono mágico', boostD_abono: 'Las plantas crecen 2x más rápido por 10 min', boost_racao: 'Ración premium', boostD_racao: 'Los animales producen 2x más rápido por 10 min', boostDone_abono: 'Abono activo: ¡siembra ahora!', boostDone_racao: 'Ración premium activa: ¡alimenta a los animales!', boostLeft: t => `Activo: ${t}`,
-    tourist: 'Turista',
+    tourist: 'Turista', rainNow: '¡Está lloviendo! La lluvia regó los cultivos (+30 s).',
     fair: 'Feria del barrio', fairSub: 'Pon productos en los puestos: vecinos y turistas compran a precio completo (más que vender en el granero). Con la Pousada lista llegan turistas.', fairEmpty: 'Puesto vacío: elige qué vender', fairTake: 'Retirar', fairBuy: '¡Me lo llevo!', fairSold: n => `Vendido en la feria: ${n} monedas`, stall: i => `Puesto ${i}`,
     npcSad: 'Falta una plaza por aquí…', npcHappy: '¡Me encanta vivir en esta ciudad!',
     reqs: 'Pedidos de los vecinos', reqSub: 'Los vecinos piden en persona y pagan el doble. Toca al vecino con el globo.', reqFrom: n => `${n} quiere:`, reqThanks: '¡Gracias, vecino!', reqWait: t => `Nuevo pedido en ${t}`,
@@ -365,6 +365,9 @@ function genReq(S) { const items = unlockedItems(S), k = items[Math.floor(Math.r
   return { who: Math.floor(Math.random() * Math.max(1, S.homes.length * 2)), it: [[k, q]], c: Math.round(val * 2) + 10, x: Math.round(val / 3) + 2 }; }
 function ensureReqs(S, now) { if (!S.homes || !S.homes.length) return false; let ch = false; const want = Math.min(4, S.homes.length);
   while (S.reqs.length < want) { const r = { id: S.oid++, w: now, ...genReq(S) }; if (S.reqs.some(o => o.who === r.who)) r.who = (r.who + 1) % (S.homes.length * 2); S.reqs.push(r); ch = true; } return ch; }
+// chuva: de vez em quando chove 1 minuto e rega tudo (plantas e árvores adiantam 30 s)
+function rainTick(S, now) { if (!S.wx || typeof S.wx !== 'object') S.wx = {}; if (S.wx.r > now || now < (S.wx.next || 0)) return false; if (Math.random() > 1 / 300) return false;
+  S.wx = { r: now + 60000, next: now + 7 * 60000 }; for (const pl of S.plots) if (pl.c && !plotReady(pl, now)) pl.p -= 30000; (S.xt || []).forEach(t => { t.t -= 30000; }); S.trees = S.trees.map(t => t - 30000); toast(L('rainNow'), 3500); return true; }
 function fairTick(S, now) { if (!S.land.bairro || !S.fair || !S.fair.some(Boolean)) return -1; const tour = S.city.pousada && S.city.pousada.e <= now;
   const p = 0.05 + Math.min(0.1, S.homes.length * 0.01) + (tour ? 0.05 : 0); if (Math.random() > p) return -1;
   const opts = S.fair.map((st, i) => st ? i : -1).filter(i => i >= 0), i = opts[Math.floor(Math.random() * opts.length)], st = S.fair[i];
@@ -866,7 +869,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.25';
+const BUILD_V = '2026-11-02.26';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -876,6 +879,7 @@ $('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S);
 let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   const S = G.S, now = Date.now(); helperClock++; if (ensureReqs(S, now)) { S.rev++; saveSoon(); broadcast(); }
+  if (rainTick(S, now)) { S.rev++; saveSoon(); broadcast(); }
   { const fi = fairTick(S, now); if (fi >= 0) { S.rev++; saveSoon(); broadcast(); fairFx(fi); } }
   if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { let r = null; for (let hh = 0; hh < hCount(S); hh++) { const rr = helperTask(S, now); if (rr && rr.ok) { S.helper.ps[hh] = [S.helper.x, S.helper.y]; if (r && r.ok) playFx(r.fx.filter(f => f[0] !== 'coins')); r = rr; } else if (!r) r = rr; } if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
 
@@ -1214,6 +1218,12 @@ function path(g, pts, w) {
   g.lineCap = 'round'; g.lineJoin = 'round'; g.strokeStyle = '#b8935a'; g.lineWidth = w + 8; line(); g.stroke(); g.strokeStyle = '#e3c58f'; g.lineWidth = w; line(); g.stroke();
   g.strokeStyle = 'rgba(255,255,255,.18)'; g.lineWidth = w * 0.3; line(); g.stroke();
 }
+// dia e noite: ciclo de 16 min igual nos dois celulares
+function nightF(ms) { const t = (ms / 1000) % 960; return t < 660 ? 0 : t < 720 ? (t - 660) / 60 : t < 900 ? 1 : (960 - t) / 60; }
+function lampPts(S) { const pts = []; if (S.land.bairro) for (let x = 100; x < 1440; x += 200) pts.push([x, 2004]); if (S.land.vila) for (let x = 160; x < 1000; x += 200) pts.push([x, 1545]);
+  for (let y = 760; y < 1500; y += 240) pts.push([352, y]); for (const k of S.roads || []) { const gx = k % 100, gy = Math.floor(k / 100); if ((gx * 3 + gy * 5) % 7 === 0) pts.push([gx * RD + RD - 4, gy * RD + 6]); } return pts; }
+function lamps(g, S, nf, T) { for (const [x, y] of lampPts(S)) { g.fillStyle = 'rgba(0,0,0,.18)'; g.beginPath(); g.ellipse(x, y, 7, 3, 0, 0, 6.283); g.fill(); g.fillStyle = '#3a3a44'; g.fillRect(x - 2, y - 56, 4, 56); g.fillRect(x - 6, y - 4, 12, 4);
+  g.fillStyle = nf > 0.05 ? `rgba(255,214,120,${0.6 + 0.4 * nf})` : '#e8eef2'; g.beginPath(); g.moveTo(x - 7, y - 56); g.lineTo(x + 7, y - 56); g.lineTo(x + 5, y - 68); g.lineTo(x - 5, y - 68); g.closePath(); g.fill(); g.fillStyle = '#3a3a44'; g.fillRect(x - 8, y - 71, 16, 4); } }
 function drawRoads(g, S) {
   const set = new Set(S.roads), has2 = (x, y) => set.has(roadKey(x, y));
   if (G.road) { g.save(); g.strokeStyle = 'rgba(255,255,255,.18)'; g.lineWidth = 1; g.beginPath(); for (let x = 0; x <= WW; x += RD) { g.moveTo(x, 0); g.lineTo(x, WH); } for (let y = 0; y <= WH; y += RD) { g.moveTo(0, y); g.lineTo(WW, y); } g.stroke(); g.restore(); }
@@ -1548,8 +1558,14 @@ function draw(T, dt) {
   // ganhos flutuando
   for (const f of FLOAT) { f.t += dt; const p = f.t / 1.2; cx.globalAlpha = 1 - Math.max(0, p - 0.6) / 0.4; cx.drawImage(iconCanvas(f.k), f.x - 18, f.y - 30 - p * 50, 36, 36); cx.fillStyle = '#fff'; cx.strokeStyle = '#3a2412'; cx.lineWidth = 4; cx.font = '900 18px Nunito, sans-serif'; cx.textAlign = 'left'; cx.strokeText('+' + f.n, f.x + 18, f.y - 6 - p * 50); cx.fillText('+' + f.n, f.x + 18, f.y - 6 - p * 50); cx.globalAlpha = 1; }
   for (let i = FLOAT.length - 1; i >= 0; i--) if (FLOAT[i].t > 1.2) FLOAT.splice(i, 1);
+  // noite: escurece e acende os postes; chuva
+  if (S) { const nf = nightF(Date.now()); lamps(cx, S, nf, T); if (nf > 0) { cx.fillStyle = `rgba(18,26,74,${0.42 * nf})`; cx.fillRect(-600, -600, WW + 1200, WH + 1200); cx.save(); cx.globalCompositeOperation = 'lighter';
+      for (const [x, y] of lampPts(S)) { const gl = cx.createRadialGradient(x, y - 56, 2, x, y - 40, 90); gl.addColorStop(0, `rgba(255,200,110,${0.55 * nf})`); gl.addColorStop(1, 'rgba(255,200,110,0)'); cx.fillStyle = gl; cx.fillRect(x - 90, y - 130, 180, 180); }
+      cx.restore(); } }
   // luz de sol quente e vinheta suave, na tela
   cx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  if (S && S.wx && S.wx.r > Date.now()) { cx.fillStyle = 'rgba(60,80,110,.16)'; cx.fillRect(0, 0, innerWidth, innerHeight); cx.strokeStyle = 'rgba(210,230,255,.55)'; cx.lineWidth = 1.5; cx.beginPath();
+    for (let i = 0; i < 90; i++) { const x = ((i * 97.3 + T * 60) % (innerWidth + 60)) - 30, y = ((i * 57.1 + T * (520 + (i % 5) * 40)) % (innerHeight + 40)) - 20; cx.moveTo(x, y); cx.lineTo(x - 5, y + 16); } cx.stroke(); }
   const sun = cx.createRadialGradient(innerWidth * 0.2, -innerHeight * 0.1, 10, innerWidth * 0.2, -innerHeight * 0.1, innerHeight * 1.1); sun.addColorStop(0, 'rgba(255,236,170,.22)'); sun.addColorStop(1, 'rgba(255,236,170,0)'); cx.fillStyle = sun; cx.fillRect(0, 0, innerWidth, innerHeight);
   const vg = cx.createRadialGradient(innerWidth / 2, innerHeight / 2, Math.min(innerWidth, innerHeight) * 0.45, innerWidth / 2, innerHeight / 2, Math.max(innerWidth, innerHeight) * 0.8); vg.addColorStop(0, 'rgba(0,30,0,0)'); vg.addColorStop(1, 'rgba(0,30,0,.22)'); cx.fillStyle = vg; cx.fillRect(0, 0, innerWidth, innerHeight);
 }
