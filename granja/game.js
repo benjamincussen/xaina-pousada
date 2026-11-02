@@ -51,6 +51,7 @@ const TX = {
     city: 'Cidade', cityBtn: 'Painel da cidade', happyL: 'Felicidade', happyHint: 'Quanto mais feliz a cidade, mais rendem os aluguéis (até 1,5x).', cityPop: (p, m) => `${p} moradores · aluguéis x${m}`, serv_praca: 'Praça', servD_praca: 'Bancos, árvores e coreto: +15 de felicidade', serv_posto: 'Posto de saúde', servD_posto: 'Cuida dos vizinhos: +20 de felicidade', servDone: (n, h) => `${n} inaugurado! Felicidade: ${h}`, hpFrom: 'Sobe com: decorações, ruas, obras da vila, praça e posto.', incomeH: n => `Aluguéis: ~${n} moedas por hora`,
     upTitle: 'Melhorar prédio', upHint: (l, p) => `Nível ${l}: tudo fica ${p}% mais rápido (vale para as cópias também).`, upBtn: 'Melhorar', upDone: (n, l) => `${n} agora é nível ${l}!`, upMax: 'Nível máximo', bLvl: l => `Nv ${l}`,
     boosts: 'Impulsos', boost_abono: 'Adubo mágico', boostD_abono: 'Plantas crescem 2x mais rápido por 10 min', boost_racao: 'Ração premium', boostD_racao: 'Animais produzem 2x mais rápido por 10 min', boostDone_abono: 'Adubo ativo: plante agora!', boostDone_racao: 'Ração premium ativa: alimente os animais!', boostLeft: t => `Ativo: ${t}`,
+    goals: "Metas do sítio", goalsSub: "Metas para os dois. Cada uma dá um prêmio em moedas.", claim: "Pegar prêmio", tipBarn: "💡 Celeiro quase cheio: venda sobras ou leve à feira", tipDeliver: "💡 Dá para entregar um pedido agora!", tipGoal: "💡 Meta cumprida: pegue o prêmio!", tipPlant: "💡 Tem canteiro vazio: plante algo", tipAll: "💡 Você completou todas as metas!", g_dup1: "Construir uma cópia de um prédio", g_road20: "Fazer 20 pedaços de rua", g_up1: "Melhorar um prédio para o nível 2", g_boost: "Usar um impulso (adubo ou ração)", g_bairro: "Comprar o Bairro Novo", g_home3: "Ter 3 casas no bairro", g_req5: "Atender 5 pedidos de vizinhos", g_fair: "Vender 300 moedas na feira", g_praca: "Inaugurar a praça", g_truck: "Comprar o caminhão de entregas", g_happy70: "Felicidade da cidade 70+", g_dup6: "Ter 6 cópias de prédios", g_home10: "Encher o bairro de casas", g_orders100: "Entregar 100 encomendas", g_lvl15: "Chegar ao nível 15", g_lvl20: "Chegar ao nível 20", g_lvl30: "Chegar ao nível 30", tipIdle: n => `💡 ${n} está parada: faça algo lá`, tipNext: g => `💡 Próxima meta: ${g}`,
     truck: 'Caminhão de entregas', truckD: 'Entrega sozinho uma encomenda pronta a cada 30 s, mesmo sem ajudantes.', truckDone: 'O caminhão entregou uma encomenda!', truckBought: 'Caminhão novo! Ele entrega as encomendas prontas sozinho.',
     tourist: 'Turista', rainNow: 'Está chovendo! A chuva regou a plantação (+30 s).',
     fair: 'Feira do bairro', fairSub: 'Coloque produtos nas barracas: vizinhos e turistas compram pelo preço cheio (mais que vender no celeiro). Com a Pousada pronta chegam turistas.', fairEmpty: 'Barraca vazia: escolha o que vender', fairTake: 'Retirar', fairBuy: 'Vou levar!', fairSold: n => `Vendido na feira: ${n} moedas`, stall: i => `Barraca ${i}`,
@@ -116,6 +117,7 @@ const TX = {
     city: 'Ciudad', cityBtn: 'Panel de la ciudad', happyL: 'Felicidad', happyHint: 'Mientras más feliz la ciudad, más rinden los arriendos (hasta 1,5x).', cityPop: (p, m) => `${p} vecinos · arriendos x${m}`, serv_praca: 'Plaza', servD_praca: 'Bancos, árboles y glorieta: +15 de felicidad', serv_posto: 'Posta de salud', servD_posto: 'Cuida a los vecinos: +20 de felicidad', servDone: (n, h) => `¡${n} inaugurada! Felicidad: ${h}`, hpFrom: 'Sube con: decoraciones, calles, obras de la villa, plaza y posta.', incomeH: n => `Arriendos: ~${n} monedas por hora`,
     upTitle: 'Mejorar edificio', upHint: (l, p) => `Nivel ${l}: todo sale ${p}% más rápido (también en las copias).`, upBtn: 'Mejorar', upDone: (n, l) => `¡${n} ahora es nivel ${l}!`, upMax: 'Nivel máximo', bLvl: l => `Nv ${l}`,
     boosts: 'Impulsos', boost_abono: 'Abono mágico', boostD_abono: 'Las plantas crecen 2x más rápido por 10 min', boost_racao: 'Ración premium', boostD_racao: 'Los animales producen 2x más rápido por 10 min', boostDone_abono: 'Abono activo: ¡siembra ahora!', boostDone_racao: 'Ración premium activa: ¡alimenta a los animales!', boostLeft: t => `Activo: ${t}`,
+    goals: "Metas de la granja", goalsSub: "Metas para los dos. Cada una da un premio en monedas.", claim: "Cobrar premio", tipBarn: "💡 Granero casi lleno: vende sobras o llévalas a la feria", tipDeliver: "💡 ¡Puedes entregar un pedido ahora!", tipGoal: "💡 Meta cumplida: ¡cobra el premio!", tipPlant: "💡 Hay una parcela vacía: siembra algo", tipAll: "💡 ¡Completaste todas las metas!", g_dup1: "Construir una copia de un edificio", g_road20: "Hacer 20 tramos de calle", g_up1: "Mejorar un edificio a nivel 2", g_boost: "Usar un impulso (abono o ración)", g_bairro: "Comprar el Barrio Nuevo", g_home3: "Tener 3 casas en el barrio", g_req5: "Atender 5 pedidos de vecinos", g_fair: "Vender 300 monedas en la feria", g_praca: "Inaugurar la plaza", g_truck: "Comprar el camión de reparto", g_happy70: "Felicidad de la ciudad 70+", g_dup6: "Tener 6 copias de edificios", g_home10: "Llenar el barrio de casas", g_orders100: "Entregar 100 pedidos", g_lvl15: "Llegar al nivel 15", g_lvl20: "Llegar al nivel 20", g_lvl30: "Llegar al nivel 30", tipIdle: n => `💡 ${n} está parada: haz algo ahí`, tipNext: g => `💡 Próxima meta: ${g}`,
     truck: 'Camión de reparto', truckD: 'Entrega solo un pedido listo cada 30 s, aunque no haya ayudantes.', truckDone: '¡El camión entregó un pedido!', truckBought: '¡Camión nuevo! Entrega los pedidos listos solo.',
     tourist: 'Turista', rainNow: '¡Está lloviendo! La lluvia regó los cultivos (+30 s).',
     fair: 'Feria del barrio', fairSub: 'Pon productos en los puestos: vecinos y turistas compran a precio completo (más que vender en el granero). Con la Pousada lista llegan turistas.', fairEmpty: 'Puesto vacío: elige qué vender', fairTake: 'Retirar', fairBuy: '¡Me lo llevo!', fairSold: n => `Vendido en la feria: ${n} monedas`, stall: i => `Puesto ${i}`,
@@ -320,7 +322,7 @@ function migrate(S) {
   if (!S.deco || typeof S.deco !== 'object') S.deco = {};
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
-  if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (typeof S.truck !== 'number') S.truck = 0; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
+  if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (typeof S.truck !== 'number') S.truck = 0; if (!S.goals || typeof S.goals !== 'object') S.goals = {}; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
   if (!Array.isArray(S.homes)) S.homes = []; if (!Array.isArray(S.reqs)) S.reqs = []; if (!Array.isArray(S.fair)) S.fair = [null, null, null, null];
   if (!Array.isArray(S.roads)) S.roads = []; if (typeof S.roadFree !== 'number') S.roadFree = ROAD_FREE;
   if (typeof S.silos !== 'number') S.silos = 0;
@@ -378,6 +380,20 @@ function drawTruck(g, x, y, d, T) { g.save(); g.translate(x, y); g.scale(d, 1); 
   g.fillStyle = '#3f8fd1'; rr(g, -44, -44, 58, 40, 6); g.fill(); g.fillStyle = '#ffffff'; g.fillRect(-38, -36, 46, 4); g.fillStyle = '#e0533d'; rr(g, 14, -34, 30, 30, 6); g.fill(); g.fillStyle = '#bfe9ff'; g.fillRect(24, -30, 16, 12);
   g.fillStyle = '#ffd23f'; g.fillRect(40, -12, 5, 5); for (const wx of [-28, 28]) { g.fillStyle = '#2b2b2b'; g.beginPath(); g.arc(wx, -2, 9, 0, 6.283); g.fill(); g.fillStyle = '#aaa'; g.beginPath(); g.arc(wx, -2, 3.5, 0, 6.283); g.fill(); }
   g.drawImage(iconCanvas('orders'), -30, -42, 26, 26); g.restore(); }
+// metas do casal (com prêmio) e dica do que fazer agora
+const dupSum = S => Object.values(S.dup || {}).reduce((a, b) => a + b, 0);
+const GOALS = [
+  ['g_dup1', S => dupSum(S) >= 1, 300], ['g_road20', S => S.roads.length >= 20, 200], ['g_up1', S => Object.values(S.blv).some(v => v >= 1), 300], ['g_boost', S => Object.keys(S.boost).length > 0, 150],
+  ['g_bairro', S => !!S.land.bairro, 500], ['g_home3', S => S.homes.length >= 3, 400], ['g_req5', S => (S.reqDone || 0) >= 5, 500], ['g_fair', S => (S.fairSold || 0) >= 300, 300],
+  ['g_praca', S => !!S.serv.praca, 400], ['g_truck', S => !!S.truck, 500], ['g_happy70', S => happy(S) >= 70, 600], ['g_dup6', S => dupSum(S) >= 6, 1200],
+  ['g_home10', S => S.homes.length >= LOTS.length, 1500], ['g_orders100', S => (S.done || 0) >= 100, 1000], ['g_lvl15', S => S.lvl >= 15, 1000], ['g_lvl20', S => S.lvl >= 20, 2000], ['g_lvl30', S => S.lvl >= 30, 5000]];
+function nextTip(S, now) { const n = invCount(S);
+  if (n >= S.cap * 0.9) return ['tipBarn'];
+  if (S.orders.some(o => o.w <= now && has(S, Object.fromEntries(o.it))) || (S.reqs || []).some(o => o.w <= now && has(S, Object.fromEntries(o.it)))) return ['tipDeliver'];
+  const g = GOALS.find(([id, f]) => !S.goals[id] && f(S)); if (g) return ['tipGoal'];
+  if (S.plots.slice(0, S.np).some(p => !p.c)) return ['tipPlant'];
+  for (const [k, B] of Object.entries(BUILD)) if (okB(S, B) && !S.bld[k].q.length && B.rec.some(r => okR(S, r) && has(S, r.i))) return ['tipIdle', N(k)];
+  const ng = GOALS.find(([id]) => !S.goals[id]); return ng ? ['tipNext', L(ng[0])] : ['tipAll']; }
 function fairTick(S, now) { if (!S.land.bairro || !S.fair || !S.fair.some(Boolean)) return -1; const tour = S.city.pousada && S.city.pousada.e <= now;
   const p = 0.05 + Math.min(0.1, S.homes.length * 0.01) + (tour ? 0.05 : 0); if (Math.random() > p) return -1;
   const opts = S.fair.map((st, i) => st ? i : -1).filter(i => i >= 0), i = opts[Math.floor(Math.random() * opts.length)], st = S.fair[i];
@@ -462,6 +478,8 @@ function apply(S, a, now) {
     const i = a.i | 0, k = a.k; if (!S.land.bairro || i < 0 || i >= FAIR.n || S.fair[i] || !ITEMS[k] || !(S.inv[k] > 0)) return fail(''); const q = Math.min(FAIR.max, S.inv[k]); take(S, { [k]: q }); S.fair[i] = { k, q }; out.fx.push(['fairPut', i]);
   } else if (a.a === 'fairTake') {
     const i = a.i | 0, st = S.fair[i]; if (!st) return fail(''); if (invCount(S) + st.q > S.cap) return fail(L('barnFull')); give(S, st.k, st.q); S.fair[i] = null;
+  } else if (a.a === 'goal') {
+    const g = GOALS.find(x => x[0] === a.id); if (!g || S.goals[a.id] || !g[1](S)) return fail(''); S.goals[a.id] = 1; S.coins += g[2]; addXp(S, 10, out); out.fx.push(['coins', g[2]]); out.fx.push(['goal', a.id]);
   } else if (a.a === 'truck') {
     if (S.truck) return fail(''); if (S.lvl < TRUCK.lvl) return fail(L('unlockAt', TRUCK.lvl)); if (S.coins < TRUCK.cost) return fail(L('noCoins')); S.coins -= TRUCK.cost; S.truck = 1; S.truckAt = 0; out.fx.push(['truck']);
   } else if (a.a === 'serv') {
@@ -474,7 +492,7 @@ function apply(S, a, now) {
     const B = BOOSTS[a.k]; if (!B) return fail(''); if (S.coins < B.cost) return fail(L('noCoins')); S.coins -= B.cost; S.boost[a.k] = Math.max(now, S.boost[a.k] || 0) + B.min * 60000; out.fx.push(['boost', a.k]);
   } else if (a.a === 'req') {
     const o = S.reqs.find(x => x.id === a.id); if (!o || o.w > now) return fail(''); const need = Object.fromEntries(o.it); if (!has(S, need)) return fail(L('missingProd'));
-    const pay = Math.round(o.c * (1 + decoBonus(S) / 100)); take(S, need); S.coins += pay; addXp(S, o.x, out); out.fx.push(['coins', pay]); out.fx.push(['req', o.who]);
+    const pay = Math.round(o.c * (1 + decoBonus(S) / 100)); take(S, need); S.coins += pay; addXp(S, o.x, out); out.fx.push(['coins', pay]); out.fx.push(['req', o.who]); S.reqDone = (S.reqDone || 0) + 1;
     Object.assign(o, { id: S.oid++, w: now + 45000 }, genReq(S)); if (S.reqs.some(x => x !== o && x.who === o.who)) o.who = (o.who + 1) % (S.homes.length * 2);
   } else if (a.a === 'home') {
     if (!S.land.bairro) return fail(L('needLand', L('land_bairro'))); const n = S.homes.length; if (n >= LOTS.length) return fail(L('slotsMax'));
@@ -552,7 +570,10 @@ function storeFarm(S, own) {
   if (m) Object.assign(m, meta); else idx.push(meta); saveIdx(idx);
 }
 let saveT = 0;
-function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => { if (G.S) storeFarm(G.S); }, 400); }
+function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => { saveT = 0; if (G.S) storeFarm(G.S); }, 400); }
+// ao fechar ou trocar de app, grava na hora o que estava pendente
+function flushSave() { if (!saveT) return; clearTimeout(saveT); saveT = 0; if (G.S) storeFarm(G.S); }
+addEventListener('pagehide', flushSave); document.addEventListener('visibilitychange', () => { if (document.hidden) flushSave(); });
 
 // ---------- ícones (desenhados, sem imagens externas) ----------
 function drawIcon(g, k, s) {
@@ -796,6 +817,7 @@ function playFx(fx) {
     if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
     if (f[0] === 'lvl') { SND.lvl(); openSheet('lvl', f[1]); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
+    if (f[0] === 'goal') { SND.lvl(); for (let i = 0; i < 24; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
     if (f[0] === 'truck') { SND.lvl(); CAM.x = TRUCK.x; CAM.y = TRUCK.y - 40; clampCam(); closeSheet(); toast(L('truckBought'), 3200); }
     if (f[0] === 'serv') { SND.hammer(); const V = SERV[f[1]]; CAM.x = V.x; CAM.y = V.y - 60; clampCam(); closeSheet(); burst(V.x, V.y - 60, 'star'); toast(L('servDone', L('serv_' + f[1]), happy(G.S)), 3200); }
     if (f[0] === 'up') { SND.lvl(); const B = BUILD[f[1]]; burst(B.x, B.y - 60, 'star'); toast(L('upDone', N(f[1]), upLv(G.S, f[1]) + 1), 3000); }
@@ -882,7 +904,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.27';
+const BUILD_V = '2026-11-02.28';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -1028,7 +1050,8 @@ $('bJoin').onclick = () => { if (!needNameOk()) return; const c = $('iCode').val
 $('iCode').addEventListener('input', e => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4); });
 $('bRoomOk').onclick = () => { $('ovRoom').hidden = true; };
 $('bCopy').onclick = async () => { const i = $('rLink'); try { await navigator.clipboard.writeText(i.value); $('bCopy').textContent = L('copied'); } catch (e) { i.focus(); i.select(); } setTimeout(() => { $('bCopy').textContent = L('copy'); }, 1500); };
-$('bHelper').onclick = () => openSheet('helper'); $('bMove').onclick = () => setEdit(!G.edit); $('bEditDone').onclick = () => G.road ? setRoad(false) : setEdit(false); $('bRoad').onclick = () => setRoad(!G.road);
+$('bHelper').onclick = () => openSheet('helper'); $('bMove').onclick = () => setEdit(!G.edit); $('bEditDone').onclick = () => G.road ? setRoad(false) : setEdit(false); $('bRoad').onclick = () => setRoad(!G.road); $('tip').onclick = () => openSheet('goals');
+setInterval(() => { const el = $('tip'); if (!G.S) { el.hidden = true; return; } try { const tp = nextTip(G.S, nowS()); el.textContent = L(tp[0], tp[1]); el.hidden = false; } catch (e) { el.hidden = true; } }, 1500);
 function roadBarText() { const S = G.S; return S ? L('roadBar', S.roadFree, ROAD_COST) + ' · ' + L('roadHint') : ''; }
 function setRoad(on) { if (on && G.edit) setEdit(false); G.road = !!on; closeSheet(); $('editBar').hidden = !G.road; $('editT').textContent = roadBarText(); $('bEditDone').textContent = L('moveDone'); $('bRoad').classList.toggle('on', G.road); SND.pop(); }
 function setEdit(on) { if (G.road) { G.road = false; $('bRoad').classList.remove('on'); } G.edit = !!on; closeSheet(); $('editBar').hidden = !G.edit; $('editT').textContent = L('moveHint'); $('bEditDone').textContent = L('moveDone'); $('bMove').classList.toggle('on', G.edit); SND.pop(); } $('bOrders').onclick = () => openSheet('orders'); $('bBarn').onclick = () => openSheet('barn'); $('bShop').onclick = () => openSheet('shop'); $('bMenu').onclick = () => openSheet('menu'); $('hCoins').onclick = () => openSheet('shop');
@@ -1093,6 +1116,10 @@ function renderSheet() {
       <div class="card"><span class="lbl">${L('lvlUnlocked')}</span><p style="margin:0;font-weight:800">${news ? news.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <div class="card"><span class="lbl">${L('lvlNext', l + 1)}</span><p style="margin:0;font-weight:700">${nxt ? nxt.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <button class="btn" type="button" data-close="1">${L('great')}</button>`;
+  } else if (SH.type === 'goals') {
+    t.textContent = L('goals'); const tp = nextTip(S, now);
+    h = `<div class="card"><b>${L(tp[0], tp[1])}</b></div><p class="sub">${L('goalsSub')}</p>` + GOALS.map(([id, f, rw]) => { const done = !!S.goals[id], ok = f(S);
+      return `<div class="card" style="${done ? 'opacity:.55' : ''}"><div class="row"><span style="font-size:22px;width:30px;text-align:center">${done ? '✅' : ok ? '🎁' : '⬜'}</span><div style="flex:1"><b>${L(id)}</b><br><small>${img('coin').replace('<img', '<img style="width:14px;height:14px;vertical-align:-2px"')} ${rw}</small></div>${!done && ok ? `<button class="btn" type="button" data-goal="${id}">${L('claim')}</button>` : ''}</div></div>`; }).join('');
   } else if (SH.type === 'fair') {
     t.textContent = L('fair'); const ks = Object.keys(S.inv).filter(k => S.inv[k] > 0);
     h = `<p class="sub">${L('fairSub')}</p><p class="sub">${L('fairSold', S.fairSold || 0)}</p>` + S.fair.map((st, i) => st
@@ -1171,6 +1198,7 @@ function renderSheet() {
       <span class="lbl">${L('lvlRoad')}</span>${[1, 2, 3].map(d => { const nn = levelNews(S.lvl + d); return `<p class="sub" style="margin:0">${L('lvl', S.lvl + d)}: ${nn ? nn.replace(/^[^:]+: /, '') : L('lvlNothing')}</p>`; }).join('')}
       <span class="lbl">${L('langLbl')}</span>${langButtons()}
       <button class="btn blue" type="button" data-citypanel="1">${L('cityBtn')}</button>
+      <button class="btn blue" type="button" data-goals="1">🎁 ${L('goals')}</button>
       <button class="btn gray" type="button" data-exit="1">${L('backHome')}</button>`;
   }
   b.innerHTML = h;
@@ -1200,6 +1228,8 @@ $('sBody').addEventListener('click', e => {
   if (d.up) act({ a: 'up', k: d.up });
   if (d.serv) act({ a: 'serv', k: d.serv });
   if (d.truck) act({ a: 'truck' });
+  if (d.goal) act({ a: 'goal', id: d.goal });
+  if (d.goals) { openSheet('goals'); return; }
   if (d.fput) act({ a: 'fairPut', i: +d.fput, k: d.k });
   if (d.ftake) act({ a: 'fairTake', i: +d.ftake });
   if (d.citypanel) { openSheet('city'); return; }

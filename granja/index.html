@@ -39,6 +39,9 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-o
 #hud[hidden] ~ #bRoad{display:none}
 body:has(#sheet:not([hidden])) #bRoad{display:none}
 #bRoad.on{background:#ffe08a}
+#tip{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 100px);z-index:3;border:0;background:rgba(255,248,230,.94);color:#3a2412;font:800 13px Nunito,sans-serif;border-radius:999px;padding:6px 12px;box-shadow:0 3px 10px rgba(0,0,0,.2);max-width:92%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#hud[hidden] ~ #tip{display:none}
+body:has(#sheet:not([hidden])) #tip,body:has(#editBar:not([hidden])) #tip{display:none}
 #hud[hidden] ~ #bMove{display:none}
 body:has(#sheet:not([hidden])) #bMove{display:none}
 .ib .dot{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;border-radius:10px;background:var(--red);color:#fff;font-size:12px;display:grid;place-items:center;padding:0 5px;border:2px solid #fff}
@@ -114,7 +117,7 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
   <button class="ib" id="bShop" type="button" aria-label="Loja"><img id="icShop" alt=""></button>
   <button class="ib" id="bMenu" type="button" aria-label="Menu">☰</button>
 </div>
-<button class="ib" id="bMove" type="button" aria-label="Mover"><img id="icMove" alt=""></button><button class="ib" id="bRoad" type="button" aria-label="Ruas"><img id="icRoad" alt=""></button>
+<button class="ib" id="bMove" type="button" aria-label="Mover"><img id="icMove" alt=""></button><button class="ib" id="bRoad" type="button" aria-label="Ruas"><img id="icRoad" alt=""></button><button id="tip" type="button" hidden></button>
 <div id="coop" hidden><i></i><span id="coopT">Jogando com seu amigo</span></div>
 
 <section id="sheet" hidden aria-live="polite">
@@ -157,9 +160,9 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 <div id="editBar" hidden style="position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 16px);z-index:5;background:#fff7e3;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.3);padding:10px 12px;display:flex;gap:10px;align-items:center;font-weight:800;font-size:14px;width:min(94%,440px)"><span id="editT" style="flex:1">Modo mover</span><button class="btn" id="bEditDone" type="button" style="font-size:17px;padding:8px 14px">Pronto</button></div>
 <div id="upd" hidden style="position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 100px);z-index:8;background:#fff7e3;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.3);padding:10px 12px;display:flex;gap:10px;align-items:center;font-weight:800;max-width:calc(100% - 24px)"><span id="updT">Tem uma versão nova do jogo.</span><button class="btn" id="bUpd" type="button" style="font-size:17px;padding:8px 12px">Atualizar</button></div>
 <script src="mqtt.min.js"></script>
-<script src="relay.js?v=2026-11-02.27"></script>
+<script src="relay.js?v=2026-11-02.28"></script>
 <script src="peerjs.min.js"></script>
-<script src="p2p.js?v=2026-11-02.27"></script>
-<script src="game.js?v=2026-11-02.27"></script>
+<script src="p2p.js?v=2026-11-02.28"></script>
+<script src="game.js?v=2026-11-02.28"></script>
 </body>
 </html>
