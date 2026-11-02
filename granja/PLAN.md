@@ -170,3 +170,7 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Carrera de bicicletas en la avenida con apuesta
 - [x] Aniversario semanal de la granja con regalo
 - [x] Misiones de Juca: 12 misiones en orden con premios
+
+## Versión grande 29: "Veterinaria" (2026-11-03.30)
+- [x] Veterinaria: animales 25% más rápidos, doctora que visita los corrales
+- [x] Familias que quieren crecer (⬆️ en casas pequeñas con felicidad 70+, +200 al ampliar)
