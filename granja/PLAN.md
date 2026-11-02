@@ -596,3 +596,10 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Población visible:** el indicador 🏛️ muestra 👥 vecinos; metas nuevas: primera torre, 300 y 600 vecinos.
 - **Rendimiento:** con más de 240 vecinos (120 en "Menos animaciones") solo una parte camina por las calles.
 - Prueba `tests/torres.js`: torre construida (+8 vecinos, alquiler 8×), rechazo de torre repetida, opciones del Concejo con `homeTower`, 3 h simuladas, hojas sin errores, captura.
+
+## Versión 85: Gráficas 2 — árboles, casas, lluvia y sombras
+
+- Tres tipos de árbol (redondo, pino y copa ancha) elegidos por posición; sirven también para los árboles decorativos del fondo.
+- Cada casa tiene un detalle según el lote: chimenea, toldo a rayas o jardineras con flores.
+- La laguna del Campo Sur brilla; con lluvia aparecen charcos que se expanden; al amanecer y al atardecer las sombras se alargan (`SUN_K`).
+- Pruebas: smoke y logística sin errores; capturas del barrio y la granja.
