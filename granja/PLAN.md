@@ -279,3 +279,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Minimapa en el sheet del mapa 🗺️: todo el mundo en pequeño (tierras sin comprar oscurecidas), rectángulo de lo que se ve y los íconos de los eventos activos; tocarlo lleva la cámara a ese punto.
 - El aviso naranja se oculta solo si el evento ya se hizo (por ejemplo, lo hizo un ayudante o el otro jugador).
 - Cine en la playa: en las noches de verano, pantalla en la arena con dibujos y vecinos en toallas de colores.
+
+## Versión grande 50: Álbum de eventos, playa ordenada y mercado de pulgas mejor (2026-11-03.51)
+- Álbum de eventos (menú ☰): 19 eventos de la ciudad (desfiles, ballena, maratón, fuegos, bomberos, mudanza…) se registran al verlos (acción sincronizada evSeen); premios por ver 5 (200), 10 (400) y los 19 (1000).
+- Playa: sombrillas de verano en lugares fijos que no tapan el cine, el carrito de helados ni el puerto.
+- Mercado de pulgas: el lote sorpresa ahora trae productos de valor ≥ 25 ya vistos (vale la pena por 40).
+- Arreglo: la noticia "Cumpleaños de los vecinos" había sido pisada por "Cumpleaños de los ayudantes" (clave duplicada n_bday → n_hbday).
