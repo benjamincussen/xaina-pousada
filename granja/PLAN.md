@@ -529,3 +529,13 @@ Pedido de Benjamin: ver el dinero usándose y moviéndose, más recursos y produ
 - **Comercio autónomo:** la Secretaría de Comercio vende cada minuto hasta 3 lotes de sobras del granero (misma regla de "sobra" que los ayudantes: nunca lo que piden pedidos, recetas o metas de stock) a la ciudad vecina con mejor relación (Villa Aurora o las del Mundo); paga según la relación (+hasta 50%), **60% para ti y 40% al tesoro**, +1 de relación; sale un camión 📦→🏰 desde la Alcaldía; queda en Decisiones ("vendió sobras…").
 - **Producción nueva:** Aserradero (Valle Verde, nv 14): madera (pan como insumo) y muebles (madera + tela); Tostadora (Valle Verde, nv 14): café tostado a partir de café, cultivo nuevo (nv 14, 200 s) con su planta y su ícono; Ladrillera (Campos del Oeste, nv 15): ladrillos con piedra + caña. **10 ladrillos en el granero dejan la próxima casa 25% más barata** (también para el Concejo). Dibujos propios (sierra que gira, chimenea con humo, horno) e íconos nuevos.
 - **Pruebas (Playwright):** ciudad nivel 20 con todo comprado, 3 h simuladas en 84 ms: 151 decisiones, 3 ventas a vecinos (2314), flujo de entrada/salida por fuente y por cargo, 23 monedas en vuelo frente a la Alcaldía, casa con descuento por ladrillos, café sembrado, las 3 fábricas producen, 11 hojas abiertas sin errores de consola.
+
+## Versión 77: El mapa crece hacia el sur — Barrio Sur y Zona Industrial
+
+Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar.
+
+- **Mundo más alto:** WH pasa de 4920 a 6400 (todo lo viejo queda igual; el pasto, la playa y el mar siguen hacia abajo; la cerca y el minimapa se ajustan solos).
+- **Barrio Sur (nivel 17, 7000):** 18 lotes nuevos (índices 40–57, `lotLand` → 'bairroSul') en 3 filas, dos avenidas de piedra con rotonda, calles laterales, faroles, flores; los vecinos tienen ids propios (1000+). El Alcalde lo compra con el tesoro y la Secretaría de Obras construye las casas (en 3 h simuladas: 8 casas nuevas, 48 en total, 144 vecinos).
+- **Zona Industrial (nivel 18, 9000):** piso de asfalto con galpones de techo serrado y chimenea: Fábrica de Ración (ración ×9 rápida), Ingenio de Azúcar (azúcar ×6), Fábrica de Telas (tela ×4 y redes) y el **Depósito** (servicio: +300 de espacio en el granero, 14 empleos, +5 de felicidad). Los ayudantes y el Concejo los usan solos (son `BUILD`/`SERV` normales).
+- "Ir a…" tiene los dos lugares; la arquitecta conoce las avenidas nuevas para trazar calles; Novedades.
+- Pruebas (Playwright): compra de ambos terrenos, Depósito (+300), producción en las 3 fábricas, 3 h de Concejo, hojas de terreno/mapa/ciudad/Concejo/fábricas sin errores de consola; capturas del barrio con casas y vecinos y de la zona industrial.
