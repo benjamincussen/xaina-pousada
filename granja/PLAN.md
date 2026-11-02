@@ -174,3 +174,7 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 ## Versión grande 29: "Veterinaria" (2026-11-03.30)
 - [x] Veterinaria: animales 25% más rápidos, doctora que visita los corrales
 - [x] Familias que quieren crecer (⬆️ en casas pequeñas con felicidad 70+, +200 al ampliar)
+
+## Versión grande 30: "Vendedor ambulante" (2026-11-03.31)
+- [x] Vendedor ambulante en la villa: vende cosas raras y compra 2 productos al doble
+- [x] Reloj de la plaza con la hora real
