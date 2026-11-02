@@ -39,3 +39,10 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Plan del scout por cadena (paleta → azúcar → caña) y sin llenar el molino de ración
 - [x] Cuentas de los ayudantes (gastado / ganado)
 - [x] Campo Grande: +24 parcelas (mapa más grande al sur)
+
+## Versión grande 4: "Fiesta" (2026-11-03.4)
+- [x] Invernadero de vidrio + girasol (ramo de flores, perfume)
+- [x] Pizzería (pizza y pizza dulce, horno encendido)
+- [x] Fiesta del Viento cada 20 min: banderines, fuegos, música, todos a la plaza, feria vende 2,5x
+- [x] Mascotas: perrito de Benjamin y gatita de Ana Luyza
+- [x] La página siempre carga la última versión (sin quedarse pegada en caché)
