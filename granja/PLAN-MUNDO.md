@@ -22,6 +22,11 @@ Zona del mapa reservada para el Mundo: **x > 3000**, el océano al este del mapa
   - Expediciones navales animadas: al atacar, la flota (2–8 barcos según los de guerra) sale del fuerte, cruza el mar en 45 s, combate 12 s frente a la isla (humo, chispas y 💥, sin heridos) y vuelve con el cartel del resultado; el aviso de victoria o derrota sale al terminar el combate.
   - Ataques enemigos visibles: los saqueos de las ciudades del mundo llegan en barcos con su bandera hasta nuestro puerto, con aviso "⚠️ Barcos de … vienen", y si la defensa gana se ve "¡Defendimos!".
 
+- **Fase 3: diplomacia.**
+  - Las ciudades del mundo tienen relaciones entre sí (las guerreras bajan, las comerciantes suben): se alían (≥ 60) y se declaran guerra (≤ −40). Las guerras se ven como flotas que cruzan entre islas y combaten, y cambian población y soldados.
+  - Embajadores cada 18–32 min llegan en barco con 🕊️ a nuestro puerto con: tratado de paz (+20 de relación), comercio (compran 15 de lo que piden a 1,8×), tributo (pagar o perder relación) o alianza (2000; no atacan más y el 30% de su ejército nos defiende). Esperan 20 min.
+  - Ranking de ciudades y "Noticias del mundo" en el panel 🌍.
+
 ## Próximas fases (grandes, una por ronda)
 1. ~~Vida en las islas~~ (hecho en v96):
    - vecinos caminando, humo, faroles de noche y gaviotas;
@@ -31,7 +36,7 @@ Zona del mapa reservada para el Mundo: **x > 3000**, el océano al este del mapa
    - al atacar, la flota sale del fuerte, cruza el mar hasta la isla, hay un combate de dibujo animado (humo, chispas, nadie muere) y vuelve;
    - el resultado llega al llegar.
    - Los ataques enemigos también se ven venir: barcos con su bandera que cruzan hacia nosotros, con aviso en pantalla.
-3. **Diplomacia entre ciudades:**
+3. ~~Diplomacia entre ciudades~~ (hecho):
    - alianzas y guerras entre ellas, con ataques visibles entre islas;
    - embajadores que llegan en barco con propuestas: tratado, comercio o tributo;
    - ranking de ciudades.
