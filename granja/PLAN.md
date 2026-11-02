@@ -411,3 +411,9 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - **Meta nueva:** "Construir el Parque Eólico" (premio de 2000).
 - **Novedades:** el botón "Ver" lleva directo al proyecto.
 - **Fiesta de la Ciudad Nueva (v68):** el escenario se movió a la calle libre del sur para no tapar las casas.
+
+## Versión 70: Food trucks, tú y tu amigo en el mapa, luces del viento
+
+- **Plaza de food trucks (Centro Moderno):** tres camiones (tacos, hamburguesas y helado) con fila de vecinos que cambia, y mesitas con sombrilla. De noche la plaza se ilumina.
+- **Mapa con personajes:** el minimapa muestra una bolita con tu inicial (naranja) y la de tu amigo (morada). En co-op aparece el botón "📍 Ir a donde está…", que lleva la cámara hasta él.
+- **Parque Eólico de noche:** los molinos parpadean con luces rojas de aviación.
