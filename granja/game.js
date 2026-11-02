@@ -1016,12 +1016,12 @@ function editHit(S, w) {
 function tapAt(p) {
   if (!G.S) return; const S = G.S, now = nowS(); applyLayout(S);
   if (G.edit) return;
+  if (potOn(S, Date.now()) && Math.hypot(p.x - POT.x, p.y - POT.y + 10) < 40) return void act({ a: 'pot' });
   if (G.decoK) { const i = S.decor.findIndex(d => Math.hypot(d.x - p.x, d.y - 10 - p.y) < 22); if (i >= 0) act({ a: 'decor', rm: i }); else act({ a: 'decor', k: G.decoK, x: p.x, y: p.y + 10 }); $('editT').textContent = decorBarText(); return; }
   ping(p.x, p.y);
   for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR(p, Ld.r)) return openSheet('land', k);
   for (const n of NPCS.list) if (Math.abs(p.x - n.x) < 20 && p.y > n.y - 60 && p.y < n.y + 8) { const rq = (S.reqs || []).find(o => 'h' + o.who === n.id && o.w <= now); if (rq) return openSheet('req', rq.id); const jb = n.id[0] === 'h' ? jobOf(S, +n.id.slice(1)) : null; n.say = L('npcHi', n.name) + ' ' + (jb ? L('jobSay', L('job_' + jb[0])) : npcLine(S)); n.sayT = 4; return; }
   if (S.land.bairro && Math.abs(p.x - FAIR.x) < 200 && p.y > FAIR.y - 120 && p.y < FAIR.y + 10) return openSheet('fair');
-  if (potOn(S, Date.now()) && Math.hypot(p.x - POT.x, p.y - POT.y + 10) < 40) return void act({ a: 'pot' });
   if (S.land.praia && Math.abs(p.x - FAROL.x) < 50 && p.y > FAROL.y - 230 && p.y < FAROL.y + 10) return openSheet('farol');
   for (const [k, V] of Object.entries(SERV)) if (S.land[V.land || 'bairro'] && Math.abs(p.x - V.x) < (V.w || 160) / 2 && p.y > V.y - 150 && p.y < V.y + 10) return openSheet('city');
   { for (let i = 0; i < LOTS.length; i++) { const [hx, hy] = LOTS[i]; if (!S.land[lotLand(i)]) continue; if (Math.abs(p.x - hx) < 66 && p.y > hy - 140 && p.y < hy + 10) { if (S.homes[i] && homeRent(S, i, now) > 0) return void act({ a: 'homeRent', i }); return openSheet('homes', i); } } }
@@ -1218,7 +1218,7 @@ function helperTask(S, now, role) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-03.11';
+const BUILD_V = '2026-11-03.12';
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
 let UPD = null, lastTouch = Date.now(); addEventListener('pointerdown', () => { lastTouch = Date.now(); }, { capture: true });
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { let tried = ''; try { tried = sessionStorage.getItem('sitio-upd-try') || ''; } catch (e) {} if (tried !== j.v) UPD = j.v; } } catch (e) {} }
