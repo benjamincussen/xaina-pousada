@@ -18,7 +18,17 @@ Objetivo de Benjamin: llevar el juego "al siguiente nivel": mapa enorme, dinero 
 - v76 Economía viva · v77 Mapa al sur (Barrio Sur, Zona Industrial) · v78 Suroeste (Campo Sur, Cantera) · v79 Logística visible · v80 HUD móvil · v81 Precios del día · v83 Negocios (negocios.js) · v84 Torres y población · v85 Gráficas 2 · v86 Ayudantes 3 (Industria, 24) · v87 Rendimiento · v88/89 Diario de la ciudad · v90 Estaciones + riego + fuzz · v91 Árboles por estación.
 - Sistema EXT para extensiones; pruebas en `tests/` (smoke, fuzz, logística, precios, torres, ayudantes3, estaciones, negocios, hud-movil).
 
-## Próximas versiones — sesión A (ronda 2)
+## Hecho (ronda 2 y 3) — sesión A
+- v92 Más al sur (Cacao, Lago del Sur, Barrio Alto; WH 7900) · v93 Ferrocarril de carga · v94 Clima 2 · v95 Guía y metas · v96 Niños 2 · v98 Obras a la vista · v99 Turismo del Lago · v100 Fiesta + Tu ciudad en números.
+
+## Próximas versiones — sesión A (ronda 4)
+1. **v101 Vecinos con dinero**: los vecinos con empleo cobran y gastan en la feria y el Mercado Grande (compran sobras del granero a buen precio); colas visibles; "consumo" en la Economía.
+2. **v102 Eventos de ciudad 2**: carrera de botes en el Lago del Sur (apuestas), festival de la cosecha con puestos, feria de ciencias en el colegio.
+3. **v103 Más al sur 3** (WH 9400): Viñedo (uvas → jugo de uva), Parque Nacional (animales, turismo), Ciudad Universitaria (lotes + universidad con empleos).
+4. **v104 Gráficas 3**: autos en las avenidas nuevas, estelas de botes, bandadas de pájaros, reflejos en el agua.
+5. **v105 Ayudantes 4**: camionero (lleva producción al depósito), Lúcia con presupuesto propio aprobado por el jugador.
+
+## Ronda 2 (hecha)
 1. **v92 Más al sur**: el mapa crece otra franja (WH 7900) con Plantación de cacao (cultivo + Fábrica de chocolate), Lago del Sur (muelle, botes, turismo) y Barrio Alto (12 lotes en la colina). Más terrenos para que el Alcalde siga comprando.
 2. **v93 Ferrocarril de carga**: tren de mercancías que une Zona Industrial, Cantera y Puerto de Carga; vagones con lo producido; exportación +20% cuando llega el tren.
 3. **v94 Escuela y niños 2**: más bebés con torres, guardería grande, niños yendo al colegio del Barrio Sur, "Día del niño".
