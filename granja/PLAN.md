@@ -313,3 +313,11 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 ## Versión grande 56: Tiro al blanco y carrera de sacos (2026-11-03.57)
 - Tiro al blanco (Parque de diversiones, junto a la rueda): puesto con toldo rojo y blancos que se mueven; minijuego de mira que va y vuelve más rápido que el minigolf. Centro 100 monedas, cerca 50, fallo 15. Una vez cada 10 min (sincronizado). En la agenda.
 - Carrera de sacos: con la Cancha, cada 25 min cinco niños saltan en sacos de lado a lado. Nuevo evento en el álbum (ahora 20; el premio final es por verlos todos).
+
+## Versión grande 57: Ayudantes más inteligentes (pedido de Benjamin) (2026-11-03.58)
+Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "sin nada que hacer"; panes en vez del pastel de zanahoria que pedía una obra.
+- Plan del scout: primero lo que falta para progresar (obras de la ciudad/colonia, faro, concurso), después los pedidos, después la ración.
+- Siembra equilibrada: si no falta nada urgente, siembran el cultivo con menos stock respecto a lo que usan las recetas abiertas (stockTarget pondera también los usos del producto: la caña pesa por el azúcar), en vez de repetir trigo.
+- Producción continua (opción, encendida por defecto): edificios parados con materia prima de sobra fabrican lo que tenga menos stock, sin tocar lo reservado para el plan y dejando siempre 1 espacio libre para el jugador; no llena el granero (>85%).
+- Scout: si no hay nada que entregar, ayuda fabricando lo del plan (ya no queda "descansando").
+- Ayudantes: tarjeta "Prioridades para progresar" con cada obra y lo que le falta; descripciones de oficios actualizadas.
