@@ -189,3 +189,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Guardería (Panel de la ciudad, Barrio Escolar, nivel 11, 2200): +3 cupos de bebés, +10 felicidad; de día los bebés gatean en el patio con la cuidadora.
 - Cartero en bicicleta: cada 4 min recorre la avenida del barrio y lanza cartas a las casas.
 - Carrito de helados en la playa: tocarlo vende 1 helado de mango o paleta de naranja al doble del precio (máx. 6 cada 10 min, sincronizado en co-op).
+
+## Versión grande 33: Jardín botánico, panadero y ropa tendida (2026-11-03.34)
+- Jardín botánico (Panel de la ciudad, Campo Grande, nivel 12, 2600): flores, laguna, arco de rosas y mariposas; +12 felicidad.
+- Panadero de la villa: cada 5 min cruza la villa con su canasta; tocarlo regala 2 panes (1 vez por vuelta, sincronizado en co-op).
+- Ropa tendida: de día los vecinos cuelgan ropa de colores entre las casas del barrio.
