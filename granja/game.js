@@ -48,6 +48,8 @@ const TX = {
     sound: 'Som', music: 'Música', ambient: 'Sons do sítio', on: 'sim', off: 'não',
     lvlCap: '+50 lugares no celeiro', lvlTitle: l => `Nível ${l}!`, lvlCoins: c => `+${c} moedas de prêmio`, lvlUnlocked: 'Liberado agora', lvlNext: l => `No nível ${l}`, lvlNothing: 'Prêmio em moedas, +50 lugares no celeiro e encomendas que pagam mais.', lvlRoad: 'Próximos níveis', great: 'Que bom!',
     land_bairro: 'Bairro Novo', landDesc_bairro: 'Um bairro com avenida e 12 lotes: construa casas, chegam vizinhos que pagam aluguel e dão bônus nas encomendas.',
+    upTitle: 'Melhorar prédio', upHint: (l, p) => `Nível ${l}: tudo fica ${p}% mais rápido (vale para as cópias também).`, upBtn: 'Melhorar', upDone: (n, l) => `${n} agora é nível ${l}!`, upMax: 'Nível máximo', bLvl: l => `Nv ${l}`,
+    boosts: 'Impulsos', boost_abono: 'Adubo mágico', boostD_abono: 'Plantas crescem 2x mais rápido por 10 min', boost_racao: 'Ração premium', boostD_racao: 'Animais produzem 2x mais rápido por 10 min', boostDone_abono: 'Adubo ativo: plante agora!', boostDone_racao: 'Ração premium ativa: alimente os animais!', boostLeft: t => `Ativo: ${t}`,
     reqs: 'Pedidos dos vizinhos', reqSub: 'Os vizinhos pedem em pessoa e pagam o dobro. Toque no vizinho com o balão.', reqFrom: n => `${n} quer:`, reqThanks: 'Obrigado, vizinho!', reqWait: t => `Novo pedido em ${t}`,
     homes: 'Casas do bairro', homeHint: 'Cada casa traz 2 vizinhos: +2% nas encomendas por casa (até 20%) e aluguel de 30 moedas a cada 5 min.', homeBuy: 'Construir casa', homeDone: (a, b) => `${a} e ${b} se mudaram para o bairro!`, homesN: (n, m, p) => `${n} de ${m} casas · ${p} moradores`, homeOf: (a, b) => `Casa de ${a} e ${b}`, emptyLot: 'Lote vazio', rentIn: (n, t) => `${n} moedas em ${t}`, npcHi: n => `Oi, sou ${n}!`,
     npc: ['Que dia bonito!', 'Adoro o pão daqui!', 'Essa rua ficou linda.', 'Vou na feira mais tarde.', 'Bom dia, vizinho!', 'O vento hoje está ótimo!', 'Meu filho quer ser kitesurfista.', 'Que cheiro de bolo!', 'A cidade está crescendo!', 'Tem sorvete hoje?', 'Obrigado pelas ruas novas!', 'Vou pescar no lago.'],
@@ -106,6 +108,8 @@ const TX = {
     sound: 'Sonido', music: 'Música', ambient: 'Sonidos del campo', on: 'sí', off: 'no',
     lvlCap: '+50 espacios en el granero', lvlTitle: l => `¡Nivel ${l}!`, lvlCoins: c => `+${c} monedas de premio`, lvlUnlocked: 'Se desbloquea ahora', lvlNext: l => `En el nivel ${l}`, lvlNothing: 'Premio en monedas, +50 espacios en el granero y pedidos que pagan más.', lvlRoad: 'Próximos niveles', great: '¡Genial!',
     land_bairro: 'Barrio Nuevo', landDesc_bairro: 'Un barrio con avenida y 12 lotes: construye casas, llegan vecinos que pagan arriendo y dan bono en los pedidos.',
+    upTitle: 'Mejorar edificio', upHint: (l, p) => `Nivel ${l}: todo sale ${p}% más rápido (también en las copias).`, upBtn: 'Mejorar', upDone: (n, l) => `¡${n} ahora es nivel ${l}!`, upMax: 'Nivel máximo', bLvl: l => `Nv ${l}`,
+    boosts: 'Impulsos', boost_abono: 'Abono mágico', boostD_abono: 'Las plantas crecen 2x más rápido por 10 min', boost_racao: 'Ración premium', boostD_racao: 'Los animales producen 2x más rápido por 10 min', boostDone_abono: 'Abono activo: ¡siembra ahora!', boostDone_racao: 'Ración premium activa: ¡alimenta a los animales!', boostLeft: t => `Activo: ${t}`,
     reqs: 'Pedidos de los vecinos', reqSub: 'Los vecinos piden en persona y pagan el doble. Toca al vecino con el globo.', reqFrom: n => `${n} quiere:`, reqThanks: '¡Gracias, vecino!', reqWait: t => `Nuevo pedido en ${t}`,
     homes: 'Casas del barrio', homeHint: 'Cada casa trae 2 vecinos: +2% en los pedidos por casa (hasta 20%) y arriendo de 30 monedas cada 5 min.', homeBuy: 'Construir casa', homeDone: (a, b) => `¡${a} y ${b} se mudaron al barrio!`, homesN: (n, m, p) => `${n} de ${m} casas · ${p} vecinos`, homeOf: (a, b) => `Casa de ${a} y ${b}`, emptyLot: 'Lote vacío', rentIn: (n, t) => `${n} monedas en ${t}`, npcHi: n => `¡Hola, soy ${n}!`,
     npc: ['¡Qué día tan bonito!', '¡Me encanta el pan de aquí!', 'Esta calle quedó preciosa.', 'Voy a la feria más tarde.', '¡Buen día, vecino!', '¡Hoy el viento está perfecto!', 'Mi hijo quiere ser kitesurfista.', '¡Qué olor a pastel!', '¡La ciudad está creciendo!', '¿Hay helado hoy?', '¡Gracias por las calles nuevas!', 'Voy a pescar al lago.'],
@@ -214,6 +218,10 @@ const DUP_SPOTS = [[90, 1500, 'vila'], [220, 1500, 'vila'], [350, 1500, 'vila'],
 const DUP_COL = { moinho: ['#f2e3c6', '#b5523b'], padaria: ['#ffe2b0', '#c8702a'], queijaria: ['#e6f2ff', '#3f8fd1'], sucos: ['#fff4d6', '#ff9a1f'], tecelagem: ['#f3e9ff', '#7b5ea7'], sorveteria: ['#ffe4ee', '#ff7aa8'] };
 { let si = 0; for (let n = 2; n <= 1 + DUP_MAX; n++) for (const k of DUP_TYPES) { const B = BUILD[k], sp = DUP_SPOTS[si++];
   BUILD[k + '_' + n] = { n: B.n + ' ' + n, base: k, idx: n, lvl: B.lvl, q: B.q, x: sp[0], y: sp[1], w: 110, h: 80, land: sp[2], baseLand: B.land, rec: B.rec }; } }
+// melhorias: nível 2 e 3 de cada tipo de prédio (vale para todas as cópias): produz mais rápido
+const UP_MULT = [1, 0.8, 0.6], UP_LVL = [0, 6, 10], upLv = (S, k) => (S.blv && S.blv[k]) || 0, upCost = (k, l) => Math.round((DUP_BASE[k] || 400) * 1.5 * (l + 1));
+// impulsos: abono (plantas crescem 2x) e ração premium (animais 2x) por 10 minutos
+const BOOSTS = { abono: { cost: 120, min: 10 }, racao: { cost: 160, min: 10 } }, boostOn = (S, k, now) => !!(S.boost && S.boost[k] > now);
 const dupN = (S, k) => (S.dup && S.dup[k]) || 0;
 const famOf = b => BUILD[b].base || b;
 const fam = (S, k) => Object.keys(BUILD).filter(b => famOf(b) === k && okB(S, BUILD[b]));
@@ -295,7 +303,7 @@ function migrate(S) {
   if (!S.deco || typeof S.deco !== 'object') S.deco = {};
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
-  if (!S.dup || typeof S.dup !== 'object') S.dup = {};
+  if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
   if (!Array.isArray(S.homes)) S.homes = []; if (!Array.isArray(S.reqs)) S.reqs = [];
   if (!Array.isArray(S.roads)) S.roads = []; if (typeof S.roadFree !== 'number') S.roadFree = ROAD_FREE;
   if (typeof S.silos !== 'number') S.silos = 0;
@@ -353,7 +361,7 @@ function apply(S, a, now) {
     if (!pl || i >= S.np || pl.c || !c) return fail('');
     if (c.lvl > S.lvl) return fail(L('unlockAt', c.lvl));
     if (S.coins < c.cost) return fail(L('noCoins'));
-    S.coins -= c.cost; S.plots[i] = { c: a.c, p: now }; out.fx.push(['plant', i]);
+    S.coins -= c.cost; S.plots[i] = { c: a.c, p: boostOn(S, 'abono', now) ? now - c.t * 500 : now }; out.fx.push(['plant', i]);
   } else if (a.a === 'harvest') {
     const i = a.i | 0, pl = S.plots[i]; if (!pl || !plotReady(pl, now)) return fail('');
     const c = CROPS[pl.c]; if (invCount(S) + c.y > S.cap) return fail(L('barnFull'));
@@ -364,7 +372,7 @@ function apply(S, a, now) {
     if (st.q.length >= qCap(S, a.b)) return fail(L('queueFull'));
     if (!has(S, r.i)) return fail(L('missingIng'));
     take(S, r.i); const s = st.q.length ? Math.max(now, st.q[st.q.length - 1].e) : now;
-    st.q.push({ r: a.r | 0, s, e: s + r.t * 1000 }); out.fx.push(['craft', a.b]);
+    st.q.push({ r: a.r | 0, s, e: s + Math.round(r.t * UP_MULT[upLv(S, famOf(a.b))] * 1000) }); out.fx.push(['craft', a.b]);
   } else if (a.a === 'collect') {
     const B = BUILD[a.b], st = B && S.bld[a.b]; if (!st) return fail('');
     let n = 0; while (st.q.length && st.q[0].e <= now) { const r = B.rec[st.q[0].r]; if (invCount(S) + r.k > S.cap) { if (!n) return fail(L('barnFull')); break; } give(S, r.o, r.k); addXp(S, r.xp, out); out.fx.push(['gain', r.o, r.k, 'bld', a.b]); st.q.shift(); n++; }
@@ -374,7 +382,7 @@ function apply(S, a, now) {
     let got = 0;
     for (let j = 0; j < st.a.length; j++) if (st.a[j] && now >= st.a[j] + P.t * 1000) { if (invCount(S) + 1 > S.cap) { if (!got) return fail(L('barnFull')); break; } give(S, P.out, 1); addXp(S, P.xp, out); st.a[j] = 0; got++; }
     if (got) out.fx.push(['gain', P.out, got, 'pen', a.k]);
-    else { let fed = 0; for (let j = 0; j < st.a.length; j++) if (!st.a[j] && (S.inv[P.feed] || 0) > 0) { take(S, { [P.feed]: 1 }); st.a[j] = now; fed++; }
+    else { let fed = 0; for (let j = 0; j < st.a.length; j++) if (!st.a[j] && (S.inv[P.feed] || 0) > 0) { take(S, { [P.feed]: 1 }); st.a[j] = boostOn(S, 'racao', now) ? now - P.t * 500 : now; fed++; }
       if (!fed) return fail(st.a.some(x => !x) ? L('needFeed', P.feed) : L('producing')); out.fx.push(['feed', a.k, fed]); }
   } else if (a.a === 'deliver') {
     const o = S.orders.find(x => x.id === a.id); if (!o || o.w > now) return fail('');
@@ -418,6 +426,11 @@ function apply(S, a, now) {
     else if (a.t === 'boat') { if (S.boat.e && S.boat.e > now) { rem = S.boat.e - now; doIt = () => { S.boat.e = now; }; } }
     if (!doIt) return fail(''); const c = rushCost(Math.ceil(rem / 1000)); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; doIt(); out.fx.push(['coins', -c]); out.fx.push(['rush']);
+  } else if (a.a === 'up') {
+    const k = a.k, B = BUILD[k], l = upLv(S, k); if (!B || B.base || !okB(S, B) || l >= 2) return fail(''); if (S.lvl < UP_LVL[l + 1]) return fail(L('unlockAt', UP_LVL[l + 1]));
+    const c = upCost(k, l); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; S.blv[k] = l + 1; out.fx.push(['up', k]);
+  } else if (a.a === 'boost') {
+    const B = BOOSTS[a.k]; if (!B) return fail(''); if (S.coins < B.cost) return fail(L('noCoins')); S.coins -= B.cost; S.boost[a.k] = Math.max(now, S.boost[a.k] || 0) + B.min * 60000; out.fx.push(['boost', a.k]);
   } else if (a.a === 'req') {
     const o = S.reqs.find(x => x.id === a.id); if (!o || o.w > now) return fail(''); const need = Object.fromEntries(o.it); if (!has(S, need)) return fail(L('missingProd'));
     const pay = Math.round(o.c * (1 + decoBonus(S) / 100)); take(S, need); S.coins += pay; addXp(S, o.x, out); out.fx.push(['coins', pay]); out.fx.push(['req', o.who]);
@@ -739,12 +752,20 @@ function playFx(fx) {
     if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
     if (f[0] === 'lvl') { SND.lvl(); openSheet('lvl', f[1]); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
+    if (f[0] === 'up') { SND.lvl(); const B = BUILD[f[1]]; burst(B.x, B.y - 60, 'star'); toast(L('upDone', N(f[1]), upLv(G.S, f[1]) + 1), 3000); }
+    if (f[0] === 'boost') { SND.lvl(); toast(L('boostDone_' + f[1]), 3000); }
     if (f[0] === 'req') { SND.coin(); const n = NPCS.list.find(x => x.id === 'h' + f[1]); if (n) { n.say = L('reqThanks'); n.sayT = 3; burst(n.x, n.y - 40, 'coin'); } }
     if (f[0] === 'home') { SND.hammer(); const [hx, hy] = LOTS[f[1]]; CAM.x = hx; CAM.y = hy - 60; clampCam(); closeSheet(); burst(hx, hy - 60, 'coin'); toast(L('homeDone', NPC_NAMES[(f[1] * 2) % NPC_NAMES.length], NPC_NAMES[(f[1] * 2 + 1) % NPC_NAMES.length]), 3600); }
     if (f[0] === 'dup') { SND.hammer(); const B = BUILD[f[1]]; applyLayout(G.S); CAM.x = B.x; CAM.y = B.y - 60; clampCam(); closeSheet(); burst(B.x, B.y - 60, 'coin'); toast(L('dupDone', N(f[1])), 3000); }
     if (f[0] === 'silo') { SND.lvl(); burst(SILOS[f[1]].x, SILOS[f[1]].y - 60, 'coin'); }
   }
 }
+function upCard(S, k) { const l = upLv(S, k), B = BUILD[k]; if (!B || !okB(S, B)) return '';
+  return `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img('star')}</span><div style="flex:1"><b>${L('upTitle')} · ${L('bLvl', l + 1)}</b><br><small>${l >= 2 ? L('upMax') : L('upHint', l + 2, Math.round((1 - UP_MULT[l + 1]) * 100))}</small></div>
+    ${l >= 2 ? '' : S.lvl < UP_LVL[l + 1] ? `<small>${L('lvl', UP_LVL[l + 1])}</small>` : `<button class="btn blue" type="button" data-up="${k}" ${S.coins < upCost(k, l) ? 'disabled' : ''}>${img('coin')} ${upCost(k, l)}</button>`}</div></div>`; }
+function oneBoost(S, k) { const now = nowS(), B = BOOSTS[k]; return `<div class="card"><div class="row"><b style="flex:1">⚡ ${L('boost_' + k)}<br><small>${boostOn(S, k, now) ? L('boostLeft', fmtT(Math.ceil((S.boost[k] - now) / 1000))) : L('boostD_' + k)}</small></b><button class="btn" type="button" data-boost="${k}" ${S.coins < B.cost ? 'disabled' : ''}>${img('coin')} ${B.cost}</button></div></div>`; }
+function boostCards(S) { const now = nowS(); return `<span class="lbl">${L('boosts')}</span>` + Object.entries(BOOSTS).map(([k, B]) => `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(k === 'abono' ? 'trigo' : 'racaoV')}</span><div style="flex:1"><b>${L('boost_' + k)}</b><br><small>${boostOn(S, k, now) ? L('boostLeft', fmtT(Math.ceil((S.boost[k] - now) / 1000))) : L('boostD_' + k)}</small></div>
+    <button class="btn" type="button" data-boost="${k}" ${S.coins < B.cost ? 'disabled' : ''}>${img('coin')} ${B.cost}</button></div></div>`).join(''); }
 function reqCard(o) { const S = G.S, now = nowS(), nm = NPC_NAMES[o.who % NPC_NAMES.length];
   return o.w > now ? `<div class="card"><p class="sub">${L('reqWait', fmtT(Math.ceil((o.w - now) / 1000)))}</p></div>`
     : `<div class="card"><b>${L('reqFrom', nm)}</b>${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>${img('coin')}${o.c}</span><span>${img('star')}${o.x}</span></span><span style="flex:1"></span><button class="btn" type="button" data-req="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`; }
@@ -814,7 +835,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.22';
+const BUILD_V = '2026-11-02.23';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -982,7 +1003,7 @@ function renderSheet() {
     t.textContent = L('plant');
     h = `<p class="sub">${L('plantSub')}</p><div class="grid">${Object.entries(CROPS).map(([k, c]) => c.lvl > S.lvl
       ? `<button class="tile lock" type="button" disabled>${img(k)}${N(k)}<small>${L('lvl', c.lvl)}</small></button>`
-      : `<button class="tile" type="button" data-plant="${k}" ${S.coins < c.cost ? 'disabled' : ''}>${img(k)}${N(k)}<small>${L('coins', c.cost)} · ${fmtT(c.t)}</small><small>${L('yields', c.y)}</small></button>`).join('')}</div>`;
+      : `<button class="tile" type="button" data-plant="${k}" ${S.coins < c.cost ? 'disabled' : ''}>${img(k)}${N(k)}<small>${L('coins', c.cost)} · ${fmtT(c.t)}</small><small>${L('yields', c.y)}</small></button>`).join('')}</div>` + oneBoost(S, 'abono');
   } else if (SH.type === 'bld') {
     const B = BUILD[SH.arg], st = S.bld[SH.arg]; t.textContent = N(SH.arg);
     const slots = Array.from({ length: qCap(S, SH.arg) }, (_, i) => { const j = st.q[i]; if (!j) return `<div class="slot">${L('empty')}</div>`; const r = B.rec[j.r], ready = j.e <= now; return `<div class="slot ${ready ? 'ready' : ''}">${img(r.o)}<em>${ready ? L('ready') : j.s <= now ? fmtT(Math.ceil((j.e - now) / 1000)) : L('queued')}</em></div>`; }).join('');
@@ -990,8 +1011,8 @@ function renderSheet() {
     const fj = st.q[0], rushB = fj && fj.e > now && fj.s <= now ? `<button class="btn" type="button" data-rushb="1" ${S.coins < rushCost(Math.ceil((fj.e - now) / 1000)) ? 'disabled' : ''} style="font-size:16px">⚡ ${L('rushBtn')} · ${img('coin')} ${rushCost(Math.ceil((fj.e - now) / 1000))}</button>` : '';
     h = rushB + `<div class="row"><div class="q" style="flex:1">${slots}</div>${st.q.some(j => j.e <= now) ? `<button class="btn" type="button" data-collect="1">${L('collect')}</button>` : ''}</div>
       ${B.rec.map((r, i) => !okR(S, r) ? `<div class="card" style="opacity:.55"><div class="row">${img(r.o)}<b style="flex:1">${N(r.o)}</b><small>${r.lvl > S.lvl ? L('lvl', r.lvl) : L('land_' + r.land)}</small></div></div>`
-        : `<div class="card"><div class="row"><span style="width:44px;height:44px;display:grid;place-items:center">${img(r.o)}</span><div style="flex:1"><b>${N(r.o)}${r.k > 1 ? ' ×' + r.k : ''}</b><br><small>${fmtT(r.t)}</small></div>
-          <button class="btn" type="button" data-craft="${i}" ${!has(S, r.i) || st.q.length >= qCap(S, SH.arg) ? 'disabled' : ''}>${L('make')}</button></div>${needHtml(S, r.i)}</div>`).join('')}${more}${DUP_TYPES.includes(famOf(SH.arg)) ? `<span class="lbl">${L('dups')}</span>` + dupCard(S, famOf(SH.arg)) : ''}`;
+        : `<div class="card"><div class="row"><span style="width:44px;height:44px;display:grid;place-items:center">${img(r.o)}</span><div style="flex:1"><b>${N(r.o)}${r.k > 1 ? ' ×' + r.k : ''}</b><br><small>${fmtT(Math.round(r.t * UP_MULT[upLv(S, famOf(SH.arg))]))}</small></div>
+          <button class="btn" type="button" data-craft="${i}" ${!has(S, r.i) || st.q.length >= qCap(S, SH.arg) ? 'disabled' : ''}>${L('make')}</button></div>${needHtml(S, r.i)}</div>`).join('')}${more}${upCard(S, famOf(SH.arg))}${DUP_TYPES.includes(famOf(SH.arg)) ? `<span class="lbl">${L('dups')}</span>` + dupCard(S, famOf(SH.arg)) : ''}`;
   } else if (SH.type === 'pen') {
     const P = PENS[SH.arg], st = S.pens[SH.arg]; t.textContent = N(SH.arg);
     const ready = st.a.filter(x => x && now >= x + P.t * 1000).length, busy = st.a.filter(x => x && now < x + P.t * 1000), hungry = st.a.filter(x => !x).length;
@@ -999,7 +1020,7 @@ function renderSheet() {
       <div class="card"><div class="row">${img(P.feed)}<div style="flex:1"><b>${N(P.feed)}</b><br><small>${L('youHave', S.inv[P.feed] || 0)}</small></div></div>
       ${busy.length ? `<small>${L('nextIn', P.out, fmtT(Math.ceil((Math.min(...busy) + P.t * 1000 - now) / 1000)))}</small>` : ''}</div>
       <button class="btn" type="button" data-pen="1">${ready ? L('collectX', P.out) : L('feed')}</button>
-      ${busy.length ? `<button class="btn blue" type="button" data-rushp="1" ${S.coins < rushCost(Math.ceil((Math.max(...busy) + P.t * 1000 - now) / 1000)) ? 'disabled' : ''}>⚡ ${L('rushBtn')} · ${img('coin')} ${rushCost(Math.ceil((Math.max(...busy) + P.t * 1000 - now) / 1000))}</button>` : ''}`;
+      ${busy.length ? `<button class="btn blue" type="button" data-rushp="1" ${S.coins < rushCost(Math.ceil((Math.max(...busy) + P.t * 1000 - now) / 1000)) ? 'disabled' : ''}>⚡ ${L('rushBtn')} · ${img('coin')} ${rushCost(Math.ceil((Math.max(...busy) + P.t * 1000 - now) / 1000))}</button>` : ''}` + oneBoost(S, 'racao');
   } else if (SH.type === 'barn') {
     const n = invCount(S); t.textContent = L('barn'); const sellAllBtn = `<button class="btn" type="button" data-sellall="1">${img('coin')} ${L('sellSurplus')}</button><small>${L('sellSurplusHint')}</small>`;
     const ks = Object.keys(S.inv).filter(k => S.inv[k] > 0);
@@ -1065,6 +1086,7 @@ function renderSheet() {
       <span class="lbl">${L('animals')}</span>${Object.entries(PENS).filter(([, P]) => P.lvl <= S.lvl).map(([k]) => { const n = S.pens[k].a.length, m = PEN_MAX[k];
         return `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(PENS[k].out)}</span><div style="flex:1"><b>${L(k === 'galinheiro' ? 'buyHen' : 'buyCow')}</b><br><small>${N(k)} · ${L('haveN', n, m)}</small></div>
         ${n >= m ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-animal="${k}" ${S.coins < animalCost(k, n) ? 'disabled' : ''}>${img('coin')} ${animalCost(k, n)}</button>`}</div></div>`; }).join('')}
+      ${boostCards(S)}
       ${S.land.bairro ? `<span class="lbl">${L('homes')}</span><div class="card"><p class="sub">${L('homesN', S.homes.length, LOTS.length, S.homes.length * 2)}</p><small>${L('homeHint')}</small>${S.homes.length < LOTS.length ? `<button class="btn" type="button" data-home="1" ${S.coins < homeCost(S.homes.length) ? 'disabled' : ''}>${L('homeBuy')} · ${img('coin')} ${homeCost(S.homes.length)}</button>` : ''}</div>` : ''}
       <span class="lbl">${L('roads')}</span><div class="card"><p class="sub">${L('roadInfo', S.roads.length, roadBonus(S))}</p><button class="btn blue" type="button" data-roadmode="1">${L('roadBtn')}</button></div>
       ${DUP_TYPES.some(k => okB(S, BUILD[k])) ? `<span class="lbl">${L('dups')}</span><p class="sub">${L('dupHint')}</p>${DUP_TYPES.map(k => dupCard(S, k)).join('')}` : ''}
@@ -1111,6 +1133,8 @@ $('sBody').addEventListener('click', e => {
   if (d.silo) act({ a: 'silo' });
   if (d.dup) act({ a: 'dup', k: d.dup });
   if (d.home) act({ a: 'home' });
+  if (d.up) act({ a: 'up', k: d.up });
+  if (d.boost) act({ a: 'boost', k: d.boost });
   if (d.req) { const r = act({ a: 'req', id: +d.req }); if (r.ok && SH && SH.type === 'req') closeSheet(); }
   if (d.roadmode) { setRoad(true); return; }
   if (d.music) { MUSIC.set(!MUSIC.on); try { localStorage.setItem('sitio-music', MUSIC.on ? '1' : '0'); } catch (e) {} }
