@@ -34,6 +34,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-o
 .ib img{width:30px;height:30px}
 .ib .dot{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;border-radius:10px;background:var(--red);color:#fff;font-size:12px;display:grid;place-items:center;padding:0 5px;border:2px solid #fff}
 .ib .dot:empty{display:none}
+@media (max-width:430px){#hud{gap:5px}.ib{width:40px;height:40px;border-radius:12px}.ib img{width:26px;height:26px}.lvl{width:46px;height:46px}.lvl b{width:37px;height:37px;font-size:21px}.pill{font-size:15px;padding:3px 9px 3px 4px}.pill img{width:22px;height:22px}}
 #coop{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 66px);z-index:3;background:rgba(58,36,18,.78);color:#fff;font-weight:800;font-size:13px;border-radius:999px;padding:5px 12px;display:flex;gap:6px;align-items:center;white-space:nowrap}
 #coop i{width:10px;height:10px;border-radius:50%;background:var(--friend);display:inline-block}
 /* panel inferior */
@@ -54,6 +55,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-o
 .need span{display:flex;align-items:center;gap:3px;background:var(--paper);border-radius:10px;padding:3px 8px 3px 4px;font-weight:900;font-size:14px}
 .need span img{width:28px;height:28px}
 .need span.no{color:var(--red)}
+#sBody span[style*="place-items"] img{width:100%;height:100%}
 .btn{border:0;border-radius:14px;padding:11px 14px;font-family:var(--display);font-size:20px;line-height:1;color:#fff;background:linear-gradient(#5cc04a,#3a9530);box-shadow:0 4px 0 #2b6e23;display:flex;align-items:center;justify-content:center;gap:6px}
 .btn.blue{background:linear-gradient(#4aa8ef,#2a7cc4);box-shadow:0 4px 0 #1d5a8f}
 .btn.gray{background:#d9cbb0;color:var(--ink);box-shadow:0 4px 0 #b3a385}
@@ -95,6 +97,7 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
   <div class="lvl" id="hLvl" aria-label="Nível"><b id="hLvlN">1</b></div>
   <button class="pill" id="hCoins" type="button" aria-label="Moedas"><img id="icCoin" alt=""><span id="hCoinsN">0</span></button>
   <div class="sp"></div>
+  <button class="ib" id="bHelper" type="button" aria-label="Ajudante"><img id="icHelper" alt=""></button>
   <button class="ib" id="bOrders" type="button" aria-label="Encomendas"><img id="icOrders" alt=""><span class="dot" id="dOrders"></span></button>
   <button class="ib" id="bBarn" type="button" aria-label="Celeiro"><img id="icBarn" alt=""></button>
   <button class="ib" id="bShop" type="button" aria-label="Loja"><img id="icShop" alt=""></button>

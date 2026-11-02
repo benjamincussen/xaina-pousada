@@ -22,7 +22,7 @@ const TX = {
     inviteTitle: 'Convide seu amigo', codeLbl: 'Código', shareLbl: 'Ou mande este link', linkAria: 'Link da sala', copy: 'Copiar', copied: 'Copiado', keepPlaying: 'Continuar jogando',
     canvasAria: 'O sítio. Arraste para se mover e toque nos canteiros, animais e construções.', lvlAria: 'Nível', coinsAria: 'Moedas', ordersAria: 'Encomendas', barnAria: 'Celeiro', shopAria: 'Loja', menuAria: 'Menu', close: 'Fechar',
     myFarm: 'Meu sítio', friendFarm: 'Sítio do amigo', lvl: n => `Nível ${n}`, own: 'seu sítio', copyHere: 'cópia salva aqui', play: 'Jogar', friendBtn: '+ Amigo', inviteAria: n => `Convidar amigo para ${n}`,
-    code4: 'O código tem 4 letras.', unlockAt: n => `Libera no nível ${n}`, noCoins: 'Moedas insuficientes', barnFull: 'O celeiro está cheio', queueFull: 'A fila está cheia',
+    code4: 'O código tem 4 letras.', unlockAt: n => `Libera no nível ${n}`, noCoins: 'Moedas insuficientes', barnFull: 'O celeiro está cheio. Toque no Celeiro e venda alguma coisa.', queueFull: 'A fila está cheia',
     missingIng: 'Faltam ingredientes', notReady: 'Ainda não está pronto', needFeed: k => `Precisa de ${N(k)}`, producing: 'Os animais ainda estão produzindo', missingProd: 'Faltam produtos',
     readyIn: (k, t) => `${N(k)}: pronto em ${t}`, unlockName: (n, l) => `${n}: libera no nível ${l}`, lvlUp: (l, x) => `Nível ${l}! ${x}`, news: x => `Novo: ${x}.`,
     noFriendMode: 'O modo com amigo não está disponível nesta página.', notFound: 'Não achei uma sala com esse código. Confira as letras ou peça para seu amigo criar de novo.',
@@ -41,6 +41,10 @@ const TX = {
     land_leste: 'Terreno do Pomar', land_sul: 'Terreno do Lago', forSale: 'À VENDA', landDesc_leste: 'Seis árvores de laranja e manga e uma fábrica de sucos.', landDesc_sul: 'Colmeias que dão mel e um barco de pesca no lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Já é seu', boatGo: 'Mandar o barco (isca: 2 milhos)', boatBack: t => `O barco volta em ${t}`, boatIdle: 'O barco está no cais. Use 2 milhos de isca para pescar.',
     honeyIn: t => `Mel pronto em ${t}`, zoomHint: 'Use dois dedos para aproximar ou afastar o mapa.',
+    sellOne: 'Vender 1', sellAll: 'Vender tudo', each: n => `${n} cada`, barnFullHint: 'O celeiro está cheio. Toque no Celeiro e venda alguma coisa.', sold: (q, k, c) => `Vendeu ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
+    helperTitle: 'Ajudante Juca', helperAria: 'Ajudante', helperLocked: n => `Entregue ${n} encomendas e vocês ganham o Juca, um ajudante que cuida do sítio.`, helperProg: (d, n) => `${d} de ${n} encomendas entregues`,
+    helperWon: 'Vocês ganharam um ajudante: o Juca!', shiftBtn: 'Pagar um turno de 20 min', working: t => `O Juca está trabalhando. Ainda ${t}.`, resting: 'O Juca está descansando. Pague um turno para ele trabalhar.',
+    helperDoes: 'Enquanto trabalha, ele colhe e replanta os canteiros, recolhe a produção, alimenta os animais e cuida do pomar, das colmeias e do barco.', helperFull: 'O Juca parou: o celeiro está cheio.',
     stats: (l, x, c) => `Nível ${l} · ${x} de experiência · ${c} moedas`, guestNote: 'Você está no sítio do seu amigo. Tudo o que fizer fica salvo nos dois celulares.',
     seeCode: 'Ver código da sala', invite: 'Convidar um amigo', backHome: 'Voltar ao início', langLbl: 'Idioma', buy: 'Comprar', board: 'ENCOMENDAS',
     nameLbl: 'Seu nome', namePh: 'Como você se chama?', lookLbl: 'Seu personagem', lookHat: 'Chapéu de palha', lookHair: 'Cabelo comprido', needName: 'Escreva seu nome primeiro.',
@@ -52,7 +56,7 @@ const TX = {
     inviteTitle: 'Invita a tu amigo', codeLbl: 'Código', shareLbl: 'O mándale este enlace', linkAria: 'Enlace de la sala', copy: 'Copiar', copied: 'Copiado', keepPlaying: 'Seguir jugando',
     canvasAria: 'La granja. Arrastra para moverte y toca las parcelas, animales y construcciones.', lvlAria: 'Nivel', coinsAria: 'Monedas', ordersAria: 'Pedidos', barnAria: 'Granero', shopAria: 'Tienda', menuAria: 'Menú', close: 'Cerrar',
     myFarm: 'Mi granja', friendFarm: 'Granja del amigo', lvl: n => `Nivel ${n}`, own: 'tu granja', copyHere: 'copia guardada aquí', play: 'Jugar', friendBtn: '+ Amigo', inviteAria: n => `Invitar a un amigo a ${n}`,
-    code4: 'El código tiene 4 letras.', unlockAt: n => `Se desbloquea en el nivel ${n}`, noCoins: 'No te alcanzan las monedas', barnFull: 'El granero está lleno', queueFull: 'La fila está llena',
+    code4: 'El código tiene 4 letras.', unlockAt: n => `Se desbloquea en el nivel ${n}`, noCoins: 'No te alcanzan las monedas', barnFull: 'El granero está lleno. Toca el Granero y vende algo.', queueFull: 'La fila está llena',
     missingIng: 'Faltan ingredientes', notReady: 'Todavía no está listo', needFeed: k => `Necesitas ${N(k)}`, producing: 'Los animales todavía están produciendo', missingProd: 'Faltan productos',
     readyIn: (k, t) => `${N(k)}: listo en ${t}`, unlockName: (n, l) => `${n}: se desbloquea en el nivel ${l}`, lvlUp: (l, x) => `¡Nivel ${l}! ${x}`, news: x => `Nuevo: ${x}.`,
     noFriendMode: 'El modo con amigo no está disponible en esta página.', notFound: 'No encontré una sala con ese código. Revisa las letras o pide a tu amigo que la cree de nuevo.',
@@ -71,6 +75,10 @@ const TX = {
     land_leste: 'Terreno del Huerto', land_sul: 'Terreno del Lago', forSale: 'SE VENDE', landDesc_leste: 'Seis árboles de naranja y mango y una fábrica de jugos.', landDesc_sul: 'Colmenas que dan miel y un barco de pesca en el lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Ya es tuyo', boatGo: 'Mandar el barco (carnada: 2 maíces)', boatBack: t => `El barco vuelve en ${t}`, boatIdle: 'El barco está en el muelle. Usa 2 maíces de carnada para pescar.',
     honeyIn: t => `Miel lista en ${t}`, zoomHint: 'Usa dos dedos para acercar o alejar el mapa.',
+    sellOne: 'Vender 1', sellAll: 'Vender todo', each: n => `${n} c/u`, barnFullHint: 'El granero está lleno. Toca el Granero y vende algo.', sold: (q, k, c) => `Vendiste ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
+    helperTitle: 'Ayudante Juca', helperAria: 'Ayudante', helperLocked: n => `Entreguen ${n} pedidos y se ganan a Juca, un ayudante que cuida la granja.`, helperProg: (d, n) => `${d} de ${n} pedidos entregados`,
+    helperWon: '¡Se ganaron un ayudante: Juca!', shiftBtn: 'Pagar un turno de 20 min', working: t => `Juca está trabajando. Le quedan ${t}.`, resting: 'Juca está descansando. Págale un turno para que trabaje.',
+    helperDoes: 'Mientras trabaja, cosecha y vuelve a sembrar las parcelas, recoge la producción, alimenta a los animales y cuida el huerto, las colmenas y el barco.', helperFull: 'Juca se detuvo: el granero está lleno.',
     stats: (l, x, c) => `Nivel ${l} · ${x} de experiencia · ${c} monedas`, guestNote: 'Estás en la granja de tu amigo. Todo lo que hagas queda guardado en los dos celulares.',
     seeCode: 'Ver código de la sala', invite: 'Invitar a un amigo', backHome: 'Volver al inicio', langLbl: 'Idioma', buy: 'Comprar', board: 'PEDIDOS',
     nameLbl: 'Tu nombre', namePh: '¿Cómo te llamas?', lookLbl: 'Tu personaje', lookHat: 'Sombrero de paja', lookHair: 'Pelo largo', needName: 'Escribe tu nombre primero.',
@@ -88,7 +96,7 @@ function applyLang() {
   document.documentElement.lang = LANG === 'es' ? 'es' : 'pt-BR'; document.title = L('title');
   const set = (id, k) => { const e = $(id); if (e) e.textContent = L(k); };
   set('tTitle', 'title'); set('tIntro', 'intro'); set('tFarms', 'farmsLbl'); set('tJoinOr', 'joinOr'); set('bJoin', 'enter'); set('tInvite', 'inviteTitle'); set('tCodeLbl', 'codeLbl'); set('tShareLbl', 'shareLbl'); set('bCopy', 'copy'); set('bRoomOk', 'keepPlaying'); set('tName', 'nameLbl'); set('tLook', 'lookLbl'); set('lkHat', 'lookHat'); set('lkHair', 'lookHair'); $('iName').placeholder = L('namePh');
-  const aria = { iCode: 'codeAria', rLink: 'linkAria', cv: 'canvasAria', hLvl: 'lvlAria', hCoins: 'coinsAria', bOrders: 'ordersAria', bBarn: 'barnAria', bShop: 'shopAria', bMenu: 'menuAria', sClose: 'close' };
+  const aria = { bHelper: 'helperAria', iCode: 'codeAria', rLink: 'linkAria', cv: 'canvasAria', hLvl: 'lvlAria', hCoins: 'coinsAria', bOrders: 'ordersAria', bBarn: 'barnAria', bShop: 'shopAria', bMenu: 'menuAria', sClose: 'close' };
   for (const [id, k] of Object.entries(aria)) { const e = $(id); if (e) e.setAttribute('aria-label', L(k)); }
   $('mLangs').innerHTML = langButtons();
 }
@@ -130,6 +138,8 @@ const FRUIT = { laranja: { t: 150, y: 3, xp: 4 }, manga: { t: 240, y: 2, xp: 5 }
 const HIVES = [[110, 1110], [190, 1110], [110, 1220], [190, 1220]], HIVE_T = 200;
 const BOAT = { x: 640, y: 1190, t: 120, bait: { milho: 2 }, out: 'peixe', k: 2, xp: 5 };
 const LAKE = { x: 830, y: 1170, rx: 230, ry: 110 };
+const sellPrice = k => Math.max(1, Math.round(ITEMS[k].v * 0.6));
+const HELPER_ORDERS = 8, SHIFT = { cost: 25, min: 20 }, HELPER_HOME = { x: 196, y: 262 };
 const PENS = {
   galinheiro: { n: 'Galinheiro', lvl: 1, feed: 'racaoG', out: 'ovo', t: 90, count: 3, xp: 2, x: 125, y: 790, w: 210, h: 140 },
   estabulo: { n: 'Estábulo', lvl: 3, feed: 'racaoV', out: 'leite', t: 180, count: 2, xp: 4, x: 515, y: 790, w: 210, h: 140 },
@@ -154,6 +164,8 @@ function migrate(S) {
   if (!Array.isArray(S.trees) || S.trees.length !== TREES.length) S.trees = TREES.map(() => 0);
   if (!Array.isArray(S.hives) || S.hives.length !== HIVES.length) S.hives = HIVES.map(() => 0);
   if (!S.boat || typeof S.boat !== 'object') S.boat = { e: 0 };
+  if (typeof S.done !== 'number') S.done = 0;
+  if (!S.helper || typeof S.helper !== 'object') S.helper = { on: 0, until: 0, x: HELPER_HOME.x, y: HELPER_HOME.y };
   for (const k of Object.keys(BUILD)) if (!S.bld[k]) S.bld[k] = { q: [] };
   return S;
 }
@@ -222,6 +234,7 @@ function apply(S, a, now) {
     const need = Object.fromEntries(o.it); if (!has(S, need)) return fail(L('missingProd'));
     take(S, need); S.coins += o.c; addXp(S, o.x, out); out.fx.push(['coins', o.c]);
     Object.assign(o, { id: S.oid++, w: now + 12000 }, genOrder(S));
+    S.done = (S.done || 0) + 1; if (S.done >= HELPER_ORDERS && !S.helper.on) { S.helper.on = 1; out.fx.push(['helper']); }
   } else if (a.a === 'discard') {
     const o = S.orders.find(x => x.id === a.id); if (!o || o.w > now) return fail('');
     Object.assign(o, { id: S.oid++, w: now + 40000 }, genOrder(S));
@@ -248,6 +261,12 @@ function apply(S, a, now) {
     if (!S.boat.e) { if (!has(S, BOAT.bait)) return fail(L('missingIng')); take(S, BOAT.bait); S.boat.e = now + BOAT.t * 1000; out.fx.push(['boat']); }
     else if (S.boat.e <= now) { if (invCount(S) + BOAT.k > S.cap) return fail(L('barnFull')); give(S, BOAT.out, BOAT.k); addXp(S, BOAT.xp, out); S.boat.e = 0; out.fx.push(['gain', BOAT.out, BOAT.k, 'boat', 0]); }
     else return fail(L('boatBack', fmtT(Math.ceil((S.boat.e - now) / 1000))));
+  } else if (a.a === 'sell') {
+    const k = a.k, q = Math.min(a.q | 0, S.inv[k] || 0); if (!ITEMS[k] || q <= 0) return fail('');
+    const c = q * sellPrice(k); take(S, { [k]: q }); S.coins += c; out.fx.push(['coins', c]); out.fx.push(['sold', q, k, c]);
+  } else if (a.a === 'shift') {
+    if (!S.helper.on) return fail(''); if (S.coins < SHIFT.cost) return fail(L('noCoins'));
+    S.coins -= SHIFT.cost; S.helper.until = Math.max(now, S.helper.until || 0) + SHIFT.min * 60000; out.fx.push(['coins', -SHIFT.cost]);
   } else if (a.a === 'cap') {
     const c = capCost(S.cap); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; S.cap += 25;
   } else return fail('');
@@ -294,6 +313,7 @@ function drawIcon(g, k, s) {
     case 'peixe': g.fillStyle = '#5aa9d6'; g.beginPath(); g.ellipse(46, 52, 32, 18, 0, 0, 6.283); g.fill(); g.beginPath(); g.moveTo(72, 52); g.lineTo(94, 34); g.lineTo(94, 70); g.closePath(); g.fill(); g.strokeStyle = '#2f6f99'; g.lineWidth = 4; g.beginPath(); g.ellipse(46, 52, 32, 18, 0, 0, 6.283); g.stroke(); blob(28, 48, 4, 4, '#1b3a52'); g.strokeStyle = 'rgba(255,255,255,.6)'; g.lineWidth = 3; g.beginPath(); g.moveTo(44, 40); g.quadraticCurveTo(50, 52, 44, 64); g.stroke(); break;
     case 'paoMel': g.fillStyle = '#8a4a1f'; g.beginPath(); g.ellipse(50, 60, 34, 26, 0, 0, 6.283); g.fill(); g.strokeStyle = '#4f2810'; g.lineWidth = 4; g.stroke(); g.fillStyle = '#ffb627'; g.beginPath(); g.moveTo(22, 52); g.quadraticCurveTo(50, 26, 78, 52); g.lineTo(78, 56); g.quadraticCurveTo(70, 70, 64, 56); g.quadraticCurveTo(56, 72, 48, 56); g.quadraticCurveTo(38, 70, 30, 56); g.lineTo(22, 56); g.closePath(); g.fill(); break;
     case 'land': g.fillStyle = '#6fbf4a'; g.fillRect(12, 40, 76, 48); g.fillStyle = '#3f8f2e'; for (const [x, y] of [[26, 52], [52, 64], [74, 50]]) { g.beginPath(); g.arc(x, y, 9, 0, 6.283); g.fill(); } g.fillStyle = '#c9905a'; g.fillRect(40, 14, 40, 26); g.fillStyle = '#7a4b25'; g.fillRect(46, 40, 6, 30); g.fillStyle = '#fff'; g.fillRect(46, 22, 28, 4); g.fillRect(46, 30, 20, 4); break;
+    case 'helper': blob(50, 92, 30, 12, '#3f8f2e'); g.fillStyle = '#2f9e6e'; g.fillRect(28, 60, 44, 34); g.fillStyle = '#f2c6a0'; g.beginPath(); g.arc(50, 44, 20, 0, 6.283); g.fill(); g.fillStyle = '#3a2412'; g.beginPath(); g.arc(43, 44, 2.5, 0, 6.283); g.arc(57, 44, 2.5, 0, 6.283); g.fill(); g.strokeStyle = '#3a2412'; g.lineWidth = 3; g.beginPath(); g.arc(50, 50, 7, 0.3, 2.84); g.stroke(); g.fillStyle = '#2f9e6e'; g.beginPath(); g.arc(50, 34, 20, Math.PI, 0); g.fill(); g.fillRect(50, 30, 28, 6); g.fillStyle = '#ffc23a'; g.fillRect(36, 70, 8, 8); g.fillRect(56, 70, 8, 8); break;
     case 'coin': blob(50, 50, 40, 40, '#ffc23a', '#c98a10'); blob(50, 50, 28, 28, '#ffd76a'); g.fillStyle = '#c98a10'; g.font = '900 40px Nunito, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('$', 50, 53); break;
     case 'orders': g.fillStyle = '#c9905a'; g.fillRect(16, 14, 68, 72); g.strokeStyle = '#7a4b25'; g.lineWidth = 5; g.strokeRect(16, 14, 68, 72); g.fillStyle = '#fff'; g.fillRect(26, 24, 22, 28); g.fillRect(52, 30, 22, 26); g.fillRect(30, 58, 40, 20); g.fillStyle = '#e0533d'; blob(37, 25, 4, 4, '#e0533d'); blob(63, 31, 4, 4, '#e0533d'); blob(50, 59, 4, 4, '#e0533d'); break;
     case 'barn': g.fillStyle = '#d9483b'; g.fillRect(18, 44, 64, 44); g.fillStyle = '#8a2a20'; g.beginPath(); g.moveTo(10, 46); g.lineTo(50, 14); g.lineTo(90, 46); g.closePath(); g.fill(); g.fillStyle = '#fff'; g.fillRect(38, 58, 24, 30); g.strokeStyle = '#d9483b'; g.lineWidth = 4; g.beginPath(); g.moveTo(38, 58); g.lineTo(62, 88); g.moveTo(62, 58); g.lineTo(38, 88); g.stroke(); break;
@@ -319,7 +339,7 @@ addEventListener('pointerdown', () => SND.init(), { capture: true });
 // ---------- personagens ----------
 const ME = { name: '', look: 'hat' };
 try { ME.name = (localStorage.getItem('sitio-name') || '').slice(0, 16); ME.look = localStorage.getItem('sitio-look') === 'hair' ? 'hair' : 'hat'; } catch (e) {}
-const AV = { me: { x: 150, y: 262, tx: 150, ty: 262, t: 0 }, fr: { x: 196, y: 268, tx: 196, ty: 268, t: 0, on: false, name: '', look: 'hair' } };
+const AV = { helper: { x: 236, y: 272, tx: 236, ty: 272, t: 0 }, me: { x: 150, y: 262, tx: 150, ty: 262, t: 0 }, fr: { x: 196, y: 268, tx: 196, ty: 268, t: 0, on: false, name: '', look: 'hair' } };
 const ownerName = S => S && S.owner ? S.owner : '';
 const farmTitle = S => ownerName(S) ? L('farmOf', ownerName(S)) : dispName(S && S.name);
 function meInfo() { return { n: ME.name, l: ME.look }; }
@@ -328,7 +348,7 @@ function walkTo(av, x, y) { av.tx = clamp(x, 20, WW - 20); av.ty = clamp(y + 18,
 function stepAv(av, dt) { const dx = av.tx - av.x, dy = av.ty - av.y, d = Math.hypot(dx, dy), sp = 240 * dt; if (d > 1) { const k = Math.min(1, sp / d); av.x += dx * k; av.y += dy * k; av.t += dt; av.dir = dx >= 0 ? 1 : -1; av.walk = true; } else av.walk = false; }
 function drawAv(g, av, name, look, T, mine) {
   const x = av.x, y = av.y, step = av.walk ? Math.sin(av.t * 14) : 0, bob = av.walk ? Math.abs(Math.sin(av.t * 14)) * 2 : 0, d = av.dir || 1;
-  const shirt = look === 'hair' ? '#9b5de5' : '#ff8a1f', pants = look === 'hair' ? '#3d5a99' : '#4a6fa5';
+  const shirt = look === 'hair' ? '#9b5de5' : look === 'cap' ? '#2f9e6e' : '#ff8a1f', pants = look === 'hair' ? '#3d5a99' : look === 'cap' ? '#2f7a55' : '#4a6fa5';
   g.fillStyle = 'rgba(0,0,0,.2)'; g.beginPath(); g.ellipse(x, y + 2, 13, 4, 0, 0, 6.283); g.fill();
   g.strokeStyle = pants; g.lineWidth = 6; g.lineCap = 'round'; g.beginPath(); g.moveTo(x - 4, y - 14 - bob); g.lineTo(x - 4 + step * 4, y - 1); g.moveTo(x + 4, y - 14 - bob); g.lineTo(x + 4 - step * 4, y - 1); g.stroke();
   if (look === 'hair') { g.fillStyle = '#5a2e14'; g.beginPath(); g.ellipse(x - d * 2, y - 34 - bob, 12, 16, 0, 0, 6.283); g.fill(); }
@@ -337,8 +357,9 @@ function drawAv(g, av, name, look, T, mine) {
   g.fillStyle = '#f2c6a0'; g.beginPath(); g.arc(x, y - 40 - bob, 9, 0, 6.283); g.fill();
   g.fillStyle = '#3a2412'; g.beginPath(); g.arc(x + d * 3, y - 41 - bob, 1.6, 0, 6.283); g.fill();
   if (look === 'hair') { g.fillStyle = '#5a2e14'; g.beginPath(); g.arc(x, y - 44 - bob, 9.5, Math.PI, 0); g.fill(); }
+  else if (look === 'cap') { g.fillStyle = '#2f9e6e'; g.beginPath(); g.arc(x, y - 45 - bob, 9.5, Math.PI, 0); g.fill(); g.fillRect(x + (d > 0 ? 0 : -14), y - 47 - bob, 14, 3.5); }
   else { g.fillStyle = '#f2d06b'; g.beginPath(); g.ellipse(x, y - 47 - bob, 17, 5, 0, 0, 6.283); g.fill(); g.fillRect(x - 8, y - 56 - bob, 16, 9); g.fillStyle = '#c8702a'; g.fillRect(x - 8, y - 50 - bob, 16, 3); }
-  if (name) { g.font = '900 12px Nunito, sans-serif'; const w = g.measureText(name).width + 14; g.fillStyle = look === 'hair' ? 'rgba(155,93,229,.95)' : 'rgba(255,138,31,.95)';
+  if (name) { g.font = '900 12px Nunito, sans-serif'; const w = g.measureText(name).width + 14; g.fillStyle = look === 'hair' ? 'rgba(155,93,229,.95)' : look === 'cap' ? 'rgba(47,158,110,.95)' : 'rgba(255,138,31,.95)';
     g.beginPath(); g.roundRect ? g.roundRect(x - w / 2, y - 80 - bob, w, 18, 9) : g.rect(x - w / 2, y - 80 - bob, w, 18); g.fill(); g.fillStyle = '#fff'; g.textAlign = 'center'; g.fillText(name, x, y - 67 - bob); }
 }
 
@@ -388,6 +409,7 @@ function tapAt(p) {
     if (P.lvl > S.lvl) return toast(L('unlockName', N(k), P.lvl));
     const r = act({ a: 'pen', k }, true); if (!r.ok) openSheet('pen', k); return;
   }
+  if (S.helper && S.helper.on && Math.hypot(p.x - AV.helper.x, p.y - (AV.helper.y - 30)) < 34) return openSheet('helper');
   if (inR(p, bRect(BARN))) return openSheet('barn');
   if (inR(p, bRect(BOARD))) return openSheet('orders');
   if (inR(p, bRect(HOUSE))) return openSheet('menu');
@@ -416,6 +438,8 @@ function playFx(fx) {
     if (f[0] === 'coins') SND.coin();
     if (f[0] === 'land') { SND.lvl(); toast(L('land_' + f[1]) + '!', 2600); const Ld = LANDS[f[1]]; CAM.x = Ld.r.x + Ld.r.w / 2; CAM.y = Ld.r.y + Ld.r.h / 2; clampCam(); }
     if (f[0] === 'boat') SND.plant();
+    if (f[0] === 'sold') toast(L('sold', f[1], f[2], f[3]));
+    if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
     if (f[0] === 'lvl') { SND.lvl(); toast(L('lvlUp', f[1], levelNews(f[1])), 3500); }
   }
 }
@@ -429,7 +453,24 @@ function levelNews(l) {
 function ping(x, y) { G.myPing = [Math.round(x), Math.round(y), Date.now()]; walkTo(AV.me, x, y); if (NET.room) NET.room.presence({ ping: G.myPing, me: meInfo() }).catch(() => {}); }
 let bcT = 0, bcLast = 0;
 function broadcast() { if (G.mode !== 'host' || !NET.room) return; const now = Date.now(); clearTimeout(bcT); const send = () => { bcLast = Date.now(); NET.room.presence({ st: G.S, now: Date.now() }).catch(() => {}); }; if (now - bcLast > 150) send(); else bcT = setTimeout(send, 150); }
-setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') { if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host') broadcast(); refresh(); }, 1000);
+// escolhe e faz uma tarefa pendente; devolve a ação feita
+function helperTask(S, now) {
+  const tries = [];
+  S.plots.forEach((pl, i) => { if (i < S.np && plotReady(pl, now)) tries.push([{ a: 'harvest', i }, plotRect(i), pl.c]); });
+  for (const k of Object.keys(BUILD)) { const q = S.bld[k].q; if (q.length && q[0].e <= now) tries.push([{ a: 'collect', b: k }, { x: BUILD[k].x - 10, y: BUILD[k].y - 10, w: 20, h: 20 }]); }
+  for (const [k, P] of Object.entries(PENS)) if (P.lvl <= S.lvl) { const st = S.pens[k], ready = st.a.some(f => f && now >= f + P.t * 1000), hungry = st.a.some(f => !f) && (S.inv[P.feed] || 0) > 0; if (ready || hungry) tries.push([{ a: 'pen', k }, { x: P.x - 10, y: P.y - 10, w: 20, h: 20 }]); }
+  if (S.land.leste) TREES.forEach((t, i) => { if (treeReady(S, i, now)) tries.push([{ a: 'tree', i }, { x: t[1] - 10, y: t[2] - 10, w: 20, h: 20 }]); });
+  if (S.land.sul) { if (HIVES.some((h, i) => hiveReady(S, i, now))) tries.push([{ a: 'hive' }, { x: HIVES[0][0], y: HIVES[0][1], w: 1, h: 1 }]);
+    if ((S.boat.e && S.boat.e <= now) || (!S.boat.e && (S.inv.milho || 0) >= 4)) tries.push([{ a: 'boat' }, { x: BOAT.x - 40, y: BOAT.y - 10, w: 1, h: 1 }]); }
+  S.plots.forEach((pl, i) => { if (i < S.np && !pl.c) { const c = pl.last && CROPS[pl.last] && CROPS[pl.last].lvl <= S.lvl ? pl.last : 'trigo'; if (S.coins >= CROPS[c].cost + 10) tries.push([{ a: 'plant', i, c }, plotRect(i)]); } });
+  let blocked = false;
+  for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; if (CROPS[crop] && S.coins >= CROPS[crop].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: crop }, now); if (re.ok) { S.plots[a.i].last = crop; res.fx.push(...re.fx); } } } S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
+  return blocked ? { full: true } : null;
+}
+let helperClock = 0;
+setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
+  const S = G.S, now = Date.now(); helperClock++;
+  if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { const r = helperTask(S, now); if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host') broadcast(); refresh(); }, 1000);
 
 const NET = { api: null, room: null, sub: null, code: null, role: null, guestPeer: null,
   async leave() { if (this.sub) this.sub(); this.sub = null; const r = this.room; this.room = null; this.guestPeer = null; if (r) try { await r.leave(); } catch (e) {} } };
@@ -544,9 +585,9 @@ $('bJoin').onclick = () => { if (!needNameOk()) return; const c = $('iCode').val
 $('iCode').addEventListener('input', e => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4); });
 $('bRoomOk').onclick = () => { $('ovRoom').hidden = true; };
 $('bCopy').onclick = async () => { const i = $('rLink'); try { await navigator.clipboard.writeText(i.value); $('bCopy').textContent = L('copied'); } catch (e) { i.focus(); i.select(); } setTimeout(() => { $('bCopy').textContent = L('copy'); }, 1500); };
-$('bOrders').onclick = () => openSheet('orders'); $('bBarn').onclick = () => openSheet('barn'); $('bShop').onclick = () => openSheet('shop'); $('bMenu').onclick = () => openSheet('menu'); $('hCoins').onclick = () => openSheet('shop');
+$('bHelper').onclick = () => openSheet('helper'); $('bOrders').onclick = () => openSheet('orders'); $('bBarn').onclick = () => openSheet('barn'); $('bShop').onclick = () => openSheet('shop'); $('bMenu').onclick = () => openSheet('menu'); $('hCoins').onclick = () => openSheet('shop');
 $('sClose').onclick = () => closeSheet();
-$('icCoin').src = icon('coin'); $('icOrders').src = icon('orders'); $('icBarn').src = icon('barn'); $('icShop').src = icon('shop');
+$('icHelper').src = icon('helper'); $('icCoin').src = icon('coin'); $('icOrders').src = icon('orders'); $('icBarn').src = icon('barn'); $('icShop').src = icon('shop');
 
 let SH = null;
 function openSheet(type, arg) { SH = { type, arg }; $('sheet').hidden = false; renderSheet(); }
@@ -585,7 +626,8 @@ function renderSheet() {
     const n = invCount(S); t.textContent = L('barn');
     const ks = Object.keys(S.inv).filter(k => S.inv[k] > 0);
     h = `<p class="sub">${L('barnUsed', n, S.cap)}</p><div style="height:10px;border-radius:5px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${Math.min(100, n / S.cap * 100)}%;background:${n >= S.cap ? '#e0533d' : '#5cc04a'}"></i></div>
-      <div class="grid">${ks.length ? ks.map(k => `<div class="tile">${img(k)}${N(k)}<small>×${S.inv[k]}</small></div>`).join('') : `<p class="sub">${L('barnEmpty')}</p>`}</div>
+      ${ks.length ? ks.map(k => `<div class="card" style="padding:8px 10px"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(k)}</span><div style="flex:1;min-width:0"><b>${N(k)} ×${S.inv[k]}</b><br><small>${img('coin').replace('<img', '<img style="width:14px;height:14px;vertical-align:-2px"')} ${L('each', sellPrice(k))}</small></div>
+        <button class="btn gray" type="button" data-sell="${k}" data-q="1" style="font-size:15px;padding:9px 10px">${L('sellOne')}</button><button class="btn" type="button" data-sell="${k}" data-q="${S.inv[k]}" style="font-size:15px;padding:9px 10px">${L('sellAll')}</button></div></div>`).join('') : `<p class="sub">${L('barnEmpty')}</p>`}
       <button class="btn blue" type="button" data-cap="1" ${S.coins < capCost(S.cap) ? 'disabled' : ''}>${L('barnUp')} · ${img('coin')} ${capCost(S.cap)}</button>`;
   } else if (SH.type === 'orders') {
     t.textContent = L('orders');
@@ -602,6 +644,11 @@ function renderSheet() {
     t.textContent = N('barco'); const e = S.boat.e;
     h = `<div class="card"><div class="row">${img('peixe')}<p style="flex:1;margin:0;font-weight:800">${!e ? L('boatIdle') : e > now ? L('boatBack', fmtT(Math.ceil((e - now) / 1000))) : L('ready')}</p></div>
       ${!e ? needHtml(S, BOAT.bait) + `<button class="btn blue" type="button" data-boat="1" ${has(S, BOAT.bait) ? '' : 'disabled'}>${L('boatGo')}</button>` : e <= now ? `<button class="btn" type="button" data-boat="1">${L('collectX', 'peixe')} ×${BOAT.k}</button>` : ''}</div>`;
+  } else if (SH.type === 'helper') {
+    t.textContent = L('helperTitle'); const H = S.helper;
+    h = `<div class="card"><div class="row"><span style="width:56px;height:56px;display:grid;place-items:center">${img('helper')}</span><p style="flex:1;margin:0;font-weight:800">${L('helperDoes')}</p></div></div>`
+      + (!H.on ? `<div class="card"><p class="sub">${L('helperLocked', HELPER_ORDERS)}</p><div style="height:10px;border-radius:5px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${Math.min(100, (S.done || 0) / HELPER_ORDERS * 100)}%;background:#5cc04a"></i></div><small>${L('helperProg', Math.min(S.done || 0, HELPER_ORDERS), HELPER_ORDERS)}</small></div>`
+        : `<div class="card"><p class="sub">${H.until > now ? L('working', fmtT(Math.ceil((H.until - now) / 1000))) : L('resting')}</p><button class="btn" type="button" data-shift="1" ${S.coins < SHIFT.cost ? 'disabled' : ''}>${L('shiftBtn')} · ${img('coin')} ${SHIFT.cost}</button></div>`);
   } else if (SH.type === 'shop') {
     t.textContent = L('shop');
     h = `<div class="card"><div class="row"><b style="flex:1">${L('newPlot')}</b>${S.np >= MAXPLOTS ? `<small>${L('allBought')}</small>` : `<button class="btn" type="button" data-buyplot="1" ${S.coins < plotCost(S.np) ? 'disabled' : ''}>${img('coin')} ${plotCost(S.np)}</button>`}</div><small>${L('plotsOf', S.np, MAXPLOTS)}</small></div>
@@ -630,6 +677,8 @@ $('sBody').addEventListener('click', e => {
   if (d.cap) act({ a: 'cap' });
   if (d.land) { const r = act({ a: 'land', k: d.land }); if (r.ok) closeSheet(); }
   if (d.boat) act({ a: 'boat' });
+  if (d.sell) act({ a: 'sell', k: d.sell, q: +d.q });
+  if (d.shift) act({ a: 'shift' });
   if (d.buyplot) act({ a: 'buyPlot' });
   if (d.deliver) act({ a: 'deliver', id: +d.deliver });
   if (d.discard) act({ a: 'discard', id: +d.discard });
@@ -749,7 +798,7 @@ function draw(T, dt) {
   cx.fillStyle = '#b5523b'; cx.fillRect(HOUSE.x + 26, HOUSE.y - HOUSE.h - 52, 14, 26); for (let s2 = 0; s2 < 3; s2++) { const ph = (T * 0.4 + s2 / 3) % 1; cx.fillStyle = `rgba(255,255,255,${0.5 * (1 - ph)})`; cx.beginPath(); cx.arc(HOUSE.x + 33 + Math.sin(ph * 5) * 5, HOUSE.y - HOUSE.h - 58 - ph * 36, 5 + ph * 7, 0, 6.283); cx.fill(); }
   if (S) { cx.fillStyle = '#7a4b25'; cx.fillRect(HOUSE.x - 64, HOUSE.y + 8, 128, 22); cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(farmTitle(S).slice(0, 20), HOUSE.x, HOUSE.y + 24); }
   house(cx, BARN.x, BARN.y, BARN.w, BARN.h, '#d9483b', '#8a2a20', 46); cx.fillStyle = '#fff'; cx.fillRect(BARN.x - 22, BARN.y - 56, 44, 56); cx.strokeStyle = '#d9483b'; cx.lineWidth = 5; cx.beginPath(); cx.moveTo(BARN.x - 22, BARN.y - 56); cx.lineTo(BARN.x + 22, BARN.y); cx.moveTo(BARN.x + 22, BARN.y - 56); cx.lineTo(BARN.x - 22, BARN.y); cx.stroke();
-  if (S && invCount(S) >= S.cap) bubble(cx, BARN.x, BARN.y - 170, 'barn', T);
+  if (S && invCount(S) >= S.cap - 2) bubble(cx, BARN.x, BARN.y - 170, 'coin', T);
   const M = BUILD.moinho; shadow(cx, M.x, M.y, 90); cx.fillStyle = '#f2e3c6'; cx.beginPath(); cx.moveTo(M.x - 34, M.y); cx.lineTo(M.x - 22, M.y - M.h); cx.lineTo(M.x + 22, M.y - M.h); cx.lineTo(M.x + 34, M.y); cx.closePath(); cx.fill(); cx.strokeStyle = 'rgba(0,0,0,.2)'; cx.lineWidth = 2; cx.stroke();
   cx.fillStyle = '#b5523b'; cx.beginPath(); cx.moveTo(M.x - 28, M.y - M.h); cx.lineTo(M.x, M.y - M.h - 26); cx.lineTo(M.x + 28, M.y - M.h); cx.fill(); cx.fillStyle = '#7a4b25'; cx.fillRect(M.x - 10, M.y - 30, 20, 30);
   const spin = S && S.bld.moinho.q.some(j => j.s <= now && j.e > now) ? 3 : 0.6; cx.save(); cx.translate(M.x, M.y - M.h + 6); cx.rotate(T * spin);
@@ -827,6 +876,9 @@ function draw(T, dt) {
   for (let i = 0; i < 5; i++) { const x = ((T * 10 + i * 300) % (WW + 300)) - 150, y = 180 + i * 260; cx.fillStyle = 'rgba(30,60,20,.08)'; cx.beginPath(); cx.ellipse(x, y, 90, 36, 0, 0, 6.283); cx.ellipse(x + 60, y + 10, 60, 28, 0, 0, 6.283); cx.fill(); }
   // toques do amigo e seus
   for (const [pg, col] of [[G.partnerPing, '#9b5de5'], [G.myPing, '#ffb020']]) if (pg && Date.now() - pg[2] < 900) { const p = (Date.now() - pg[2]) / 900; cx.strokeStyle = col; cx.globalAlpha = 1 - p; cx.lineWidth = 4; cx.beginPath(); cx.arc(pg[0], pg[1], 10 + p * 26, 0, 6.283); cx.stroke(); cx.globalAlpha = 1; }
+  // o Juca
+  if (S && S.helper && S.helper.on) { const H = S.helper, working = H.until > now, av = AV.helper; if (working) { av.tx = H.x; av.ty = H.y; } else { av.tx = HELPER_HOME.x + 40; av.ty = HELPER_HOME.y + 10; } stepAv(av, dt); drawAv(cx, av, 'Juca', 'cap', T, false);
+    if (!working) { cx.fillStyle = '#fff'; cx.strokeStyle = '#3a2412'; cx.lineWidth = 3; cx.font = '900 14px Nunito, sans-serif'; cx.textAlign = 'left'; const zz = 'z' + (Math.floor(T * 2) % 3 ? 'z' : '') + (Math.floor(T * 2) % 3 === 2 ? 'Z' : ''); cx.strokeText(zz, av.x + 12, av.y - 60); cx.fillText(zz, av.x + 12, av.y - 60); } }
   // personagens
   if (S) { stepAv(AV.me, dt); const list = [[AV.me, ME.name, ME.look, true]]; if (AV.fr.on && G.mode !== 'solo') { stepAv(AV.fr, dt); list.push([AV.fr, AV.fr.name, AV.fr.look, false]); }
     list.sort((a, b) => a[0].y - b[0].y).forEach(([av, n, l, m]) => drawAv(cx, av, n, l, T, m)); }
