@@ -16,7 +16,7 @@ const NM = {
     algodao: 'Algodón', tecido: 'Tela', rede: 'Hamaca', tecelagem: 'Tejeduría', coco: 'Coco', escola: 'Escuela de kite',
     laranja: 'Naranja', manga: 'Mango', suco: 'Jugo de naranja', vitamina: 'Batido de mango', mel: 'Miel', peixe: 'Pescado', paoMel: 'Pan de miel', sucos: 'Fábrica de jugos', apiario: 'Apiario', barco: 'Barco de pesca' },
 };
-const N = k => NM[LANG][k] || NM.pt[k] || (TX && TX[LANG] && typeof TX[LANG][k] === 'string' ? TX[LANG][k] : k);
+const N = k => (/^[a-z]+_\d$/.test(k) ? N(k.split('_')[0]) + ' ' + k.split('_')[1] : null) || NM[LANG][k] || NM.pt[k] || (TX && TX[LANG] && typeof TX[LANG][k] === 'string' ? TX[LANG][k] : k);
 const TX = {
   pt: {
     title: 'Sítio do Vento', intro: 'Plante, cuide dos animais e entregue encomendas. Sozinho ou com um amigo, no mesmo sítio.',
@@ -47,6 +47,7 @@ const TX = {
     helperDoes2: 'Eles entregam as encomendas, plantam o que as encomendas pedem, fazem os produtos nos prédios, mantêm a ração dos animais, colhem e recolhem tudo, cuidam do pomar, das colmeias, do barco e cobram a Vila.',
     sound: 'Som', music: 'Música', ambient: 'Sons do sítio', on: 'sim', off: 'não',
     lvlCap: '+50 lugares no celeiro', lvlTitle: l => `Nível ${l}!`, lvlCoins: c => `+${c} moedas de prêmio`, lvlUnlocked: 'Liberado agora', lvlNext: l => `No nível ${l}`, lvlNothing: 'Prêmio em moedas, +50 lugares no celeiro e encomendas que pagam mais.', lvlRoad: 'Próximos níveis', great: 'Que bom!',
+    dups: 'Duplicar prédios', dupHint: 'Mais um prédio igual, com fila própria: produz o dobro ao mesmo tempo. Os ajudantes usam todos.', dupHave: (n, m) => `Você tem ${n} de ${m}`, dupBtn: 'Construir outro', dupDone: n => `${n} construído! Fila nova pronta.`, needLand: l => `Primeiro compre o terreno: ${l}`, dupNeedLand: l => `Fica no terreno ${l}`,
     silos: 'Silos', silo: 'Silo', siloHint: n => `Cada silo aparece no mapa e soma +100 lugares. ${n} de 4.`, buySilo: 'Construir silo',
     land_praia: 'Terreno da Praia', landDesc_praia: 'Areia, mar e coqueiros que dão coco. Lá se constrói a Escola de kite, que dá o maior aluguel.',
     helpersTitle: 'Ajudantes', keptHost: 'Seu amigo também jogou separado: ficou o progresso desta sala.', hire: n => `Contratar ${n}`, helpersN: (n, m) => `${n} de ${m} ajudantes`, helpersWork: 'Cada ajudante faz uma tarefa ao mesmo tempo e eles constroem a Vila mais rápido.', shiftAll: n => `Pagar turno de 20 min para ${n === 1 ? 'o ajudante' : 'os ' + n + ' ajudantes'}`,
@@ -99,6 +100,7 @@ const TX = {
     helperDoes2: 'Entregan los pedidos, siembran lo que piden los pedidos, fabrican en los edificios, mantienen la ración de los animales, cosechan y recogen todo, cuidan el huerto, las colmenas, el barco y cobran en la Villa.',
     sound: 'Sonido', music: 'Música', ambient: 'Sonidos del campo', on: 'sí', off: 'no',
     lvlCap: '+50 espacios en el granero', lvlTitle: l => `¡Nivel ${l}!`, lvlCoins: c => `+${c} monedas de premio`, lvlUnlocked: 'Se desbloquea ahora', lvlNext: l => `En el nivel ${l}`, lvlNothing: 'Premio en monedas, +50 espacios en el granero y pedidos que pagan más.', lvlRoad: 'Próximos niveles', great: '¡Genial!',
+    dups: 'Duplicar edificios', dupHint: 'Otro edificio igual, con su propia fila: produce el doble al mismo tiempo. Los ayudantes usan todos.', dupHave: (n, m) => `Tienes ${n} de ${m}`, dupBtn: 'Construir otro', dupDone: n => `¡${n} construido! Nueva fila lista.`, needLand: l => `Primero compra el terreno: ${l}`, dupNeedLand: l => `Va en el terreno ${l}`,
     silos: 'Silos', silo: 'Silo', siloHint: n => `Cada silo aparece en el mapa y suma +100 espacios. ${n} de 4.`, buySilo: 'Construir silo',
     land_praia: 'Terreno de la Playa', landDesc_praia: 'Arena, mar y cocoteros que dan cocos. Ahí se construye la Escuela de kite, que da el mejor arriendo.',
     helpersTitle: 'Ayudantes', keptHost: 'Tu amigo también jugó por separado: quedó el avance de esta sala.', hire: n => `Contratar a ${n}`, helpersN: (n, m) => `${n} de ${m} ayudantes`, helpersWork: 'Cada ayudante hace una tarea al mismo tiempo y construyen la Villa más rápido.', shiftAll: n => `Pagar turno de 20 min ${n === 1 ? 'al ayudante' : 'a los ' + n + ' ayudantes'}`,
@@ -192,6 +194,18 @@ const LAKE = { x: 830, y: 1170, rx: 230, ry: 110 };
 const MAXQ = 7, qCap = (S, k) => BUILD[k].q + ((S.slots && S.slots[k]) || 0), slotCost = (S, k) => 60 * Math.pow(2, (S.slots && S.slots[k]) || 0);
 const sellPrice = k => Math.max(1, Math.round(ITEMS[k].v * 0.6));
 for (const B of Object.values(BUILD)) for (const r of B.rec) r.t = Math.max(10, Math.round(r.t * 0.6));
+// prédios duplicados: 2ª e 3ª unidade de cada prédio de produção, com fila própria (mesmas receitas)
+const DUP_TYPES = ['moinho', 'padaria', 'queijaria', 'sucos', 'tecelagem', 'sorveteria'], DUP_MAX = 2;
+const DUP_BASE = { moinho: 300, padaria: 500, queijaria: 800, sucos: 900, tecelagem: 1200, sorveteria: 1500 };
+const dupCost = (k, n) => DUP_BASE[k] * (n + 1);
+const DUP_SPOTS = [[90, 1500, 'vila'], [220, 1500, 'vila'], [350, 1500, 'vila'], [480, 1500, 'vila'], [610, 1500, 'vila'], [740, 1500, 'vila'], [870, 1500, 'vila'], [1000, 1500, 'vila'],
+  [310, 1130, 'sul'], [440, 1130, 'sul'], [310, 1290, 'sul'], [440, 1290, 'sul']];
+const DUP_COL = { moinho: ['#f2e3c6', '#b5523b'], padaria: ['#ffe2b0', '#c8702a'], queijaria: ['#e6f2ff', '#3f8fd1'], sucos: ['#fff4d6', '#ff9a1f'], tecelagem: ['#f3e9ff', '#7b5ea7'], sorveteria: ['#ffe4ee', '#ff7aa8'] };
+{ let si = 0; for (let n = 2; n <= 1 + DUP_MAX; n++) for (const k of DUP_TYPES) { const B = BUILD[k], sp = DUP_SPOTS[si++];
+  BUILD[k + '_' + n] = { n: B.n + ' ' + n, base: k, idx: n, lvl: B.lvl, q: B.q, x: sp[0], y: sp[1], w: 110, h: 80, land: sp[2], baseLand: B.land, rec: B.rec }; } }
+const dupN = (S, k) => (S.dup && S.dup[k]) || 0;
+const famOf = b => BUILD[b].base || b;
+const fam = (S, k) => Object.keys(BUILD).filter(b => famOf(b) === k && okB(S, BUILD[b]));
 const rushCost = sec => Math.max(2, Math.ceil(sec / 8));
 const XT_MAX = 16, treeCost = k => k === 'laranja' ? 150 : 220;
 const XT_SPOTS = [[560, 470], [620, 520], [560, 160], [150, 960], [470, 980], [1060, 520], [700, 720], [800, 720], [1010, 720], [700, 860], [790, 860], [1040, 860], [1050, 960], [700, 960], [1060, 120]];
@@ -261,6 +275,7 @@ function migrate(S) {
   if (!S.deco || typeof S.deco !== 'object') S.deco = {};
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
+  if (!S.dup || typeof S.dup !== 'object') S.dup = {};
   if (typeof S.silos !== 'number') S.silos = 0;
   if (!S.capv2) { S.capv2 = 1; S.cap = (S.cap || 50) + 150; }
   if (S.helper && !S.helper.n) S.helper.n = 1; if (S.helper && !Array.isArray(S.helper.ps)) S.helper.ps = [];
@@ -269,7 +284,8 @@ function migrate(S) {
   for (const k of Object.keys(BUILD)) if (!S.bld[k]) S.bld[k] = { q: [] };
   return S;
 }
-const okB = (S, B) => B.lvl <= S.lvl && (!B.land || S.land[B.land]);
+const okB = (S, B) => B.lvl <= S.lvl && (!B.land || S.land[B.land]) && (!B.base || (dupN(S, B.base) >= B.idx - 1 && (!B.baseLand || S.land[B.baseLand])));
+const dupOwned = (S, B) => !B.base || (S.dup && dupN(S, B.base) >= B.idx - 1);
 const okR = (S, r) => r.lvl <= S.lvl && (!r.land || S.land[r.land]);
 function treeList(S) { const out = []; if (S.land.leste) TREES.forEach((t, i) => out.push({ i, k: t[0], x: t[1], y: t[2], t: S.trees[i] })); (S.xt || []).forEach((t, j) => { const d = typeof G !== 'undefined' && G.dragXt && G.dragXt.j === j ? G.dragXt : t; out.push({ i: TREES.length + j, k: t.k, x: d.x, y: d.y, t: t.t, j }); }); return out; }
 const treeAt = (S, i) => treeList(S).find(t => t.i === i);
@@ -375,6 +391,11 @@ function apply(S, a, now) {
     else if (a.t === 'boat') { if (S.boat.e && S.boat.e > now) { rem = S.boat.e - now; doIt = () => { S.boat.e = now; }; } }
     if (!doIt) return fail(''); const c = rushCost(Math.ceil(rem / 1000)); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; doIt(); out.fx.push(['coins', -c]); out.fx.push(['rush']);
+  } else if (a.a === 'dup') {
+    const k = a.k, B = BUILD[k], n = dupN(S, k); if (!B || !DUP_TYPES.includes(k) || !okB(S, B) || n >= DUP_MAX) return fail('');
+    const X = BUILD[k + '_' + (n + 2)]; if (!S.land[X.land]) return fail(L('needLand', L('land_' + X.land)));
+    const c = dupCost(k, n); if (S.coins < c) return fail(L('noCoins'));
+    S.coins -= c; S.dup[k] = n + 1; if (!S.bld[k + '_' + (n + 2)]) S.bld[k + '_' + (n + 2)] = { q: [] }; out.fx.push(['dup', k + '_' + (n + 2)]);
   } else if (a.a === 'silo') {
     if (S.silos >= SILOS.length) return fail(''); const c = siloCost(S.silos); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; S.silos++; S.cap += 100; out.fx.push(['coins', -c]); out.fx.push(['silo', S.silos - 1]);
@@ -569,7 +590,7 @@ function editHit(S, w) {
   for (const [k, D] of Object.entries(DECOS)) if (S.deco[k] && Math.abs(w.x - D.x) < 36 && w.y > D.y - 80 && w.y < D.y + 8) return { k: 'd_' + k, x: D.x, y: D.y };
   for (const t of treeList(S)) if (Math.hypot(w.x - t.x, w.y - (t.y - 40)) < 52) return { k: t.i < TREES.length ? 't' + t.i : 'x' + t.j, x: t.x, y: t.y };
   if (S.land.sul) for (let i = 0; i < HIVES.length; i++) if (Math.abs(w.x - HIVES[i][0]) < 30 && w.y > HIVES[i][1] - 62 && w.y < HIVES[i][1] + 10) return { k: 'h' + i, x: HIVES[i][0], y: HIVES[i][1] };
-  for (const [k, B] of Object.entries(BUILD)) { if (B.land && !S.land[B.land]) continue; if (inR(w, bRect(B))) return { k, x: B.x, y: B.y }; }
+  for (const [k, B] of Object.entries(BUILD)) { if ((B.land && !S.land[B.land]) || !dupOwned(S, B)) continue; if (inR(w, bRect(B))) return { k, x: B.x, y: B.y }; }
   for (const [k, P] of Object.entries(PENS)) if (inR(w, penRect(P))) return { k, x: P.x, y: P.y };
   for (let i = 0; i < S.silos; i++) if (Math.abs(w.x - SILOS[i].x) < 30 && w.y > SILOS[i].y - 110 && w.y < SILOS[i].y + 8) return { k: 's' + i, x: SILOS[i].x, y: SILOS[i].y };
   const a = plotRect(0), b = plotRect(MAXPLOTS - 1); if (w.x > a.x && w.x < b.x + b.w && w.y > a.y && w.y < b.y + b.h) return { k: 'campo', x: FIELD.dx, y: FIELD.dy };
@@ -591,7 +612,7 @@ function tapAt(p) {
     if (plotReady(pl, now)) return act({ a: 'harvest', i });
     return openSheet('rush', { t: 'plot', i });
   }
-  for (const [k, B] of Object.entries(BUILD)) if (inR(p, bRect(B))) {
+  for (const [k, B] of Object.entries(BUILD)) if (dupOwned(S, B) && inR(p, bRect(B))) {
     if (B.land && !S.land[B.land]) return openSheet('land', B.land);
     if (B.lvl > S.lvl) return toast(L('unlockName', N(k), B.lvl));
     const q = S.bld[k].q; if (q.length && q[0].e <= now) act({ a: 'collect', b: k }, true); return openSheet('bld', k);
@@ -639,13 +660,20 @@ function playFx(fx) {
     if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
     if (f[0] === 'lvl') { SND.lvl(); openSheet('lvl', f[1]); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
+    if (f[0] === 'dup') { SND.hammer(); const B = BUILD[f[1]]; applyLayout(G.S); CAM.x = B.x; CAM.y = B.y - 60; clampCam(); closeSheet(); burst(B.x, B.y - 60, 'coin'); toast(L('dupDone', N(f[1])), 3000); }
     if (f[0] === 'silo') { SND.lvl(); burst(SILOS[f[1]].x, SILOS[f[1]].y - 60, 'coin'); }
   }
+}
+function dupCard(S, k) {
+  const n = dupN(S, k), B = BUILD[k]; if (!okB(S, B)) return '';
+  const nx = n < DUP_MAX ? BUILD[k + '_' + (n + 2)] : null, landOk = !nx || S.land[nx.land];
+  return `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(B.rec[0].o)}</span><div style="flex:1"><b>${N(k)}</b><br><small>${L('dupHave', n + 1, DUP_MAX + 1)}${nx && !landOk ? ' · ' + L('dupNeedLand', L('land_' + nx.land)) : ''}</small></div>
+    ${!nx ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-dup="${k}" ${S.coins < dupCost(k, n) || !landOk ? 'disabled' : ''}>${img('coin')} ${dupCost(k, n)}</button>`}</div></div>`;
 }
 function levelNews(l) {
   const n = [];
   for (const [k, c] of Object.entries(CROPS)) if (c.lvl === l) n.push(N(k));
-  for (const [bk, b] of Object.entries(BUILD)) { if (b.lvl === l) n.push(N(bk)); else for (const r of b.rec) if (r.lvl === l && b.lvl < l) n.push(N(r.o)); }
+  for (const [bk, b] of Object.entries(BUILD)) { if (b.base) continue; if (b.lvl === l) n.push(N(bk)); else for (const r of b.rec) if (r.lvl === l && b.lvl < l) n.push(N(r.o)); }
   for (const [pk, p] of Object.entries(PENS)) if (p.lvl === l) n.push(N(pk));
   for (const [lk, Ld] of Object.entries(LANDS)) if (Ld.lvl === l) n.push(L('land_' + lk));
   for (const [pk, P] of Object.entries(PROJ)) if (P.lvl === l) n.push(N(pk));
@@ -658,8 +686,8 @@ function broadcast() { if (G.mode !== 'host' || !NET.room) return; const now = D
 // o que as encomendas abertas pedem
 function orderNeeds(S, now) { const need = {}; for (const o of S.orders) if (o.w <= now) for (const [k, q] of o.it) need[k] = (need[k] || 0) + q;
   for (const [pk, P] of Object.entries(PROJ)) if (!S.city[pk] && P.lvl <= S.lvl && S.land[P.land || 'vila']) for (const [k, q] of Object.entries(P.need)) need[k] = (need[k] || 0) + q; return need; }
-function findRecipe(S, out) { for (const [b, B] of Object.entries(BUILD)) { if (!okB(S, B)) continue; const i = B.rec.findIndex(r => r.o === out && okR(S, r)); if (i >= 0) return { b, i, r: B.rec[i] }; } return null; }
-const queued = (S, b, out) => S.bld[b].q.filter(j => BUILD[b].rec[j.r].o === out).length * (BUILD[b].rec.find(r => r.o === out) || { k: 1 }).k;
+function findRecipe(S, out) { for (const [b, B] of Object.entries(BUILD)) { if (B.base || !okB(S, B)) continue; const i = B.rec.findIndex(r => r.o === out && okR(S, r)); if (i >= 0) { const best = fam(S, b).map(x => [x, S.bld[x].q.length / qCap(S, x)]).sort((p, q) => p[1] - q[1])[0][0]; return { b: best, i, r: B.rec[i] }; } } return null; }
+const queued = (S, b, out) => fam(S, famOf(b)).reduce((a, x) => a + S.bld[x].q.filter(j => BUILD[x].rec[j.r].o === out).length, 0) * (BUILD[b].rec.find(r => r.o === out) || { k: 1 }).k;
 // escolhe o que plantar: primeiro o que falta para as encomendas, depois o que falta para a ração
 function pickCrop(S, now, fallback) {
   const want = {}, add = (k, q) => { if (q > 0 && CROPS[k] && CROPS[k].lvl <= S.lvl) want[k] = (want[k] || 0) + q; };
@@ -700,7 +728,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.18';
+const BUILD_V = '2026-11-02.19';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -875,7 +903,7 @@ function renderSheet() {
     h = rushB + `<div class="row"><div class="q" style="flex:1">${slots}</div>${st.q.some(j => j.e <= now) ? `<button class="btn" type="button" data-collect="1">${L('collect')}</button>` : ''}</div>
       ${B.rec.map((r, i) => !okR(S, r) ? `<div class="card" style="opacity:.55"><div class="row">${img(r.o)}<b style="flex:1">${N(r.o)}</b><small>${r.lvl > S.lvl ? L('lvl', r.lvl) : L('land_' + r.land)}</small></div></div>`
         : `<div class="card"><div class="row"><span style="width:44px;height:44px;display:grid;place-items:center">${img(r.o)}</span><div style="flex:1"><b>${N(r.o)}${r.k > 1 ? ' ×' + r.k : ''}</b><br><small>${fmtT(r.t)}</small></div>
-          <button class="btn" type="button" data-craft="${i}" ${!has(S, r.i) || st.q.length >= qCap(S, SH.arg) ? 'disabled' : ''}>${L('make')}</button></div>${needHtml(S, r.i)}</div>`).join('')}${more}`;
+          <button class="btn" type="button" data-craft="${i}" ${!has(S, r.i) || st.q.length >= qCap(S, SH.arg) ? 'disabled' : ''}>${L('make')}</button></div>${needHtml(S, r.i)}</div>`).join('')}${more}${DUP_TYPES.includes(famOf(SH.arg)) ? `<span class="lbl">${L('dups')}</span>` + dupCard(S, famOf(SH.arg)) : ''}`;
   } else if (SH.type === 'pen') {
     const P = PENS[SH.arg], st = S.pens[SH.arg]; t.textContent = N(SH.arg);
     const ready = st.a.filter(x => x && now >= x + P.t * 1000).length, busy = st.a.filter(x => x && now < x + P.t * 1000), hungry = st.a.filter(x => !x).length;
@@ -942,6 +970,7 @@ function renderSheet() {
       <span class="lbl">${L('animals')}</span>${Object.entries(PENS).filter(([, P]) => P.lvl <= S.lvl).map(([k]) => { const n = S.pens[k].a.length, m = PEN_MAX[k];
         return `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(PENS[k].out)}</span><div style="flex:1"><b>${L(k === 'galinheiro' ? 'buyHen' : 'buyCow')}</b><br><small>${N(k)} · ${L('haveN', n, m)}</small></div>
         ${n >= m ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-animal="${k}" ${S.coins < animalCost(k, n) ? 'disabled' : ''}>${img('coin')} ${animalCost(k, n)}</button>`}</div></div>`; }).join('')}
+      ${DUP_TYPES.some(k => okB(S, BUILD[k])) ? `<span class="lbl">${L('dups')}</span><p class="sub">${L('dupHint')}</p>${DUP_TYPES.map(k => dupCard(S, k)).join('')}` : ''}
       <span class="lbl">${L('silos')}</span><div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center"><img src="${siloIcon()}" alt=""></span><div style="flex:1"><b>${L('silo')} (+100)</b><br><small>${L('siloHint', S.silos)}</small></div>
         ${S.silos >= SILOS.length ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-silo="1" ${S.coins < siloCost(S.silos) ? 'disabled' : ''}>${img('coin')} ${siloCost(S.silos)}</button>`}</div></div>
       ${S.lvl >= 4 ? `<span class="lbl">${L('trees')}</span><p class="sub">${L('treesN', S.xt.length, XT_MAX)}</p><div class="grid">${[['laranja', 'buyTreeL'], ['manga', 'buyTreeM']].map(([k, lb]) => `<button class="tile" type="button" data-tree="${k}" ${S.xt.length >= XT_MAX || S.coins < treeCost(k) ? 'disabled' : ''}>${img(k)}${L(lb)}<small>${img('coin').replace('<img', '<img style="width:14px;height:14px;vertical-align:-2px"')} ${treeCost(k)}</small></button>`).join('')}</div>` : ''}
@@ -983,6 +1012,7 @@ $('sBody').addEventListener('click', e => {
   if (d.rushboat) act({ a: 'rush', t: 'boat' });
   if (d.hire) act({ a: 'hire' });
   if (d.silo) act({ a: 'silo' });
+  if (d.dup) act({ a: 'dup', k: d.dup });
   if (d.music) { MUSIC.set(!MUSIC.on); try { localStorage.setItem('sitio-music', MUSIC.on ? '1' : '0'); } catch (e) {} }
   if (d.amb) { AMB = !AMB; try { localStorage.setItem('sitio-amb', AMB ? '1' : '0'); } catch (e) {} if (AMB) SND.bird(); }
   if (d.close) { closeSheet(); return; }
@@ -1241,6 +1271,15 @@ function draw(T, dt) {
     const j = st.q[0]; if (j) { if (j.e <= now) bubble(cx, B.x, B.y - B.h - 60, B.rec[j.r].o, T); else { progressBar(cx, B.x, B.y + 10, 70, (now - j.s) / (j.e - j.s)); if (k === 'padaria') for (let s = 0; s < 3; s++) { const ph = (T * 0.6 + s / 3) % 1; cx.fillStyle = `rgba(255,255,255,${0.6 * (1 - ph)})`; cx.beginPath(); cx.arc(B.x + 36 + Math.sin(ph * 6) * 4, B.y - B.h - 34 - ph * 40, 6 + ph * 8, 0, 6.283); cx.fill(); } } }
   }
   if (S) { const j = S.bld.moinho.q[0]; if (j) { if (j.e <= now) bubble(cx, M.x + 54, M.y - 140, BUILD.moinho.rec[j.r].o, T); else progressBar(cx, M.x, M.y + 10, 70, (now - j.s) / (j.e - j.s)); } }
+  // prédios duplicados (desenho próprio: casinha nas cores do original, placa com número)
+  if (S) for (const [k, B] of Object.entries(BUILD)) { if (!B.base || !dupOwned(S, B) || !S.land[B.land]) continue; const bk = B.base, [wall, roof] = DUP_COL[bk], st = S.bld[k];
+    if (bk === 'moinho') { shadow(cx, B.x, B.y, 80); cx.fillStyle = wall; cx.beginPath(); cx.moveTo(B.x - 28, B.y); cx.lineTo(B.x - 18, B.y - 92); cx.lineTo(B.x + 18, B.y - 92); cx.lineTo(B.x + 28, B.y); cx.closePath(); cx.fill(); cx.strokeStyle = '#7a4b25'; cx.lineWidth = 3; cx.stroke();
+      cx.fillStyle = roof; cx.beginPath(); cx.moveTo(B.x - 24, B.y - 92); cx.lineTo(B.x, B.y - 114); cx.lineTo(B.x + 24, B.y - 92); cx.fill(); cx.fillStyle = '#7a4b25'; cx.fillRect(B.x - 9, B.y - 26, 18, 26);
+      const sp = st.q.some(j => j.s <= now && j.e > now) ? 3 : 0.6; cx.save(); cx.translate(B.x, B.y - 86); cx.rotate(T * sp + B.idx); for (let i = 0; i < 4; i++) { cx.rotate(Math.PI / 2); cx.fillStyle = '#fff8e6'; cx.fillRect(4, -6, 46, 12); cx.strokeStyle = '#7a4b25'; cx.lineWidth = 2; cx.strokeRect(4, -6, 46, 12); } cx.fillStyle = '#7a4b25'; cx.beginPath(); cx.arc(0, 0, 6, 0, 6.283); cx.fill(); cx.restore(); }
+    else { house(cx, B.x, B.y, B.w, B.h, wall, roof, 30); cx.fillStyle = '#7a4b25'; cx.fillRect(B.x - 12, B.y - 36, 24, 36); win(cx, B.x - 44, B.y - 58, 22, 16); win(cx, B.x + 22, B.y - 58, 22, 16);
+      cx.save(); cx.translate(B.x + B.w / 2 - 4, B.y - B.h - 20); cx.scale(0.34, 0.34); cx.translate(-50, -50); drawIcon(cx, B.rec[0].o, 100); cx.restore(); }
+    const ty = bk === 'moinho' ? B.y + 14 : B.y - B.h - 52; cx.fillStyle = '#7a4b25'; rr(cx, B.x - 52, ty, 104, 20, 6); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 11px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N(k).toUpperCase(), B.x, ty + 14);
+    const j = st.q[0]; if (j) { if (j.e <= now) bubble(cx, B.x, B.y - B.h - 78, B.rec[j.r].o, T); else progressBar(cx, B.x, bk === 'moinho' ? B.y + 38 : B.y + 8, 64, (now - j.s) / (j.e - j.s)); } }
   // currais
   for (const k of ['galinheiro', 'estabulo']) {
     const P = PENS[k], R = penRect(P), locked = P.lvl > lvl, st = S && S.pens[k];
@@ -1271,7 +1310,7 @@ function draw(T, dt) {
   // modo mover: contornos do que pode ser arrastado
   if (S && G.edit) { cx.save(); cx.setLineDash([8, 6]); cx.lineWidth = 3; cx.strokeStyle = 'rgba(255,255,255,.9)';
     const box = (x, y, w, h, on) => { cx.strokeStyle = on ? '#ffc23a' : 'rgba(255,255,255,.9)'; rr(cx, x, y, w, h, 10); cx.stroke(); };
-    for (const [k, B] of Object.entries(BUILD)) if (!B.land || S.land[B.land]) { const r = bRect(B); box(r.x, r.y, r.w, r.h, G.dragPos && G.dragPos.k === k); }
+    for (const [k, B] of Object.entries(BUILD)) if ((!B.land || S.land[B.land]) && dupOwned(S, B)) { const r = bRect(B); box(r.x, r.y, r.w, r.h, G.dragPos && G.dragPos.k === k); }
     for (const [k, P] of Object.entries(PENS)) { const r = penRect(P); box(r.x - 4, r.y - 4, r.w + 8, r.h + 8, G.dragPos && G.dragPos.k === k); }
     for (const t of treeList(S)) { cx.beginPath(); cx.arc(t.x, t.y - 40, 50, 0, 6.283); cx.strokeStyle = 'rgba(255,255,255,.9)'; cx.stroke(); }
     if (S.land.sul) HIVES.forEach(([x, y]) => box(x - 28, y - 62, 56, 72));
