@@ -285,3 +285,7 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Playa: sombrillas de verano en lugares fijos que no tapan el cine, el carrito de helados ni el puerto.
 - Mercado de pulgas: el lote sorpresa ahora trae productos de valor ≥ 25 ya vistos (vale la pena por 40).
 - Arreglo: la noticia "Cumpleaños de los vecinos" había sido pisada por "Cumpleaños de los ayudantes" (clave duplicada n_bday → n_hbday).
+
+## Versión grande 51: Quién hizo qué y limpieza de textos (2026-11-03.52)
+- "Lo que hicieron" en el menú ☰: las últimas acciones de cada jugador con su nombre (sembró, cosechó, construyó, pescó, vendió, ayudó…), agrupadas (4×) y con hace cuánto. Cada acción del jugador lleva su nombre (a.by) y el host lo registra, así ambos teléfonos ven lo mismo. Los ayudantes siguen en su propio diario.
+- Limpieza: claves de texto duplicadas que pisaban noticias viejas (n_fire, n_bike) renombradas a n_bomb y n_bikeRace; ya no hay duplicados en PT ni ES.
