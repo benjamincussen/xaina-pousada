@@ -45,6 +45,7 @@ const TX = {
     honeyIn: t => `Mel pronto em ${t}`, zoomHint: 'Use dois dedos para aproximar ou afastar o mapa.',
     shiftLbl: 'Contratar por', sh0: '20 min', sh1: '1 hora', sh2: '24 horas', autoSell: 'Vender sobras quando o celeiro encher', autoSellHint: 'Eles só vendem o que nenhuma encomenda precisa. Ampliar o celeiro e investir continua sendo decisão sua.',
     helperDoes2: 'Eles entregam as encomendas, plantam o que as encomendas pedem, fazem os produtos nos prédios, mantêm a ração dos animais, colhem e recolhem tudo, cuidam do pomar, das colmeias, do barco e cobram a Vila.',
+    sound: 'Som', music: 'Música', ambient: 'Sons do sítio', on: 'sim', off: 'não',
     lvlCap: '+50 lugares no celeiro', lvlTitle: l => `Nível ${l}!`, lvlCoins: c => `+${c} moedas de prêmio`, lvlUnlocked: 'Liberado agora', lvlNext: l => `No nível ${l}`, lvlNothing: 'Prêmio em moedas, +50 lugares no celeiro e encomendas que pagam mais.', lvlRoad: 'Próximos níveis', great: 'Que bom!',
     silos: 'Silos', silo: 'Silo', siloHint: n => `Cada silo aparece no mapa e soma +100 lugares. ${n} de 4.`, buySilo: 'Construir silo',
     land_praia: 'Terreno da Praia', landDesc_praia: 'Areia, mar e coqueiros que dão coco. Lá se constrói a Escola de kite, que dá o maior aluguel.',
@@ -96,6 +97,7 @@ const TX = {
     honeyIn: t => `Miel lista en ${t}`, zoomHint: 'Usa dos dedos para acercar o alejar el mapa.',
     shiftLbl: 'Contratar por', sh0: '20 min', sh1: '1 hora', sh2: '24 horas', autoSell: 'Vender lo que sobra cuando se llene el granero', autoSellHint: 'Solo venden lo que ningún pedido necesita. Ampliar el granero e invertir sigue siendo decisión tuya.',
     helperDoes2: 'Entregan los pedidos, siembran lo que piden los pedidos, fabrican en los edificios, mantienen la ración de los animales, cosechan y recogen todo, cuidan el huerto, las colmenas, el barco y cobran en la Villa.',
+    sound: 'Sonido', music: 'Música', ambient: 'Sonidos del campo', on: 'sí', off: 'no',
     lvlCap: '+50 espacios en el granero', lvlTitle: l => `¡Nivel ${l}!`, lvlCoins: c => `+${c} monedas de premio`, lvlUnlocked: 'Se desbloquea ahora', lvlNext: l => `En el nivel ${l}`, lvlNothing: 'Premio en monedas, +50 espacios en el granero y pedidos que pagan más.', lvlRoad: 'Próximos niveles', great: '¡Genial!',
     silos: 'Silos', silo: 'Silo', siloHint: n => `Cada silo aparece en el mapa y suma +100 espacios. ${n} de 4.`, buySilo: 'Construir silo',
     land_praia: 'Terreno de la Playa', landDesc_praia: 'Arena, mar y cocoteros que dan cocos. Ahí se construye la Escuela de kite, que da el mejor arriendo.',
@@ -488,7 +490,24 @@ const SND = (() => { let ac = null;
   const tone = (f0, f1, d, type, p, del = 0) => { if (!ac) return; const t = ac.currentTime + del, o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + d); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(p, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + d); o.connect(g).connect(ac.destination); o.start(t); o.stop(t + d + 0.05); };
   return { init, pop: () => tone(500, 900, 0.12, 'sine', 0.12), coin: () => { tone(988, 988, 0.08, 'square', 0.05); tone(1319, 1319, 0.2, 'square', 0.05, 0.07); },
     plant: () => tone(300, 180, 0.12, 'triangle', 0.12), no: () => tone(220, 160, 0.15, 'square', 0.05),
-    lvl: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, f, 0.25, 'triangle', 0.1, i * 0.1)) }; })();
+    lvl: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, f, 0.25, 'triangle', 0.1, i * 0.1)),
+    // sons do sítio (sintetizados aqui, sem gravações)
+    cluck: () => { for (let i = 0; i < 3; i++) tone(700 + i * 60, 520, 0.07, 'square', 0.04, i * 0.09); },
+    moo: () => { tone(150, 110, 0.9, 'sawtooth', 0.05); tone(152, 112, 0.9, 'triangle', 0.06); },
+    splash: () => { tone(900, 200, 0.25, 'sine', 0.05); tone(1400, 300, 0.2, 'sine', 0.03, 0.05); },
+    hammer: () => { for (let i = 0; i < 3; i++) { tone(180, 90, 0.06, 'square', 0.08, i * 0.18); tone(2200, 1800, 0.03, 'triangle', 0.03, i * 0.18); } },
+    bird: () => { const b = 2200 + Math.random() * 1200; for (let i = 0; i < 2 + Math.floor(Math.random() * 3); i++) tone(b, b * (1.2 + Math.random() * 0.3), 0.09, 'sine', 0.025, i * 0.13); },
+    get ac() { return ac; }, tone }; })();
+// música de fundo gerada na hora: acordes suaves numa escala pentatônica, nunca repete igual
+const MUSIC = (() => { let on = false, timer = 0, step = 0; const ROOTS = [261.6, 220, 174.6, 196], PENTA = [1, 9 / 8, 5 / 4, 3 / 2, 5 / 3, 2];
+  const tick = () => { if (!on || !SND.ac) return; const root = ROOTS[Math.floor(step / 8) % ROOTS.length];
+    if (step % 8 === 0) for (const m of [1, 5 / 4, 3 / 2]) SND.tone(root * m / 2, root * m / 2, 3.6, 'triangle', 0.018);
+    if (Math.random() < 0.7) { const f = root * PENTA[Math.floor(Math.random() * PENTA.length)] * (Math.random() < 0.3 ? 2 : 1); SND.tone(f, f, 0.5, 'sine', 0.022); }
+    step++; };
+  return { set(v) { on = v; clearInterval(timer); if (on) { SND.init(); timer = setInterval(tick, 460); } }, get on() { return on; } }; })();
+let AMB = true;
+try { AMB = localStorage.getItem('sitio-amb') !== '0'; if (localStorage.getItem('sitio-music') === '1') addEventListener('pointerdown', () => { if (!MUSIC.on) MUSIC.set(true); }, { once: true }); } catch (e) {}
+setInterval(() => { if (AMB && G.S && SND.ac && Math.random() < 0.45) SND.bird(); }, 7000);
 addEventListener('pointerdown', () => SND.init(), { capture: true });
 
 // ---------- personagens ----------
@@ -603,7 +622,7 @@ function act(a, quiet) {
 }
 function playFx(fx) {
   for (const f of fx) {
-    if (f[0] === 'gain') { const at = f[3] === 'plot' ? (() => { const r = plotRect(f[4]); return { x: r.x + r.w / 2, y: r.y + r.h / 2 }; })() : f[3] === 'bld' ? { x: BUILD[f[4]].x, y: BUILD[f[4]].y - 60 }
+    if (f[0] === 'gain') { if (f[1] === 'ovo') SND.cluck(); if (f[1] === 'leite') SND.moo(); if (f[1] === 'peixe') SND.splash(); const at = f[3] === 'plot' ? (() => { const r = plotRect(f[4]); return { x: r.x + r.w / 2, y: r.y + r.h / 2 }; })() : f[3] === 'bld' ? { x: BUILD[f[4]].x, y: BUILD[f[4]].y - 60 }
         : f[3] === 'city' ? { x: PROJ[f[4]].x, y: PROJ[f[4]].y - 120 } : f[3] === 'tree' ? (() => { const t = treeAt(G.S, f[4]) || { x: 870, y: 300 }; return { x: t.x, y: t.y - 70 }; })() : f[3] === 'hive' ? { x: 150, y: 1120 } : f[3] === 'boat' ? { x: BOAT.x, y: BOAT.y - 40 } : { x: PENS[f[4]].x, y: PENS[f[4]].y - 30 };
       FLOAT.push({ k: f[1], n: f[2], x: at.x, y: at.y, t: 0 }); SND.pop(); burst(at.x, at.y, f[1]); }
     if (f[0] === 'plant') SND.plant();
@@ -615,7 +634,7 @@ function playFx(fx) {
     if (f[0] === 'soldAll') { toast(L('soldSurplus', f[1])); burst(BARN.x, BARN.y - 60, 'coin'); }
     if (f[0] === 'rush') { SND.lvl(); toast(L('rushDone')); }
     if (f[0] === 'hired') { SND.lvl(); toast(HELPER_NAMES[f[1]] + '!'); }
-    if (f[0] === 'build') { SND.plant(); const P = PROJ[f[1]]; CAM.x = P.x; CAM.y = P.y - 80; clampCam(); }
+    if (f[0] === 'build') { SND.hammer(); const P = PROJ[f[1]]; CAM.x = P.x; CAM.y = P.y - 80; clampCam(); }
     if (f[0] === 'newTree') { SND.plant(); const t = G.S.xt[f[1]]; if (t) { CAM.x = t.x; CAM.y = t.y - 40; clampCam(); for (let i = 0; i < 14; i++) SPARK.push({ x: t.x, y: t.y - 30, vx: (Math.random() - 0.5) * 140, vy: -50 - Math.random() * 110, t: 0, c: ['#8cc63f', '#ffd23f', '#ffffff'][i % 3] }); } }
     if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
@@ -681,7 +700,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.16';
+const BUILD_V = '2026-11-02.17';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -930,6 +949,7 @@ function renderSheet() {
     h = `<p class="sub">${L('stats', S.lvl, S.xp, S.coins)}</p>
       ${G.mode === 'guest' ? `<p class="sub">${L('guestNote')}</p>` : ''}
       ${host ? `<button class="btn blue" type="button" data-invite="1">${NET.role === 'host' ? L('seeCode') : L('invite')}</button>` : ''}
+      <span class="lbl">${L('sound')}</span><div class="row"><button class="btn ${MUSIC.on ? '' : 'gray'}" type="button" data-music="1" style="flex:1;font-size:16px">♪ ${L('music')}: ${MUSIC.on ? L('on') : L('off')}</button><button class="btn ${AMB ? '' : 'gray'}" type="button" data-amb="1" style="flex:1;font-size:16px">🐦 ${L('ambient')}: ${AMB ? L('on') : L('off')}</button></div>
       <span class="lbl">${L('lvlRoad')}</span>${[1, 2, 3].map(d => { const nn = levelNews(S.lvl + d); return `<p class="sub" style="margin:0">${L('lvl', S.lvl + d)}: ${nn ? nn.replace(/^[^:]+: /, '') : L('lvlNothing')}</p>`; }).join('')}
       <span class="lbl">${L('langLbl')}</span>${langButtons()}
       <button class="btn gray" type="button" data-exit="1">${L('backHome')}</button>`;
@@ -956,6 +976,8 @@ $('sBody').addEventListener('click', e => {
   if (d.rushboat) act({ a: 'rush', t: 'boat' });
   if (d.hire) act({ a: 'hire' });
   if (d.silo) act({ a: 'silo' });
+  if (d.music) { MUSIC.set(!MUSIC.on); try { localStorage.setItem('sitio-music', MUSIC.on ? '1' : '0'); } catch (e) {} }
+  if (d.amb) { AMB = !AMB; try { localStorage.setItem('sitio-amb', AMB ? '1' : '0'); } catch (e) {} if (AMB) SND.bird(); }
   if (d.close) { closeSheet(); return; }
   if (d.build) act({ a: 'build', k: d.build });
   if (d.rent) act({ a: 'rent', k: d.rent });
