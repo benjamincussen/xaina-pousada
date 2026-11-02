@@ -260,3 +260,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Búsqueda del tesoro: cada 15 min una X roja con brillo en la arena; tocarla desentierra 150 o 90 monedas, una joya o un pez dorado (+8 XP). 1 por ronda, sincronizado.
 - Heladero en bicicleta: en verano cruza la villa cada 4 min con niños detrás.
 - Opción "Menos animaciones" (menú ☰, guardada en el teléfono): menos visitantes y sin adornos (mariposas, volantines, tendederos, muñecos de nieve, hojas, picnic). No cambia la partida.
+
+## Versión grande 46: "Hoy en la ciudad" y maratón (2026-11-03.47)
+- Agenda "Hoy en la ciudad" arriba del sheet del mapa 🗺️: sopa, mercado de pulgas, panadero, canasta, pescador, concurso de pesca, tesoro, florería, vendedor y fiesta, con estado (ahora / empieza en / hecho), cuenta regresiva y botón "Ir" que lleva la cámara. También muestra el precio del día.
+- Maratón de la ciudad: cada 35 min, 12 corredores con dorsal por la avenida del Barrio Nuevo hasta la meta.
+- Novedades: 'map' abre el sheet del mapa.
