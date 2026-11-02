@@ -678,3 +678,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Expediciones navales animadas:** al atacar una ciudad del mundo, la flota sale del fuerte, cruza el mar (45 s), combate frente a la isla (12 s: humo, chispas y 💥, sin heridos) y vuelve con el cartel del resultado. El aviso de victoria o derrota sale al terminar el combate; las monedas se acreditan en el momento.
 - **Ataques enemigos visibles:** los saqueos de ciudades del mundo llegan en barcos con su bandera hasta nuestro puerto, con aviso; si la defensa gana se ve "¡Defendimos!".
 - Solo `mundo.js` (`EXT.draw`); nada nuevo en game.js.
+
+## Versión 98: Obras a la vista
+
+- Cuando se construye o amplía una casa (nueva, grande, departamento, torre) o un servicio, aparece durante 1 minuto un **andamio** con dos obreros martillando (chispas, martillazos si estás cerca) y una barra de progreso; la obra se "destapa" de arriba a abajo (`scaffold`, `S.servAt`, `h.u`).
+- Al comprar un terreno, una **franja ✨ con el nombre** y confeti aparece en el cartel durante 40 s (`S.landAt`).
+- Pruebas: compra de terreno, casa, servicio y ampliación con marcas de tiempo; smoke, fuzz y torres sin errores; capturas.
