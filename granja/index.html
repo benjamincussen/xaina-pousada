@@ -56,6 +56,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-o
 .need span img{width:28px;height:28px}
 .need span.no{color:var(--red)}
 #sBody span[style*="place-items"] img{width:100%;height:100%}
+#sBody .card > .row > img{width:40px;height:40px;flex:none}
 .btn{border:0;border-radius:14px;padding:11px 14px;font-family:var(--display);font-size:20px;line-height:1;color:#fff;background:linear-gradient(#5cc04a,#3a9530);box-shadow:0 4px 0 #2b6e23;display:flex;align-items:center;justify-content:center;gap:6px}
 .btn.blue{background:linear-gradient(#4aa8ef,#2a7cc4);box-shadow:0 4px 0 #1d5a8f}
 .btn.gray{background:#d9cbb0;color:var(--ink);box-shadow:0 4px 0 #b3a385}
@@ -141,8 +142,9 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 </section>
 
 <div id="toast" hidden></div>
+<div id="upd" hidden style="position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 100px);z-index:8;background:#fff7e3;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.3);padding:10px 12px;display:flex;gap:10px;align-items:center;font-weight:800;max-width:calc(100% - 24px)"><span id="updT">Tem uma versão nova do jogo.</span><button class="btn" id="bUpd" type="button" style="font-size:17px;padding:8px 12px">Atualizar</button></div>
 <script src="peerjs.min.js"></script>
-<script src="p2p.js"></script>
-<script src="game.js"></script>
+<script src="p2p.js?v=2026-11-02.4"></script>
+<script src="game.js?v=2026-11-02.4"></script>
 </body>
 </html>

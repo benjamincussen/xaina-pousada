@@ -41,6 +41,7 @@ const TX = {
     land_leste: 'Terreno do Pomar', land_sul: 'Terreno do Lago', forSale: 'À VENDA', landDesc_leste: 'Seis árvores de laranja e manga e uma fábrica de sucos.', landDesc_sul: 'Colmeias que dão mel e um barco de pesca no lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Já é seu', boatGo: 'Mandar o barco (isca: 2 milhos)', boatBack: t => `O barco volta em ${t}`, boatIdle: 'O barco está no cais. Use 2 milhos de isca para pescar.',
     honeyIn: t => `Mel pronto em ${t}`, zoomHint: 'Use dois dedos para aproximar ou afastar o mapa.',
+    addSlot: 'Mais um espaço na fila', slotsMax: 'Fila no máximo', newVersion: 'Tem uma versão nova do jogo.', update: 'Atualizar',
     sellOne: 'Vender 1', sellAll: 'Vender tudo', each: n => `${n} cada`, barnFullHint: 'O celeiro está cheio. Toque no Celeiro e venda alguma coisa.', sold: (q, k, c) => `Vendeu ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
     helperTitle: 'Ajudante Juca', helperAria: 'Ajudante', helperLocked: n => `Entregue ${n} encomendas e vocês ganham o Juca, um ajudante que cuida do sítio.`, helperProg: (d, n) => `${d} de ${n} encomendas entregues`,
     helperWon: 'Vocês ganharam um ajudante: o Juca!', shiftBtn: 'Pagar um turno de 20 min', working: t => `O Juca está trabalhando. Ainda ${t}.`, resting: 'O Juca está descansando. Pague um turno para ele trabalhar.',
@@ -75,6 +76,7 @@ const TX = {
     land_leste: 'Terreno del Huerto', land_sul: 'Terreno del Lago', forSale: 'SE VENDE', landDesc_leste: 'Seis árboles de naranja y mango y una fábrica de jugos.', landDesc_sul: 'Colmenas que dan miel y un barco de pesca en el lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Ya es tuyo', boatGo: 'Mandar el barco (carnada: 2 maíces)', boatBack: t => `El barco vuelve en ${t}`, boatIdle: 'El barco está en el muelle. Usa 2 maíces de carnada para pescar.',
     honeyIn: t => `Miel lista en ${t}`, zoomHint: 'Usa dos dedos para acercar o alejar el mapa.',
+    addSlot: 'Un espacio más en la fila', slotsMax: 'Fila al máximo', newVersion: 'Hay una versión nueva del juego.', update: 'Actualizar',
     sellOne: 'Vender 1', sellAll: 'Vender todo', each: n => `${n} c/u`, barnFullHint: 'El granero está lleno. Toca el Granero y vende algo.', sold: (q, k, c) => `Vendiste ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
     helperTitle: 'Ayudante Juca', helperAria: 'Ayudante', helperLocked: n => `Entreguen ${n} pedidos y se ganan a Juca, un ayudante que cuida la granja.`, helperProg: (d, n) => `${d} de ${n} pedidos entregados`,
     helperWon: '¡Se ganaron un ayudante: Juca!', shiftBtn: 'Pagar un turno de 20 min', working: t => `Juca está trabajando. Le quedan ${t}.`, resting: 'Juca está descansando. Págale un turno para que trabaje.',
@@ -138,6 +140,7 @@ const FRUIT = { laranja: { t: 150, y: 3, xp: 4 }, manga: { t: 240, y: 2, xp: 5 }
 const HIVES = [[110, 1110], [190, 1110], [110, 1220], [190, 1220]], HIVE_T = 200;
 const BOAT = { x: 640, y: 1190, t: 120, bait: { milho: 2 }, out: 'peixe', k: 2, xp: 5 };
 const LAKE = { x: 830, y: 1170, rx: 230, ry: 110 };
+const MAXQ = 7, qCap = (S, k) => BUILD[k].q + ((S.slots && S.slots[k]) || 0), slotCost = (S, k) => 60 * Math.pow(2, (S.slots && S.slots[k]) || 0);
 const sellPrice = k => Math.max(1, Math.round(ITEMS[k].v * 0.6));
 const HELPER_ORDERS = 8, SHIFT = { cost: 25, min: 20 }, HELPER_HOME = { x: 196, y: 262 };
 const PENS = {
@@ -165,6 +168,7 @@ function migrate(S) {
   if (!Array.isArray(S.hives) || S.hives.length !== HIVES.length) S.hives = HIVES.map(() => 0);
   if (!S.boat || typeof S.boat !== 'object') S.boat = { e: 0 };
   if (typeof S.done !== 'number') S.done = 0;
+  if (!S.slots || typeof S.slots !== 'object') S.slots = {};
   if (!S.helper || typeof S.helper !== 'object') S.helper = { on: 0, until: 0, x: HELPER_HOME.x, y: HELPER_HOME.y };
   for (const k of Object.keys(BUILD)) if (!S.bld[k]) S.bld[k] = { q: [] };
   return S;
@@ -214,7 +218,7 @@ function apply(S, a, now) {
   } else if (a.a === 'craft') {
     const B = BUILD[a.b], r = B && B.rec[a.r | 0], st = B && S.bld[a.b];
     if (!r || !okB(S, B) || !okR(S, r)) return fail('');
-    if (st.q.length >= B.q) return fail(L('queueFull'));
+    if (st.q.length >= qCap(S, a.b)) return fail(L('queueFull'));
     if (!has(S, r.i)) return fail(L('missingIng'));
     take(S, r.i); const s = st.q.length ? Math.max(now, st.q[st.q.length - 1].e) : now;
     st.q.push({ r: a.r | 0, s, e: s + r.t * 1000 }); out.fx.push(['craft', a.b]);
@@ -261,6 +265,9 @@ function apply(S, a, now) {
     if (!S.boat.e) { if (!has(S, BOAT.bait)) return fail(L('missingIng')); take(S, BOAT.bait); S.boat.e = now + BOAT.t * 1000; out.fx.push(['boat']); }
     else if (S.boat.e <= now) { if (invCount(S) + BOAT.k > S.cap) return fail(L('barnFull')); give(S, BOAT.out, BOAT.k); addXp(S, BOAT.xp, out); S.boat.e = 0; out.fx.push(['gain', BOAT.out, BOAT.k, 'boat', 0]); }
     else return fail(L('boatBack', fmtT(Math.ceil((S.boat.e - now) / 1000))));
+  } else if (a.a === 'slot') {
+    const B = BUILD[a.b]; if (!B || !okB(S, B) || qCap(S, a.b) >= MAXQ) return fail(''); const c = slotCost(S, a.b); if (S.coins < c) return fail(L('noCoins'));
+    S.coins -= c; S.slots[a.b] = (S.slots[a.b] || 0) + 1; out.fx.push(['coins', -c]);
   } else if (a.a === 'sell') {
     const k = a.k, q = Math.min(a.q | 0, S.inv[k] || 0); if (!ITEMS[k] || q <= 0) return fail('');
     const c = q * sellPrice(k); take(S, { [k]: q }); S.coins += c; out.fx.push(['coins', c]); out.fx.push(['sold', q, k, c]);
@@ -467,6 +474,10 @@ function helperTask(S, now) {
   for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; if (CROPS[crop] && S.coins >= CROPS[crop].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: crop }, now); if (re.ok) { S.plots[a.i].last = crop; res.fx.push(...re.fx); } } } S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
+const BUILD_V = '2026-11-02.4';
+async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
+setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
+$('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S); location.reload(); };
 let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   const S = G.S, now = Date.now(); helperClock++;
@@ -499,7 +510,9 @@ async function openRoom(role, code) {
 }
 async function hostRoom() {
   $('rMsg').textContent = ''; $('rStatus').textContent = L('creating'); $('rCode').textContent = '----'; $('ovRoom').hidden = false;
-  const r = await openRoom('host', newCode()); if (!r) return;
+  let saved = ''; try { saved = localStorage.getItem('sitio-code-' + G.S.fid) || ''; } catch (e) {}
+  const r = await openRoom('host', /^[A-Z]{4}$/.test(saved) ? saved : newCode()); if (!r) return;
+  try { localStorage.setItem('sitio-code-' + G.S.fid, NET.code); } catch (e) {}
   G.mode = 'host'; $('rCode').textContent = NET.code;
   $('rShare').hidden = !(NET.api && NET.api.p2p); $('rLink').value = location.href.split('#')[0] + '#' + NET.code;
   renderRoom(); broadcast();
@@ -610,11 +623,12 @@ function renderSheet() {
       : `<button class="tile" type="button" data-plant="${k}" ${S.coins < c.cost ? 'disabled' : ''}>${img(k)}${N(k)}<small>${L('coins', c.cost)} · ${fmtT(c.t)}</small><small>${L('yields', c.y)}</small></button>`).join('')}</div>`;
   } else if (SH.type === 'bld') {
     const B = BUILD[SH.arg], st = S.bld[SH.arg]; t.textContent = N(SH.arg);
-    const slots = Array.from({ length: B.q }, (_, i) => { const j = st.q[i]; if (!j) return `<div class="slot">${L('empty')}</div>`; const r = B.rec[j.r], ready = j.e <= now; return `<div class="slot ${ready ? 'ready' : ''}">${img(r.o)}<em>${ready ? L('ready') : j.s <= now ? fmtT(Math.ceil((j.e - now) / 1000)) : L('queued')}</em></div>`; }).join('');
+    const slots = Array.from({ length: qCap(S, SH.arg) }, (_, i) => { const j = st.q[i]; if (!j) return `<div class="slot">${L('empty')}</div>`; const r = B.rec[j.r], ready = j.e <= now; return `<div class="slot ${ready ? 'ready' : ''}">${img(r.o)}<em>${ready ? L('ready') : j.s <= now ? fmtT(Math.ceil((j.e - now) / 1000)) : L('queued')}</em></div>`; }).join('');
+    const more = qCap(S, SH.arg) >= MAXQ ? `<small>${L('slotsMax')}</small>` : `<button class="btn blue" type="button" data-slot="1" ${S.coins < slotCost(S, SH.arg) ? 'disabled' : ''} style="font-size:16px">${L('addSlot')} · ${img('coin')} ${slotCost(S, SH.arg)}</button>`;
     h = `<div class="row"><div class="q" style="flex:1">${slots}</div>${st.q.some(j => j.e <= now) ? `<button class="btn" type="button" data-collect="1">${L('collect')}</button>` : ''}</div>
-      ${B.rec.map((r, i) => !okR(S, r) ? `<div class="card" style="opacity:.55"><div class="row">${img(r.o)}<b style="flex:1">${N(r.o)}</b><small>${L('lvl', r.lvl)}</small></div></div>`
+      ${B.rec.map((r, i) => !okR(S, r) ? `<div class="card" style="opacity:.55"><div class="row">${img(r.o)}<b style="flex:1">${N(r.o)}</b><small>${r.lvl > S.lvl ? L('lvl', r.lvl) : L('land_' + r.land)}</small></div></div>`
         : `<div class="card"><div class="row"><span style="width:44px;height:44px;display:grid;place-items:center">${img(r.o)}</span><div style="flex:1"><b>${N(r.o)}${r.k > 1 ? ' ×' + r.k : ''}</b><br><small>${fmtT(r.t)}</small></div>
-          <button class="btn" type="button" data-craft="${i}" ${!has(S, r.i) || st.q.length >= B.q ? 'disabled' : ''}>${L('make')}</button></div>${needHtml(S, r.i)}</div>`).join('')}`;
+          <button class="btn" type="button" data-craft="${i}" ${!has(S, r.i) || st.q.length >= qCap(S, SH.arg) ? 'disabled' : ''}>${L('make')}</button></div>${needHtml(S, r.i)}</div>`).join('')}${more}`;
   } else if (SH.type === 'pen') {
     const P = PENS[SH.arg], st = S.pens[SH.arg]; t.textContent = N(SH.arg);
     const ready = st.a.filter(x => x && now >= x + P.t * 1000).length, busy = st.a.filter(x => x && now < x + P.t * 1000), hungry = st.a.filter(x => !x).length;
@@ -678,6 +692,7 @@ $('sBody').addEventListener('click', e => {
   if (d.land) { const r = act({ a: 'land', k: d.land }); if (r.ok) closeSheet(); }
   if (d.boat) act({ a: 'boat' });
   if (d.sell) act({ a: 'sell', k: d.sell, q: +d.q });
+  if (d.slot) act({ a: 'slot', b: SH.arg });
   if (d.shift) act({ a: 'shift' });
   if (d.buyplot) act({ a: 'buyPlot' });
   if (d.deliver) act({ a: 'deliver', id: +d.deliver });
