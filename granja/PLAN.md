@@ -13,11 +13,11 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] 8. Terreno nuevo con lotes urbanos (hecho con el Barrio Nuevo)
 - [x] 9. Edificios de servicio: plaza con glorieta y posta de salud
 - [x] 10. Felicidad de la ciudad = multiplicador de ingresos + panel de la ciudad
-- [ ] 11. Turistas que llegan a la Pousada y compran
+- [x] 11. Turistas que llegan a la Pousada y compran
 - [ ] 12. Ciclo día/noche con faroles en las calles
 - [ ] 13. Clima: lluvia que riega (cultivos más rápidos), sol, viento para el molino
 - [ ] 14. Animación de personajes y NPC (caminar, saludar, trabajar)
-- [ ] 15. Feria del pueblo: puestos donde los vecinos compran tus productos
+- [x] 15. Feria del pueblo: puestos donde los vecinos compran tus productos
 - [ ] 16. Camión de reparto que entrega pedidos automáticamente
 - [ ] 17. Logros co-op y metas semanales con premios
 - [ ] 18. Guía "¿qué hago ahora?" con flechas y consejos

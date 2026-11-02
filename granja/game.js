@@ -51,6 +51,8 @@ const TX = {
     city: 'Cidade', cityBtn: 'Painel da cidade', happyL: 'Felicidade', happyHint: 'Quanto mais feliz a cidade, mais rendem os aluguéis (até 1,5x).', cityPop: (p, m) => `${p} moradores · aluguéis x${m}`, serv_praca: 'Praça', servD_praca: 'Bancos, árvores e coreto: +15 de felicidade', serv_posto: 'Posto de saúde', servD_posto: 'Cuida dos vizinhos: +20 de felicidade', servDone: (n, h) => `${n} inaugurado! Felicidade: ${h}`, hpFrom: 'Sobe com: decorações, ruas, obras da vila, praça e posto.', incomeH: n => `Aluguéis: ~${n} moedas por hora`,
     upTitle: 'Melhorar prédio', upHint: (l, p) => `Nível ${l}: tudo fica ${p}% mais rápido (vale para as cópias também).`, upBtn: 'Melhorar', upDone: (n, l) => `${n} agora é nível ${l}!`, upMax: 'Nível máximo', bLvl: l => `Nv ${l}`,
     boosts: 'Impulsos', boost_abono: 'Adubo mágico', boostD_abono: 'Plantas crescem 2x mais rápido por 10 min', boost_racao: 'Ração premium', boostD_racao: 'Animais produzem 2x mais rápido por 10 min', boostDone_abono: 'Adubo ativo: plante agora!', boostDone_racao: 'Ração premium ativa: alimente os animais!', boostLeft: t => `Ativo: ${t}`,
+    tourist: 'Turista',
+    fair: 'Feira do bairro', fairSub: 'Coloque produtos nas barracas: vizinhos e turistas compram pelo preço cheio (mais que vender no celeiro). Com a Pousada pronta chegam turistas.', fairEmpty: 'Barraca vazia: escolha o que vender', fairTake: 'Retirar', fairBuy: 'Vou levar!', fairSold: n => `Vendido na feira: ${n} moedas`, stall: i => `Barraca ${i}`,
     npcSad: 'Falta uma praça por aqui…', npcHappy: 'Amo morar nesta cidade!',
     reqs: 'Pedidos dos vizinhos', reqSub: 'Os vizinhos pedem em pessoa e pagam o dobro. Toque no vizinho com o balão.', reqFrom: n => `${n} quer:`, reqThanks: 'Obrigado, vizinho!', reqWait: t => `Novo pedido em ${t}`,
     homes: 'Casas do bairro', homeHint: 'Cada casa traz 2 vizinhos: +2% nas encomendas por casa (até 20%) e aluguel de 30 moedas a cada 5 min.', homeBuy: 'Construir casa', homeDone: (a, b) => `${a} e ${b} se mudaram para o bairro!`, homesN: (n, m, p) => `${n} de ${m} casas · ${p} moradores`, homeOf: (a, b) => `Casa de ${a} e ${b}`, emptyLot: 'Lote vazio', rentIn: (n, t) => `${n} moedas em ${t}`, npcHi: n => `Oi, sou ${n}!`,
@@ -113,6 +115,8 @@ const TX = {
     city: 'Ciudad', cityBtn: 'Panel de la ciudad', happyL: 'Felicidad', happyHint: 'Mientras más feliz la ciudad, más rinden los arriendos (hasta 1,5x).', cityPop: (p, m) => `${p} vecinos · arriendos x${m}`, serv_praca: 'Plaza', servD_praca: 'Bancos, árboles y glorieta: +15 de felicidad', serv_posto: 'Posta de salud', servD_posto: 'Cuida a los vecinos: +20 de felicidad', servDone: (n, h) => `¡${n} inaugurada! Felicidad: ${h}`, hpFrom: 'Sube con: decoraciones, calles, obras de la villa, plaza y posta.', incomeH: n => `Arriendos: ~${n} monedas por hora`,
     upTitle: 'Mejorar edificio', upHint: (l, p) => `Nivel ${l}: todo sale ${p}% más rápido (también en las copias).`, upBtn: 'Mejorar', upDone: (n, l) => `¡${n} ahora es nivel ${l}!`, upMax: 'Nivel máximo', bLvl: l => `Nv ${l}`,
     boosts: 'Impulsos', boost_abono: 'Abono mágico', boostD_abono: 'Las plantas crecen 2x más rápido por 10 min', boost_racao: 'Ración premium', boostD_racao: 'Los animales producen 2x más rápido por 10 min', boostDone_abono: 'Abono activo: ¡siembra ahora!', boostDone_racao: 'Ración premium activa: ¡alimenta a los animales!', boostLeft: t => `Activo: ${t}`,
+    tourist: 'Turista',
+    fair: 'Feria del barrio', fairSub: 'Pon productos en los puestos: vecinos y turistas compran a precio completo (más que vender en el granero). Con la Pousada lista llegan turistas.', fairEmpty: 'Puesto vacío: elige qué vender', fairTake: 'Retirar', fairBuy: '¡Me lo llevo!', fairSold: n => `Vendido en la feria: ${n} monedas`, stall: i => `Puesto ${i}`,
     npcSad: 'Falta una plaza por aquí…', npcHappy: '¡Me encanta vivir en esta ciudad!',
     reqs: 'Pedidos de los vecinos', reqSub: 'Los vecinos piden en persona y pagan el doble. Toca al vecino con el globo.', reqFrom: n => `${n} quiere:`, reqThanks: '¡Gracias, vecino!', reqWait: t => `Nuevo pedido en ${t}`,
     homes: 'Casas del barrio', homeHint: 'Cada casa trae 2 vecinos: +2% en los pedidos por casa (hasta 20%) y arriendo de 30 monedas cada 5 min.', homeBuy: 'Construir casa', homeDone: (a, b) => `¡${a} y ${b} se mudaron al barrio!`, homesN: (n, m, p) => `${n} de ${m} casas · ${p} vecinos`, homeOf: (a, b) => `Casa de ${a} y ${b}`, emptyLot: 'Lote vacío', rentIn: (n, t) => `${n} monedas en ${t}`, npcHi: n => `¡Hola, soy ${n}!`,
@@ -267,7 +271,9 @@ const PROJ = {
 };
 const RENT_EVERY = 300, RENT_CAP = 6;
 // bairro: lotes para casas de vizinhos; cada casa traz 2 moradores (NPC) e paga aluguel
-const LOTS = [[130, 1960], [330, 1960], [530, 1960], [730, 1960], [930, 1960], [1130, 1960], [130, 2250], [330, 2250], [530, 2250], [730, 2250], [930, 2250], [1130, 2250]];
+const LOTS = [[130, 1960], [330, 1960], [530, 1960], [730, 1960], [930, 1960], [1130, 1960], [130, 2250], [330, 2250], [930, 2250], [1130, 2250]];
+// feira do bairro: 4 barracas onde vizinhos e turistas compram pelo preço cheio
+const FAIR = { x: 630, y: 2250, n: 4, max: 10 }, fairX = i => FAIR.x - 150 + i * 100;
 const HOME_INC = 30, homeCost = n => 400 + n * 250, popBonus = S => Math.min(20, ((S.homes && S.homes.length) || 0) * 2);
 const HOME_COL = [['#fff1d6', '#d9614b'], ['#e6f2ff', '#3f8fd1'], ['#f3ffe6', '#4f9a2f'], ['#ffe4ee', '#c2477a'], ['#fff4d6', '#e6a92a'], ['#f3e9ff', '#7b5ea7']];
 const NPC_NAMES = ['Dona Rosa', 'Seu Zé', 'Lia', 'Caio', 'Dona Cida', 'Tião', 'Malu', 'Davi', 'Iara', 'Beto', 'Lena', 'Rui', 'Dona Fia', 'Nico', 'Sol', 'Teo', 'Mel', 'Gui', 'Bela', 'Duda', 'Kiko', 'Rita', 'Leo', 'Vivi'];
@@ -313,7 +319,7 @@ function migrate(S) {
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
   if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
-  if (!Array.isArray(S.homes)) S.homes = []; if (!Array.isArray(S.reqs)) S.reqs = [];
+  if (!Array.isArray(S.homes)) S.homes = []; if (!Array.isArray(S.reqs)) S.reqs = []; if (!Array.isArray(S.fair)) S.fair = [null, null, null, null];
   if (!Array.isArray(S.roads)) S.roads = []; if (typeof S.roadFree !== 'number') S.roadFree = ROAD_FREE;
   if (typeof S.silos !== 'number') S.silos = 0;
   if (!S.capv2) { S.capv2 = 1; S.cap = (S.cap || 50) + 150; }
@@ -359,6 +365,10 @@ function genReq(S) { const items = unlockedItems(S), k = items[Math.floor(Math.r
   return { who: Math.floor(Math.random() * Math.max(1, S.homes.length * 2)), it: [[k, q]], c: Math.round(val * 2) + 10, x: Math.round(val / 3) + 2 }; }
 function ensureReqs(S, now) { if (!S.homes || !S.homes.length) return false; let ch = false; const want = Math.min(4, S.homes.length);
   while (S.reqs.length < want) { const r = { id: S.oid++, w: now, ...genReq(S) }; if (S.reqs.some(o => o.who === r.who)) r.who = (r.who + 1) % (S.homes.length * 2); S.reqs.push(r); ch = true; } return ch; }
+function fairTick(S, now) { if (!S.land.bairro || !S.fair || !S.fair.some(Boolean)) return -1; const tour = S.city.pousada && S.city.pousada.e <= now;
+  const p = 0.05 + Math.min(0.1, S.homes.length * 0.01) + (tour ? 0.05 : 0); if (Math.random() > p) return -1;
+  const opts = S.fair.map((st, i) => st ? i : -1).filter(i => i >= 0), i = opts[Math.floor(Math.random() * opts.length)], st = S.fair[i];
+  S.coins += ITEMS[st.k].v; S.fairSold = (S.fairSold || 0) + ITEMS[st.k].v; if (--st.q <= 0) S.fair[i] = null; return i; }
 function ensureOrders(S) { let ch = false; while (S.orders.length < 3) { S.orders.push({ id: S.oid++, w: 0, ...genOrder(S) }); ch = true; } return ch; }
 function packQ(b, now) { let t = now; for (const j of b.q) { j.s = Math.max(t, j.s); j.e = Math.max(j.e, j.s); t = j.e; } }
 // aplica uma ação; devolve {ok, msg, fx}. Determinístico a partir de "now", exceto as encomendas novas (só o dono gera).
@@ -435,6 +445,10 @@ function apply(S, a, now) {
     else if (a.t === 'boat') { if (S.boat.e && S.boat.e > now) { rem = S.boat.e - now; doIt = () => { S.boat.e = now; }; } }
     if (!doIt) return fail(''); const c = rushCost(Math.ceil(rem / 1000)); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; doIt(); out.fx.push(['coins', -c]); out.fx.push(['rush']);
+  } else if (a.a === 'fairPut') {
+    const i = a.i | 0, k = a.k; if (!S.land.bairro || i < 0 || i >= FAIR.n || S.fair[i] || !ITEMS[k] || !(S.inv[k] > 0)) return fail(''); const q = Math.min(FAIR.max, S.inv[k]); take(S, { [k]: q }); S.fair[i] = { k, q }; out.fx.push(['fairPut', i]);
+  } else if (a.a === 'fairTake') {
+    const i = a.i | 0, st = S.fair[i]; if (!st) return fail(''); if (invCount(S) + st.q > S.cap) return fail(L('barnFull')); give(S, st.k, st.q); S.fair[i] = null;
   } else if (a.a === 'serv') {
     const V = SERV[a.k]; if (!V || S.serv[a.k]) return fail(''); if (!S.land.bairro) return fail(L('needLand', L('land_bairro'))); if (S.lvl < V.lvl) return fail(L('unlockAt', V.lvl));
     if (S.coins < V.cost) return fail(L('noCoins')); S.coins -= V.cost; S.serv[a.k] = 1; addXp(S, 15, out); out.fx.push(['serv', a.k]);
@@ -614,13 +628,13 @@ const NPCS = { list: [], key: '', sayT: 0 };
 const npcLine = S => { const a = L('npc'), h = happy(S); if (h < 50 && Math.random() < 0.4) return L('npcSad'); if (h >= 80 && Math.random() < 0.3) return L('npcHappy'); return a[Math.floor(Math.random() * a.length)]; };
 function npcSpots(S) { const pts = []; for (const k of S.roads || []) pts.push([(k % 100) * RD + RD / 2, Math.floor(k / 100) * RD + RD / 2 + 10]);
   if (S.land.vila) pts.push([400, 1590], [200, 1580], [700, 1580], [900, 1580], [320, 1450]);
-  if (S.land.bairro) for (let x = 80; x < 1440; x += 120) pts.push([x, 2040]);
+  if (S.land.bairro) { for (let x = 80; x < 1440; x += 120) pts.push([x, 2040]); if (S.fair && S.fair.some(Boolean)) for (let i = 0; i < FAIR.n; i++) pts.push([fairX(i), FAIR.y + 26], [fairX(i), FAIR.y + 26]); }
   for (const [k, P] of Object.entries(PROJ)) if (S.city[k] && S.city[k].e <= Date.now()) pts.push([P.x, P.y + 20]);
   if (!pts.length) pts.push([320, 700], [320, 1000]); return pts; }
-function syncNpcs(S) { const nH = (S.homes || []).length, nP = Object.keys(PROJ).filter(k => S.city[k] && S.city[k].e <= Date.now()).length, key = nH + ':' + nP; if (key === NPCS.key) return; NPCS.key = key;
-  const want = []; for (let i = 0; i < nH * 2; i++) want.push({ id: 'h' + i, name: NPC_NAMES[i % NPC_NAMES.length], home: LOTS[i >> 1] }); for (let i = 0; i < nP; i++) want.push({ id: 'p' + i, name: NPC_NAMES[(23 - i) % NPC_NAMES.length], home: null });
+function syncNpcs(S) { const nH = (S.homes || []).length, nP = Object.keys(PROJ).filter(k => S.city[k] && S.city[k].e <= Date.now()).length, key = nH + ':' + nP + ':' + LANG; if (key === NPCS.key) return; NPCS.key = key;
+  const want = []; for (let i = 0; i < nH * 2; i++) want.push({ id: 'h' + i, name: NPC_NAMES[i % NPC_NAMES.length], home: LOTS[i >> 1] }); for (let i = 0; i < nP; i++) want.push({ id: 'p' + i, name: NPC_NAMES[(23 - i) % NPC_NAMES.length], home: null }); if (S.city.pousada && S.city.pousada.e <= Date.now()) for (let i = 0; i < 3; i++) want.push({ id: 't' + i, name: L('tourist'), home: null, tour: true });
   const old = new Map(NPCS.list.map(n => [n.id, n])); NPCS.list = want.map((w, i) => old.get(w.id) || (() => { const st = w.home ? [w.home[0], w.home[1] + 14] : [400, 1590];
-    return { ...w, x: st[0], y: st[1], tx: st[0], ty: st[1], wait: 1 + Math.random() * 3, t: 0, dir: 1, walk: false, say: '', sayT: 0, sh: ['#e0533d', '#3d7fd6', '#2f9e6e', '#e6a92a', '#9b5de5', '#ff7aa8', '#1fa6a0'][i % 7], hr: ['#3a2412', '#5a2e14', '#d9a441', '#1d1d1d', '#a0522d'][(i * 3) % 5], long: i % 3 === 1, hat: i % 4 === 2, kid: i % 5 === 4 }; })()); }
+    return { ...w, x: st[0], y: st[1], tx: st[0], ty: st[1], wait: 1 + Math.random() * 3, t: 0, dir: 1, walk: false, say: '', sayT: 0, sh: ['#e0533d', '#3d7fd6', '#2f9e6e', '#e6a92a', '#9b5de5', '#ff7aa8', '#1fa6a0'][i % 7], hr: ['#3a2412', '#5a2e14', '#d9a441', '#1d1d1d', '#a0522d'][(i * 3) % 5], long: i % 3 === 1, hat: w.tour || i % 4 === 2, kid: !w.tour && i % 5 === 4, cam: !!w.tour }; })()); }
 function stepNpcs(S, dt) { syncNpcs(S); const pts = npcSpots(S);
   for (const n of NPCS.list) { if (n.sayT > 0) n.sayT -= dt; const dx = n.tx - n.x, dy = n.ty - n.y, d = Math.hypot(dx, dy);
     if (d > 2) { const k = Math.min(1, 46 * dt / d); n.x += dx * k; n.y += dy * k; n.t += dt; n.dir = dx >= 0 ? 1 : -1; n.walk = true; }
@@ -635,6 +649,7 @@ function drawNpc(g, n, T) { const x = n.x, y = n.y, sc = n.kid ? 0.78 : 0.92, st
   g.fillStyle = '#e8b890'; g.beginPath(); g.arc(0, -40 - bob, 9, 0, 6.283); g.fill(); g.fillStyle = '#3a2412'; g.beginPath(); g.arc(d * 3, -41 - bob, 1.6, 0, 6.283); g.fill();
   if (n.hat) { g.fillStyle = '#f2d38a'; g.beginPath(); g.ellipse(0, -46 - bob, 14, 4, 0, 0, 6.283); g.fill(); g.beginPath(); g.arc(0, -47 - bob, 8, Math.PI, 0); g.fill(); g.fillStyle = n.sh; g.fillRect(-8, -49 - bob, 16, 2.5); }
   else { g.fillStyle = n.hr; g.beginPath(); g.arc(0, -44 - bob, 9.5, Math.PI, 0); g.fill(); }
+  if (n.cam) { g.fillStyle = '#2b2b2b'; g.fillRect(d * 6 - 5, -28 - bob, 10, 7); g.fillStyle = '#9fd7f0'; g.beginPath(); g.arc(d * 6, -24.5 - bob, 2, 0, 6.283); g.fill(); }
   g.restore();
   if (CAM.z > 0.55) { g.font = '800 11px Nunito, sans-serif'; g.textAlign = 'center'; g.fillStyle = 'rgba(255,255,255,.85)'; const w = g.measureText(n.name).width + 10; rr(g, x - w / 2, y + 4, w, 15, 7); g.fill(); g.fillStyle = '#3a2412'; g.fillText(n.name, x, y + 15); }
   const rq = G.S && (G.S.reqs || []).find(o => 'h' + o.who === n.id && o.w <= Date.now()); if (rq && !(n.sayT > 0)) { bubble(g, x, y - 72, rq.it[0][0], T); g.fillStyle = '#e0533d'; g.beginPath(); g.arc(x + 16, y - 90, 8, 0, 6.283); g.fill(); g.fillStyle = '#fff'; g.font = '900 12px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText('!', x + 16, y - 86); }
@@ -704,6 +719,7 @@ function tapAt(p) {
   ping(p.x, p.y);
   for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR(p, Ld.r)) return openSheet('land', k);
   for (const n of NPCS.list) if (Math.abs(p.x - n.x) < 20 && p.y > n.y - 60 && p.y < n.y + 8) { const rq = (S.reqs || []).find(o => 'h' + o.who === n.id && o.w <= now); if (rq) return openSheet('req', rq.id); n.say = L('npcHi', n.name) + ' ' + npcLine(S); n.sayT = 4; return; }
+  if (S.land.bairro && Math.abs(p.x - FAIR.x) < 200 && p.y > FAIR.y - 120 && p.y < FAIR.y + 10) return openSheet('fair');
   if (S.land.bairro) for (const [k, V] of Object.entries(SERV)) if (Math.abs(p.x - V.x) < 80 && p.y > V.y - 150 && p.y < V.y + 10) return openSheet('city');
   if (S.land.bairro) { for (let i = 0; i < LOTS.length; i++) { const [hx, hy] = LOTS[i]; if (Math.abs(p.x - hx) < 66 && p.y > hy - 140 && p.y < hy + 10) { if (S.homes[i] && homeRent(S, i, now) > 0) return void act({ a: 'homeRent', i }); return openSheet('homes', i); } } }
   for (const [k, P] of Object.entries(PROJ)) if (S.land[P.land || 'vila'] && Math.abs(p.x - P.x) < P.w / 2 + 10 && p.y > P.y - P.h - 70 && p.y < P.y + 12) { if (rentNow(S, k, now) > 0) return void act({ a: 'rent', k }); return openSheet('proj', k); }
@@ -780,6 +796,7 @@ function upCard(S, k) { const l = upLv(S, k), B = BUILD[k]; if (!B || !okB(S, B)
 function oneBoost(S, k) { const now = nowS(), B = BOOSTS[k]; return `<div class="card"><div class="row"><b style="flex:1">⚡ ${L('boost_' + k)}<br><small>${boostOn(S, k, now) ? L('boostLeft', fmtT(Math.ceil((S.boost[k] - now) / 1000))) : L('boostD_' + k)}</small></b><button class="btn" type="button" data-boost="${k}" ${S.coins < B.cost ? 'disabled' : ''}>${img('coin')} ${B.cost}</button></div></div>`; }
 function boostCards(S) { const now = nowS(); return `<span class="lbl">${L('boosts')}</span>` + Object.entries(BOOSTS).map(([k, B]) => `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(k === 'abono' ? 'trigo' : 'racaoV')}</span><div style="flex:1"><b>${L('boost_' + k)}</b><br><small>${boostOn(S, k, now) ? L('boostLeft', fmtT(Math.ceil((S.boost[k] - now) / 1000))) : L('boostD_' + k)}</small></div>
     <button class="btn" type="button" data-boost="${k}" ${S.coins < B.cost ? 'disabled' : ''}>${img('coin')} ${B.cost}</button></div></div>`).join(''); }
+function fairFx(i) { SND.coin(); burst(fairX(i), FAIR.y - 60, 'coin'); const n = NPCS.list[Math.floor(Math.random() * NPCS.list.length)]; if (n) { n.tx = fairX(i); n.ty = FAIR.y + 26; n.wait = 3; n.say = L('fairBuy'); n.sayT = 2.5; } }
 function reqCard(o) { const S = G.S, now = nowS(), nm = NPC_NAMES[o.who % NPC_NAMES.length];
   return o.w > now ? `<div class="card"><p class="sub">${L('reqWait', fmtT(Math.ceil((o.w - now) / 1000)))}</p></div>`
     : `<div class="card"><b>${L('reqFrom', nm)}</b>${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>${img('coin')}${o.c}</span><span>${img('star')}${o.x}</span></span><span style="flex:1"></span><button class="btn" type="button" data-req="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`; }
@@ -849,7 +866,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.24';
+const BUILD_V = '2026-11-02.25';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -859,6 +876,7 @@ $('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S);
 let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   const S = G.S, now = Date.now(); helperClock++; if (ensureReqs(S, now)) { S.rev++; saveSoon(); broadcast(); }
+  { const fi = fairTick(S, now); if (fi >= 0) { S.rev++; saveSoon(); broadcast(); fairFx(fi); } }
   if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { let r = null; for (let hh = 0; hh < hCount(S); hh++) { const rr = helperTask(S, now); if (rr && rr.ok) { S.helper.ps[hh] = [S.helper.x, S.helper.y]; if (r && r.ok) playFx(r.fx.filter(f => f[0] !== 'coins')); r = rr; } else if (!r) r = rr; } if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
 
 const NET = { api: null, room: null, sub: null, code: null, role: null, guestPeer: null,
@@ -1057,6 +1075,11 @@ function renderSheet() {
       <div class="card"><span class="lbl">${L('lvlUnlocked')}</span><p style="margin:0;font-weight:800">${news ? news.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <div class="card"><span class="lbl">${L('lvlNext', l + 1)}</span><p style="margin:0;font-weight:700">${nxt ? nxt.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <button class="btn" type="button" data-close="1">${L('great')}</button>`;
+  } else if (SH.type === 'fair') {
+    t.textContent = L('fair'); const ks = Object.keys(S.inv).filter(k => S.inv[k] > 0);
+    h = `<p class="sub">${L('fairSub')}</p><p class="sub">${L('fairSold', S.fairSold || 0)}</p>` + S.fair.map((st, i) => st
+      ? `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(st.k)}</span><div style="flex:1"><b>${L('stall', i + 1)}: ${N(st.k)} ×${st.q}</b><br><small>${img('coin').replace('<img', '<img style="width:14px;height:14px;vertical-align:-2px"')} ${L('each', ITEMS[st.k].v)}</small></div><button class="btn gray" type="button" data-ftake="${i}">${L('fairTake')}</button></div></div>`
+      : `<div class="card"><b>${L('stall', i + 1)}</b><small>${L('fairEmpty')}</small><div class="grid">${ks.map(k => `<button class="tile" type="button" data-fput="${i}" data-k="${k}">${img(k)}${N(k)}<small>×${Math.min(FAIR.max, S.inv[k])} · ${ITEMS[k].v}</small></button>`).join('')}</div></div>`).join('');
   } else if (SH.type === 'city') {
     t.textContent = L('city'); const hp = happy(S), m = cityMult(S), inc = Math.round((S.homes.length * HOME_INC + Object.keys(PROJ).filter(k => S.city[k] && S.city[k].e <= now).reduce((a, k) => a + PROJ[k].inc, 0)) * m * 12);
     h = `<div class="card"><b>${L('happyL')}: ${hp}/100</b><div style="height:12px;border-radius:6px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${hp}%;background:${hp > 70 ? '#5cc04a' : hp > 45 ? '#ffc23a' : '#e0533d'}"></i></div><small>${L('happyHint')}</small><small>${L('hpFrom')}</small></div>
@@ -1157,6 +1180,8 @@ $('sBody').addEventListener('click', e => {
   if (d.home) act({ a: 'home' });
   if (d.up) act({ a: 'up', k: d.up });
   if (d.serv) act({ a: 'serv', k: d.serv });
+  if (d.fput) act({ a: 'fairPut', i: +d.fput, k: d.k });
+  if (d.ftake) act({ a: 'fairTake', i: +d.ftake });
   if (d.citypanel) { openSheet('city'); return; }
   if (d.boost) act({ a: 'boost', k: d.boost });
   if (d.req) { const r = act({ a: 'req', id: +d.req }); if (r.ok && SH && SH.type === 'req') closeSheet(); }
@@ -1239,7 +1264,7 @@ function makeBg(lands) {
   if (lands.bairro) { const st = (x, y, w, h) => { g.fillStyle = 'rgba(70,50,30,.25)'; g.fillRect(x - 3, y - 2, w + 6, h + 7); g.fillStyle = '#cdb88f'; g.fillRect(x, y, w, h);
       for (let yy = y + 2; yy < y + h - 4; yy += 10) for (let xx = x + 2 + ((yy / 10) % 2) * 4; xx < x + w - 6; xx += 11) { g.fillStyle = R() < 0.5 ? '#d9c6a0' : '#bfa67b'; rr(g, xx, yy, 8, 7, 2); g.fill(); }
       g.fillStyle = '#9c8762'; g.fillRect(x, y, w, 3); g.fillRect(x, y + h - 3, w, 3); };
-    st(40, 2010, 1420, 48); st(298, 1690, 44, 320); st(1040, 2058, 44, 230); st(420, 2058, 44, 230);
+    st(40, 2010, 1420, 48); st(298, 1690, 44, 320); st(1040, 2058, 44, 230); st(208, 2058, 44, 230);
     g.fillStyle = '#e3c58f'; g.beginPath(); g.ellipse(740, 2034, 70, 34, 0, 0, 6.283); g.fill(); g.strokeStyle = '#b8935a'; g.lineWidth = 6; g.stroke(); }
   // cerca em volta de tudo
   g.strokeStyle = '#a8743f'; g.lineWidth = 4; g.strokeRect(10, 24, WW - 20, WH - 34); g.fillStyle = '#8a5a2b';
@@ -1415,6 +1440,12 @@ function draw(T, dt) {
       const [wl, rf] = HOME_COL[hm.st % HOME_COL.length]; house(cx, hx, hy, 100, 70, wl, rf, 30); cx.fillStyle = '#7a4b25'; cx.fillRect(hx - 10, hy - 32, 20, 32); win(cx, hx - 40, hy - 52, 20, 16); win(cx, hx + 20, hy - 52, 20, 16);
       cx.fillStyle = '#b5523b'; cx.fillRect(hx + 22, hy - 116, 10, 18); for (let k = 0; k < 4; k++) { cx.fillStyle = ['#ff8fb1', '#ffd23f', '#fff'][k % 3]; cx.beginPath(); cx.arc(hx - 46 + k * 9, hy - 2, 4, 0, 6.283); cx.fill(); }
       if (homeRent(S, i, now) > 0) bubble(cx, hx, hy - 140, 'coin', T); }); }
+  if (lands.bairro) { for (let i = 0; i < FAIR.n; i++) { const x = fairX(i), y = FAIR.y, st = S.fair[i], col = ['#e0533d', '#3d7fd6', '#2f9e6e', '#e6a92a'][i];
+      shadow(cx, x, y, 90); cx.fillStyle = '#a8743f'; cx.fillRect(x - 40, y - 34, 80, 34); cx.fillStyle = '#c99561'; cx.fillRect(x - 42, y - 38, 84, 8); cx.fillStyle = '#7a4b25'; cx.fillRect(x - 38, y - 86, 5, 52); cx.fillRect(x + 33, y - 86, 5, 52);
+      for (let j = 0; j < 5; j++) { cx.fillStyle = j % 2 ? '#fff' : col; cx.beginPath(); cx.moveTo(x - 46 + j * 18.4, y - 86); cx.lineTo(x - 46 + (j + 1) * 18.4, y - 86); cx.lineTo(x - 46 + (j + 1) * 18.4, y - 74); cx.quadraticCurveTo(x - 46 + (j + 0.5) * 18.4, y - 66, x - 46 + j * 18.4, y - 74); cx.closePath(); cx.fill(); }
+      cx.fillStyle = col; cx.fillRect(x - 46, y - 94, 92, 10);
+      if (st) { for (let q = 0; q < Math.min(3, st.q); q++) cx.drawImage(iconCanvas(st.k), x - 34 + q * 22, y - 60, 24, 24); cx.fillStyle = '#fff'; cx.font = '900 11px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText('×' + st.q, x, y - 12); } }
+    cx.fillStyle = '#7a4b25'; rr(cx, FAIR.x - 60, FAIR.y + 6, 120, 20, 6); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 11px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('fair').toUpperCase(), FAIR.x, FAIR.y + 20); }
   if (lands.bairro) for (const [k, V] of Object.entries(SERV)) { const x = V.x, y = V.y;
     if (!S.serv[k]) { cx.setLineDash([8, 6]); cx.strokeStyle = 'rgba(255,255,255,.6)'; cx.lineWidth = 3; rr(cx, x - 80, y - 90, 160, 90, 12); cx.stroke(); cx.setLineDash([]); cx.fillStyle = 'rgba(58,36,18,.8)'; rr(cx, x - 64, y - 58, 128, 26, 8); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('serv_' + k) + ' · ' + V.cost, x, y - 40); continue; }
     if (k === 'praca') { cx.fillStyle = '#e3c58f'; cx.beginPath(); cx.ellipse(x, y - 30, 90, 40, 0, 0, 6.283); cx.fill(); cx.strokeStyle = '#b8935a'; cx.lineWidth = 4; cx.stroke(); tree(cx, x - 70, y - 50, 0.7, T); tree(cx, x + 70, y - 50, 0.7, T);
