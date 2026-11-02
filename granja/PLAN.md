@@ -495,3 +495,26 @@ Tomé el plan de 6 etapas de la otra sesión (`PLAN-CIUDADES.md`, rama `granja-g
 - **El Concejo en persona (etapa 6):** los 5 miembros, con su ícono, están frente a la Alcaldía; por turnos, uno cuenta en un globo lo último que decidió. Tocarlos abre el panel.
 - **Ingreso del tesoro:** subió (≈350/min en una ciudad grande), para que crezca de forma visible.
 - **Falta del plan (próximas fases):** mundo 5×5 con regiones, exploradores, cadenas de bosque, desierto y pantano, más ciudades vecinas, y expediciones que conquistan regiones.
+
+## Versión 75: El Mundo (ciudades vecinas, colonias y conquistas)
+
+Pedido de Benjamin: más rápido, más grande y más autónomo; ver las otras ciudades; poder usar sus 320 mil monedas; y que el Concejo mueva el dinero que le pasa.
+
+- **Diagnóstico:** con 40 casas, todos los terrenos y todas las mejoras, el Concejo no tenía en qué gastar y el dinero quedaba quieto. Ahora hay inversiones casi sin techo.
+- **Nuevo archivo `mundo.js`** (cargado después de game.js; acciones `mu…` por `apply`, así que el co-op sigue igual):
+  - Botón 🌍 (desde nivel 14) que abre el **Mapa del Mundo**: islas, rutas y niebla con "?" en lo que no está explorado.
+  - **Explorar:** 2000 + 3000 por cada lugar ya descubierto.
+- **Ciudades vecinas:**
+  - Porto Brisa (comerciante), Vila Pedra (guerrera) y Monte Sol (agricultora), además de Villa Aurora.
+  - Cada una crece sola, con relación, comercio, fiestas, peleas, amenazas, treguas y ataques.
+  - **Visitarlas** muestra su ciudad dibujada (casas según población, castillo según nivel, muralla y soldados) y permite regalar 500/5000 o atacar (solo tú, con doble confirmación).
+  - **Con 3 victorias, la ciudad pasa a ser nuestra colonia.**
+- **Colonias** (6 islas libres + las conquistadas):
+  - Fundarla cuesta 40.000; mejorarla, 12.000×nivel^1,35, hasta nivel 10.
+  - Cinco especialidades, que se pueden cambiar: Turismo (300/h por nivel para ti), Comercio (400/h por nivel al tesoro), Agrícola (para ti y el tesoro), Minera (piedra, hierro y oro) y Militar (entrena soldados solos y suma defensa).
+  - Cobras lo tuyo con el botón Cobrar (acumula hasta 4 h); cada colonia tiene su vista dibujada.
+- **Concejo:**
+  - Cuando la ciudad está completa, el Alcalde explora y funda colonias; Obras, Comercio, Campo y Milicia mejoran colonias.
+  - Hacen más cosas por turno: 1 + nivel/2.
+  - Prueba: con 100.000 donados, en 2 h simuladas gastó ~55.000 (2 exploraciones, 47 animales, 13 parcelas, 9 servicios, 4 silos, murallas, torres y soldados).
+- Fuzz con las hojas nuevas (mundo, urbe): 0 errores.
