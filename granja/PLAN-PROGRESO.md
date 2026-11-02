@@ -21,7 +21,16 @@ Objetivo de Benjamin: llevar el juego "al siguiente nivel": mapa enorme, dinero 
 ## Hecho (ronda 2 y 3) — sesión A
 - v92 Más al sur (Cacao, Lago del Sur, Barrio Alto; WH 7900) · v93 Ferrocarril de carga · v94 Clima 2 · v95 Guía y metas · v96 Niños 2 · v98 Obras a la vista · v99 Turismo del Lago · v100 Fiesta + Tu ciudad en números.
 
-## Próximas versiones — sesión A (ronda 4)
+## Hecho (rondas 4 y 5) — sesión A
+- v101 Vecinos con dinero · v102 Más al sur 3 · v103/104 Gráficas 3 y arreglo · v105 Ayudantes 4 · v107/108 Gráfico de crecimiento · v109 Oeste (Sierra Nevada, Minas de Oro, Rancho) · v110 Desierto y Bosque · v111 Oficios 3.
+
+## Próximas versiones — sesión A (ronda 6)
+1. **v112 Volcán y Ruinas**: últimos dos terrenos del suroeste (termas y obsidiana; ruinas con museo y tesoros para cavar).
+2. **v113 Robustez**: prueba de co-op simulada (dos páginas con el mismo S, acciones del invitado), tope de datos, textos PT/ES revisados.
+3. **v114 Eventos por terreno**: festival de la nieve en la Sierra, carrera de camellos en el Desierto, noche de luciérnagas en el Bosque.
+4. **v115 Rendimiento móvil 2**: caché del fondo por zona, menos trabajo por frame en zoom lejano.
+
+## Ronda 4 (hecha)
 1. **v101 Vecinos con dinero**: los vecinos con empleo cobran y gastan en la feria y el Mercado Grande (compran sobras del granero a buen precio); colas visibles; "consumo" en la Economía.
 2. **v102 Eventos de ciudad 2**: carrera de botes en el Lago del Sur (apuestas), festival de la cosecha con puestos, feria de ciencias en el colegio.
 3. **v103 Más al sur 3** (WH 9400): Viñedo (uvas → jugo de uva), Parque Nacional (animales, turismo), Ciudad Universitaria (lotes + universidad con empleos).

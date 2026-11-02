@@ -762,3 +762,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 ## Versión 111: Oficios para las tierras nuevas
 
 - Siete oficios más (chocolatero, viticultor, buscador de oro, pastor, vidriero, apicultor, cuidador del oasis): los vecinos van de día a las fábricas del cacao, el viñedo, las minas de oro, el rancho, el desierto y el bosque (`jobPos` genérico por `BUILD`) y piden esos productos en sus pedidos.
+
+## Versión 112: Volcán y Ruinas Antiguas (el mapa completo: 35 terrenos)
+
+- **Volcán** (nivel 25, 32000): cono con cráter, lava y humo (brilla de noche), **Taller de Obsidiana** (obsidiana ×2 con piedra; collar de obsidiana y oro en la Joyería) y **Termas** (servicio: +20, 12 empleos, piscinas con vapor y bañistas, entradas cada 12 min).
+- **Ruinas Antiguas** (nivel 24, 26000): columnas, senderos de piedra; cada 20 min aparece una X con pala (tocar = 300 monedas, piedra preciosa u obsidiana), también en la agenda del mapa; **Museo de las Ruinas** (+20, 12 empleos) con oficio arqueólogo.
+- Pruebas: compra, producción, collar, servicios, tesoro por toque (300) y rechazo de repetición, agenda; smoke y fuzz sin errores; capturas.
