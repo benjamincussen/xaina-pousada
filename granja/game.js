@@ -9,9 +9,11 @@ let LANG = (() => { try { const v = localStorage.getItem('sitio-lang'); if (v ==
 const NM = {
   pt: { trigo: 'Trigo', milho: 'Milho', cenoura: 'Cenoura', cana: 'Cana', ovo: 'Ovo', leite: 'Leite', racaoG: 'Ração de galinha', racaoV: 'Ração de vaca', pao: 'Pão', bolo: 'Bolo de cenoura', queijo: 'Queijo', acucar: 'Açúcar',
     moinho: 'Moinho', padaria: 'Padaria', queijaria: 'Queijaria', galinheiro: 'Galinheiro', estabulo: 'Estábulo',
+    algodao: 'Algodão', tecido: 'Tecido', rede: 'Rede de descanso', tecelagem: 'Tecelagem', coco: 'Coco', escola: 'Escola de kite',
     laranja: 'Laranja', manga: 'Manga', suco: 'Suco de laranja', vitamina: 'Vitamina de manga', mel: 'Mel', peixe: 'Peixe', paoMel: 'Pão de mel', sucos: 'Fábrica de sucos', apiario: 'Apiário', barco: 'Barco de pesca' },
   es: { trigo: 'Trigo', milho: 'Maíz', cenoura: 'Zanahoria', cana: 'Caña', ovo: 'Huevo', leite: 'Leche', racaoG: 'Ración de gallina', racaoV: 'Ración de vaca', pao: 'Pan', bolo: 'Pastel de zanahoria', queijo: 'Queso', acucar: 'Azúcar',
     moinho: 'Molino', padaria: 'Panadería', queijaria: 'Quesería', galinheiro: 'Gallinero', estabulo: 'Establo',
+    algodao: 'Algodón', tecido: 'Tela', rede: 'Hamaca', tecelagem: 'Tejeduría', coco: 'Coco', escola: 'Escuela de kite',
     laranja: 'Naranja', manga: 'Mango', suco: 'Jugo de naranja', vitamina: 'Batido de mango', mel: 'Miel', peixe: 'Pescado', paoMel: 'Pan de miel', sucos: 'Fábrica de jugos', apiario: 'Apiario', barco: 'Barco de pesca' },
 };
 const N = k => NM[LANG][k] || NM.pt[k] || (TX && TX[LANG] && typeof TX[LANG][k] === 'string' ? TX[LANG][k] : k);
@@ -43,6 +45,9 @@ const TX = {
     honeyIn: t => `Mel pronto em ${t}`, zoomHint: 'Use dois dedos para aproximar ou afastar o mapa.',
     shiftLbl: 'Contratar por', sh0: '20 min', sh1: '1 hora', sh2: '24 horas', autoSell: 'Vender sobras quando o celeiro encher', autoSellHint: 'Eles só vendem o que nenhuma encomenda precisa. Ampliar o celeiro e investir continua sendo decisão sua.',
     helperDoes2: 'Eles entregam as encomendas, plantam o que as encomendas pedem, fazem os produtos nos prédios, mantêm a ração dos animais, colhem e recolhem tudo, cuidam do pomar, das colmeias, do barco e cobram a Vila.',
+    lvlCap: '+50 lugares no celeiro', lvlTitle: l => `Nível ${l}!`, lvlCoins: c => `+${c} moedas de prêmio`, lvlUnlocked: 'Liberado agora', lvlNext: l => `No nível ${l}`, lvlNothing: 'Prêmio em moedas, +50 lugares no celeiro e encomendas que pagam mais.', lvlRoad: 'Próximos níveis', great: 'Que bom!',
+    silos: 'Silos', silo: 'Silo', siloHint: n => `Cada silo aparece no mapa e soma +100 lugares. ${n} de 4.`, buySilo: 'Construir silo',
+    land_praia: 'Terreno da Praia', landDesc_praia: 'Areia, mar e coqueiros que dão coco. Lá se constrói a Escola de kite, que dá o maior aluguel.',
     helpersTitle: 'Ajudantes', keptHost: 'Seu amigo também jogou separado: ficou o progresso desta sala.', hire: n => `Contratar ${n}`, helpersN: (n, m) => `${n} de ${m} ajudantes`, helpersWork: 'Cada ajudante faz uma tarefa ao mesmo tempo e eles constroem a Vila mais rápido.', shiftAll: n => `Pagar turno de 20 min para ${n === 1 ? 'o ajudante' : 'os ' + n + ' ajudantes'}`,
     land_vila: 'Terreno da Vila', landDesc_vila: 'A cidade: seus ajudantes constroem Pousada, Mercado e Restaurante, que dão moedas sozinhos.',
     pousada: 'Pousada', mercado: 'Mercado', restaurante: 'Restaurante', build: 'Construir', building: t => `Em obra: falta ${t}`, built: 'Pronto! Dá moedas sozinho.', rentReady: n => `Recolher ${n} moedas`, rentNext: (n, t) => `${n} moedas a cada 5 min. Próximas em ${t}`, buildFaster: n => `Com ${n} ajudante${n > 1 ? 's' : ''} a obra fica ${n}x mais rápida.`, lot: 'Lote para construir',
@@ -91,6 +96,9 @@ const TX = {
     honeyIn: t => `Miel lista en ${t}`, zoomHint: 'Usa dos dedos para acercar o alejar el mapa.',
     shiftLbl: 'Contratar por', sh0: '20 min', sh1: '1 hora', sh2: '24 horas', autoSell: 'Vender lo que sobra cuando se llene el granero', autoSellHint: 'Solo venden lo que ningún pedido necesita. Ampliar el granero e invertir sigue siendo decisión tuya.',
     helperDoes2: 'Entregan los pedidos, siembran lo que piden los pedidos, fabrican en los edificios, mantienen la ración de los animales, cosechan y recogen todo, cuidan el huerto, las colmenas, el barco y cobran en la Villa.',
+    lvlCap: '+50 espacios en el granero', lvlTitle: l => `¡Nivel ${l}!`, lvlCoins: c => `+${c} monedas de premio`, lvlUnlocked: 'Se desbloquea ahora', lvlNext: l => `En el nivel ${l}`, lvlNothing: 'Premio en monedas, +50 espacios en el granero y pedidos que pagan más.', lvlRoad: 'Próximos niveles', great: '¡Genial!',
+    silos: 'Silos', silo: 'Silo', siloHint: n => `Cada silo aparece en el mapa y suma +100 espacios. ${n} de 4.`, buySilo: 'Construir silo',
+    land_praia: 'Terreno de la Playa', landDesc_praia: 'Arena, mar y cocoteros que dan cocos. Ahí se construye la Escuela de kite, que da el mejor arriendo.',
     helpersTitle: 'Ayudantes', keptHost: 'Tu amigo también jugó por separado: quedó el avance de esta sala.', hire: n => `Contratar a ${n}`, helpersN: (n, m) => `${n} de ${m} ayudantes`, helpersWork: 'Cada ayudante hace una tarea al mismo tiempo y construyen la Villa más rápido.', shiftAll: n => `Pagar turno de 20 min ${n === 1 ? 'al ayudante' : 'a los ' + n + ' ayudantes'}`,
     land_vila: 'Terreno de la Villa', landDesc_vila: 'La ciudad: tus ayudantes construyen la Pousada, el Mercado y el Restaurante, que dan monedas solos.',
     pousada: 'Pousada', mercado: 'Mercado', restaurante: 'Restaurante', build: 'Construir', building: t => `En obra: falta ${t}`, built: '¡Listo! Da monedas solo.', rentReady: n => `Recoger ${n} monedas`, rentNext: (n, t) => `${n} monedas cada 5 min. Próximas en ${t}`, buildFaster: n => `Con ${n} ayudante${n > 1 ? 's' : ''} la obra va ${n}x más rápido.`, lot: 'Lote para construir',
@@ -136,11 +144,12 @@ const ITEMS = {
   ovo: { n: 'Ovo', v: 9 }, leite: { n: 'Leite', v: 16 }, racaoG: { n: 'Ração de galinha', v: 4 }, racaoV: { n: 'Ração de vaca', v: 7 },
   pao: { n: 'Pão', v: 15 }, bolo: { n: 'Bolo de cenoura', v: 42 }, queijo: { n: 'Queijo', v: 44 }, acucar: { n: 'Açúcar', v: 26 },
   sorvete: { n: 'Sorvete', v: 62 }, picole: { n: 'Picolé', v: 36 },
+  algodao: { n: 'Algodão', v: 14 }, tecido: { n: 'Tecido', v: 48 }, rede: { n: 'Rede', v: 130 }, coco: { n: 'Coco', v: 20 },
   laranja: { n: 'Laranja', v: 12 }, manga: { n: 'Manga', v: 15 }, suco: { n: 'Suco', v: 45 }, vitamina: { n: 'Vitamina', v: 58 }, mel: { n: 'Mel', v: 30 }, peixe: { n: 'Peixe', v: 28 }, paoMel: { n: 'Pão de mel', v: 70 },
 };
 const CROPS = {
   trigo: { t: 12, y: 2, cost: 1, lvl: 1, xp: 1 }, milho: { t: 35, y: 2, cost: 2, lvl: 1, xp: 2 },
-  cenoura: { t: 120, y: 2, cost: 4, lvl: 2, xp: 3 }, cana: { t: 240, y: 2, cost: 6, lvl: 4, xp: 5 },
+  cenoura: { t: 70, y: 2, cost: 4, lvl: 2, xp: 3 }, cana: { t: 140, y: 2, cost: 6, lvl: 4, xp: 5 }, algodao: { t: 50, y: 2, cost: 5, lvl: 7, xp: 4 },
 };
 const BUILD = {
   moinho: { n: 'Moinho', lvl: 1, q: 3, x: 320, y: 205, w: 96, h: 120, rec: [
@@ -151,6 +160,9 @@ const BUILD = {
     { o: 'pao', k: 1, i: { trigo: 3 }, t: 60, lvl: 2, xp: 3 },
     { o: 'bolo', k: 1, i: { cenoura: 2, ovo: 1, trigo: 1 }, t: 150, lvl: 3, xp: 6 },
     { o: 'paoMel', k: 1, i: { trigo: 2, mel: 1, ovo: 1 }, t: 120, lvl: 5, xp: 8, land: 'sul' }] },
+  tecelagem: { n: 'Tecelagem', lvl: 8, q: 2, x: 190, y: 985, w: 120, h: 84, rec: [
+    { o: 'tecido', k: 1, i: { algodao: 3 }, t: 60, lvl: 8, xp: 6 },
+    { o: 'rede', k: 1, i: { tecido: 2, cana: 1 }, t: 150, lvl: 8, xp: 10 }] },
   queijaria: { n: 'Queijaria', lvl: 4, q: 2, x: 556, y: 560, w: 116, h: 84, rec: [
     { o: 'queijo', k: 1, i: { leite: 2 }, t: 120, lvl: 4, xp: 6 }] },
   sorveteria: { n: 'Sorveteria', lvl: 6, q: 2, x: 900, y: 930, w: 130, h: 86, land: 'colina', rec: [
@@ -166,9 +178,12 @@ const LANDS = {
   sul: { lvl: 5, cost: 500, r: { x: 20, y: 1010, w: 1060, h: 300 }, sx: 380, sy: 1150 },
   colina: { lvl: 6, cost: 800, r: { x: 660, y: 680, w: 420, h: 300 }, sx: 870, sy: 800 },
   vila: { lvl: 7, cost: 1200, r: { x: 20, y: 1370, w: 1060, h: 320 }, sx: 560, sy: 1470 },
+  praia: { lvl: 9, cost: 2000, r: { x: 1110, y: 40, w: 370, h: 1650 }, sx: 1290, sy: 420 },
 };
 const TREES = [['laranja', 740, 210], ['laranja', 860, 210], ['laranja', 980, 210], ['manga', 740, 380], ['manga', 860, 380], ['manga', 980, 380]];
-const FRUIT = { laranja: { t: 90, y: 3, xp: 4 }, manga: { t: 140, y: 2, xp: 5 } };
+const FRUIT = { laranja: { t: 90, y: 3, xp: 4 }, manga: { t: 140, y: 2, xp: 5 }, coco: { t: 180, y: 2, xp: 6 } };
+const COCO_POS = [[1190, 300], [1310, 560], [1190, 800], [1310, 1000]];
+const SILOS = [{ x: 640, y: 215 }, { x: 640, y: 325 }, { x: 455, y: 160 }, { x: 405, y: 160 }], siloCost = n => [500, 900, 1400, 2000][n] || 0;
 const HIVES = [[110, 1110], [190, 1110], [110, 1220], [190, 1220]], HIVE_T = 110;
 const BOAT = { x: 640, y: 1190, t: 70, bait: { milho: 2 }, out: 'peixe', k: 2, xp: 5 };
 const LAKE = { x: 830, y: 1170, rx: 230, ry: 110 };
@@ -176,7 +191,7 @@ const MAXQ = 7, qCap = (S, k) => BUILD[k].q + ((S.slots && S.slots[k]) || 0), sl
 const sellPrice = k => Math.max(1, Math.round(ITEMS[k].v * 0.6));
 for (const B of Object.values(BUILD)) for (const r of B.rec) r.t = Math.max(10, Math.round(r.t * 0.6));
 const rushCost = sec => Math.max(2, Math.ceil(sec / 8));
-const XT_MAX = 12, treeCost = k => k === 'laranja' ? 150 : 220;
+const XT_MAX = 16, treeCost = k => k === 'laranja' ? 150 : 220;
 const XT_SPOTS = [[560, 470], [620, 520], [560, 160], [150, 960], [470, 980], [1060, 520], [700, 720], [800, 720], [1010, 720], [700, 860], [790, 860], [1040, 860], [1050, 960], [700, 960], [1060, 120]];
 const FIELD = { dx: 0, dy: 0 };
 // posições padrão de tudo que pode ser movido; o layout salvo (S.pos) é aplicado por cima
@@ -187,6 +202,7 @@ function captureDefaults() {
   for (const [k, D] of Object.entries(DECOS)) DEF['d_' + k] = { x: D.x, y: D.y, o: D };
   TREES.forEach((t, i) => { DEF['t' + i] = { x: t[1], y: t[2], tr: t }; });
   HIVES.forEach((h, i) => { DEF['h' + i] = { x: h[0], y: h[1], hv: h }; });
+  SILOS.forEach((o, i) => { DEF['s' + i] = { x: o.x, y: o.y, o }; });
   DEF.campo = { x: 0, y: 0, field: true };
 }
 function applyLayout(S) {
@@ -205,6 +221,7 @@ const PROJ = {
   pousada: { lvl: 7, cost: 800, need: { pao: 6, suco: 3 }, t: 300, inc: 60, x: 200, y: 1640, w: 170, h: 110 },
   mercado: { lvl: 8, cost: 1500, need: { queijo: 4, mel: 3 }, t: 480, inc: 100, x: 560, y: 1640, w: 160, h: 96 },
   restaurante: { lvl: 9, cost: 2500, need: { peixe: 6, bolo: 3 }, t: 600, inc: 160, x: 910, y: 1640, w: 160, h: 100 },
+  escola: { land: 'praia', lvl: 10, cost: 3000, need: { rede: 2, suco: 4, coco: 4 }, t: 720, inc: 250, x: 1300, y: 1330, w: 170, h: 100 },
 };
 const RENT_EVERY = 300, RENT_CAP = 6;
 const hCount = S => S.helper && S.helper.on ? (S.helper.n || 1) : 0;
@@ -218,7 +235,8 @@ const PENS = {
 PENS.galinheiro.t = 50; PENS.estabulo.t = 90; // ritmo mais rápido
 const BARN = { x: 548, y: 205, w: 124, h: 96 }, HOUSE = { x: 96, y: 205, w: 120, h: 86 }, BOARD = { x: 320, y: 905, w: 120, h: 70 };
 const LV = [0, 12, 35, 70, 120, 190, 280, 400, 550, 750, 1000, 1300];
-const MAXPLOTS = 12, PLOT0 = 6, WW = 1100, WH = 1720;
+for (let l = 12; l < 40; l++) LV.push(LV[l - 1] + 300 + (l - 11) * 160); // níveis até 40
+const MAXPLOTS = 12, PLOT0 = 6, WW = 1500, WH = 1720;
 const plotRect = i => ({ x: 168 + FIELD.dx + (i % 3) * 104, y: 290 + FIELD.dy + Math.floor(i / 3) * 82, w: 96, h: 72 });
 const plotCost = np => Math.round(25 * Math.pow(1.55, np - PLOT0));
 const capCost = cap => Math.round(60 + Math.max(0, cap - 100) / 50 * 70);
@@ -241,6 +259,7 @@ function migrate(S) {
   if (!S.deco || typeof S.deco !== 'object') S.deco = {};
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
+  if (typeof S.silos !== 'number') S.silos = 0;
   if (!S.capv2) { S.capv2 = 1; S.cap = (S.cap || 50) + 150; }
   if (S.helper && !S.helper.n) S.helper.n = 1; if (S.helper && !Array.isArray(S.helper.ps)) S.helper.ps = [];
   if (!S.pos || typeof S.pos !== 'object') S.pos = {};
@@ -260,7 +279,7 @@ const has = (S, need) => Object.entries(need).every(([k, q]) => (S.inv[k] || 0) 
 function take(S, need) { for (const [k, q] of Object.entries(need)) { S.inv[k] -= q; if (S.inv[k] <= 0) delete S.inv[k]; } }
 const give = (S, k, q) => { S.inv[k] = (S.inv[k] || 0) + q; };
 const plotReady = (pl, now) => pl.c && now >= pl.p + CROPS[pl.c].t * 1000;
-function addXp(S, x, out) { S.xp += x; while (S.lvl < LV.length && S.xp >= LV[S.lvl]) { S.lvl++; S.coins += 20 * S.lvl; out.fx.push(['lvl', S.lvl]); } }
+function addXp(S, x, out) { S.xp += x; while (S.lvl < LV.length && S.xp >= LV[S.lvl]) { S.lvl++; S.coins += 50 * S.lvl; S.cap += 50; out.fx.push(['lvl', S.lvl]); } }
 function unlockedItems(S) {
   const out = [];
   for (const [k, c] of Object.entries(CROPS)) if (c.lvl <= S.lvl) out.push(k);
@@ -268,6 +287,7 @@ function unlockedItems(S) {
   for (const b of Object.values(BUILD)) if (okB(S, b)) for (const r of b.rec) if (okR(S, r) && !r.o.startsWith('racao')) out.push(r.o);
   if (S.land.leste) out.push('laranja', 'manga');
   if (S.land.sul) out.push('mel', 'peixe');
+  if (S.land.praia) out.push('coco');
   return out;
 }
 function genOrder(S) {
@@ -326,7 +346,7 @@ function apply(S, a, now) {
   } else if (a.a === 'land') {
     const Ld = LANDS[a.k]; if (!Ld || S.land[a.k]) return fail('');
     if (Ld.lvl > S.lvl) return fail(L('unlockAt', Ld.lvl)); if (S.coins < Ld.cost) return fail(L('noCoins'));
-    S.coins -= Ld.cost; S.land[a.k] = 1; if (a.k === 'leste') S.trees = TREES.map(() => now); if (a.k === 'sul') S.hives = HIVES.map(() => now);
+    S.coins -= Ld.cost; S.land[a.k] = 1; if (a.k === 'praia') for (const [x, y] of COCO_POS) S.xt.push({ k: 'coco', x, y, t: now }); if (a.k === 'leste') S.trees = TREES.map(() => now); if (a.k === 'sul') S.hives = HIVES.map(() => now);
     out.fx.push(['land', a.k]);
   } else if (a.a === 'tree') {
     const i = a.i | 0, tr = treeAt(S, i); if (!tr) return fail('');
@@ -353,18 +373,21 @@ function apply(S, a, now) {
     else if (a.t === 'boat') { if (S.boat.e && S.boat.e > now) { rem = S.boat.e - now; doIt = () => { S.boat.e = now; }; } }
     if (!doIt) return fail(''); const c = rushCost(Math.ceil(rem / 1000)); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; doIt(); out.fx.push(['coins', -c]); out.fx.push(['rush']);
+  } else if (a.a === 'silo') {
+    if (S.silos >= SILOS.length) return fail(''); const c = siloCost(S.silos); if (S.coins < c) return fail(L('noCoins'));
+    S.coins -= c; S.silos++; S.cap += 100; out.fx.push(['coins', -c]); out.fx.push(['silo', S.silos - 1]);
   } else if (a.a === 'hire') {
     const n = hCount(S); if (!n || n >= HELPER_NAMES.length) return fail(''); const c = hireCost(n); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; S.helper.n = n + 1; out.fx.push(['coins', -c]); out.fx.push(['hired', n]);
   } else if (a.a === 'build') {
-    const P = PROJ[a.k]; if (!P || !S.land.vila || S.city[a.k]) return fail(''); if (P.lvl > S.lvl) return fail(L('unlockAt', P.lvl));
+    const P = PROJ[a.k]; if (!P || !S.land[P.land || 'vila'] || S.city[a.k]) return fail(''); if (P.lvl > S.lvl) return fail(L('unlockAt', P.lvl));
     if (S.coins < P.cost) return fail(L('noCoins')); if (!has(S, P.need)) return fail(L('missingProd'));
     S.coins -= P.cost; take(S, P.need); const dur = Math.max(30, Math.round(P.t / Math.max(1, hCount(S)))) * 1000; S.city[a.k] = { s: now, e: now + dur, c: now + dur }; addXp(S, 20, out); out.fx.push(['coins', -P.cost]); out.fx.push(['build', a.k]);
   } else if (a.a === 'rent') {
     const c = S.city[a.k]; if (!c || c.e > now) return fail(''); const amt = rentNow(S, a.k, now); if (!amt) return fail(L('rentNext', PROJ[a.k].inc, fmtT(Math.ceil((c.c + RENT_EVERY * 1000 - now) / 1000))));
     const per = Math.floor((now - c.c) / (RENT_EVERY * 1000)); c.c = per > RENT_CAP ? now : c.c + per * RENT_EVERY * 1000; S.coins += amt; out.fx.push(['coins', amt]); out.fx.push(['gain', 'coin', amt, 'city', a.k]);
   } else if (a.a === 'buyTree') {
-    if (!FRUIT[a.k] || S.lvl < 4 || S.xt.length >= XT_MAX) return fail(''); const c = treeCost(a.k); if (S.coins < c) return fail(L('noCoins'));
+    if (!FRUIT[a.k] || a.k === 'coco' || S.lvl < 4 || S.xt.length >= XT_MAX) return fail(''); const c = treeCost(a.k); if (S.coins < c) return fail(L('noCoins'));
     const all = treeList(S), spot = XT_SPOTS.find(([x, y]) => all.every(t => Math.hypot(t.x - x, t.y - y) > 70)) || XT_SPOTS[S.xt.length % XT_SPOTS.length];
     S.coins -= c; S.xt.push({ k: a.k, x: spot[0], y: spot[1], t: now }); out.fx.push(['coins', -c]); out.fx.push(['newTree', S.xt.length - 1]);
   } else if (a.a === 'move') {
@@ -439,6 +462,10 @@ function drawIcon(g, k, s) {
     case 'paoMel': g.fillStyle = '#8a4a1f'; g.beginPath(); g.ellipse(50, 60, 34, 26, 0, 0, 6.283); g.fill(); g.strokeStyle = '#4f2810'; g.lineWidth = 4; g.stroke(); g.fillStyle = '#ffb627'; g.beginPath(); g.moveTo(22, 52); g.quadraticCurveTo(50, 26, 78, 52); g.lineTo(78, 56); g.quadraticCurveTo(70, 70, 64, 56); g.quadraticCurveTo(56, 72, 48, 56); g.quadraticCurveTo(38, 70, 30, 56); g.lineTo(22, 56); g.closePath(); g.fill(); break;
     case 'land': g.fillStyle = '#6fbf4a'; g.fillRect(12, 40, 76, 48); g.fillStyle = '#3f8f2e'; for (const [x, y] of [[26, 52], [52, 64], [74, 50]]) { g.beginPath(); g.arc(x, y, 9, 0, 6.283); g.fill(); } g.fillStyle = '#c9905a'; g.fillRect(40, 14, 40, 26); g.fillStyle = '#7a4b25'; g.fillRect(46, 40, 6, 30); g.fillStyle = '#fff'; g.fillRect(46, 22, 28, 4); g.fillRect(46, 30, 20, 4); break;
     case 'helper': blob(50, 92, 30, 12, '#3f8f2e'); g.fillStyle = '#2f9e6e'; g.fillRect(28, 60, 44, 34); g.fillStyle = '#f2c6a0'; g.beginPath(); g.arc(50, 44, 20, 0, 6.283); g.fill(); g.fillStyle = '#3a2412'; g.beginPath(); g.arc(43, 44, 2.5, 0, 6.283); g.arc(57, 44, 2.5, 0, 6.283); g.fill(); g.strokeStyle = '#3a2412'; g.lineWidth = 3; g.beginPath(); g.arc(50, 50, 7, 0.3, 2.84); g.stroke(); g.fillStyle = '#2f9e6e'; g.beginPath(); g.arc(50, 34, 20, Math.PI, 0); g.fill(); g.fillRect(50, 30, 28, 6); g.fillStyle = '#ffc23a'; g.fillRect(36, 70, 8, 8); g.fillRect(56, 70, 8, 8); break;
+    case 'algodao': g.strokeStyle = '#6b8f3a'; g.lineWidth = 5; g.beginPath(); g.moveTo(50, 94); g.lineTo(50, 50); g.stroke(); g.fillStyle = '#8a5a2b'; for (const [x, y] of [[36, 46], [64, 46], [50, 30]]) { g.beginPath(); g.moveTo(x - 14, y + 8); g.lineTo(x, y + 16); g.lineTo(x + 14, y + 8); g.fill(); } for (const [x, y, r] of [[36, 40, 13], [64, 40, 13], [50, 24, 14], [50, 42, 12]]) blob(x, y, r, r * 0.9, '#ffffff', '#cfcfcf'); break;
+    case 'tecido': for (let i = 0; i < 3; i++) { g.fillStyle = ['#7b5ea7', '#e0533d', '#3f8fd1'][i]; g.beginPath(); if (g.roundRect) g.roundRect(16, 22 + i * 22, 68, 20, 6); else g.rect(16, 22 + i * 22, 68, 20); g.fill(); g.fillStyle = 'rgba(255,255,255,.35)'; g.fillRect(16, 26 + i * 22, 68, 3); } break;
+    case 'rede': g.fillStyle = '#7a4b25'; g.fillRect(10, 20, 8, 72); g.fillRect(82, 20, 8, 72); g.strokeStyle = '#e8d6a4'; g.lineWidth = 3; g.beginPath(); g.moveTo(14, 30); g.lineTo(28, 50); g.moveTo(86, 30); g.lineTo(72, 50); g.stroke(); g.fillStyle = '#e0533d'; g.beginPath(); g.moveTo(26, 48); g.quadraticCurveTo(50, 92, 74, 48); g.quadraticCurveTo(50, 70, 26, 48); g.fill(); g.strokeStyle = '#ffd23f'; g.lineWidth = 4; g.beginPath(); g.moveTo(30, 56); g.quadraticCurveTo(50, 84, 70, 56); g.stroke(); break;
+    case 'coco': blob(50, 56, 32, 30, '#7a4b25', '#4f2810'); g.fillStyle = 'rgba(255,255,255,.18)'; for (let i = 0; i < 5; i++) g.fillRect(28 + i * 9, 36 + (i % 2) * 6, 3, 30); blob(42, 42, 5, 4, '#3a2412'); blob(56, 42, 5, 4, '#3a2412'); blob(49, 52, 5, 4, '#3a2412'); g.fillStyle = '#4f9a2f'; g.beginPath(); g.ellipse(62, 22, 16, 5, -0.5, 0, 6.283); g.fill(); break;
     case 'move': g.fillStyle = '#3f8fd1'; for (let r = 0; r < 4; r++) { g.save(); g.translate(50, 50); g.rotate(r * Math.PI / 2); g.beginPath(); g.moveTo(0, -42); g.lineTo(14, -26); g.lineTo(6, -26); g.lineTo(6, -6); g.lineTo(-6, -6); g.lineTo(-6, -26); g.lineTo(-14, -26); g.closePath(); g.fill(); g.restore(); } blob(50, 50, 10, 10, '#1d5a8f'); break;
     case 'sorvete': g.fillStyle = '#d9a35a'; g.beginPath(); g.moveTo(30, 50); g.lineTo(70, 50); g.lineTo(50, 96); g.closePath(); g.fill(); g.strokeStyle = '#a8741c'; g.lineWidth = 3; for (let i = 0; i < 4; i++) { g.beginPath(); g.moveTo(34 + i * 10, 52); g.lineTo(50, 92); g.stroke(); } blob(50, 40, 24, 20, '#ffb627', '#d98a10'); blob(42, 22, 14, 12, '#ffd76a'); blob(60, 16, 5, 5, '#e0533d'); break;
     case 'picole': g.fillStyle = '#e8c58a'; g.fillRect(45, 70, 10, 26); g.fillStyle = '#ff9a1f'; g.beginPath(); if (g.roundRect) g.roundRect(30, 10, 40, 66, 18); else g.rect(30, 10, 40, 66); g.fill(); g.strokeStyle = '#c96a0a'; g.lineWidth = 4; g.stroke(); g.fillStyle = 'rgba(255,255,255,.45)'; g.fillRect(38, 18, 6, 40); break;
@@ -525,6 +552,7 @@ function editHit(S, w) {
   if (S.land.sul) for (let i = 0; i < HIVES.length; i++) if (Math.abs(w.x - HIVES[i][0]) < 30 && w.y > HIVES[i][1] - 62 && w.y < HIVES[i][1] + 10) return { k: 'h' + i, x: HIVES[i][0], y: HIVES[i][1] };
   for (const [k, B] of Object.entries(BUILD)) { if (B.land && !S.land[B.land]) continue; if (inR(w, bRect(B))) return { k, x: B.x, y: B.y }; }
   for (const [k, P] of Object.entries(PENS)) if (inR(w, penRect(P))) return { k, x: P.x, y: P.y };
+  for (let i = 0; i < S.silos; i++) if (Math.abs(w.x - SILOS[i].x) < 30 && w.y > SILOS[i].y - 110 && w.y < SILOS[i].y + 8) return { k: 's' + i, x: SILOS[i].x, y: SILOS[i].y };
   const a = plotRect(0), b = plotRect(MAXPLOTS - 1); if (w.x > a.x && w.x < b.x + b.w && w.y > a.y && w.y < b.y + b.h) return { k: 'campo', x: FIELD.dx, y: FIELD.dy };
   return null;
 }
@@ -533,7 +561,7 @@ function tapAt(p) {
   if (G.edit) return;
   ping(p.x, p.y);
   for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR(p, Ld.r)) return openSheet('land', k);
-  if (S.land.vila) for (const [k, P] of Object.entries(PROJ)) if (Math.abs(p.x - P.x) < P.w / 2 + 10 && p.y > P.y - P.h - 70 && p.y < P.y + 12) { if (rentNow(S, k, now) > 0) return void act({ a: 'rent', k }); return openSheet('proj', k); }
+  for (const [k, P] of Object.entries(PROJ)) if (S.land[P.land || 'vila'] && Math.abs(p.x - P.x) < P.w / 2 + 10 && p.y > P.y - P.h - 70 && p.y < P.y + 12) { if (rentNow(S, k, now) > 0) return void act({ a: 'rent', k }); return openSheet('proj', k); }
   for (const t of treeList(S)) if (Math.hypot(p.x - t.x, p.y - (t.y - 40)) < 52) return treeReady(S, t.i, now) ? void act({ a: 'tree', i: t.i }) : openSheet('rush', { t: 'tree', i: t.i });
   if (S.land.sul) { for (const [hx, hy] of HIVES) if (Math.abs(p.x - hx) < 34 && p.y > hy - 60 && p.y < hy + 12) return void act({ a: 'hive' });
     if (p.x > BOAT.x - 120 && p.x < BOAT.x + 120 && p.y > BOAT.y - 70 && p.y < BOAT.y + 50) return openSheet('boat'); }
@@ -554,6 +582,7 @@ function tapAt(p) {
     const r = act({ a: 'pen', k }, true); if (!r.ok) openSheet('pen', k); return;
   }
   if (S.helper && S.helper.on && (AV.hs || []).some(av => Math.hypot(p.x - av.x, p.y - (av.y - 30)) < 34)) return openSheet('helper');
+  for (let i = 0; i < S.silos; i++) if (Math.abs(p.x - SILOS[i].x) < 30 && p.y > SILOS[i].y - 110 && p.y < SILOS[i].y + 8) return openSheet('barn');
   if (inR(p, bRect(BARN))) return openSheet('barn');
   if (inR(p, bRect(BOARD))) return openSheet('orders');
   if (inR(p, bRect(HOUSE))) return openSheet('menu');
@@ -590,7 +619,8 @@ function playFx(fx) {
     if (f[0] === 'newTree') { SND.plant(); const t = G.S.xt[f[1]]; if (t) { CAM.x = t.x; CAM.y = t.y - 40; clampCam(); for (let i = 0; i < 14; i++) SPARK.push({ x: t.x, y: t.y - 30, vx: (Math.random() - 0.5) * 140, vy: -50 - Math.random() * 110, t: 0, c: ['#8cc63f', '#ffd23f', '#ffffff'][i % 3] }); } }
     if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
-    if (f[0] === 'lvl') { SND.lvl(); toast(L('lvlUp', f[1], levelNews(f[1])), 3500); }
+    if (f[0] === 'lvl') { SND.lvl(); openSheet('lvl', f[1]); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
+    if (f[0] === 'silo') { SND.lvl(); burst(SILOS[f[1]].x, SILOS[f[1]].y - 60, 'coin'); }
   }
 }
 function levelNews(l) {
@@ -598,6 +628,8 @@ function levelNews(l) {
   for (const [k, c] of Object.entries(CROPS)) if (c.lvl === l) n.push(N(k));
   for (const [bk, b] of Object.entries(BUILD)) { if (b.lvl === l) n.push(N(bk)); else for (const r of b.rec) if (r.lvl === l && b.lvl < l) n.push(N(r.o)); }
   for (const [pk, p] of Object.entries(PENS)) if (p.lvl === l) n.push(N(pk));
+  for (const [lk, Ld] of Object.entries(LANDS)) if (Ld.lvl === l) n.push(L('land_' + lk));
+  for (const [pk, P] of Object.entries(PROJ)) if (P.lvl === l) n.push(N(pk));
   return n.length ? L('news', n.join(', ')) : '';
 }
 function ping(x, y) { G.myPing = [Math.round(x), Math.round(y), Date.now()]; walkTo(AV.me, x, y); if (NET.room) NET.room.presence({ ping: G.myPing, me: meInfo() }).catch(() => {}); }
@@ -605,7 +637,8 @@ let bcT = 0, bcLast = 0;
 function broadcast() { if (G.mode !== 'host' || !NET.room) return; const now = Date.now(); clearTimeout(bcT); const send = () => { bcLast = Date.now(); NET.room.presence({ st: G.S, now: Date.now() }).catch(() => {}); }; if (now - bcLast > 150) send(); else bcT = setTimeout(send, 150); }
 // escolhe e faz uma tarefa pendente; devolve a ação feita
 // o que as encomendas abertas pedem
-function orderNeeds(S, now) { const need = {}; for (const o of S.orders) if (o.w <= now) for (const [k, q] of o.it) need[k] = (need[k] || 0) + q; return need; }
+function orderNeeds(S, now) { const need = {}; for (const o of S.orders) if (o.w <= now) for (const [k, q] of o.it) need[k] = (need[k] || 0) + q;
+  for (const [pk, P] of Object.entries(PROJ)) if (!S.city[pk] && P.lvl <= S.lvl && S.land[P.land || 'vila']) for (const [k, q] of Object.entries(P.need)) need[k] = (need[k] || 0) + q; return need; }
 function findRecipe(S, out) { for (const [b, B] of Object.entries(BUILD)) { if (!okB(S, B)) continue; const i = B.rec.findIndex(r => r.o === out && okR(S, r)); if (i >= 0) return { b, i, r: B.rec[i] }; } return null; }
 const queued = (S, b, out) => S.bld[b].q.filter(j => BUILD[b].rec[j.r].o === out).length * (BUILD[b].rec.find(r => r.o === out) || { k: 1 }).k;
 // escolhe o que plantar: primeiro o que falta para as encomendas, depois o que falta para a ração
@@ -648,7 +681,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.14';
+const BUILD_V = '2026-11-02.16';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -838,6 +871,12 @@ function renderSheet() {
       ? `<div class="card"><p class="sub">${L('newOrderIn', fmtT(Math.ceil((o.w - now) / 1000)))}</p></div>`
       : `<div class="card">${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>${img('coin')}${o.c}</span><span>${img('star')}${o.x}</span></span><span style="flex:1"></span>
         <button class="btn gray" type="button" data-discard="${o.id}" aria-label="${L('discardAria')}">✕</button><button class="btn" type="button" data-deliver="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`).join('');
+  } else if (SH.type === 'lvl') {
+    const l = SH.arg; t.textContent = L('lvlTitle', l); const news = levelNews(l), nxt = levelNews(l + 1);
+    h = `<div class="card" style="align-items:center;text-align:center"><b style="font-family:var(--display);font-size:38px;color:#2f7a22">${l}</b><p class="sub" style="display:flex;gap:6px;align-items:center;justify-content:center">${img('coin').replace('<img', '<img style="width:24px;height:24px"')} ${L('lvlCoins', 50 * l)}</p><p class="sub">${img('barn').replace('<img', '<img style="width:24px;height:24px;vertical-align:-6px"')} ${L('lvlCap')}</p></div>
+      <div class="card"><span class="lbl">${L('lvlUnlocked')}</span><p style="margin:0;font-weight:800">${news ? news.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
+      <div class="card"><span class="lbl">${L('lvlNext', l + 1)}</span><p style="margin:0;font-weight:700">${nxt ? nxt.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
+      <button class="btn" type="button" data-close="1">${L('great')}</button>`;
   } else if (SH.type === 'proj') {
     const k = SH.arg, P = PROJ[k], c = S.city[k]; t.textContent = N(k);
     if (!c) h = `<div class="card"><p class="sub">${L('lot')}</p>${P.lvl > S.lvl ? `<p class="sub">${L('unlockAt', P.lvl)}</p>` : `${needHtml(S, P.need)}<p class="sub">${L('buildFaster', Math.max(1, hCount(S)))} · ${fmtT(Math.max(30, Math.round(P.t / Math.max(1, hCount(S)))))}</p>
@@ -877,6 +916,8 @@ function renderSheet() {
       <span class="lbl">${L('animals')}</span>${Object.entries(PENS).filter(([, P]) => P.lvl <= S.lvl).map(([k]) => { const n = S.pens[k].a.length, m = PEN_MAX[k];
         return `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(PENS[k].out)}</span><div style="flex:1"><b>${L(k === 'galinheiro' ? 'buyHen' : 'buyCow')}</b><br><small>${N(k)} · ${L('haveN', n, m)}</small></div>
         ${n >= m ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-animal="${k}" ${S.coins < animalCost(k, n) ? 'disabled' : ''}>${img('coin')} ${animalCost(k, n)}</button>`}</div></div>`; }).join('')}
+      <span class="lbl">${L('silos')}</span><div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center"><img src="${siloIcon()}" alt=""></span><div style="flex:1"><b>${L('silo')} (+100)</b><br><small>${L('siloHint', S.silos)}</small></div>
+        ${S.silos >= SILOS.length ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-silo="1" ${S.coins < siloCost(S.silos) ? 'disabled' : ''}>${img('coin')} ${siloCost(S.silos)}</button>`}</div></div>
       ${S.lvl >= 4 ? `<span class="lbl">${L('trees')}</span><p class="sub">${L('treesN', S.xt.length, XT_MAX)}</p><div class="grid">${[['laranja', 'buyTreeL'], ['manga', 'buyTreeM']].map(([k, lb]) => `<button class="tile" type="button" data-tree="${k}" ${S.xt.length >= XT_MAX || S.coins < treeCost(k) ? 'disabled' : ''}>${img(k)}${L(lb)}<small>${img('coin').replace('<img', '<img style="width:14px;height:14px;vertical-align:-2px"')} ${treeCost(k)}</small></button>`).join('')}</div>` : ''}
       <span class="lbl">${L('decos')}</span><p class="sub">${L('decoBonus', decoBonus(S))}</p><div class="grid">${Object.entries(DECOS).map(([k, D]) => `<button class="tile" type="button" data-deco="${k}" ${S.deco[k] || S.coins < D.cost ? 'disabled' : ''}><img src="${decoIcon(k)}" alt="">${L('deco_' + k)}<small>${S.deco[k] ? L('bought') : img('coin').replace('<img', '<img style="width:14px;height:14px;vertical-align:-2px"') + ' ' + D.cost}</small></button>`).join('')}</div>
       <span class="lbl">${L('lands')}</span>${Object.entries(LANDS).map(([k, Ld]) => `<div class="card"><div class="row">${img('land')}<div style="flex:1"><b>${L('land_' + k)}</b><br><small>${L('landDesc_' + k)}</small></div>
@@ -889,6 +930,7 @@ function renderSheet() {
     h = `<p class="sub">${L('stats', S.lvl, S.xp, S.coins)}</p>
       ${G.mode === 'guest' ? `<p class="sub">${L('guestNote')}</p>` : ''}
       ${host ? `<button class="btn blue" type="button" data-invite="1">${NET.role === 'host' ? L('seeCode') : L('invite')}</button>` : ''}
+      <span class="lbl">${L('lvlRoad')}</span>${[1, 2, 3].map(d => { const nn = levelNews(S.lvl + d); return `<p class="sub" style="margin:0">${L('lvl', S.lvl + d)}: ${nn ? nn.replace(/^[^:]+: /, '') : L('lvlNothing')}</p>`; }).join('')}
       <span class="lbl">${L('langLbl')}</span>${langButtons()}
       <button class="btn gray" type="button" data-exit="1">${L('backHome')}</button>`;
   }
@@ -913,6 +955,8 @@ $('sBody').addEventListener('click', e => {
   if (d.rushp) act({ a: 'rush', t: 'pen', k: SH.arg });
   if (d.rushboat) act({ a: 'rush', t: 'boat' });
   if (d.hire) act({ a: 'hire' });
+  if (d.silo) act({ a: 'silo' });
+  if (d.close) { closeSheet(); return; }
   if (d.build) act({ a: 'build', k: d.build });
   if (d.rent) act({ a: 'rent', k: d.rent });
   if (d.rushc) act({ a: 'rush', t: 'city', k: d.rushc });
@@ -971,6 +1015,10 @@ function makeBg(lands) {
   for (const [k, Ld] of Object.entries(LANDS)) if (!lands[k]) { const r = Ld.r; g.fillStyle = 'rgba(25,70,20,.42)'; rr(g, r.x, r.y, r.w, r.h, 26); g.fill();
     for (let i = 0; i < Math.round(r.w * r.h / 2600); i++) { const x = r.x + 20 + R() * (r.w - 40), y = r.y + 30 + R() * (r.h - 40); if (Math.hypot(x - Ld.sx, y - Ld.sy) < 90) continue; bush(g, x, y, 0.8 + R() * 0.7, '#2f6f22', '#3f8f2e'); }
     g.setLineDash([10, 8]); g.strokeStyle = 'rgba(255,255,255,.55)'; g.lineWidth = 3; rr(g, r.x, r.y, r.w, r.h, 26); g.stroke(); g.setLineDash([]); }
+  // praia e mar no lado direito
+  { const sg = g.createLinearGradient(1100, 0, 1500, 0); sg.addColorStop(0, 'rgba(240,222,170,0)'); sg.addColorStop(0.12, '#f2dfa8'); sg.addColorStop(1, '#f6e6b8'); g.fillStyle = sg; g.fillRect(1100, 0, 400, WH);
+    const og = g.createLinearGradient(1400, 0, 1500, 0); og.addColorStop(0, '#5fc3e8'); og.addColorStop(1, '#2a8cc4'); g.fillStyle = og; g.beginPath(); g.moveTo(1500, 0); g.lineTo(1420, 0); for (let y = 0; y <= WH; y += 40) g.lineTo(1412 + Math.sin(y * 0.02) * 10, y); g.lineTo(1500, WH); g.closePath(); g.fill();
+    for (let i = 0; i < 60; i++) { g.fillStyle = 'rgba(200,170,110,.35)'; g.beginPath(); g.arc(1130 + R() * 270, R() * WH, 1.5 + R() * 2, 0, 6.283); g.fill(); } }
   // cerca em volta de tudo
   g.strokeStyle = '#a8743f'; g.lineWidth = 4; g.strokeRect(10, 24, WW - 20, WH - 34); g.fillStyle = '#8a5a2b';
   for (let x = 10; x <= WW - 10; x += 32) { g.fillRect(x - 3, 12, 6, 20); g.fillRect(x - 3, WH - 22, 6, 20); } for (let y = 24; y <= WH - 10; y += 32) { g.fillRect(4, y - 4, 12, 8); g.fillRect(WW - 16, y - 4, 12, 8); }
@@ -995,7 +1043,10 @@ function palm(g, x, y, s, T) { shadow(g, x + 10 * s, y, 60 * s); const sw = Math
   const tx = x + 6 * s + sw, ty = y - 78 * s;
   for (let i = 0; i < 7; i++) { const a = -Math.PI / 2 + (i - 3) * 0.55 + Math.sin(T + i) * 0.04; g.fillStyle = i % 2 ? '#3f9a2f' : '#52b13c'; g.beginPath(); g.moveTo(tx, ty); g.quadraticCurveTo(tx + Math.cos(a - 0.3) * 30 * s, ty + Math.sin(a - 0.3) * 30 * s - 6 * s, tx + Math.cos(a) * 46 * s, ty + Math.sin(a) * 46 * s + 14 * s); g.quadraticCurveTo(tx + Math.cos(a + 0.3) * 24 * s, ty + Math.sin(a + 0.3) * 24 * s, tx, ty); g.fill(); }
   g.fillStyle = '#7a5a2a'; for (const [dx, dy] of [[-5, 4], [4, 5], [0, 9]]) { g.beginPath(); g.arc(tx + dx * s, ty + dy * s, 4.5 * s, 0, 6.283); g.fill(); } }
-function fruitTree(g, k, x, y, ready, p, T) { shadow(g, x, y, 90); g.fillStyle = '#6b4120'; g.fillRect(x - 6, y - 34, 12, 34); const sw = Math.sin(T + x) * 1.2;
+function fruitTree(g, k, x, y, ready, p, T) {
+  if (k === 'coco') { palm(g, x, y, 1.3, T); const sw = Math.sin(T * 0.9 + x * 0.1) * 3 * 1.3, tx = x + 6 * 1.3 + sw, ty = y - 78 * 1.3; const n = ready ? 5 : Math.floor(p * 4);
+    for (let i = 0; i < n; i++) { g.fillStyle = ready ? '#7a4b25' : '#8cc63f'; g.beginPath(); g.arc(tx + Math.cos(i * 1.3 + 1) * 9, ty + 8 + Math.sin(i * 1.3 + 1) * 6, 6, 0, 6.283); g.fill(); } return; }
+  shadow(g, x, y, 90); g.fillStyle = '#6b4120'; g.fillRect(x - 6, y - 34, 12, 34); const sw = Math.sin(T + x) * 1.2;
   const c1 = k === 'laranja' ? '#2f7f26' : '#367f27', c2 = k === 'laranja' ? '#3d9a2f' : '#4aa236';
   for (const [dx, dy, r, c] of [[0, -62, 34, c1], [-24, -48, 24, c1], [24, -48, 24, c1], [0, -76, 24, c2], [-10, -84, 10, 'rgba(255,255,255,.15)']]) { g.fillStyle = c; g.beginPath(); g.arc(x + dx + sw, y + dy, r, 0, 6.283); g.fill(); }
   const n = ready ? 7 : Math.floor(p * 5); for (let i = 0; i < n; i++) { const fx = x + sw + Math.cos(i * 2.4) * (12 + (i % 3) * 8), fy = y - 60 + Math.sin(i * 2.4) * 18;
@@ -1014,7 +1065,7 @@ function saleSign(g, x, y, k, S) { const Ld = LANDS[k]; shadow(g, x, y, 90); g.f
   g.font = '900 12px Nunito, sans-serif'; g.fillText(S && Ld.lvl > S.lvl ? L('lvl', Ld.lvl) : '', x, y - 64); if (!S || Ld.lvl <= S.lvl) { g.drawImage(iconCanvas('coin'), x - 26, y - 76, 18, 18); g.fillText(String(Ld.cost), x + 6, y - 62); } }
 const SPARK = [];
 // explosão de partículas ao colher/recolher, na cor do produto
-const ITEM_COL = { trigo: '#f2c14e', milho: '#ffd23f', cenoura: '#ff8c1a', cana: '#7cc04b', ovo: '#fff3dc', leite: '#ffffff', laranja: '#ff9a1f', manga: '#ffb627', mel: '#ffb627', peixe: '#5aa9d6', coin: '#ffc23a' };
+const ITEM_COL = { algodao: '#ffffff', tecido: '#7b5ea7', rede: '#e0533d', coco: '#7a4b25', trigo: '#f2c14e', milho: '#ffd23f', cenoura: '#ff8c1a', cana: '#7cc04b', ovo: '#fff3dc', leite: '#ffffff', laranja: '#ff9a1f', manga: '#ffb627', mel: '#ffb627', peixe: '#5aa9d6', coin: '#ffc23a' };
 function burst(x, y, k) { const c = ITEM_COL[k] || '#ffd23f'; for (let i = 0; i < 16; i++) { const a = Math.random() * 6.283, v = 70 + Math.random() * 130; SPARK.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 90, t: 0, c: i % 3 ? c : (i % 2 ? '#8cc63f' : '#ffffff'), leaf: i % 3 === 0 }); } }
 function drawDeco(g, k, x, y, T) {
   if (k === 'banco') { shadow(g, x, y, 70); g.fillStyle = '#6b4120'; g.fillRect(x - 26, y - 14, 5, 14); g.fillRect(x + 21, y - 14, 5, 14); g.fillStyle = '#a8743f'; for (let i = 0; i < 2; i++) g.fillRect(x - 30, y - 20 - i * 7, 60, 5); for (let i = 0; i < 2; i++) g.fillRect(x - 30, y - 38 - i * 7, 60, 5); g.fillStyle = '#6b4120'; g.fillRect(x - 28, y - 44, 4, 26); g.fillRect(x + 24, y - 44, 4, 26); }
@@ -1031,6 +1082,10 @@ function drawDeco(g, k, x, y, T) {
 }
 const DECO_URL = {};
 function decoIcon(k) { if (!DECO_URL[k]) { const c = document.createElement('canvas'); c.width = c.height = 96; const g = c.getContext('2d'); g.translate(48, 82); g.scale(0.9, 0.9); drawDeco(g, k, 0, 0, 0); DECO_URL[k] = c.toDataURL(); } return DECO_URL[k]; }
+function siloShape(g, x, y) { shadow(g, x, y, 70); const gr = g.createLinearGradient(x - 26, 0, x + 26, 0); gr.addColorStop(0, '#d9dcd6'); gr.addColorStop(0.5, '#ffffff'); gr.addColorStop(1, '#a9ada6'); g.fillStyle = gr; g.fillRect(x - 26, y - 92, 52, 92);
+  g.strokeStyle = 'rgba(0,0,0,.18)'; g.lineWidth = 2; for (let yy = y - 80; yy < y; yy += 16) { g.beginPath(); g.moveTo(x - 26, yy); g.lineTo(x + 26, yy); g.stroke(); }
+  g.fillStyle = '#b5523b'; g.beginPath(); g.ellipse(x, y - 92, 28, 10, 0, Math.PI, 0); g.lineTo(x + 28, y - 92); g.quadraticCurveTo(x, y - 128, x - 28, y - 92); g.fill(); g.fillStyle = '#7a4b25'; g.fillRect(x - 8, y - 24, 16, 24); g.strokeStyle = '#7a4b25'; g.lineWidth = 2; g.strokeRect(x - 26, y - 92, 52, 92); }
+let SILO_URL = ''; function siloIcon() { if (!SILO_URL) { const c = document.createElement('canvas'); c.width = c.height = 96; const g = c.getContext('2d'); g.translate(48, 92); g.scale(0.62, 0.62); siloShape(g, 0, 0); SILO_URL = c.toDataURL(); } return SILO_URL; }
 const BUTTER = Array.from({ length: 7 }, (_, i) => ({ x: 120 + i * 140, y: 160 + (i % 3) * 300, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4], p: i * 1.7 }));
 function butterflies(g, T) { for (const b of BUTTER) { const x = b.x + Math.sin(T * 0.4 + b.p) * 70, y = b.y + Math.sin(T * 0.7 + b.p * 2) * 40, f = Math.abs(Math.sin(T * 14 + b.p)) * 5 + 1; g.fillStyle = b.c; g.beginPath(); g.ellipse(x - f / 2 - 1, y, f, 4, 0, 0, 6.283); g.ellipse(x + f / 2 + 1, y, f, 4, 0, 0, 6.283); g.fill(); g.fillStyle = '#3a2412'; g.fillRect(x - 0.8, y - 3, 1.6, 6); } }
 function cropPlant(g, k, st, x, y, T) {
@@ -1040,6 +1095,7 @@ function cropPlant(g, k, st, x, y, T) {
   if (k === 'trigo') { g.strokeStyle = '#c9902a'; g.lineWidth = 2; for (const d of [-4, 0, 4]) { g.beginPath(); g.moveTo(x + d, y); g.lineTo(x + d + sw, y - 20); g.stroke(); g.fillStyle = '#f2c14e'; g.beginPath(); g.ellipse(x + d + sw, y - 24, 3, 7, 0, 0, 6.283); g.fill(); } }
   if (k === 'milho') { g.fillStyle = '#4aa236'; g.beginPath(); g.moveTo(x - 6, y); g.quadraticCurveTo(x - 10 + sw, y - 20, x - 2 + sw, y - 34); g.lineTo(x + 2 + sw, y - 34); g.quadraticCurveTo(x + 10 + sw, y - 20, x + 6, y); g.fill(); g.fillStyle = '#ffd23f'; g.beginPath(); g.ellipse(x + 5 + sw, y - 18, 4, 9, 0.3, 0, 6.283); g.fill(); }
   if (k === 'cenoura') { g.fillStyle = '#4fae3a'; for (const a of [-0.6, 0, 0.6]) { g.beginPath(); g.ellipse(x + Math.sin(a) * 7 + sw, y - 12, 3, 9, a, 0, 6.283); g.fill(); } g.fillStyle = '#ff8c1a'; g.beginPath(); g.ellipse(x, y - 2, 6, 4, 0, 0, 6.283); g.fill(); }
+  if (k === 'algodao') { g.strokeStyle = '#6b8f3a'; g.lineWidth = 2; for (const d of [-5, 0, 5]) { g.beginPath(); g.moveTo(x + d * 0.4, y); g.lineTo(x + d + sw, y - 18); g.stroke(); g.fillStyle = '#ffffff'; g.beginPath(); g.arc(x + d + sw, y - 20, 4.5, 0, 6.283); g.arc(x + d + sw + 3, y - 18, 3.5, 0, 6.283); g.fill(); } }
   if (k === 'cana') { g.fillStyle = '#7cc04b'; for (const d of [-4, 3]) g.fillRect(x + d + sw * 0.5, y - 36, 4, 36); g.fillStyle = '#4f9a2f'; g.beginPath(); g.moveTo(x, y - 30); g.quadraticCurveTo(x + 14 + sw, y - 40, x + 18 + sw, y - 28); g.quadraticCurveTo(x + 10, y - 32, x, y - 26); g.fill(); }
 }
 function bubble(g, x, y, k, T, faded) { const b = Math.sin(T * 4) * 3; g.save(); g.globalAlpha = faded ? 0.6 : 1; g.fillStyle = '#fff'; g.beginPath(); g.arc(x, y + b, 20, 0, 6.283); g.fill(); g.beginPath(); g.moveTo(x - 6, y + 16 + b); g.lineTo(x, y + 26 + b); g.lineTo(x + 6, y + 16 + b); g.fill(); g.drawImage(iconCanvas(k), x - 16, y - 16 + b, 32, 32); g.restore(); }
@@ -1050,7 +1106,7 @@ function draw(T, dt) {
   const S = G.S, now = nowS(); applyLayout(S);
   cx.setTransform(DPR, 0, 0, DPR, 0, 0); cx.fillStyle = '#5aa83c'; cx.fillRect(0, 0, innerWidth, innerHeight);
   cx.setTransform(DPR * CAM.z, 0, 0, DPR * CAM.z, DPR * (innerWidth / 2 - CAM.x * CAM.z), DPR * (innerHeight / 2 - CAM.y * CAM.z));
-  const lands = S ? S.land : {}, key = (lands.leste ? 1 : 0) + ',' + (lands.sul ? 1 : 0) + ',' + (lands.colina ? 1 : 0) + ',' + (lands.vila ? 1 : 0); if (!BG || key !== BGKEY) { BG = makeBg(lands); BGKEY = key; } cx.drawImage(BG, 0, 0, WW, WH);
+  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia'].map(k => lands[k] ? 1 : 0).join(','); if (!BG || key !== BGKEY) { BG = makeBg(lands); BGKEY = key; } cx.drawImage(BG, 0, 0, WW, WH);
   const lvl = S ? S.lvl : 1;
   // lago com brilho
   cx.strokeStyle = 'rgba(255,255,255,.45)'; cx.lineWidth = 2; for (let i = 0; i < 3; i++) { const r = ((T * 12 + i * 20) % 60); cx.globalAlpha = 1 - r / 60; cx.beginPath(); cx.ellipse(62, 400, r * 0.6, r, 0, 0, 6.283); cx.stroke(); } cx.globalAlpha = 1;
@@ -1100,7 +1156,7 @@ function draw(T, dt) {
     // praça com chafariz
     cx.fillStyle = '#5ab4e6'; cx.beginPath(); cx.ellipse(400, 1556, 24, 9, 0, 0, 6.283); cx.fill(); cx.strokeStyle = '#a9a9a0'; cx.lineWidth = 5; cx.stroke();
     for (let i = 0; i < 6; i++) { const ph = (T * 1.2 + i / 6) % 1; cx.fillStyle = `rgba(160,220,255,${1 - ph})`; cx.beginPath(); cx.arc(400 + Math.cos(i) * ph * 14, 1548 - Math.sin(ph * Math.PI) * 12, 2, 0, 6.283); cx.fill(); }
-    for (const [k, P] of Object.entries(PROJ)) { const c = S.city[k];
+    for (const [k, P] of Object.entries(PROJ)) { if ((P.land || 'vila') !== 'vila') continue; const c = S.city[k];
       if (!c) { cx.fillStyle = 'rgba(140,100,55,.45)'; rr(cx, P.x - P.w / 2, P.y - 50, P.w, 54, 8); cx.fill(); cx.fillStyle = '#7a4b25'; for (const [dx, dy] of [[-P.w / 2, -50], [P.w / 2 - 4, -50], [-P.w / 2, 0], [P.w / 2 - 4, 0]]) cx.fillRect(P.x + dx, P.y + dy - 10, 4, 14);
         cx.fillStyle = 'rgba(58,36,18,.85)'; rr(cx, P.x - 62, P.y - 96, 124, 40, 8); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N(k), P.x, P.y - 80); cx.font = '800 11px Nunito, sans-serif'; cx.fillText(P.lvl > S.lvl ? L('lvl', P.lvl) : L('build') + ' · ' + P.cost, P.x, P.y - 64); continue; }
       if (c.e > now) { const pr = clamp((now - c.s) / (c.e - c.s), 0, 1), hgt = P.h * (0.2 + 0.8 * pr); shadow(cx, P.x, P.y, P.w + 30);
@@ -1118,6 +1174,18 @@ function draw(T, dt) {
       cx.fillStyle = '#7a4b25'; rr(cx, P.x - 52, P.y - P.h - (k === 'pousada' ? 64 : 58), 104, 22, 6); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N(k).toUpperCase(), P.x, P.y - P.h - (k === 'pousada' ? 49 : 43));
       if (rentNow(S, k, now) > 0) bubble(cx, P.x + P.w / 2 - 10, P.y - P.h - 70, 'coin', T); }
   } else saleSign(cx, LANDS.vila.sx, LANDS.vila.sy, 'vila', S);
+  // espuma das ondas na beira do mar
+  cx.strokeStyle = 'rgba(255,255,255,.75)'; cx.lineWidth = 3; for (let y = 20; y < WH; y += 60) { const off = Math.sin(T * 1.4 + y * 0.05) * 8; cx.beginPath(); cx.moveTo(1414 + off + Math.sin(y * 0.02) * 10, y); cx.quadraticCurveTo(1406 + off, y + 20, 1414 + off + Math.sin((y + 40) * 0.02) * 10, y + 40); cx.stroke(); }
+  if (lands.praia) { const P = PROJ.escola, c = S.city.escola;
+    if (!c) { cx.fillStyle = 'rgba(140,100,55,.35)'; rr(cx, P.x - P.w / 2, P.y - 50, P.w, 54, 8); cx.fill(); cx.fillStyle = 'rgba(58,36,18,.85)'; rr(cx, P.x - 70, P.y - 96, 140, 40, 8); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N('escola'), P.x, P.y - 80); cx.font = '800 11px Nunito, sans-serif'; cx.fillText(P.lvl > S.lvl ? L('lvl', P.lvl) : L('build') + ' · ' + P.cost, P.x, P.y - 64); }
+    else if (c.e > now) { const pr = clamp((now - c.s) / (c.e - c.s), 0, 1); cx.fillStyle = '#e8d9b8'; cx.fillRect(P.x - P.w / 2 + 10, P.y - P.h * (0.2 + 0.8 * pr), P.w - 20, P.h * (0.2 + 0.8 * pr)); cx.strokeStyle = '#b07a3a'; cx.lineWidth = 3; for (let x = P.x - P.w / 2; x <= P.x + P.w / 2; x += P.w / 4) { cx.beginPath(); cx.moveTo(x, P.y); cx.lineTo(x, P.y - P.h - 10); cx.stroke(); } progressBar(cx, P.x, P.y + 10, 90, pr); }
+    else { house(cx, P.x, P.y, P.w, P.h, '#e9f8ff', '#2a8cc4', 34); win(cx, P.x - 60, P.y - 66, 26, 20); win(cx, P.x + 34, P.y - 66, 26, 20); cx.fillStyle = '#7a4b25'; cx.fillRect(P.x - 14, P.y - 42, 28, 42);
+      // pipa de kite em cima do telhado (desenho próprio)
+      const kx = P.x + Math.sin(T * 0.8) * 30, ky = P.y - P.h - 110 + Math.cos(T * 1.1) * 8; cx.strokeStyle = 'rgba(40,40,40,.6)'; cx.lineWidth = 1.2; cx.beginPath(); cx.moveTo(P.x + 40, P.y - P.h - 30); cx.lineTo(kx - 24, ky + 8); cx.moveTo(P.x + 40, P.y - P.h - 30); cx.lineTo(kx + 24, ky + 8); cx.stroke();
+      cx.fillStyle = '#ffb627'; cx.beginPath(); cx.moveTo(kx - 34, ky + 10); cx.quadraticCurveTo(kx, ky - 22, kx + 34, ky + 10); cx.quadraticCurveTo(kx, ky - 6, kx - 34, ky + 10); cx.fill(); cx.strokeStyle = '#c96a0a'; cx.lineWidth = 2; cx.stroke();
+      cx.fillStyle = '#7a4b25'; rr(cx, P.x - 64, P.y - P.h - 58, 128, 22, 6); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N('escola').toUpperCase(), P.x, P.y - P.h - 43);
+      if (rentNow(S, 'escola', now) > 0) bubble(cx, P.x + P.w / 2 - 10, P.y - P.h - 70, 'coin', T); } }
+  else saleSign(cx, LANDS.praia.sx, LANDS.praia.sy, 'praia', S);
   // canteiros
   for (let i = 0; i < MAXPLOTS; i++) {
     const r = plotRect(i), pl = S ? S.plots[i] : { c: null }, locked = !S || i >= S.np;
@@ -1133,10 +1201,10 @@ function draw(T, dt) {
       else if (Math.sin(T * 5 + i) > 0.6) { cx.fillStyle = '#fff'; cx.beginPath(); cx.arc(r.x + r.w - 12, r.y + 10, 3, 0, 6.283); cx.fill(); } }
   }
   // padaria e queijaria
-  for (const k of ['padaria', 'queijaria']) {
+  for (const k of ['padaria', 'queijaria', 'tecelagem']) {
     const B = BUILD[k], locked = B.lvl > lvl, st = S && S.bld[k];
     cx.save(); if (locked) cx.globalAlpha = 0.55;
-    house(cx, B.x, B.y, B.w, B.h, k === 'padaria' ? '#ffe2b0' : '#e6f2ff', k === 'padaria' ? '#c8702a' : '#3f8fd1', 34);
+    house(cx, B.x, B.y, B.w, B.h, k === 'padaria' ? '#ffe2b0' : k === 'tecelagem' ? '#f3e9ff' : '#e6f2ff', k === 'padaria' ? '#c8702a' : k === 'tecelagem' ? '#7b5ea7' : '#3f8fd1', 34);
     cx.fillStyle = '#7a4b25'; cx.fillRect(B.x - 14, B.y - 40, 28, 40); win(cx, B.x - 48, B.y - 66, 26, 18); win(cx, B.x + 22, B.y - 66, 26, 18);
     cx.fillStyle = '#7a4b25'; cx.fillRect(B.x - 40, B.y - B.h - 30, 80, 20); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N(k).toUpperCase(), B.x, B.y - B.h - 16);
     cx.restore();
@@ -1162,6 +1230,8 @@ function draw(T, dt) {
       if (ready) bubble(cx, ax, ay - 40, P.out, T); else if (hungry) bubble(cx, ax, ay - 40, P.feed, T, true);
     });
   }
+  // silos
+  if (S) for (let i = 0; i < S.silos; i++) siloShape(cx, SILOS[i].x, SILOS[i].y);
   // decorações
   if (S) for (const k of Object.keys(DECOS)) if (S.deco[k]) drawDeco(cx, k, DECOS[k].x, DECOS[k].y, T);
   // quadro de encomendas
