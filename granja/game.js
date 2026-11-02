@@ -476,7 +476,7 @@ function helperTask(S, now) {
   for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; if (CROPS[crop] && S.coins >= CROPS[crop].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: crop }, now); if (re.ok) { S.plots[a.i].last = crop; res.fx.push(...re.fx); } } } S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.6';
+const BUILD_V = '2026-11-02.7';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -484,13 +484,14 @@ $('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S); locat
 let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   const S = G.S, now = Date.now(); helperClock++;
-  if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { const r = helperTask(S, now); if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host') broadcast(); refresh(); }, 1000);
+  if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { const r = helperTask(S, now); if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
 
 const NET = { api: null, room: null, sub: null, code: null, role: null, guestPeer: null,
   async leave() { if (this.sub) this.sub(); this.sub = null; const r = this.room; this.room = null; this.guestPeer = null; if (r) try { await r.leave(); } catch (e) {} } };
 (async () => {
   await null;
   try { NET.api = window.claude && typeof window.claude.use === 'function' ? await window.claude.use('room') : null; } catch (e) { NET.api = null; }
+  if (!NET.api && window.RELAY_ROOM) NET.api = window.RELAY_ROOM; // servidor intermediário: funciona em qualquer rede
   if (!NET.api && window.P2P_ROOM) NET.api = window.P2P_ROOM;
   joinFromHash(); addEventListener('hashchange', joinFromHash);
 })();
