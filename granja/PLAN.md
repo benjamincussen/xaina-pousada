@@ -222,3 +222,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Camión de mudanza: al construir una casa llega un camión azul "MUDANZA", deja cajas y la familia las lleva adentro (45 s).
 - Concurso de jardines: con 4+ casas, cada 30 min una casa gana una escarapela con trofeo; +5 felicidad de la ciudad.
 - Regata en el lago: cada 10 min tres botecitos a remo compiten de lado a lado, con línea de llegada.
+
+## Versión grande 39: Volantines, mariposas, pasajeros que saludan y mapa lejano más rápido (2026-11-03.40)
+- Volantines en la playa: de día 1-3 niños elevan volantines (más con más vecinos); cada 20 min hay festival con 7 volantines de colores.
+- Mariposas en primavera y verano por la granja, los barrios y el campo.
+- Los pasajeros del tren saludan con la mano.
+- Rendimiento: con zoom muy lejano el fondo usa una copia reducida en caché (mip), ~20% menos tiempo de dibujo.
