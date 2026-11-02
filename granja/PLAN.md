@@ -5,8 +5,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 
 - [x] 1. Duplicar edificios de producción (2ª y 3ª Panadería, Molino, Quesería, Jugos, Tejeduría, Heladería; cada uno con su fila; los ayudantes usan todos)
 - [x] 2. Calles: caminos que se pueden construir y colocar en el mapa (modo construir) + calles principales de la vila
-- [ ] 3. Vecinos (NPC) caminando por las calles, con nombre y globos de diálogo
-- [ ] 4. Casas de vecinos: población que sube y da bono de ingreso
+- [x] 3. Vecinos (NPC) caminando por las calles, con nombre y globos de diálogo
+- [x] 4. Barrio Nuevo (terreno grande al sur con avenida) + casas de vecinos: población, arriendo y bono en pedidos
 - [ ] 5. Pedidos especiales de los vecinos (piden cosas en persona, pagan más)
 - [ ] 6. Mejorar edificios por nivel (Nv 2/3: más rápido y más filas)
 - [ ] 7. Impulsos de producción: abono (cultivos más rápidos) y ración premium (animales)

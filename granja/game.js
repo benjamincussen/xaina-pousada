@@ -47,6 +47,9 @@ const TX = {
     helperDoes2: 'Eles entregam as encomendas, plantam o que as encomendas pedem, fazem os produtos nos prédios, mantêm a ração dos animais, colhem e recolhem tudo, cuidam do pomar, das colmeias, do barco e cobram a Vila.',
     sound: 'Som', music: 'Música', ambient: 'Sons do sítio', on: 'sim', off: 'não',
     lvlCap: '+50 lugares no celeiro', lvlTitle: l => `Nível ${l}!`, lvlCoins: c => `+${c} moedas de prêmio`, lvlUnlocked: 'Liberado agora', lvlNext: l => `No nível ${l}`, lvlNothing: 'Prêmio em moedas, +50 lugares no celeiro e encomendas que pagam mais.', lvlRoad: 'Próximos níveis', great: 'Que bom!',
+    land_bairro: 'Bairro Novo', landDesc_bairro: 'Um bairro com avenida e 12 lotes: construa casas, chegam vizinhos que pagam aluguel e dão bônus nas encomendas.',
+    homes: 'Casas do bairro', homeHint: 'Cada casa traz 2 vizinhos: +2% nas encomendas por casa (até 20%) e aluguel de 30 moedas a cada 5 min.', homeBuy: 'Construir casa', homeDone: (a, b) => `${a} e ${b} se mudaram para o bairro!`, homesN: (n, m, p) => `${n} de ${m} casas · ${p} moradores`, homeOf: (a, b) => `Casa de ${a} e ${b}`, emptyLot: 'Lote vazio', rentIn: (n, t) => `${n} moedas em ${t}`, npcHi: n => `Oi, sou ${n}!`,
+    npc: ['Que dia bonito!', 'Adoro o pão daqui!', 'Essa rua ficou linda.', 'Vou na feira mais tarde.', 'Bom dia, vizinho!', 'O vento hoje está ótimo!', 'Meu filho quer ser kitesurfista.', 'Que cheiro de bolo!', 'A cidade está crescendo!', 'Tem sorvete hoje?', 'Obrigado pelas ruas novas!', 'Vou pescar no lago.'],
     roads: 'Ruas', roadHint: 'Arraste para pintar · toque para apagar · 2 dedos movem o mapa', roadBar: (f, c) => f > 0 ? `Ruas: ${f} grátis` : `Ruas: ${c} moedas cada`, roadNo: 'Aqui não dá para fazer rua', roadBtn: 'Construir ruas', roadInfo: (n, b) => `${n} pedaços de rua · +${b}% nas encomendas (1% a cada 20, até 10%)`,
     dups: 'Duplicar prédios', dupHint: 'Mais um prédio igual, com fila própria: produz o dobro ao mesmo tempo. Os ajudantes usam todos.', dupHave: (n, m) => `Você tem ${n} de ${m}`, dupBtn: 'Construir outro', dupDone: n => `${n} construído! Fila nova pronta.`, needLand: l => `Primeiro compre o terreno: ${l}`, dupNeedLand: l => `Fica no terreno ${l}`,
     silos: 'Silos', silo: 'Silo', siloHint: n => `Cada silo aparece no mapa e soma +100 lugares. ${n} de 4.`, buySilo: 'Construir silo',
@@ -101,6 +104,9 @@ const TX = {
     helperDoes2: 'Entregan los pedidos, siembran lo que piden los pedidos, fabrican en los edificios, mantienen la ración de los animales, cosechan y recogen todo, cuidan el huerto, las colmenas, el barco y cobran en la Villa.',
     sound: 'Sonido', music: 'Música', ambient: 'Sonidos del campo', on: 'sí', off: 'no',
     lvlCap: '+50 espacios en el granero', lvlTitle: l => `¡Nivel ${l}!`, lvlCoins: c => `+${c} monedas de premio`, lvlUnlocked: 'Se desbloquea ahora', lvlNext: l => `En el nivel ${l}`, lvlNothing: 'Premio en monedas, +50 espacios en el granero y pedidos que pagan más.', lvlRoad: 'Próximos niveles', great: '¡Genial!',
+    land_bairro: 'Barrio Nuevo', landDesc_bairro: 'Un barrio con avenida y 12 lotes: construye casas, llegan vecinos que pagan arriendo y dan bono en los pedidos.',
+    homes: 'Casas del barrio', homeHint: 'Cada casa trae 2 vecinos: +2% en los pedidos por casa (hasta 20%) y arriendo de 30 monedas cada 5 min.', homeBuy: 'Construir casa', homeDone: (a, b) => `¡${a} y ${b} se mudaron al barrio!`, homesN: (n, m, p) => `${n} de ${m} casas · ${p} vecinos`, homeOf: (a, b) => `Casa de ${a} y ${b}`, emptyLot: 'Lote vacío', rentIn: (n, t) => `${n} monedas en ${t}`, npcHi: n => `¡Hola, soy ${n}!`,
+    npc: ['¡Qué día tan bonito!', '¡Me encanta el pan de aquí!', 'Esta calle quedó preciosa.', 'Voy a la feria más tarde.', '¡Buen día, vecino!', '¡Hoy el viento está perfecto!', 'Mi hijo quiere ser kitesurfista.', '¡Qué olor a pastel!', '¡La ciudad está creciendo!', '¿Hay helado hoy?', '¡Gracias por las calles nuevas!', 'Voy a pescar al lago.'],
     roads: 'Calles', roadHint: 'Arrastra para pintar · toca para borrar · 2 dedos mueven el mapa', roadBar: (f, c) => f > 0 ? `Calles: ${f} gratis` : `Calles: ${c} monedas cada una`, roadNo: 'Aquí no se puede hacer calle', roadBtn: 'Construir calles', roadInfo: (n, b) => `${n} tramos de calle · +${b}% en los pedidos (1% cada 20, hasta 10%)`,
     dups: 'Duplicar edificios', dupHint: 'Otro edificio igual, con su propia fila: produce el doble al mismo tiempo. Los ayudantes usan todos.', dupHave: (n, m) => `Tienes ${n} de ${m}`, dupBtn: 'Construir otro', dupDone: n => `¡${n} construido! Nueva fila lista.`, needLand: l => `Primero compra el terreno: ${l}`, dupNeedLand: l => `Va en el terreno ${l}`,
     silos: 'Silos', silo: 'Silo', siloHint: n => `Cada silo aparece en el mapa y suma +100 espacios. ${n} de 4.`, buySilo: 'Construir silo',
@@ -185,6 +191,7 @@ const LANDS = {
   colina: { lvl: 6, cost: 800, r: { x: 660, y: 680, w: 420, h: 300 }, sx: 870, sy: 800 },
   vila: { lvl: 7, cost: 1200, r: { x: 20, y: 1370, w: 1060, h: 320 }, sx: 560, sy: 1470 },
   praia: { lvl: 9, cost: 2000, r: { x: 1110, y: 40, w: 370, h: 1650 }, sx: 1290, sy: 420 },
+  bairro: { lvl: 8, cost: 1500, r: { x: 20, y: 1730, w: 1460, h: 570 }, sx: 740, sy: 1900 },
 };
 const TREES = [['laranja', 740, 210], ['laranja', 860, 210], ['laranja', 980, 210], ['manga', 740, 380], ['manga', 860, 380], ['manga', 980, 380]];
 const FRUIT = { laranja: { t: 90, y: 3, xp: 4 }, manga: { t: 140, y: 2, xp: 5 }, coco: { t: 180, y: 2, xp: 6 } };
@@ -234,7 +241,7 @@ const PEN_MAX = { galinheiro: 10, estabulo: 8 }, animalCost = (k, n) => k === 'g
 const DECOS = { banco: { cost: 150, x: 185, y: 690 }, flores: { cost: 200, x: 255, y: 692 }, espantalho: { cost: 300, x: 510, y: 330 }, fonte: { cost: 600, x: 470, y: 700 } };
 const RD = 40, ROAD_MAX = 700, ROAD_COST = 5, ROAD_FREE = 30, roadKey = (gx, gy) => gy * 100 + gx;
 const roadBonus = S => Math.min(10, Math.floor(((S.roads && S.roads.length) || 0) / 20));
-const decoBonus = S => Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5 + roadBonus(S);
+const decoBonus = S => Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5 + roadBonus(S) + popBonus(S);
 function roadOk(S, gx, gy) { const x = gx * RD + RD / 2, y = gy * RD + RD / 2; if (x < 20 || y < 50 || x > WW - 20 || y > WH - 20) return false; for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR({ x, y }, Ld.r)) return false; return true; }
 captureDefaults.later = true;
 const HELPER_NAMES = ['Juca', 'Nina', 'Tonho', 'Bia'], HELPER_LOOKS = ['cap', 'cap2', 'cap3', 'cap4'], hireCost = n => [0, 400, 900, 1600][n] || 0;
@@ -245,6 +252,12 @@ const PROJ = {
   escola: { land: 'praia', lvl: 10, cost: 3000, need: { rede: 2, suco: 4, coco: 4 }, t: 720, inc: 250, x: 1300, y: 1330, w: 170, h: 100 },
 };
 const RENT_EVERY = 300, RENT_CAP = 6;
+// bairro: lotes para casas de vizinhos; cada casa traz 2 moradores (NPC) e paga aluguel
+const LOTS = [[130, 1960], [330, 1960], [530, 1960], [730, 1960], [930, 1960], [1130, 1960], [130, 2250], [330, 2250], [530, 2250], [730, 2250], [930, 2250], [1130, 2250]];
+const HOME_INC = 30, homeCost = n => 400 + n * 250, popBonus = S => Math.min(20, ((S.homes && S.homes.length) || 0) * 2);
+const HOME_COL = [['#fff1d6', '#d9614b'], ['#e6f2ff', '#3f8fd1'], ['#f3ffe6', '#4f9a2f'], ['#ffe4ee', '#c2477a'], ['#fff4d6', '#e6a92a'], ['#f3e9ff', '#7b5ea7']];
+const NPC_NAMES = ['Dona Rosa', 'Seu Zé', 'Lia', 'Caio', 'Dona Cida', 'Tião', 'Malu', 'Davi', 'Iara', 'Beto', 'Lena', 'Rui', 'Dona Fia', 'Nico', 'Sol', 'Teo', 'Mel', 'Gui', 'Bela', 'Duda', 'Kiko', 'Rita', 'Leo', 'Vivi'];
+function homeRent(S, i, now) { const h = S.homes[i]; if (!h) return 0; return Math.min(Math.floor((now - h.c) / (RENT_EVERY * 1000)), RENT_CAP) * HOME_INC; }
 const hCount = S => S.helper && S.helper.on ? (S.helper.n || 1) : 0;
 function rentNow(S, k, now) { const c = S.city[k]; if (!c || c.e > now) return 0; const per = Math.floor((now - c.c) / (RENT_EVERY * 1000)); return Math.min(per, RENT_CAP) * PROJ[k].inc; }
 const SHIFTS = [{ min: 20, cost: 25 }, { min: 60, cost: 60 }, { min: 1440, cost: 900 }];
@@ -257,7 +270,7 @@ PENS.galinheiro.t = 50; PENS.estabulo.t = 90; // ritmo mais rápido
 const BARN = { x: 548, y: 205, w: 124, h: 96 }, HOUSE = { x: 96, y: 205, w: 120, h: 86 }, BOARD = { x: 320, y: 905, w: 120, h: 70 };
 const LV = [0, 12, 35, 70, 120, 190, 280, 400, 550, 750, 1000, 1300];
 for (let l = 12; l < 40; l++) LV.push(LV[l - 1] + 300 + (l - 11) * 160); // níveis até 40
-const MAXPLOTS = 12, PLOT0 = 6, WW = 1500, WH = 1720;
+const MAXPLOTS = 12, PLOT0 = 6, WW = 1500, WH = 2320;
 const plotRect = i => ({ x: 168 + FIELD.dx + (i % 3) * 104, y: 290 + FIELD.dy + Math.floor(i / 3) * 82, w: 96, h: 72 });
 const plotCost = np => Math.round(25 * Math.pow(1.55, np - PLOT0));
 const capCost = cap => Math.round(60 + Math.max(0, cap - 100) / 50 * 70);
@@ -281,6 +294,7 @@ function migrate(S) {
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
   if (!S.dup || typeof S.dup !== 'object') S.dup = {};
+  if (!Array.isArray(S.homes)) S.homes = [];
   if (!Array.isArray(S.roads)) S.roads = []; if (typeof S.roadFree !== 'number') S.roadFree = ROAD_FREE;
   if (typeof S.silos !== 'number') S.silos = 0;
   if (!S.capv2) { S.capv2 = 1; S.cap = (S.cap || 50) + 150; }
@@ -397,6 +411,12 @@ function apply(S, a, now) {
     else if (a.t === 'boat') { if (S.boat.e && S.boat.e > now) { rem = S.boat.e - now; doIt = () => { S.boat.e = now; }; } }
     if (!doIt) return fail(''); const c = rushCost(Math.ceil(rem / 1000)); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; doIt(); out.fx.push(['coins', -c]); out.fx.push(['rush']);
+  } else if (a.a === 'home') {
+    if (!S.land.bairro) return fail(L('needLand', L('land_bairro'))); const n = S.homes.length; if (n >= LOTS.length) return fail(L('slotsMax'));
+    const c = homeCost(n); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; S.homes.push({ c: now, st: n % HOME_COL.length }); addXp(S, 10, out); out.fx.push(['home', n]);
+  } else if (a.a === 'homeRent') {
+    const i = a.i | 0, h = S.homes[i]; if (!h) return fail(''); const amt = homeRent(S, i, now); if (!amt) return fail(L('rentNext', HOME_INC, fmtT(Math.ceil((h.c + RENT_EVERY * 1000 - now) / 1000))));
+    const per = Math.floor((now - h.c) / (RENT_EVERY * 1000)); h.c = per > RENT_CAP ? now : h.c + per * RENT_EVERY * 1000; S.coins += amt; out.fx.push(['coins', amt]); out.fx.push(['gain', 'coin', amt, 'home', i]);
   } else if (a.a === 'road') {
     const gx = a.x | 0, gy = a.y | 0, key = roadKey(gx, gy), i = S.roads.indexOf(key);
     if (a.on) { if (i >= 0) return out; if (!roadOk(S, gx, gy)) return fail(L('roadNo')); if (S.roads.length >= ROAD_MAX) return fail(L('slotsMax'));
@@ -553,6 +573,35 @@ function meInfo() { return { n: ME.name, l: ME.look }; }
 function sendMe() { if (NET.room) NET.room.presence({ me: meInfo() }).catch(() => {}); }
 function walkTo(av, x, y) { av.tx = clamp(x, 20, WW - 20); av.ty = clamp(y + 18, 40, WH - 30); }
 function stepAv(av, dt) { const dx = av.tx - av.x, dy = av.ty - av.y, d = Math.hypot(dx, dy), sp = 240 * dt; if (d > 1) { const k = Math.min(1, sp / d); av.x += dx * k; av.y += dy * k; av.t += dt; av.dir = dx >= 0 ? 1 : -1; av.walk = true; } else av.walk = false; }
+// vizinhos (NPC): só visual, cada aparelho simula os seus a partir do estado salvo
+const NPCS = { list: [], key: '', sayT: 0 };
+const npcLine = S => { const a = L('npc'); return a[Math.floor(Math.random() * a.length)]; };
+function npcSpots(S) { const pts = []; for (const k of S.roads || []) pts.push([(k % 100) * RD + RD / 2, Math.floor(k / 100) * RD + RD / 2 + 10]);
+  if (S.land.vila) pts.push([400, 1590], [200, 1580], [700, 1580], [900, 1580], [320, 1450]);
+  if (S.land.bairro) for (let x = 80; x < 1440; x += 120) pts.push([x, 2040]);
+  for (const [k, P] of Object.entries(PROJ)) if (S.city[k] && S.city[k].e <= Date.now()) pts.push([P.x, P.y + 20]);
+  if (!pts.length) pts.push([320, 700], [320, 1000]); return pts; }
+function syncNpcs(S) { const nH = (S.homes || []).length, nP = Object.keys(PROJ).filter(k => S.city[k] && S.city[k].e <= Date.now()).length, key = nH + ':' + nP; if (key === NPCS.key) return; NPCS.key = key;
+  const want = []; for (let i = 0; i < nH * 2; i++) want.push({ id: 'h' + i, name: NPC_NAMES[i % NPC_NAMES.length], home: LOTS[i >> 1] }); for (let i = 0; i < nP; i++) want.push({ id: 'p' + i, name: NPC_NAMES[(23 - i) % NPC_NAMES.length], home: null });
+  const old = new Map(NPCS.list.map(n => [n.id, n])); NPCS.list = want.map((w, i) => old.get(w.id) || (() => { const st = w.home ? [w.home[0], w.home[1] + 14] : [400, 1590];
+    return { ...w, x: st[0], y: st[1], tx: st[0], ty: st[1], wait: 1 + Math.random() * 3, t: 0, dir: 1, walk: false, say: '', sayT: 0, sh: ['#e0533d', '#3d7fd6', '#2f9e6e', '#e6a92a', '#9b5de5', '#ff7aa8', '#1fa6a0'][i % 7], hr: ['#3a2412', '#5a2e14', '#d9a441', '#1d1d1d', '#a0522d'][(i * 3) % 5], long: i % 3 === 1, hat: i % 4 === 2, kid: i % 5 === 4 }; })()); }
+function stepNpcs(S, dt) { syncNpcs(S); const pts = npcSpots(S);
+  for (const n of NPCS.list) { if (n.sayT > 0) n.sayT -= dt; const dx = n.tx - n.x, dy = n.ty - n.y, d = Math.hypot(dx, dy);
+    if (d > 2) { const k = Math.min(1, 46 * dt / d); n.x += dx * k; n.y += dy * k; n.t += dt; n.dir = dx >= 0 ? 1 : -1; n.walk = true; }
+    else { n.walk = false; n.wait -= dt; if (n.wait <= 0) { const p = n.home && Math.random() < 0.2 ? [n.home[0], n.home[1] + 14] : pts[Math.floor(Math.random() * pts.length)]; n.tx = p[0] + (Math.random() - 0.5) * 16; n.ty = p[1] + (Math.random() - 0.5) * 8; n.wait = 2 + Math.random() * 5; } } }
+  NPCS.sayT -= dt; if (NPCS.sayT <= 0 && NPCS.list.length) { NPCS.sayT = 4 + Math.random() * 4; const n = NPCS.list[Math.floor(Math.random() * NPCS.list.length)]; n.say = npcLine(S); n.sayT = 3.5; } }
+function drawNpc(g, n, T) { const x = n.x, y = n.y, sc = n.kid ? 0.78 : 0.92, step = n.walk ? Math.sin(n.t * 12) : 0, bob = n.walk ? Math.abs(Math.sin(n.t * 12)) * 1.6 : 0, d = n.dir;
+  g.save(); g.translate(x, y); g.scale(sc, sc); g.fillStyle = 'rgba(0,0,0,.18)'; g.beginPath(); g.ellipse(0, 2, 12, 4, 0, 0, 6.283); g.fill();
+  g.strokeStyle = '#3a4a5a'; g.lineWidth = 6; g.lineCap = 'round'; g.beginPath(); g.moveTo(-4, -14 - bob); g.lineTo(-4 + step * 4, -1); g.moveTo(4, -14 - bob); g.lineTo(4 - step * 4, -1); g.stroke();
+  if (n.long) { g.fillStyle = n.hr; g.beginPath(); g.ellipse(-d * 2, -34 - bob, 11, 15, 0, 0, 6.283); g.fill(); }
+  g.fillStyle = n.sh; rr(g, -10, -32 - bob, 20, 20, 6); g.fill();
+  g.strokeStyle = '#e8b890'; g.lineWidth = 5; g.beginPath(); g.moveTo(-10, -28 - bob); g.lineTo(-14, -18 - bob + step * 3); g.moveTo(10, -28 - bob); g.lineTo(14, -18 - bob - step * 3); g.stroke();
+  g.fillStyle = '#e8b890'; g.beginPath(); g.arc(0, -40 - bob, 9, 0, 6.283); g.fill(); g.fillStyle = '#3a2412'; g.beginPath(); g.arc(d * 3, -41 - bob, 1.6, 0, 6.283); g.fill();
+  if (n.hat) { g.fillStyle = '#f2d38a'; g.beginPath(); g.ellipse(0, -46 - bob, 14, 4, 0, 0, 6.283); g.fill(); g.beginPath(); g.arc(0, -47 - bob, 8, Math.PI, 0); g.fill(); g.fillStyle = n.sh; g.fillRect(-8, -49 - bob, 16, 2.5); }
+  else { g.fillStyle = n.hr; g.beginPath(); g.arc(0, -44 - bob, 9.5, Math.PI, 0); g.fill(); }
+  g.restore();
+  if (CAM.z > 0.55) { g.font = '800 11px Nunito, sans-serif'; g.textAlign = 'center'; g.fillStyle = 'rgba(255,255,255,.85)'; const w = g.measureText(n.name).width + 10; rr(g, x - w / 2, y + 4, w, 15, 7); g.fill(); g.fillStyle = '#3a2412'; g.fillText(n.name, x, y + 15); }
+  if (n.sayT > 0 && n.say) { g.font = '800 13px Nunito, sans-serif'; const w = Math.min(220, g.measureText(n.say).width + 18), by = y - 62 * sc - 26; g.globalAlpha = Math.min(1, n.sayT * 2); g.fillStyle = '#fff'; rr(g, x - w / 2, by, w, 24, 10); g.fill(); g.beginPath(); g.moveTo(x - 5, by + 24); g.lineTo(x, by + 31); g.lineTo(x + 5, by + 24); g.fill(); g.fillStyle = '#3a2412'; g.textAlign = 'center'; g.fillText(n.say, x, by + 16, w - 10); g.globalAlpha = 1; } }
 function drawAv(g, av, name, look, T, mine) {
   const x = av.x, y = av.y, step = av.walk ? Math.sin(av.t * 14) : 0, bob = av.walk ? Math.abs(Math.sin(av.t * 14)) * 2 : 0, d = av.dir || 1;
   const CAPC = { cap: '#2f9e6e', cap2: '#3d7fd6', cap3: '#e0533d', cap4: '#e6a92a' }, isCap = !!CAPC[look];
@@ -617,6 +666,8 @@ function tapAt(p) {
   if (G.edit) return;
   ping(p.x, p.y);
   for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR(p, Ld.r)) return openSheet('land', k);
+  for (const n of NPCS.list) if (Math.abs(p.x - n.x) < 18 && p.y > n.y - 56 && p.y < n.y + 6) { n.say = L('npcHi', n.name) + ' ' + npcLine(S); n.sayT = 4; return; }
+  if (S.land.bairro) { for (let i = 0; i < LOTS.length; i++) { const [hx, hy] = LOTS[i]; if (Math.abs(p.x - hx) < 66 && p.y > hy - 140 && p.y < hy + 10) { if (S.homes[i] && homeRent(S, i, now) > 0) return void act({ a: 'homeRent', i }); return openSheet('homes', i); } } }
   for (const [k, P] of Object.entries(PROJ)) if (S.land[P.land || 'vila'] && Math.abs(p.x - P.x) < P.w / 2 + 10 && p.y > P.y - P.h - 70 && p.y < P.y + 12) { if (rentNow(S, k, now) > 0) return void act({ a: 'rent', k }); return openSheet('proj', k); }
   for (const t of treeList(S)) if (Math.hypot(p.x - t.x, p.y - (t.y - 40)) < 52) return treeReady(S, t.i, now) ? void act({ a: 'tree', i: t.i }) : openSheet('rush', { t: 'tree', i: t.i });
   if (S.land.sul) { for (const [hx, hy] of HIVES) if (Math.abs(p.x - hx) < 34 && p.y > hy - 60 && p.y < hy + 12) return void act({ a: 'hive' });
@@ -659,7 +710,7 @@ function act(a, quiet) {
 }
 function playFx(fx) {
   for (const f of fx) {
-    if (f[0] === 'gain') { if (f[1] === 'ovo') SND.cluck(); if (f[1] === 'leite') SND.moo(); if (f[1] === 'peixe') SND.splash(); const at = f[3] === 'plot' ? (() => { const r = plotRect(f[4]); return { x: r.x + r.w / 2, y: r.y + r.h / 2 }; })() : f[3] === 'bld' ? { x: BUILD[f[4]].x, y: BUILD[f[4]].y - 60 }
+    if (f[0] === 'gain') { if (f[1] === 'ovo') SND.cluck(); if (f[1] === 'leite') SND.moo(); if (f[1] === 'peixe') SND.splash(); const at = f[3] === 'plot' ? (() => { const r = plotRect(f[4]); return { x: r.x + r.w / 2, y: r.y + r.h / 2 }; })() : f[3] === 'bld' ? { x: BUILD[f[4]].x, y: BUILD[f[4]].y - 60 } : f[3] === 'home' ? { x: LOTS[f[4]][0], y: LOTS[f[4]][1] - 60 }
         : f[3] === 'city' ? { x: PROJ[f[4]].x, y: PROJ[f[4]].y - 120 } : f[3] === 'tree' ? (() => { const t = treeAt(G.S, f[4]) || { x: 870, y: 300 }; return { x: t.x, y: t.y - 70 }; })() : f[3] === 'hive' ? { x: 150, y: 1120 } : f[3] === 'boat' ? { x: BOAT.x, y: BOAT.y - 40 } : { x: PENS[f[4]].x, y: PENS[f[4]].y - 30 };
       FLOAT.push({ k: f[1], n: f[2], x: at.x, y: at.y, t: 0 }); SND.pop(); burst(at.x, at.y, f[1]); }
     if (f[0] === 'plant') SND.plant();
@@ -676,6 +727,7 @@ function playFx(fx) {
     if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
     if (f[0] === 'lvl') { SND.lvl(); openSheet('lvl', f[1]); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
+    if (f[0] === 'home') { SND.hammer(); const [hx, hy] = LOTS[f[1]]; CAM.x = hx; CAM.y = hy - 60; clampCam(); closeSheet(); burst(hx, hy - 60, 'coin'); toast(L('homeDone', NPC_NAMES[(f[1] * 2) % NPC_NAMES.length], NPC_NAMES[(f[1] * 2 + 1) % NPC_NAMES.length]), 3600); }
     if (f[0] === 'dup') { SND.hammer(); const B = BUILD[f[1]]; applyLayout(G.S); CAM.x = B.x; CAM.y = B.y - 60; clampCam(); closeSheet(); burst(B.x, B.y - 60, 'coin'); toast(L('dupDone', N(f[1])), 3000); }
     if (f[0] === 'silo') { SND.lvl(); burst(SILOS[f[1]].x, SILOS[f[1]].y - 60, 'coin'); }
   }
@@ -732,6 +784,7 @@ function helperTask(S, now) {
   if (S.land.sul) { if (HIVES.some((h, i) => hiveReady(S, i, now))) tries.push([{ a: 'hive' }, at(HIVES[0][0], HIVES[0][1])]);
     if ((S.boat.e && S.boat.e <= now) || (!S.boat.e && (S.inv.milho || 0) >= 4)) tries.push([{ a: 'boat' }, at(BOAT.x - 40, BOAT.y)]); }
   for (const k of Object.keys(PROJ)) if (rentNow(S, k, now) > 0) tries.push([{ a: 'rent', k }, at(PROJ[k].x, PROJ[k].y)]);
+  (S.homes || []).forEach((h, i) => { if (homeRent(S, i, now) >= HOME_INC * 2) tries.push([{ a: 'homeRent', i }, at(LOTS[i][0], LOTS[i][1])]); });
   if (S.helper.sell !== false && invCount(S) >= S.cap * 0.85) { const sale = surplusSale(S, now); if (sale) tries.push([sale, at(BARN.x, BARN.y)]); }
   // fazer nos prédios o que as encomendas pedem
   for (const [k, q] of Object.entries(orderNeeds(S, now))) { if (CROPS[k]) continue; const R = findRecipe(S, k); if (!R) continue; const miss = q - (S.inv[k] || 0) - queued(S, R.b, k);
@@ -744,7 +797,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.20';
+const BUILD_V = '2026-11-02.21';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -949,6 +1002,10 @@ function renderSheet() {
       <div class="card"><span class="lbl">${L('lvlUnlocked')}</span><p style="margin:0;font-weight:800">${news ? news.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <div class="card"><span class="lbl">${L('lvlNext', l + 1)}</span><p style="margin:0;font-weight:700">${nxt ? nxt.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <button class="btn" type="button" data-close="1">${L('great')}</button>`;
+  } else if (SH.type === 'homes') {
+    const i = SH.arg, hm = S.homes[i]; t.textContent = hm ? L('homeOf', NPC_NAMES[(i * 2) % NPC_NAMES.length], NPC_NAMES[(i * 2 + 1) % NPC_NAMES.length]) : L('emptyLot');
+    h = hm ? `<p class="sub">${L('rentIn', HOME_INC, fmtT(Math.ceil((hm.c + RENT_EVERY * 1000 - now) / 1000)))}</p><small>${L('homeHint')}</small>`
+      : `<p class="sub">${L('homesN', S.homes.length, LOTS.length, S.homes.length * 2)}</p><small>${L('homeHint')}</small>${S.homes.length < LOTS.length ? `<button class="btn" type="button" data-home="1" ${S.coins < homeCost(S.homes.length) ? 'disabled' : ''}>${L('homeBuy')} · ${img('coin')} ${homeCost(S.homes.length)}</button>` : ''}`;
   } else if (SH.type === 'proj') {
     const k = SH.arg, P = PROJ[k], c = S.city[k]; t.textContent = N(k);
     if (!c) h = `<div class="card"><p class="sub">${L('lot')}</p>${P.lvl > S.lvl ? `<p class="sub">${L('unlockAt', P.lvl)}</p>` : `${needHtml(S, P.need)}<p class="sub">${L('buildFaster', Math.max(1, hCount(S)))} · ${fmtT(Math.max(30, Math.round(P.t / Math.max(1, hCount(S)))))}</p>
@@ -988,6 +1045,7 @@ function renderSheet() {
       <span class="lbl">${L('animals')}</span>${Object.entries(PENS).filter(([, P]) => P.lvl <= S.lvl).map(([k]) => { const n = S.pens[k].a.length, m = PEN_MAX[k];
         return `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(PENS[k].out)}</span><div style="flex:1"><b>${L(k === 'galinheiro' ? 'buyHen' : 'buyCow')}</b><br><small>${N(k)} · ${L('haveN', n, m)}</small></div>
         ${n >= m ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-animal="${k}" ${S.coins < animalCost(k, n) ? 'disabled' : ''}>${img('coin')} ${animalCost(k, n)}</button>`}</div></div>`; }).join('')}
+      ${S.land.bairro ? `<span class="lbl">${L('homes')}</span><div class="card"><p class="sub">${L('homesN', S.homes.length, LOTS.length, S.homes.length * 2)}</p><small>${L('homeHint')}</small>${S.homes.length < LOTS.length ? `<button class="btn" type="button" data-home="1" ${S.coins < homeCost(S.homes.length) ? 'disabled' : ''}>${L('homeBuy')} · ${img('coin')} ${homeCost(S.homes.length)}</button>` : ''}</div>` : ''}
       <span class="lbl">${L('roads')}</span><div class="card"><p class="sub">${L('roadInfo', S.roads.length, roadBonus(S))}</p><button class="btn blue" type="button" data-roadmode="1">${L('roadBtn')}</button></div>
       ${DUP_TYPES.some(k => okB(S, BUILD[k])) ? `<span class="lbl">${L('dups')}</span><p class="sub">${L('dupHint')}</p>${DUP_TYPES.map(k => dupCard(S, k)).join('')}` : ''}
       <span class="lbl">${L('silos')}</span><div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center"><img src="${siloIcon()}" alt=""></span><div style="flex:1"><b>${L('silo')} (+100)</b><br><small>${L('siloHint', S.silos)}</small></div>
@@ -1032,6 +1090,7 @@ $('sBody').addEventListener('click', e => {
   if (d.hire) act({ a: 'hire' });
   if (d.silo) act({ a: 'silo' });
   if (d.dup) act({ a: 'dup', k: d.dup });
+  if (d.home) act({ a: 'home' });
   if (d.roadmode) { setRoad(true); return; }
   if (d.music) { MUSIC.set(!MUSIC.on); try { localStorage.setItem('sitio-music', MUSIC.on ? '1' : '0'); } catch (e) {} }
   if (d.amb) { AMB = !AMB; try { localStorage.setItem('sitio-amb', AMB ? '1' : '0'); } catch (e) {} if (AMB) SND.bird(); }
@@ -1107,6 +1166,12 @@ function makeBg(lands) {
   { const sg = g.createLinearGradient(1100, 0, 1500, 0); sg.addColorStop(0, 'rgba(240,222,170,0)'); sg.addColorStop(0.12, '#f2dfa8'); sg.addColorStop(1, '#f6e6b8'); g.fillStyle = sg; g.fillRect(1100, 0, 400, WH);
     const og = g.createLinearGradient(1400, 0, 1500, 0); og.addColorStop(0, '#5fc3e8'); og.addColorStop(1, '#2a8cc4'); g.fillStyle = og; g.beginPath(); g.moveTo(1500, 0); g.lineTo(1420, 0); for (let y = 0; y <= WH; y += 40) g.lineTo(1412 + Math.sin(y * 0.02) * 10, y); g.lineTo(1500, WH); g.closePath(); g.fill();
     for (let i = 0; i < 60; i++) { g.fillStyle = 'rgba(200,170,110,.35)'; g.beginPath(); g.arc(1130 + R() * 270, R() * WH, 1.5 + R() * 2, 0, 6.283); g.fill(); } }
+  // avenida de pedra do bairro
+  if (lands.bairro) { const st = (x, y, w, h) => { g.fillStyle = 'rgba(70,50,30,.25)'; g.fillRect(x - 3, y - 2, w + 6, h + 7); g.fillStyle = '#cdb88f'; g.fillRect(x, y, w, h);
+      for (let yy = y + 2; yy < y + h - 4; yy += 10) for (let xx = x + 2 + ((yy / 10) % 2) * 4; xx < x + w - 6; xx += 11) { g.fillStyle = R() < 0.5 ? '#d9c6a0' : '#bfa67b'; rr(g, xx, yy, 8, 7, 2); g.fill(); }
+      g.fillStyle = '#9c8762'; g.fillRect(x, y, w, 3); g.fillRect(x, y + h - 3, w, 3); };
+    st(40, 2010, 1420, 48); st(298, 1690, 44, 320); st(1040, 2058, 44, 230); st(420, 2058, 44, 230);
+    g.fillStyle = '#e3c58f'; g.beginPath(); g.ellipse(740, 2034, 70, 34, 0, 0, 6.283); g.fill(); g.strokeStyle = '#b8935a'; g.lineWidth = 6; g.stroke(); }
   // cerca em volta de tudo
   g.strokeStyle = '#a8743f'; g.lineWidth = 4; g.strokeRect(10, 24, WW - 20, WH - 34); g.fillStyle = '#8a5a2b';
   for (let x = 10; x <= WW - 10; x += 32) { g.fillRect(x - 3, 12, 6, 20); g.fillRect(x - 3, WH - 22, 6, 20); } for (let y = 24; y <= WH - 10; y += 32) { g.fillRect(4, y - 4, 12, 8); g.fillRect(WW - 16, y - 4, 12, 8); }
@@ -1194,7 +1259,7 @@ function draw(T, dt) {
   const S = G.S, now = nowS(); applyLayout(S);
   cx.setTransform(DPR, 0, 0, DPR, 0, 0); cx.fillStyle = '#5aa83c'; cx.fillRect(0, 0, innerWidth, innerHeight);
   cx.setTransform(DPR * CAM.z, 0, 0, DPR * CAM.z, DPR * (innerWidth / 2 - CAM.x * CAM.z), DPR * (innerHeight / 2 - CAM.y * CAM.z));
-  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia'].map(k => lands[k] ? 1 : 0).join(','); if (!BG || key !== BGKEY) { BG = makeBg(lands); BGKEY = key; } cx.drawImage(BG, 0, 0, WW, WH); if (S && (S.roads.length || G.road)) drawRoads(cx, S);
+  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia', 'bairro'].map(k => lands[k] ? 1 : 0).join(','); if (!BG || key !== BGKEY) { BG = makeBg(lands); BGKEY = key; } cx.drawImage(BG, 0, 0, WW, WH); if (S && (S.roads.length || G.road)) drawRoads(cx, S);
   const lvl = S ? S.lvl : 1;
   // lago com brilho
   cx.strokeStyle = 'rgba(255,255,255,.45)'; cx.lineWidth = 2; for (let i = 0; i < 3; i++) { const r = ((T * 12 + i * 20) % 60); cx.globalAlpha = 1 - r / 60; cx.beginPath(); cx.ellipse(62, 400, r * 0.6, r, 0, 0, 6.283); cx.stroke(); } cx.globalAlpha = 1;
@@ -1274,6 +1339,14 @@ function draw(T, dt) {
       cx.fillStyle = '#7a4b25'; rr(cx, P.x - 64, P.y - P.h - 58, 128, 22, 6); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N('escola').toUpperCase(), P.x, P.y - P.h - 43);
       if (rentNow(S, 'escola', now) > 0) bubble(cx, P.x + P.w / 2 - 10, P.y - P.h - 70, 'coin', T); } }
   else saleSign(cx, LANDS.praia.sx, LANDS.praia.sy, 'praia', S);
+  // bairro: casas e lotes
+  if (lands.bairro) { cx.save(); cx.translate(740, 2034); cx.fillStyle = '#9fd7f0'; cx.beginPath(); cx.ellipse(0, -2, 30, 12, 0, 0, 6.283); cx.fill(); cx.strokeStyle = 'rgba(255,255,255,.8)'; cx.lineWidth = 2; const fr = (T * 1.5) % 1; cx.beginPath(); cx.ellipse(0, -2, 8 + fr * 20, 3 + fr * 8, 0, 0, 6.283); cx.stroke(); cx.restore();
+    LOTS.forEach(([hx, hy], i) => { const hm = S.homes[i];
+      if (!hm) { cx.setLineDash([8, 6]); cx.strokeStyle = 'rgba(255,255,255,.6)'; cx.lineWidth = 3; rr(cx, hx - 62, hy - 70, 124, 70, 10); cx.stroke(); cx.setLineDash([]); if (i === S.homes.length) { cx.fillStyle = 'rgba(58,36,18,.8)'; rr(cx, hx - 50, hy - 48, 100, 26, 8); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('homeBuy') + ' ' + homeCost(i), hx, hy - 30); } return; }
+      const [wl, rf] = HOME_COL[hm.st % HOME_COL.length]; house(cx, hx, hy, 100, 70, wl, rf, 30); cx.fillStyle = '#7a4b25'; cx.fillRect(hx - 10, hy - 32, 20, 32); win(cx, hx - 40, hy - 52, 20, 16); win(cx, hx + 20, hy - 52, 20, 16);
+      cx.fillStyle = '#b5523b'; cx.fillRect(hx + 22, hy - 116, 10, 18); for (let k = 0; k < 4; k++) { cx.fillStyle = ['#ff8fb1', '#ffd23f', '#fff'][k % 3]; cx.beginPath(); cx.arc(hx - 46 + k * 9, hy - 2, 4, 0, 6.283); cx.fill(); }
+      if (homeRent(S, i, now) > 0) bubble(cx, hx, hy - 140, 'coin', T); }); }
+  else saleSign(cx, LANDS.bairro.sx, LANDS.bairro.sy, 'bairro', S);
   // canteiros
   for (let i = 0; i < MAXPLOTS; i++) {
     const r = plotRect(i), pl = S ? S.plots[i] : { c: null }, locked = !S || i >= S.np;
@@ -1357,6 +1430,8 @@ function draw(T, dt) {
   if (S && S.helper && S.helper.on) for (let hh = 0; hh < hCount(S); hh++) { const H = S.helper, working = H.until > now; AV.hs = AV.hs || []; const av = AV.hs[hh] = AV.hs[hh] || { x: HELPER_HOME.x + 40 + hh * 30, y: HELPER_HOME.y + 10, tx: 0, ty: 0, t: 0 };
     const pp = H.ps && H.ps[hh]; if (working && pp) { av.tx = pp[0] + hh * 6; av.ty = pp[1]; } else if (working && hh === 0) { av.tx = H.x; av.ty = H.y; } else { av.tx = HELPER_HOME.x + 40 + hh * 30; av.ty = HELPER_HOME.y + 10 + (hh % 2) * 14; } stepAv(av, dt); drawAv(cx, av, HELPER_NAMES[hh], HELPER_LOOKS[hh], T, false);
     if (!working) { cx.fillStyle = '#fff'; cx.strokeStyle = '#3a2412'; cx.lineWidth = 3; cx.font = '900 14px Nunito, sans-serif'; cx.textAlign = 'left'; const zz = 'z' + (Math.floor(T * 2) % 3 ? 'z' : '') + (Math.floor(T * 2) % 3 === 2 ? 'Z' : ''); cx.strokeText(zz, av.x + 12, av.y - 60); cx.fillText(zz, av.x + 12, av.y - 60); } }
+  // vizinhos
+  if (S) { stepNpcs(S, dt); NPCS.list.slice().sort((a, b) => a.y - b.y).forEach(n => drawNpc(cx, n, T)); }
   // personagens
   if (S) { stepAv(AV.me, dt); const list = [[AV.me, ME.name, ME.look, true]]; if (AV.fr.on && G.mode !== 'solo') { stepAv(AV.fr, dt); list.push([AV.fr, AV.fr.name, AV.fr.look, false]); }
     list.sort((a, b) => a[0].y - b[0].y).forEach(([av, n, l, m]) => drawAv(cx, av, n, l, T, m)); }
