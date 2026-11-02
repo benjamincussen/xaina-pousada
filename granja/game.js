@@ -41,6 +41,9 @@ const TX = {
     land_leste: 'Terreno do Pomar', land_sul: 'Terreno do Lago', forSale: 'À VENDA', landDesc_leste: 'Seis árvores de laranja e manga e uma fábrica de sucos.', landDesc_sul: 'Colmeias que dão mel e um barco de pesca no lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Já é seu', boatGo: 'Mandar o barco (isca: 2 milhos)', boatBack: t => `O barco volta em ${t}`, boatIdle: 'O barco está no cais. Use 2 milhos de isca para pescar.',
     honeyIn: t => `Mel pronto em ${t}`, zoomHint: 'Use dois dedos para aproximar ou afastar o mapa.',
+    helpersTitle: 'Ajudantes', keptHost: 'Seu amigo também jogou separado: ficou o progresso desta sala.', hire: n => `Contratar ${n}`, helpersN: (n, m) => `${n} de ${m} ajudantes`, helpersWork: 'Cada ajudante faz uma tarefa ao mesmo tempo e eles constroem a Vila mais rápido.', shiftAll: n => `Pagar turno de 20 min para ${n === 1 ? 'o ajudante' : 'os ' + n + ' ajudantes'}`,
+    land_vila: 'Terreno da Vila', landDesc_vila: 'A cidade: seus ajudantes constroem Pousada, Mercado e Restaurante, que dão moedas sozinhos.',
+    pousada: 'Pousada', mercado: 'Mercado', restaurante: 'Restaurante', build: 'Construir', building: t => `Em obra: falta ${t}`, built: 'Pronto! Dá moedas sozinho.', rentReady: n => `Recolher ${n} moedas`, rentNext: (n, t) => `${n} moedas a cada 5 min. Próximas em ${t}`, buildFaster: n => `Com ${n} ajudante${n > 1 ? 's' : ''} a obra fica ${n}x mais rápida.`, lot: 'Lote para construir',
     rushTitle: 'Acelerar', rushText: t => `Falta ${t}. Quer terminar agora?`, rushBtn: 'Terminar agora', rushDone: 'Pronto na hora!',
     trees: 'Árvores', buyTreeL: 'Plantar laranjeira', buyTreeM: 'Plantar mangueira', treesN: (n, m) => `${n} de ${m} árvores extras`,
     move: 'Mover', moveHint: 'Modo mover: arraste prédios, currais, árvores, colmeias, decoração ou a plantação.', moveDone: 'Pronto', moved: 'Lugar salvo',
@@ -84,6 +87,9 @@ const TX = {
     land_leste: 'Terreno del Huerto', land_sul: 'Terreno del Lago', forSale: 'SE VENDE', landDesc_leste: 'Seis árboles de naranja y mango y una fábrica de jugos.', landDesc_sul: 'Colmenas que dan miel y un barco de pesca en el lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Ya es tuyo', boatGo: 'Mandar el barco (carnada: 2 maíces)', boatBack: t => `El barco vuelve en ${t}`, boatIdle: 'El barco está en el muelle. Usa 2 maíces de carnada para pescar.',
     honeyIn: t => `Miel lista en ${t}`, zoomHint: 'Usa dos dedos para acercar o alejar el mapa.',
+    helpersTitle: 'Ayudantes', keptHost: 'Tu amigo también jugó por separado: quedó el avance de esta sala.', hire: n => `Contratar a ${n}`, helpersN: (n, m) => `${n} de ${m} ayudantes`, helpersWork: 'Cada ayudante hace una tarea al mismo tiempo y construyen la Villa más rápido.', shiftAll: n => `Pagar turno de 20 min ${n === 1 ? 'al ayudante' : 'a los ' + n + ' ayudantes'}`,
+    land_vila: 'Terreno de la Villa', landDesc_vila: 'La ciudad: tus ayudantes construyen la Pousada, el Mercado y el Restaurante, que dan monedas solos.',
+    pousada: 'Pousada', mercado: 'Mercado', restaurante: 'Restaurante', build: 'Construir', building: t => `En obra: falta ${t}`, built: '¡Listo! Da monedas solo.', rentReady: n => `Recoger ${n} monedas`, rentNext: (n, t) => `${n} monedas cada 5 min. Próximas en ${t}`, buildFaster: n => `Con ${n} ayudante${n > 1 ? 's' : ''} la obra va ${n}x más rápido.`, lot: 'Lote para construir',
     rushTitle: 'Acelerar', rushText: t => `Falta ${t}. ¿Terminar ahora?`, rushBtn: 'Terminar ahora', rushDone: '¡Listo al instante!',
     trees: 'Árboles', buyTreeL: 'Plantar naranjo', buyTreeM: 'Plantar mango', treesN: (n, m) => `${n} de ${m} árboles extra`,
     move: 'Mover', moveHint: 'Modo mover: arrastra edificios, corrales, árboles, colmenas, decoración o el sembrado.', moveDone: 'Listo', moved: 'Lugar guardado',
@@ -155,6 +161,7 @@ const LANDS = {
   leste: { lvl: 4, cost: 300, r: { x: 660, y: 70, w: 420, h: 590 }, sx: 870, sy: 330 },
   sul: { lvl: 5, cost: 500, r: { x: 20, y: 1010, w: 1060, h: 300 }, sx: 380, sy: 1150 },
   colina: { lvl: 6, cost: 800, r: { x: 660, y: 680, w: 420, h: 300 }, sx: 870, sy: 800 },
+  vila: { lvl: 7, cost: 1200, r: { x: 20, y: 1370, w: 1060, h: 320 }, sx: 560, sy: 1470 },
 };
 const TREES = [['laranja', 740, 210], ['laranja', 860, 210], ['laranja', 980, 210], ['manga', 740, 380], ['manga', 860, 380], ['manga', 980, 380]];
 const FRUIT = { laranja: { t: 90, y: 3, xp: 4 }, manga: { t: 140, y: 2, xp: 5 } };
@@ -189,6 +196,15 @@ const PEN_MAX = { galinheiro: 10, estabulo: 8 }, animalCost = (k, n) => k === 'g
 const DECOS = { banco: { cost: 150, x: 185, y: 690 }, flores: { cost: 200, x: 255, y: 692 }, espantalho: { cost: 300, x: 510, y: 330 }, fonte: { cost: 600, x: 470, y: 700 } };
 const decoBonus = S => Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5;
 captureDefaults.later = true;
+const HELPER_NAMES = ['Juca', 'Nina', 'Tonho', 'Bia'], HELPER_LOOKS = ['cap', 'cap2', 'cap3', 'cap4'], hireCost = n => [0, 400, 900, 1600][n] || 0;
+const PROJ = {
+  pousada: { lvl: 7, cost: 800, need: { pao: 6, suco: 3 }, t: 300, inc: 60, x: 200, y: 1640, w: 170, h: 110 },
+  mercado: { lvl: 8, cost: 1500, need: { queijo: 4, mel: 3 }, t: 480, inc: 100, x: 560, y: 1640, w: 160, h: 96 },
+  restaurante: { lvl: 9, cost: 2500, need: { peixe: 6, bolo: 3 }, t: 600, inc: 160, x: 910, y: 1640, w: 160, h: 100 },
+};
+const RENT_EVERY = 300, RENT_CAP = 6;
+const hCount = S => S.helper && S.helper.on ? (S.helper.n || 1) : 0;
+function rentNow(S, k, now) { const c = S.city[k]; if (!c || c.e > now) return 0; const per = Math.floor((now - c.c) / (RENT_EVERY * 1000)); return Math.min(per, RENT_CAP) * PROJ[k].inc; }
 const HELPER_ORDERS = 8, SHIFT = { cost: 25, min: 20 }, HELPER_HOME = { x: 196, y: 262 };
 const PENS = {
   galinheiro: { n: 'Galinheiro', lvl: 1, feed: 'racaoG', out: 'ovo', t: 90, count: 3, xp: 2, x: 125, y: 790, w: 210, h: 140 },
@@ -197,7 +213,7 @@ const PENS = {
 PENS.galinheiro.t = 50; PENS.estabulo.t = 90; // ritmo mais rápido
 const BARN = { x: 548, y: 205, w: 124, h: 96 }, HOUSE = { x: 96, y: 205, w: 120, h: 86 }, BOARD = { x: 320, y: 905, w: 120, h: 70 };
 const LV = [0, 12, 35, 70, 120, 190, 280, 400, 550, 750, 1000, 1300];
-const MAXPLOTS = 12, PLOT0 = 6, WW = 1100, WH = 1340;
+const MAXPLOTS = 12, PLOT0 = 6, WW = 1100, WH = 1720;
 const plotRect = i => ({ x: 168 + FIELD.dx + (i % 3) * 104, y: 290 + FIELD.dy + Math.floor(i / 3) * 82, w: 96, h: 72 });
 const plotCost = np => Math.round(25 * Math.pow(1.55, np - PLOT0));
 const capCost = cap => 80 + (cap - 50) / 25 * 70;
@@ -219,6 +235,8 @@ function migrate(S) {
   if (!S.slots || typeof S.slots !== 'object') S.slots = {};
   if (!S.deco || typeof S.deco !== 'object') S.deco = {};
   if (!Array.isArray(S.xt)) S.xt = [];
+  if (!S.city || typeof S.city !== 'object') S.city = {};
+  if (S.helper && !S.helper.n) S.helper.n = 1; if (S.helper && !Array.isArray(S.helper.ps)) S.helper.ps = [];
   if (!S.pos || typeof S.pos !== 'object') S.pos = {};
   if (!S.helper || typeof S.helper !== 'object') S.helper = { on: 0, until: 0, x: HELPER_HOME.x, y: HELPER_HOME.y };
   for (const k of Object.keys(BUILD)) if (!S.bld[k]) S.bld[k] = { q: [] };
@@ -325,9 +343,20 @@ function apply(S, a, now) {
     else if (a.t === 'pen') { const P = PENS[a.k], st = P && S.pens[a.k]; if (st) { const busy = st.a.filter(f => f && now < f + P.t * 1000); if (busy.length) { rem = Math.max(...busy) + P.t * 1000 - now; doIt = () => { st.a = st.a.map(f => f && now < f + P.t * 1000 ? now - P.t * 1000 : f); }; } } }
     else if (a.t === 'bld') { const st = S.bld[a.b]; const j = st && st.q[0]; if (j && j.e > now) { rem = j.e - now; doIt = () => { j.s = Math.min(j.s, now); j.e = now; }; } }
     else if (a.t === 'tree') { const tr = treeAt(S, a.i | 0); if (tr && !treeReady(S, tr.i, now)) { rem = tr.t + FRUIT[tr.k].t * 1000 - now; doIt = () => setTreeT(S, tr.i, now - FRUIT[tr.k].t * 1000); } }
+    else if (a.t === 'city') { const c = S.city[a.k]; if (c && c.e > now) { rem = c.e - now; doIt = () => { c.e = now; c.c = now; }; } }
     else if (a.t === 'boat') { if (S.boat.e && S.boat.e > now) { rem = S.boat.e - now; doIt = () => { S.boat.e = now; }; } }
     if (!doIt) return fail(''); const c = rushCost(Math.ceil(rem / 1000)); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; doIt(); out.fx.push(['coins', -c]); out.fx.push(['rush']);
+  } else if (a.a === 'hire') {
+    const n = hCount(S); if (!n || n >= HELPER_NAMES.length) return fail(''); const c = hireCost(n); if (S.coins < c) return fail(L('noCoins'));
+    S.coins -= c; S.helper.n = n + 1; out.fx.push(['coins', -c]); out.fx.push(['hired', n]);
+  } else if (a.a === 'build') {
+    const P = PROJ[a.k]; if (!P || !S.land.vila || S.city[a.k]) return fail(''); if (P.lvl > S.lvl) return fail(L('unlockAt', P.lvl));
+    if (S.coins < P.cost) return fail(L('noCoins')); if (!has(S, P.need)) return fail(L('missingProd'));
+    S.coins -= P.cost; take(S, P.need); const dur = Math.max(30, Math.round(P.t / Math.max(1, hCount(S)))) * 1000; S.city[a.k] = { s: now, e: now + dur, c: now + dur }; addXp(S, 20, out); out.fx.push(['coins', -P.cost]); out.fx.push(['build', a.k]);
+  } else if (a.a === 'rent') {
+    const c = S.city[a.k]; if (!c || c.e > now) return fail(''); const amt = rentNow(S, a.k, now); if (!amt) return fail(L('rentNext', PROJ[a.k].inc, fmtT(Math.ceil((c.c + RENT_EVERY * 1000 - now) / 1000))));
+    const per = Math.floor((now - c.c) / (RENT_EVERY * 1000)); c.c = per > RENT_CAP ? now : c.c + per * RENT_EVERY * 1000; S.coins += amt; out.fx.push(['coins', amt]); out.fx.push(['gain', 'coin', amt, 'city', a.k]);
   } else if (a.a === 'buyTree') {
     if (!FRUIT[a.k] || S.lvl < 4 || S.xt.length >= XT_MAX) return fail(''); const c = treeCost(a.k); if (S.coins < c) return fail(L('noCoins'));
     const all = treeList(S), spot = XT_SPOTS.find(([x, y]) => all.every(t => Math.hypot(t.x - x, t.y - y) > 70)) || XT_SPOTS[S.xt.length % XT_SPOTS.length];
@@ -351,8 +380,8 @@ function apply(S, a, now) {
     const k = a.k, q = Math.min(a.q | 0, S.inv[k] || 0); if (!ITEMS[k] || q <= 0) return fail('');
     const c = q * sellPrice(k); take(S, { [k]: q }); S.coins += c; out.fx.push(['coins', c]); out.fx.push(['sold', q, k, c]);
   } else if (a.a === 'shift') {
-    if (!S.helper.on) return fail(''); if (S.coins < SHIFT.cost) return fail(L('noCoins'));
-    S.coins -= SHIFT.cost; S.helper.until = Math.max(now, S.helper.until || 0) + SHIFT.min * 60000; out.fx.push(['coins', -SHIFT.cost]);
+    if (!S.helper.on) return fail(''); const sc = SHIFT.cost * hCount(S); if (S.coins < sc) return fail(L('noCoins'));
+    S.coins -= sc; S.helper.until = Math.max(now, S.helper.until || 0) + SHIFT.min * 60000; out.fx.push(['coins', -sc]);
   } else if (a.a === 'cap') {
     const c = capCost(S.cap); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; S.cap += 25;
   } else return fail('');
@@ -437,7 +466,8 @@ function walkTo(av, x, y) { av.tx = clamp(x, 20, WW - 20); av.ty = clamp(y + 18,
 function stepAv(av, dt) { const dx = av.tx - av.x, dy = av.ty - av.y, d = Math.hypot(dx, dy), sp = 240 * dt; if (d > 1) { const k = Math.min(1, sp / d); av.x += dx * k; av.y += dy * k; av.t += dt; av.dir = dx >= 0 ? 1 : -1; av.walk = true; } else av.walk = false; }
 function drawAv(g, av, name, look, T, mine) {
   const x = av.x, y = av.y, step = av.walk ? Math.sin(av.t * 14) : 0, bob = av.walk ? Math.abs(Math.sin(av.t * 14)) * 2 : 0, d = av.dir || 1;
-  const shirt = look === 'hair' ? '#9b5de5' : look === 'cap' ? '#2f9e6e' : '#ff8a1f', pants = look === 'hair' ? '#3d5a99' : look === 'cap' ? '#2f7a55' : '#4a6fa5';
+  const CAPC = { cap: '#2f9e6e', cap2: '#3d7fd6', cap3: '#e0533d', cap4: '#e6a92a' }, isCap = !!CAPC[look];
+  const shirt = look === 'hair' ? '#9b5de5' : isCap ? CAPC[look] : '#ff8a1f', pants = look === 'hair' ? '#3d5a99' : isCap ? '#3a4a5a' : '#4a6fa5';
   g.fillStyle = 'rgba(0,0,0,.2)'; g.beginPath(); g.ellipse(x, y + 2, 13, 4, 0, 0, 6.283); g.fill();
   g.strokeStyle = pants; g.lineWidth = 6; g.lineCap = 'round'; g.beginPath(); g.moveTo(x - 4, y - 14 - bob); g.lineTo(x - 4 + step * 4, y - 1); g.moveTo(x + 4, y - 14 - bob); g.lineTo(x + 4 - step * 4, y - 1); g.stroke();
   if (look === 'hair') { g.fillStyle = '#5a2e14'; g.beginPath(); g.ellipse(x - d * 2, y - 34 - bob, 12, 16, 0, 0, 6.283); g.fill(); }
@@ -446,9 +476,9 @@ function drawAv(g, av, name, look, T, mine) {
   g.fillStyle = '#f2c6a0'; g.beginPath(); g.arc(x, y - 40 - bob, 9, 0, 6.283); g.fill();
   g.fillStyle = '#3a2412'; g.beginPath(); g.arc(x + d * 3, y - 41 - bob, 1.6, 0, 6.283); g.fill();
   if (look === 'hair') { g.fillStyle = '#5a2e14'; g.beginPath(); g.arc(x, y - 44 - bob, 9.5, Math.PI, 0); g.fill(); }
-  else if (look === 'cap') { g.fillStyle = '#2f9e6e'; g.beginPath(); g.arc(x, y - 45 - bob, 9.5, Math.PI, 0); g.fill(); g.fillRect(x + (d > 0 ? 0 : -14), y - 47 - bob, 14, 3.5); }
+  else if (isCap) { g.fillStyle = CAPC[look]; g.beginPath(); g.arc(x, y - 45 - bob, 9.5, Math.PI, 0); g.fill(); g.fillRect(x + (d > 0 ? 0 : -14), y - 47 - bob, 14, 3.5); }
   else { g.fillStyle = '#f2d06b'; g.beginPath(); g.ellipse(x, y - 47 - bob, 17, 5, 0, 0, 6.283); g.fill(); g.fillRect(x - 8, y - 56 - bob, 16, 9); g.fillStyle = '#c8702a'; g.fillRect(x - 8, y - 50 - bob, 16, 3); }
-  if (name) { g.font = '900 12px Nunito, sans-serif'; const w = g.measureText(name).width + 14; g.fillStyle = look === 'hair' ? 'rgba(155,93,229,.95)' : look === 'cap' ? 'rgba(47,158,110,.95)' : 'rgba(255,138,31,.95)';
+  if (name) { g.font = '900 12px Nunito, sans-serif'; const w = g.measureText(name).width + 14; g.fillStyle = look === 'hair' ? 'rgba(155,93,229,.95)' : isCap ? CAPC[look] : 'rgba(255,138,31,.95)';
     g.beginPath(); g.roundRect ? g.roundRect(x - w / 2, y - 80 - bob, w, 18, 9) : g.rect(x - w / 2, y - 80 - bob, w, 18); g.fill(); g.fillStyle = '#fff'; g.textAlign = 'center'; g.fillText(name, x, y - 67 - bob); }
 }
 
@@ -493,6 +523,7 @@ function tapAt(p) {
   if (G.edit) return;
   ping(p.x, p.y);
   for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR(p, Ld.r)) return openSheet('land', k);
+  if (S.land.vila) for (const [k, P] of Object.entries(PROJ)) if (Math.abs(p.x - P.x) < P.w / 2 + 10 && p.y > P.y - P.h - 70 && p.y < P.y + 12) { if (rentNow(S, k, now) > 0) return void act({ a: 'rent', k }); return openSheet('proj', k); }
   for (const t of treeList(S)) if (Math.hypot(p.x - t.x, p.y - (t.y - 40)) < 52) return treeReady(S, t.i, now) ? void act({ a: 'tree', i: t.i }) : openSheet('rush', { t: 'tree', i: t.i });
   if (S.land.sul) { for (const [hx, hy] of HIVES) if (Math.abs(p.x - hx) < 34 && p.y > hy - 60 && p.y < hy + 12) return void act({ a: 'hive' });
     if (p.x > BOAT.x - 120 && p.x < BOAT.x + 120 && p.y > BOAT.y - 70 && p.y < BOAT.y + 50) return openSheet('boat'); }
@@ -512,7 +543,7 @@ function tapAt(p) {
     if (P.lvl > S.lvl) return toast(L('unlockName', N(k), P.lvl));
     const r = act({ a: 'pen', k }, true); if (!r.ok) openSheet('pen', k); return;
   }
-  if (S.helper && S.helper.on && Math.hypot(p.x - AV.helper.x, p.y - (AV.helper.y - 30)) < 34) return openSheet('helper');
+  if (S.helper && S.helper.on && (AV.hs || []).some(av => Math.hypot(p.x - av.x, p.y - (av.y - 30)) < 34)) return openSheet('helper');
   if (inR(p, bRect(BARN))) return openSheet('barn');
   if (inR(p, bRect(BOARD))) return openSheet('orders');
   if (inR(p, bRect(HOUSE))) return openSheet('menu');
@@ -534,7 +565,7 @@ function act(a, quiet) {
 function playFx(fx) {
   for (const f of fx) {
     if (f[0] === 'gain') { const at = f[3] === 'plot' ? (() => { const r = plotRect(f[4]); return { x: r.x + r.w / 2, y: r.y + r.h / 2 }; })() : f[3] === 'bld' ? { x: BUILD[f[4]].x, y: BUILD[f[4]].y - 60 }
-        : f[3] === 'tree' ? (() => { const t = treeAt(G.S, f[4]) || { x: 870, y: 300 }; return { x: t.x, y: t.y - 70 }; })() : f[3] === 'hive' ? { x: 150, y: 1120 } : f[3] === 'boat' ? { x: BOAT.x, y: BOAT.y - 40 } : { x: PENS[f[4]].x, y: PENS[f[4]].y - 30 };
+        : f[3] === 'city' ? { x: PROJ[f[4]].x, y: PROJ[f[4]].y - 120 } : f[3] === 'tree' ? (() => { const t = treeAt(G.S, f[4]) || { x: 870, y: 300 }; return { x: t.x, y: t.y - 70 }; })() : f[3] === 'hive' ? { x: 150, y: 1120 } : f[3] === 'boat' ? { x: BOAT.x, y: BOAT.y - 40 } : { x: PENS[f[4]].x, y: PENS[f[4]].y - 30 };
       FLOAT.push({ k: f[1], n: f[2], x: at.x, y: at.y, t: 0 }); SND.pop(); }
     if (f[0] === 'plant') SND.plant();
     if (f[0] === 'craft' || f[0] === 'feed') SND.pop();
@@ -543,6 +574,8 @@ function playFx(fx) {
     if (f[0] === 'boat') SND.plant();
     if (f[0] === 'sold') toast(L('sold', f[1], f[2], f[3]));
     if (f[0] === 'rush') { SND.lvl(); toast(L('rushDone')); }
+    if (f[0] === 'hired') { SND.lvl(); toast(HELPER_NAMES[f[1]] + '!'); }
+    if (f[0] === 'build') { SND.plant(); const P = PROJ[f[1]]; CAM.x = P.x; CAM.y = P.y - 80; clampCam(); }
     if (f[0] === 'newTree') { SND.plant(); const t = G.S.xt[f[1]]; if (t) { CAM.x = t.x; CAM.y = t.y - 40; clampCam(); for (let i = 0; i < 14; i++) SPARK.push({ x: t.x, y: t.y - 30, vx: (Math.random() - 0.5) * 140, vy: -50 - Math.random() * 110, t: 0, c: ['#8cc63f', '#ffd23f', '#ffffff'][i % 3] }); } }
     if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
@@ -568,12 +601,13 @@ function helperTask(S, now) {
   applyLayout(S); treeList(S).forEach(t => { if (treeReady(S, t.i, now)) tries.push([{ a: 'tree', i: t.i }, { x: t.x - 10, y: t.y - 10, w: 20, h: 20 }]); });
   if (S.land.sul) { if (HIVES.some((h, i) => hiveReady(S, i, now))) tries.push([{ a: 'hive' }, { x: HIVES[0][0], y: HIVES[0][1], w: 1, h: 1 }]);
     if ((S.boat.e && S.boat.e <= now) || (!S.boat.e && (S.inv.milho || 0) >= 4)) tries.push([{ a: 'boat' }, { x: BOAT.x - 40, y: BOAT.y - 10, w: 1, h: 1 }]); }
+  for (const k of Object.keys(PROJ)) if (rentNow(S, k, now) > 0) tries.push([{ a: 'rent', k }, { x: PROJ[k].x - 10, y: PROJ[k].y - 10, w: 20, h: 20 }]);
   S.plots.forEach((pl, i) => { if (i < S.np && !pl.c) { const c = pl.last && CROPS[pl.last] && CROPS[pl.last].lvl <= S.lvl ? pl.last : 'trigo'; if (S.coins >= CROPS[c].cost + 10) tries.push([{ a: 'plant', i, c }, plotRect(i)]); } });
   let blocked = false;
   for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; if (CROPS[crop] && S.coins >= CROPS[crop].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: crop }, now); if (re.ok) { S.plots[a.i].last = crop; res.fx.push(...re.fx); } } } S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.10';
+const BUILD_V = '2026-11-02.11';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -581,7 +615,7 @@ $('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S); locat
 let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   const S = G.S, now = Date.now(); helperClock++;
-  if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { const r = helperTask(S, now); if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
+  if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { let r = null; for (let hh = 0; hh < hCount(S); hh++) { const rr = helperTask(S, now); if (rr && rr.ok) { S.helper.ps[hh] = [S.helper.x, S.helper.y]; if (r && r.ok) playFx(r.fx.filter(f => f[0] !== 'coins')); r = rr; } else if (!r) r = rr; } if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
 
 const NET = { api: null, room: null, sub: null, code: null, role: null, guestPeer: null,
   async leave() { if (this.sub) this.sub(); this.sub = null; const r = this.room; this.room = null; this.guestPeer = null; if (r) try { await r.leave(); } catch (e) {} } };
@@ -635,7 +669,11 @@ function onPeers() {
     if (!o && NET.guestPeer) { NET.guestPeer = null; toast(AV.fr.name ? L('leftN', AV.fr.name) : L('friendLeft')); AV.fr.on = false; }
     if (o) {
       const pr = o.presence;
-      if (pr.up && pr.up.fid === G.S.fid && sane(pr.up) && pr.up.rev > G.S.rev && !G.sent[pr.up.rev]) { G.sent[pr.up.rev] = 1; G.S = pr.up; storeFarm(G.S); toast(L('loadedFriend')); broadcast(); refresh(); }
+      // o progresso do amigo só entra se quem abriu a sala não jogou desde a última vez que estiveram juntos
+      if (pr.up && pr.up.fid === G.S.fid && sane(pr.up) && !G.sent['u' + pr.up.rev]) { G.sent['u' + pr.up.rev] = 1;
+        if (G.S.rev === (G.S.sy || 0) && pr.up.rev > G.S.rev) { G.S = pr.up; storeFarm(G.S); toast(L('loadedFriend')); } else if (pr.up.rev !== G.S.rev) toast(L('keptHost'), 3600);
+        broadcast(); refresh(); }
+      if (pr.have === G.S.rev && G.S.sy !== G.S.rev) { G.S.sy = G.S.rev; saveSoon(); }
       if (pr.acts && pr.acts.fid === G.S.fid && Array.isArray(pr.acts.q)) for (const [q, a] of pr.acts.q) if (q > G.lastSeq) { G.lastSeq = q; const r = apply(G.S, a, Date.now()); if (r.ok) { playFx(r.fx.filter(f => f[0] !== 'lvl')); r.fx.filter(f => f[0] === 'lvl').forEach(f => playFx([f])); ensureOrders(G.S); saveSoon(); broadcast(); refresh(); } }
       readFriend(pr);
     }
@@ -648,9 +686,9 @@ function onPeers() {
       if (st && sane(st)) {
         G.off = (h.presence.now || Date.now()) - Date.now();
         const mine = loadFarm(st.fid);
-        if (mine && mine.rev > st.rev && !G.sent[st.fid + ':' + mine.rev]) { G.sent[st.fid + ':' + mine.rev] = 1; NET.room.presence({ up: mine }).catch(() => {}); }
+        if (mine && mine.rev > (mine.sy || 0) && mine.rev !== st.rev && !G.sent[st.fid + ':' + mine.rev]) { G.sent[st.fid + ':' + mine.rev] = 1; NET.room.presence({ up: mine }).catch(() => {}); }
         const first = G.mode !== 'guest';
-        G.S = st; G.mode = 'guest'; storeFarm(st, false); try { if (NET.code) localStorage.setItem('sitio-code-' + st.fid, NET.code); } catch (e) {}
+        G.S = st; G.mode = 'guest'; storeFarm({ ...st, sy: st.rev }, false); if (G.ackRev !== st.rev) { G.ackRev = st.rev; NET.room.presence({ have: st.rev }).catch(() => {}); } try { if (NET.code) localStorage.setItem('sitio-code-' + st.fid, NET.code); } catch (e) {}
         if (first) { $('ovMenu').hidden = true; $('hud').hidden = false; toast(L('youJoined', farmTitle(st))); }
         refresh();
       }
@@ -759,6 +797,12 @@ function renderSheet() {
       ? `<div class="card"><p class="sub">${L('newOrderIn', fmtT(Math.ceil((o.w - now) / 1000)))}</p></div>`
       : `<div class="card">${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>${img('coin')}${o.c}</span><span>${img('star')}${o.x}</span></span><span style="flex:1"></span>
         <button class="btn gray" type="button" data-discard="${o.id}" aria-label="${L('discardAria')}">✕</button><button class="btn" type="button" data-deliver="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`).join('');
+  } else if (SH.type === 'proj') {
+    const k = SH.arg, P = PROJ[k], c = S.city[k]; t.textContent = N(k);
+    if (!c) h = `<div class="card"><p class="sub">${L('lot')}</p>${P.lvl > S.lvl ? `<p class="sub">${L('unlockAt', P.lvl)}</p>` : `${needHtml(S, P.need)}<p class="sub">${L('buildFaster', Math.max(1, hCount(S)))} · ${fmtT(Math.max(30, Math.round(P.t / Math.max(1, hCount(S)))))}</p>
+      <button class="btn" type="button" data-build="${k}" ${S.coins < P.cost || !has(S, P.need) ? 'disabled' : ''}>${L('build')} · ${img('coin')} ${P.cost}</button>`}</div>`;
+    else if (c.e > now) h = `<div class="card"><p class="sub">${L('building', fmtT(Math.ceil((c.e - now) / 1000)))}</p><button class="btn" type="button" data-rushc="${k}" ${S.coins < rushCost(Math.ceil((c.e - now) / 1000)) ? 'disabled' : ''}>⚡ ${L('rushBtn')} · ${img('coin')} ${rushCost(Math.ceil((c.e - now) / 1000))}</button></div>`;
+    else { const amt = rentNow(S, k, now); h = `<div class="card"><p class="sub">${L('built')}</p><p class="sub">${L('rentNext', P.inc, fmtT(Math.max(0, Math.ceil((c.c + RENT_EVERY * 1000 - now) / 1000))))}</p>${amt ? `<button class="btn" type="button" data-rent="${k}">${L('rentReady', amt)}</button>` : ''}</div>`; }
   } else if (SH.type === 'rush') {
     const r = SH.arg; t.textContent = L('rushTitle'); let rem = 0, ic = 'coin';
     if (r.t === 'plot') { const pl = S.plots[r.i]; if (pl && pl.c) { rem = pl.p + CROPS[pl.c].t * 1000 - now; ic = pl.c; } }
@@ -777,10 +821,12 @@ function renderSheet() {
     h = `<div class="card"><div class="row">${img('peixe')}<p style="flex:1;margin:0;font-weight:800">${!e ? L('boatIdle') : e > now ? L('boatBack', fmtT(Math.ceil((e - now) / 1000))) : L('ready')}</p></div>
       ${!e ? needHtml(S, BOAT.bait) + `<button class="btn blue" type="button" data-boat="1" ${has(S, BOAT.bait) ? '' : 'disabled'}>${L('boatGo')}</button>` : e <= now ? `<button class="btn" type="button" data-boat="1">${L('collectX', 'peixe')} ×${BOAT.k}</button>` : `<button class="btn" type="button" data-rushboat="1" ${S.coins < rushCost(Math.ceil((e - now) / 1000)) ? 'disabled' : ''}>⚡ ${L('rushBtn')} · ${img('coin')} ${rushCost(Math.ceil((e - now) / 1000))}</button>`}</div>`;
   } else if (SH.type === 'helper') {
-    t.textContent = L('helperTitle'); const H = S.helper;
+    const H = S.helper; t.textContent = hCount(S) > 1 ? L('helpersTitle') : L('helperTitle');
     h = `<div class="card"><div class="row"><span style="width:56px;height:56px;display:grid;place-items:center">${img('helper')}</span><p style="flex:1;margin:0;font-weight:800">${L('helperDoes')}</p></div></div>`
       + (!H.on ? `<div class="card"><p class="sub">${L('helperLocked', HELPER_ORDERS)}</p><div style="height:10px;border-radius:5px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${Math.min(100, (S.done || 0) / HELPER_ORDERS * 100)}%;background:#5cc04a"></i></div><small>${L('helperProg', Math.min(S.done || 0, HELPER_ORDERS), HELPER_ORDERS)}</small></div>`
-        : `<div class="card"><p class="sub">${H.until > now ? L('working', fmtT(Math.ceil((H.until - now) / 1000))) : L('resting')}</p><button class="btn" type="button" data-shift="1" ${S.coins < SHIFT.cost ? 'disabled' : ''}>${L('shiftBtn')} · ${img('coin')} ${SHIFT.cost}</button></div>`);
+        : `<div class="card"><p class="sub">${H.until > now ? L('working', fmtT(Math.ceil((H.until - now) / 1000))) : L('resting')}</p><button class="btn" type="button" data-shift="1" ${S.coins < SHIFT.cost * hCount(S) ? 'disabled' : ''}>${L('shiftAll', hCount(S))} · ${img('coin')} ${SHIFT.cost * hCount(S)}</button></div>
+          <div class="card"><p class="sub">${L('helpersN', hCount(S), HELPER_NAMES.length)} · ${HELPER_NAMES.slice(0, hCount(S)).join(', ')}</p><p class="sub">${L('helpersWork')}</p>
+          ${hCount(S) < HELPER_NAMES.length ? `<button class="btn blue" type="button" data-hire="1" ${S.coins < hireCost(hCount(S)) ? 'disabled' : ''}>${L('hire', HELPER_NAMES[hCount(S)])} · ${img('coin')} ${hireCost(hCount(S))}</button>` : ''}</div>`);
   } else if (SH.type === 'shop') {
     t.textContent = L('shop');
     h = `<div class="card"><div class="row"><b style="flex:1">${L('newPlot')}</b>${S.np >= MAXPLOTS ? `<small>${L('allBought')}</small>` : `<button class="btn" type="button" data-buyplot="1" ${S.coins < plotCost(S.np) ? 'disabled' : ''}>${img('coin')} ${plotCost(S.np)}</button>`}</div><small>${L('plotsOf', S.np, MAXPLOTS)}</small></div>
@@ -822,6 +868,10 @@ $('sBody').addEventListener('click', e => {
   if (d.rushb) act({ a: 'rush', t: 'bld', b: SH.arg });
   if (d.rushp) act({ a: 'rush', t: 'pen', k: SH.arg });
   if (d.rushboat) act({ a: 'rush', t: 'boat' });
+  if (d.hire) act({ a: 'hire' });
+  if (d.build) act({ a: 'build', k: d.build });
+  if (d.rent) act({ a: 'rent', k: d.rent });
+  if (d.rushc) act({ a: 'rush', t: 'city', k: d.rushc });
   if (d.deco) act({ a: 'deco', k: d.deco });
   if (d.shift) act({ a: 'shift' });
   if (d.buyplot) act({ a: 'buyPlot' });
@@ -854,6 +904,8 @@ function makeBg(lands) {
   path(g, [[84, 600], [320, 640, 556, 600], [870, 610]], 30);
   path(g, [[96, 230], [320, 260, 548, 230], [870, 250]], 26);
   path(g, [[320, 1180], [440, 1200, 560, 1190]], 30);
+  path(g, [[320, 1180], [320, 1560]], 40); path(g, [[120, 1560], [1000, 1560]], 34);
+  g.fillStyle = '#e3c58f'; g.beginPath(); g.ellipse(400, 1560, 62, 30, 0, 0, 6.283); g.fill(); g.strokeStyle = '#b8935a'; g.lineWidth = 6; g.stroke();
   for (let i = 0; i < 160; i++) { const y = 650 + R() * 540, x = 300 + R() * 40; g.fillStyle = 'rgba(140,105,60,.35)'; g.beginPath(); g.ellipse(x, y, 2 + R() * 2, 1.5, 0, 0, 6.283); g.fill(); }
   // lagoinha com borda de areia
   g.fillStyle = '#e8d6a4'; g.beginPath(); g.ellipse(62, 380, 52, 77, 0, 0, 6.283); g.fill();
@@ -950,7 +1002,7 @@ function draw(T, dt) {
   const S = G.S, now = nowS(); applyLayout(S);
   cx.setTransform(DPR, 0, 0, DPR, 0, 0); cx.fillStyle = '#5aa83c'; cx.fillRect(0, 0, innerWidth, innerHeight);
   cx.setTransform(DPR * CAM.z, 0, 0, DPR * CAM.z, DPR * (innerWidth / 2 - CAM.x * CAM.z), DPR * (innerHeight / 2 - CAM.y * CAM.z));
-  const lands = S ? S.land : {}, key = (lands.leste ? 1 : 0) + ',' + (lands.sul ? 1 : 0) + ',' + (lands.colina ? 1 : 0); if (!BG || key !== BGKEY) { BG = makeBg(lands); BGKEY = key; } cx.drawImage(BG, 0, 0, WW, WH);
+  const lands = S ? S.land : {}, key = (lands.leste ? 1 : 0) + ',' + (lands.sul ? 1 : 0) + ',' + (lands.colina ? 1 : 0) + ',' + (lands.vila ? 1 : 0); if (!BG || key !== BGKEY) { BG = makeBg(lands); BGKEY = key; } cx.drawImage(BG, 0, 0, WW, WH);
   const lvl = S ? S.lvl : 1;
   // lago com brilho
   cx.strokeStyle = 'rgba(255,255,255,.45)'; cx.lineWidth = 2; for (let i = 0; i < 3; i++) { const r = ((T * 12 + i * 20) % 60); cx.globalAlpha = 1 - r / 60; cx.beginPath(); cx.ellipse(62, 400, r * 0.6, r, 0, 0, 6.283); cx.stroke(); } cx.globalAlpha = 1;
@@ -995,6 +1047,29 @@ function draw(T, dt) {
     boatShape(cx, bx, by + Math.sin(T * 2) * 1.5, 1);
     if (!e) bubble(cx, BOAT.x + 44, BOAT.y - 76, 'milho', T, true); else if (!out) bubble(cx, BOAT.x + 44, BOAT.y - 76, 'peixe', T); else progressBar(cx, BOAT.x - 40, BOAT.y + 22, 70, 1 - (e - now) / (BOAT.t * 1000));
   } else saleSign(cx, LANDS.sul.sx, LANDS.sul.sy, 'sul', S);
+  // a Vila: obras dos ajudantes e prédios que dão moedas
+  if (lands.vila) {
+    // praça com chafariz
+    cx.fillStyle = '#5ab4e6'; cx.beginPath(); cx.ellipse(400, 1556, 24, 9, 0, 0, 6.283); cx.fill(); cx.strokeStyle = '#a9a9a0'; cx.lineWidth = 5; cx.stroke();
+    for (let i = 0; i < 6; i++) { const ph = (T * 1.2 + i / 6) % 1; cx.fillStyle = `rgba(160,220,255,${1 - ph})`; cx.beginPath(); cx.arc(400 + Math.cos(i) * ph * 14, 1548 - Math.sin(ph * Math.PI) * 12, 2, 0, 6.283); cx.fill(); }
+    for (const [k, P] of Object.entries(PROJ)) { const c = S.city[k];
+      if (!c) { cx.fillStyle = 'rgba(140,100,55,.45)'; rr(cx, P.x - P.w / 2, P.y - 50, P.w, 54, 8); cx.fill(); cx.fillStyle = '#7a4b25'; for (const [dx, dy] of [[-P.w / 2, -50], [P.w / 2 - 4, -50], [-P.w / 2, 0], [P.w / 2 - 4, 0]]) cx.fillRect(P.x + dx, P.y + dy - 10, 4, 14);
+        cx.fillStyle = 'rgba(58,36,18,.85)'; rr(cx, P.x - 62, P.y - 96, 124, 40, 8); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N(k), P.x, P.y - 80); cx.font = '800 11px Nunito, sans-serif'; cx.fillText(P.lvl > S.lvl ? L('lvl', P.lvl) : L('build') + ' · ' + P.cost, P.x, P.y - 64); continue; }
+      if (c.e > now) { const pr = clamp((now - c.s) / (c.e - c.s), 0, 1), hgt = P.h * (0.2 + 0.8 * pr); shadow(cx, P.x, P.y, P.w + 30);
+        cx.fillStyle = '#e8d9b8'; cx.fillRect(P.x - P.w / 2 + 10, P.y - hgt, P.w - 20, hgt); cx.strokeStyle = '#b07a3a'; cx.lineWidth = 3;
+        for (let x = P.x - P.w / 2; x <= P.x + P.w / 2; x += P.w / 4) { cx.beginPath(); cx.moveTo(x, P.y); cx.lineTo(x, P.y - P.h - 10); cx.stroke(); } for (let y = P.y - 20; y > P.y - P.h - 10; y -= 26) { cx.beginPath(); cx.moveTo(P.x - P.w / 2, y); cx.lineTo(P.x + P.w / 2, y); cx.stroke(); }
+        cx.strokeStyle = '#e6a92a'; cx.lineWidth = 4; cx.beginPath(); cx.moveTo(P.x + P.w / 2 + 14, P.y); cx.lineTo(P.x + P.w / 2 + 14, P.y - P.h - 50); cx.lineTo(P.x - 10, P.y - P.h - 50); cx.stroke(); cx.lineWidth = 1.5; const sw = Math.sin(T * 1.5) * 8; cx.beginPath(); cx.moveTo(P.x + 6, P.y - P.h - 50); cx.lineTo(P.x + 6 + sw, P.y - P.h - 20); cx.stroke(); cx.fillStyle = '#7a4b25'; cx.fillRect(P.x + sw, P.y - P.h - 22, 12, 8);
+        progressBar(cx, P.x, P.y + 10, 90, pr); continue; }
+      if (k === 'pousada') { house(cx, P.x, P.y, P.w, P.h, '#fff4e0', '#2f8f8a', 40); for (const dx of [-60, -20, 20, 60]) win(cx, P.x + dx - 11, P.y - P.h + 14, 22, 18); for (const dx of [-60, 40]) win(cx, P.x + dx - 11, P.y - 52, 22, 18); cx.fillStyle = '#7a4b25'; cx.fillRect(P.x - 14, P.y - 42, 28, 42);
+        cx.fillStyle = '#a8743f'; cx.fillRect(P.x - P.w / 2, P.y - P.h / 2 - 6, P.w, 6); for (let x = P.x - P.w / 2 + 6; x < P.x + P.w / 2; x += 12) cx.fillRect(x, P.y - P.h / 2 - 18, 3, 12); cx.fillRect(P.x - P.w / 2, P.y - P.h / 2 - 20, P.w, 3); }
+      if (k === 'mercado') { house(cx, P.x, P.y, P.w, P.h, '#fff8e6', '#c8702a', 30); for (let i = 0; i < 8; i++) { cx.fillStyle = i % 2 ? '#fff' : '#3d9a2f'; cx.fillRect(P.x - P.w / 2 - 6 + i * (P.w + 12) / 8, P.y - 56, (P.w + 12) / 8, 16); }
+        for (const [dx, it] of [[-50, 'laranja'], [-16, 'milho'], [18, 'cenoura'], [52, 'manga']]) { cx.fillStyle = '#a8743f'; cx.fillRect(P.x + dx - 14, P.y - 24, 28, 14); cx.drawImage(iconCanvas(it), P.x + dx - 11, P.y - 36, 22, 22); } }
+      if (k === 'restaurante') { house(cx, P.x, P.y, P.w, P.h, '#ffe9d6', '#b5523b', 36); win(cx, P.x - 56, P.y - 70, 30, 24); win(cx, P.x + 26, P.y - 70, 30, 24); cx.fillStyle = '#7a4b25'; cx.fillRect(P.x - 14, P.y - 42, 28, 42); cx.fillStyle = '#b5523b'; cx.fillRect(P.x + 30, P.y - P.h - 50, 14, 30);
+        for (let s2 = 0; s2 < 3; s2++) { const ph = (T * 0.5 + s2 / 3) % 1; cx.fillStyle = `rgba(255,255,255,${0.55 * (1 - ph)})`; cx.beginPath(); cx.arc(P.x + 37 + Math.sin(ph * 5) * 4, P.y - P.h - 56 - ph * 36, 5 + ph * 7, 0, 6.283); cx.fill(); }
+        for (const dx of [-70, 70]) { cx.fillStyle = '#fff'; cx.beginPath(); cx.ellipse(P.x + dx, P.y + 16, 14, 6, 0, 0, 6.283); cx.fill(); cx.fillStyle = '#e0533d'; cx.beginPath(); cx.moveTo(P.x + dx, P.y - 14); cx.lineTo(P.x + dx - 16, P.y - 2); cx.lineTo(P.x + dx + 16, P.y - 2); cx.fill(); cx.fillStyle = '#7a4b25'; cx.fillRect(P.x + dx - 1, P.y - 2, 2, 18); } }
+      cx.fillStyle = '#7a4b25'; rr(cx, P.x - 52, P.y - P.h - (k === 'pousada' ? 64 : 58), 104, 22, 6); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N(k).toUpperCase(), P.x, P.y - P.h - (k === 'pousada' ? 49 : 43));
+      if (rentNow(S, k, now) > 0) bubble(cx, P.x + P.w / 2 - 10, P.y - P.h - 70, 'coin', T); }
+  } else saleSign(cx, LANDS.vila.sx, LANDS.vila.sy, 'vila', S);
   // canteiros
   for (let i = 0; i < MAXPLOTS; i++) {
     const r = plotRect(i), pl = S ? S.plots[i] : { c: null }, locked = !S || i >= S.np;
@@ -1059,7 +1134,8 @@ function draw(T, dt) {
   // toques do amigo e seus
   for (const [pg, col] of [[G.partnerPing, '#9b5de5'], [G.myPing, '#ffb020']]) if (pg && Date.now() - pg[2] < 900) { const p = (Date.now() - pg[2]) / 900; cx.strokeStyle = col; cx.globalAlpha = 1 - p; cx.lineWidth = 4; cx.beginPath(); cx.arc(pg[0], pg[1], 10 + p * 26, 0, 6.283); cx.stroke(); cx.globalAlpha = 1; }
   // o Juca
-  if (S && S.helper && S.helper.on) { const H = S.helper, working = H.until > now, av = AV.helper; if (working) { av.tx = H.x; av.ty = H.y; } else { av.tx = HELPER_HOME.x + 40; av.ty = HELPER_HOME.y + 10; } stepAv(av, dt); drawAv(cx, av, 'Juca', 'cap', T, false);
+  if (S && S.helper && S.helper.on) for (let hh = 0; hh < hCount(S); hh++) { const H = S.helper, working = H.until > now; AV.hs = AV.hs || []; const av = AV.hs[hh] = AV.hs[hh] || { x: HELPER_HOME.x + 40 + hh * 30, y: HELPER_HOME.y + 10, tx: 0, ty: 0, t: 0 };
+    const pp = H.ps && H.ps[hh]; if (working && pp) { av.tx = pp[0] + hh * 6; av.ty = pp[1]; } else if (working && hh === 0) { av.tx = H.x; av.ty = H.y; } else { av.tx = HELPER_HOME.x + 40 + hh * 30; av.ty = HELPER_HOME.y + 10 + (hh % 2) * 14; } stepAv(av, dt); drawAv(cx, av, HELPER_NAMES[hh], HELPER_LOOKS[hh], T, false);
     if (!working) { cx.fillStyle = '#fff'; cx.strokeStyle = '#3a2412'; cx.lineWidth = 3; cx.font = '900 14px Nunito, sans-serif'; cx.textAlign = 'left'; const zz = 'z' + (Math.floor(T * 2) % 3 ? 'z' : '') + (Math.floor(T * 2) % 3 === 2 ? 'Z' : ''); cx.strokeText(zz, av.x + 12, av.y - 60); cx.fillText(zz, av.x + 12, av.y - 60); } }
   // personagens
   if (S) { stepAv(AV.me, dt); const list = [[AV.me, ME.name, ME.look, true]]; if (AV.fr.on && G.mode !== 'solo') { stepAv(AV.fr, dt); list.push([AV.fr, AV.fr.name, AV.fr.look, false]); }
