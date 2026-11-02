@@ -432,3 +432,40 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
   - Rendimiento comparado con la v67, sin pérdidas.
 - **Turistas:** con el Aeropuerto listo, pasean turistas con maletas por la plaza de los food trucks y los pedidos pagan 25% más (se ve "✈️ +25%" en la hoja).
 - **Agenda del mapa:** ahora incluye el Show de la Ciudad Nueva y los pedidos de los food trucks, con botón "Ir".
+
+## Versión 73: Concejo elegido, Villa Aurora y la milicia (fase 1)
+
+Pedido de Benjamin: noche y lluvia más cortas; un grupo de ciudadanos elegidos por el pueblo que decida solo y haga crecer la ciudad; una ciudad vecina que crece con su propio ejército; nuestra milicia y defensas; un vocero que informe; y un panel para ver todo.
+
+- **Noche y lluvia:**
+  - La noche dura 2 min 15 s de cada 16 min (antes, 5 min).
+  - La lluvia dura 30 s (antes, 60 s) y llega cada 12 min o más (antes, 7).
+- **Concejo elegido (necesita la Alcaldía):** cinco cargos.
+  - Alcalde: compra terrenos y habla contigo.
+  - Obras: casas nuevas, ampliaciones y silos.
+  - Campo: animales, parcelas y frutales.
+  - Comercio: mejora fábricas y construye servicios.
+  - Comandante de la Milicia: soldados, murallas y torres.
+- **Cómo deciden:**
+  - Actúan solos cada 20 s, usando las acciones normales del juego, así que respetan las mismas reglas.
+  - Suben de nivel con cada decisión; desde el nivel 3 hacen 2 cosas por turno.
+- **Tesoro de la ciudad:**
+  - El Concejo nunca toca tus monedas.
+  - Ingreso propio de unas 190/min con 20 casas, nivel 18, empleos y proyectos.
+  - Se reparte en carteras por cargo (Obras 35%, Alcalde 20%, Comercio 20%, Campo 15%, Milicia 10%; la Milicia sube al 35% si hay amenaza), para que cada uno ahorre para lo suyo con prioridades fijas.
+  - Puedes donar 500, 2000 o 10000.
+- **Elecciones cada 2 h:**
+  - Por cargo compiten el que está y un candidato.
+  - Se elige por desempeño y popularidad, y tu voto suma mucho.
+- **Villa Aurora:**
+  - Isla al sureste que crece en población, nivel (hasta 10), soldados y murallas.
+  - Su relación contigo (−100 a 100) cambia con eventos: comercio (pagan al tesoro), fiestas, peleas de frontera, amenazas, treguas y ataques (se llevan parte del tesoro si nuestra defensa es menor; si es mayor, la milicia los frena).
+  - Puedes mandar regalos (500).
+- **Milicia (necesita el Puerto de Carga):**
+  - Fuerte de piedra con cuartel, bandera, soldados marchando, muralla (5 niveles) y torres (4).
+  - Atacar es solo decisión tuya, con doble confirmación y 30 min de descanso: si ganas te llevas monedas, si pierdes vuelve la mitad de la milicia.
+- **Panel 🏛️:**
+  - Botón a la izquierda con un contador de novedades.
+  - Muestra el informe del vocero (qué hicieron desde tu última visita, el tesoro y un consejo militar), el tesoro con donaciones, cada miembro (cargo, nivel, cartera, responsabilidades, decisiones y última acción), la votación, la milicia, Villa Aurora y el registro de decisiones.
+  - El vocero avisa en pantalla cuando el Concejo decide algo.
+- **Próximas fases:** mapa más grande, minería y minerales, comercio con Villa Aurora, más edificios militares, y miembros del Concejo caminando por la ciudad.
