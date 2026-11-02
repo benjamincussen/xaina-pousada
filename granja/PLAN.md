@@ -178,3 +178,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 ## Versión grande 30: "Vendedor ambulante" (2026-11-03.31)
 - [x] Vendedor ambulante en la villa: vende cosas raras y compra 2 productos al doble
 - [x] Reloj de la plaza con la hora real
+
+## Versión grande 31: Servicios (2026-11-03.32)
+- Barrendero: con 6+ tramos de calle, un barrendero de naranja recorre las calles; con 20+ tramos, +3 de felicidad.
+- Banda en la glorieta de la Plaza al atardecer, con notas musicales y sonido.
+- Bomberos: con la Posta de salud, cada 15 min el camión con sirena cruza la avenida del barrio.
+- Novedades (PT/ES) actualizadas.
