@@ -474,8 +474,9 @@ function helperTask(S, now) {
   for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; if (CROPS[crop] && S.coins >= CROPS[crop].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: crop }, now); if (re.ok) { S.plots[a.i].last = crop; res.fx.push(...re.fx); } } } S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.4';
+const BUILD_V = '2026-11-02.5';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
+$('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
 $('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S); location.reload(); };
 let helperClock = 0;
