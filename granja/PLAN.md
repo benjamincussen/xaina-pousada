@@ -635,3 +635,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Las estaciones afectan los cultivos: primavera +10% más rápido, invierno 25% más lento (nota en la hoja de semillas).
 - **Riego automático** (Tienda, nivel 8, 1500): aspersores animados en las parcelas y todo lo sembrado crece 15% más rápido; la Secretaría del Campo lo compra sola.
 - `tests/fuzz.js`: abre 28 hojas en PT y ES, toca 129 botones al azar y da 800 toques por todo el mapa: 0 errores. `tests/estaciones.js` para el riego.
+
+## Versión 91: Árboles que cambian con la estación
+
+- Las copas (árbol redondo y de copa ancha, incluidos los del fondo) siguen la estación: flores rosas en primavera, verde pleno en verano, naranja/rojo en otoño y verde pálido en invierno; los pinos quedan verdes. El fondo en caché se renueva al cambiar la estación.
+- Capturas de primavera, otoño e invierno; smoke sin errores.
