@@ -366,3 +366,8 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Tranvía del Oeste: con 2+ terrenos del oeste, sube y baja por el camino del Oeste (aviso al pasar cerca).
 - Terrenos (Panel de la ciudad): primero los disponibles ordenados por nivel, luego los ya comprados; cada uno con botón "Ir".
 - Verificado: los ayudantes alimentan los corrales nuevos y siembran las parcelas del oeste (cultivos variados).
+
+## Versión 63: Arreglo del modo cooperativo (reporte de Benjamin: Ana no podía entrar bien) (2026-11-03.64)
+- Causa: al recargar (por ejemplo con la actualización automática), la presencia vieja de la misma aba queda ~30 s en el servidor MQTT ("fantasma"). Entonces: el host recibía "sala ocupada" y se metía como invitado en su propio fantasma; la invitada podía seguir al host fantasma (estado congelado) y el host podía escuchar al fantasma de Ana en vez de a ella (sus acciones no llegaban).
+- Arreglo en relay.js: cada aba tiene un id que sobrevive al recargar (sessionStorage 'sitio-dev'); se ignora la presencia de la propia aba y de cada jugador queda solo la más nueva (ordenadas por tiempo). Compatible con teléfonos con la versión anterior.
+- Probado: re-entrada del host con el fantasma presente (antes "taken", ahora entra), la invitada ve solo el host actual, y coop2/resume/coopbig sin errores.
