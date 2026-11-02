@@ -22,4 +22,4 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] 17. Logros co-op y metas semanales con premios
 - [x] 18. Guía "¿qué hago ahora?" con flechas y consejos
 - [x] 19. Optimización de rendimiento (celulares) y carga más rápida
-- [ ] 20. Pulido final, balance de precios y resumen con capturas
+- [x] 20. Pulido final, balance de precios y resumen con capturas

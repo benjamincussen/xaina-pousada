@@ -39,7 +39,7 @@ const TX = {
     barn: 'Celeiro', barnUsed: (n, c) => `${n} de ${c} lugares ocupados`, barnEmpty: 'Vazio. Colha os canteiros para encher o celeiro.', barnUp: 'Aumentar celeiro (+50)', sellSurplus: 'Vender sobras', sellSurplusHint: 'Vende de uma vez o que nenhuma encomenda precisa e guarda um pouco de cada ingrediente.', noSurplus: 'Não há sobras: tudo serve para encomendas ou receitas.', soldSurplus: c => `Vendeu as sobras por ${c} moedas`,
     orders: 'Encomendas', ordersSub: 'O pessoal da vila paga bem. Entregue para ganhar moedas e experiência.', newOrderIn: t => `Nova encomenda chegando em ${t}…`, discardAria: 'Descartar encomenda', deliver: 'Entregar',
     shop: 'Loja', newPlot: 'Novo canteiro', allBought: 'Todos comprados', plotsOf: (n, m) => `${n} de ${m} canteiros`, bigBarn: 'Celeiro maior (+50)', fitsNow: c => `Hoje cabem ${c} itens`,
-    soon: 'Em breve', expansion: 'expansão', exps: ['Feira da vila', 'Sorveteria', 'Casa de praia', 'Estufa de flores'],
+    soon: 'Em breve', expansion: 'expansão', exps: ['Estufa de flores', 'Pizzaria', 'Porto de pesca', 'Parque de diversões'],
     land_leste: 'Terreno do Pomar', land_sul: 'Terreno do Lago', forSale: 'À VENDA', landDesc_leste: 'Seis árvores de laranja e manga e uma fábrica de sucos.', landDesc_sul: 'Colmeias que dão mel e um barco de pesca no lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Já é seu', boatGo: 'Mandar o barco (isca: 2 milhos)', boatBack: t => `O barco volta em ${t}`, boatIdle: 'O barco está no cais. Use 2 milhos de isca para pescar.',
     honeyIn: t => `Mel pronto em ${t}`, zoomHint: 'Use dois dedos para aproximar ou afastar o mapa.',
@@ -105,7 +105,7 @@ const TX = {
     barn: 'Granero', barnUsed: (n, c) => `${n} de ${c} espacios ocupados`, barnEmpty: 'Vacío. Cosecha las parcelas para llenar el granero.', barnUp: 'Ampliar granero (+50)', sellSurplus: 'Vender sobras', sellSurplusHint: 'Vende de una vez lo que ningún pedido necesita y guarda un poco de cada ingrediente.', noSurplus: 'No hay sobras: todo sirve para pedidos o recetas.', soldSurplus: c => `Vendiste las sobras por ${c} monedas`,
     orders: 'Pedidos', ordersSub: 'La gente del pueblo paga bien. Entrega para ganar monedas y experiencia.', newOrderIn: t => `Llega un pedido nuevo en ${t}…`, discardAria: 'Descartar pedido', deliver: 'Entregar',
     shop: 'Tienda', newPlot: 'Nueva parcela', allBought: 'Todas compradas', plotsOf: (n, m) => `${n} de ${m} parcelas`, bigBarn: 'Granero más grande (+50)', fitsNow: c => `Hoy caben ${c} cosas`,
-    soon: 'Muy pronto', expansion: 'expansión', exps: ['Feria del pueblo', 'Heladería', 'Casa de playa', 'Invernadero de flores'],
+    soon: 'Muy pronto', expansion: 'expansión', exps: ['Invernadero de flores', 'Pizzería', 'Puerto pesquero', 'Parque de diversiones'],
     land_leste: 'Terreno del Huerto', land_sul: 'Terreno del Lago', forSale: 'SE VENDE', landDesc_leste: 'Seis árboles de naranja y mango y una fábrica de jugos.', landDesc_sul: 'Colmenas que dan miel y un barco de pesca en el lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Ya es tuyo', boatGo: 'Mandar el barco (carnada: 2 maíces)', boatBack: t => `El barco vuelve en ${t}`, boatIdle: 'El barco está en el muelle. Usa 2 maíces de carnada para pescar.',
     honeyIn: t => `Miel lista en ${t}`, zoomHint: 'Usa dos dedos para acercar o alejar el mapa.',
@@ -851,6 +851,7 @@ function levelNews(l) {
   for (const [pk, p] of Object.entries(PENS)) if (p.lvl === l) n.push(N(pk));
   for (const [lk, Ld] of Object.entries(LANDS)) if (Ld.lvl === l) n.push(L('land_' + lk));
   for (const [pk, P] of Object.entries(PROJ)) if (P.lvl === l) n.push(N(pk));
+  if (UP_LVL.includes(l)) n.push(L('upTitle') + ' ' + L('bLvl', UP_LVL.indexOf(l) + 1)); if (l === TRUCK.lvl) n.push(L('truck')); for (const [k, V] of Object.entries(SERV)) if (V.lvl === l) n.push(L('serv_' + k));
   return n.length ? L('news', n.join(', ')) : '';
 }
 function ping(x, y) { G.myPing = [Math.round(x), Math.round(y), Date.now()]; walkTo(AV.me, x, y); if (NET.room) NET.room.presence({ ping: G.myPing, me: meInfo() }).catch(() => {}); }
@@ -904,7 +905,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.29';
+const BUILD_V = '2026-11-02.30';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
