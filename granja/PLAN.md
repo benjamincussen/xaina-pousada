@@ -331,3 +331,17 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Granero: tarjeta "Sugerencia: qué vender" con lo que sobra mucho respecto a lo que usan recetas y pedidos (ej. trigo de más), cuánto y por cuántas monedas, con botón "Vender sobra" (deja el stock objetivo).
 - Aviso cuando el granero pasa del 90% (una vez cada 10 min).
 - Ayudantes (venta automática con granero lleno): venden primero lo que más sobra respecto a su stock objetivo (y el precio del día), nunca lo que falta para obras o pedidos.
+
+## Versión grande 60: LA GRAN EXPANSIÓN — mapa 4 veces más grande (pedido de Benjamin) (2026-11-03.61)
+- Mundo: x de -3000 a 3000 (antes 0–1500), mismo alto 4920. Todo lo viejo queda igual en su lugar; se crece hacia el oeste (tierra) y hacia el este (mar abierto).
+- Fondo por baldosas 2D perezosas (1000×1000, alta resolución de cerca, baja a media distancia, vista general para el zoom lejano) con límite de memoria; minimapa con la vista general.
+- 7 terrenos nuevos para comprar (cada uno con su nivel y precio):
+  - Campos del Oeste (nv 10): +24 parcelas (36–59). Valle Verde (nv 14): +24 parcelas (60–83) y huertos.
+  - Gran Corral (nv 11): Granja de gallinas y Hacienda de vacas (y otras 2 en el nivel 13), con más capacidad de animales.
+  - Ciudad Nueva (nv 13): avenida asfaltada, 12 lotes, Shopping (+15 felicidad) y Torre Residencial (arriendo 300).
+  - Centro Moderno (nv 16): edificios altos, 12 lotes, Hospital con ambulancia (+15) y Centro Empresarial (arriendo 380).
+  - Aeropuerto (nv 18): pista, terminal (arriendo 600) y aviones que despegan y aterrizan.
+  - Puerto de Carga (nv 14, en el mar): muelles, grúa, barcos; Exportación: cada 15 min un barco pide 3 productos y paga ~2,2× su valor (+20 XP), sincronizado.
+- Mar grande: islas con palmeras, barcos de carga, lanchas y veleros cruzando.
+- Casas en los lotes nuevos con ids de vecinos propios (1000+) para no chocar con los viejos. Parcelas hasta 84; corrales con 'kind' (gallinero/establo) y nivel que depende del terreno.
+- "Ir a…" con los 7 lugares nuevos; Novedades.
