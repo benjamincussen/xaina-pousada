@@ -739,3 +739,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Cada 30 min (también en la simulación offline) se guarda un punto con vecinos, casas, tesoro y monedas (`S.hist`, hasta 48 h, ordenado por franja de tiempo).
 - "Tu ciudad en números" muestra el gráfico 📈 con tres líneas (vecinos, casas, tesoro) y el último valor de cada una.
 - Prueba: 6 h simuladas → 13 puntos ordenados, canvas pintado; smoke y fuzz sin errores.
+
+## Versión 108: Pulido — etiquetas del gráfico y silbato del tren de carga
+
+- Las tres etiquetas del gráfico de crecimiento quedan alineadas (izquierda, centro, derecha) sin cortarse.
+- El tren de carga silba al salir de la estación si la cámara está cerca.
