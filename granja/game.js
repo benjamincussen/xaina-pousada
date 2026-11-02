@@ -38,6 +38,8 @@ const TX = {
     soon: 'Em breve', expansion: 'expansão', exps: ['Pomar de frutas', 'Apiário com mel', 'Barco de pesca', 'Feira da vila'],
     stats: (l, x, c) => `Nível ${l} · ${x} de experiência · ${c} moedas`, guestNote: 'Você está no sítio do seu amigo. Tudo o que fizer fica salvo nos dois celulares.',
     seeCode: 'Ver código da sala', invite: 'Convidar um amigo', backHome: 'Voltar ao início', langLbl: 'Idioma', buy: 'Comprar', board: 'ENCOMENDAS',
+    nameLbl: 'Seu nome', namePh: 'Como você se chama?', lookLbl: 'Seu personagem', lookHat: 'Chapéu de palha', lookHair: 'Cabelo comprido', needName: 'Escreva seu nome primeiro.',
+    farmOf: n => `Sítio de ${n}`, coopHostN: n => `${n} está aqui`, coopGuestN: n => `No sítio de ${n}`, joinedN: n => `${n} entrou no sítio!`, leftN: n => `${n} saiu do sítio`, friend: 'Amigo',
   },
   es: {
     title: 'Granja del Viento', intro: 'Siembra, cuida a los animales y entrega pedidos. Solo o con un amigo, en la misma granja.',
@@ -63,6 +65,8 @@ const TX = {
     soon: 'Muy pronto', expansion: 'expansión', exps: ['Huerto de frutas', 'Colmenas con miel', 'Barco de pesca', 'Feria del pueblo'],
     stats: (l, x, c) => `Nivel ${l} · ${x} de experiencia · ${c} monedas`, guestNote: 'Estás en la granja de tu amigo. Todo lo que hagas queda guardado en los dos celulares.',
     seeCode: 'Ver código de la sala', invite: 'Invitar a un amigo', backHome: 'Volver al inicio', langLbl: 'Idioma', buy: 'Comprar', board: 'PEDIDOS',
+    nameLbl: 'Tu nombre', namePh: '¿Cómo te llamas?', lookLbl: 'Tu personaje', lookHat: 'Sombrero de paja', lookHair: 'Pelo largo', needName: 'Escribe tu nombre primero.',
+    farmOf: n => `Granja de ${n}`, coopHostN: n => `${n} está aquí`, coopGuestN: n => `En la granja de ${n}`, joinedN: n => `¡${n} entró a la granja!`, leftN: n => `${n} salió de la granja`, friend: 'Amigo',
   },
 };
 const L = (k, ...a) => { const v = TX[LANG][k] ?? TX.pt[k] ?? k; return typeof v === 'function' ? v(...a) : v; };
@@ -75,7 +79,7 @@ function setLang(l) {
 function applyLang() {
   document.documentElement.lang = LANG === 'es' ? 'es' : 'pt-BR'; document.title = L('title');
   const set = (id, k) => { const e = $(id); if (e) e.textContent = L(k); };
-  set('tTitle', 'title'); set('tIntro', 'intro'); set('tFarms', 'farmsLbl'); set('tJoinOr', 'joinOr'); set('bJoin', 'enter'); set('tInvite', 'inviteTitle'); set('tCodeLbl', 'codeLbl'); set('tShareLbl', 'shareLbl'); set('bCopy', 'copy'); set('bRoomOk', 'keepPlaying');
+  set('tTitle', 'title'); set('tIntro', 'intro'); set('tFarms', 'farmsLbl'); set('tJoinOr', 'joinOr'); set('bJoin', 'enter'); set('tInvite', 'inviteTitle'); set('tCodeLbl', 'codeLbl'); set('tShareLbl', 'shareLbl'); set('bCopy', 'copy'); set('bRoomOk', 'keepPlaying'); set('tName', 'nameLbl'); set('tLook', 'lookLbl'); set('lkHat', 'lookHat'); set('lkHair', 'lookHair'); $('iName').placeholder = L('namePh');
   const aria = { iCode: 'codeAria', rLink: 'linkAria', cv: 'canvasAria', hLvl: 'lvlAria', hCoins: 'coinsAria', bOrders: 'ordersAria', bBarn: 'barnAria', bShop: 'shopAria', bMenu: 'menuAria', sClose: 'close' };
   for (const [id, k] of Object.entries(aria)) { const e = $(id); if (e) e.setAttribute('aria-label', L(k)); }
   $('mLangs').innerHTML = langButtons();
@@ -201,7 +205,7 @@ function saveIdx(x) { try { localStorage.setItem(IDX, JSON.stringify(x)); } catc
 function loadFarm(fid) { try { const s = JSON.parse(localStorage.getItem('sitio-farm-' + fid)); return sane(s) ? s : null; } catch (e) { return null; } }
 function storeFarm(S, own) {
   try { localStorage.setItem('sitio-farm-' + S.fid, JSON.stringify(S)); } catch (e) {}
-  const idx = loadIdx(), m = idx.find(x => x.fid === S.fid), meta = { fid: S.fid, name: S.name, lvl: S.lvl, rev: S.rev, own: m ? m.own : !!own, last: Date.now() };
+  const idx = loadIdx(), m = idx.find(x => x.fid === S.fid), meta = { fid: S.fid, name: S.name, owner: S.owner || '', lvl: S.lvl, rev: S.rev, own: m ? m.own : !!own, last: Date.now() };
   if (m) Object.assign(m, meta); else idx.push(meta); saveIdx(idx);
 }
 let saveT = 0;
@@ -247,6 +251,32 @@ const SND = (() => { let ac = null;
     plant: () => tone(300, 180, 0.12, 'triangle', 0.12), no: () => tone(220, 160, 0.15, 'square', 0.05),
     lvl: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, f, 0.25, 'triangle', 0.1, i * 0.1)) }; })();
 addEventListener('pointerdown', () => SND.init(), { capture: true });
+
+// ---------- personagens ----------
+const ME = { name: '', look: 'hat' };
+try { ME.name = (localStorage.getItem('sitio-name') || '').slice(0, 16); ME.look = localStorage.getItem('sitio-look') === 'hair' ? 'hair' : 'hat'; } catch (e) {}
+const AV = { me: { x: 150, y: 262, tx: 150, ty: 262, t: 0 }, fr: { x: 196, y: 268, tx: 196, ty: 268, t: 0, on: false, name: '', look: 'hair' } };
+const ownerName = S => S && S.owner ? S.owner : '';
+const farmTitle = S => ownerName(S) ? L('farmOf', ownerName(S)) : dispName(S && S.name);
+function meInfo() { return { n: ME.name, l: ME.look }; }
+function sendMe() { if (NET.room) NET.room.presence({ me: meInfo() }).catch(() => {}); }
+function walkTo(av, x, y) { av.tx = clamp(x, 20, WW - 20); av.ty = clamp(y + 18, 40, WH - 30); }
+function stepAv(av, dt) { const dx = av.tx - av.x, dy = av.ty - av.y, d = Math.hypot(dx, dy), sp = 240 * dt; if (d > 1) { const k = Math.min(1, sp / d); av.x += dx * k; av.y += dy * k; av.t += dt; av.dir = dx >= 0 ? 1 : -1; av.walk = true; } else av.walk = false; }
+function drawAv(g, av, name, look, T, mine) {
+  const x = av.x, y = av.y, step = av.walk ? Math.sin(av.t * 14) : 0, bob = av.walk ? Math.abs(Math.sin(av.t * 14)) * 2 : 0, d = av.dir || 1;
+  const shirt = look === 'hair' ? '#9b5de5' : '#ff8a1f', pants = look === 'hair' ? '#3d5a99' : '#4a6fa5';
+  g.fillStyle = 'rgba(0,0,0,.2)'; g.beginPath(); g.ellipse(x, y + 2, 13, 4, 0, 0, 6.283); g.fill();
+  g.strokeStyle = pants; g.lineWidth = 6; g.lineCap = 'round'; g.beginPath(); g.moveTo(x - 4, y - 14 - bob); g.lineTo(x - 4 + step * 4, y - 1); g.moveTo(x + 4, y - 14 - bob); g.lineTo(x + 4 - step * 4, y - 1); g.stroke();
+  if (look === 'hair') { g.fillStyle = '#5a2e14'; g.beginPath(); g.ellipse(x - d * 2, y - 34 - bob, 12, 16, 0, 0, 6.283); g.fill(); }
+  g.fillStyle = shirt; g.beginPath(); g.roundRect ? g.roundRect(x - 10, y - 32 - bob, 20, 20, 6) : g.rect(x - 10, y - 32 - bob, 20, 20); g.fill();
+  g.strokeStyle = '#f2c6a0'; g.lineWidth = 5; g.beginPath(); g.moveTo(x - 10, y - 28 - bob); g.lineTo(x - 14, y - 18 - bob + step * 3); g.moveTo(x + 10, y - 28 - bob); g.lineTo(x + 14, y - 18 - bob - step * 3); g.stroke();
+  g.fillStyle = '#f2c6a0'; g.beginPath(); g.arc(x, y - 40 - bob, 9, 0, 6.283); g.fill();
+  g.fillStyle = '#3a2412'; g.beginPath(); g.arc(x + d * 3, y - 41 - bob, 1.6, 0, 6.283); g.fill();
+  if (look === 'hair') { g.fillStyle = '#5a2e14'; g.beginPath(); g.arc(x, y - 44 - bob, 9.5, Math.PI, 0); g.fill(); }
+  else { g.fillStyle = '#f2d06b'; g.beginPath(); g.ellipse(x, y - 47 - bob, 17, 5, 0, 0, 6.283); g.fill(); g.fillRect(x - 8, y - 56 - bob, 16, 9); g.fillStyle = '#c8702a'; g.fillRect(x - 8, y - 50 - bob, 16, 3); }
+  if (name) { g.font = '900 12px Nunito, sans-serif'; const w = g.measureText(name).width + 14; g.fillStyle = look === 'hair' ? 'rgba(155,93,229,.95)' : 'rgba(255,138,31,.95)';
+    g.beginPath(); g.roundRect ? g.roundRect(x - w / 2, y - 80 - bob, w, 18, 9) : g.rect(x - w / 2, y - 80 - bob, w, 18); g.fill(); g.fillStyle = '#fff'; g.textAlign = 'center'; g.fillText(name, x, y - 67 - bob); }
+}
 
 // ---------- câmera e entrada ----------
 const cv = $('cv'), cx = cv.getContext('2d');
@@ -317,7 +347,7 @@ function levelNews(l) {
   for (const [pk, p] of Object.entries(PENS)) if (p.lvl === l) n.push(N(pk));
   return n.length ? L('news', n.join(', ')) : '';
 }
-function ping(x, y) { G.myPing = [Math.round(x), Math.round(y), Date.now()]; if (NET.room) NET.room.presence({ ping: G.myPing }).catch(() => {}); }
+function ping(x, y) { G.myPing = [Math.round(x), Math.round(y), Date.now()]; walkTo(AV.me, x, y); if (NET.room) NET.room.presence({ ping: G.myPing, me: meInfo() }).catch(() => {}); }
 let bcT = 0, bcLast = 0;
 function broadcast() { if (G.mode !== 'host' || !NET.room) return; const now = Date.now(); clearTimeout(bcT); const send = () => { bcLast = Date.now(); NET.room.presence({ st: G.S, now: Date.now() }).catch(() => {}); }; if (now - bcLast > 150) send(); else bcT = setTimeout(send, 150); }
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') { if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host') broadcast(); refresh(); }, 1000);
@@ -331,7 +361,7 @@ const NET = { api: null, room: null, sub: null, code: null, role: null, guestPee
   joinFromHash(); addEventListener('hashchange', joinFromHash);
 })();
 const CODE_AB = 'ACDEFGHJKMNPQRTUVWXY', newCode = () => Array.from({ length: 4 }, () => CODE_AB[Math.floor(Math.random() * CODE_AB.length)]).join('');
-function joinFromHash() { const h = (location.hash || '').slice(1).toUpperCase(); if (NET.api && /^[A-Z]{4}$/.test(h) && !NET.room) { $('iCode').value = h; join(h); } }
+function joinFromHash() { const h = (location.hash || '').slice(1).toUpperCase(); if (NET.api && /^[A-Z]{4}$/.test(h) && !NET.room) { $('iCode').value = h; if (ME.name) join(h); else { $('mMsg').textContent = L('needName'); $('iName').focus(); } } }
 const others = () => NET.room ? NET.room.peers().filter(p => !p.sameTab && p.presence && p.presence.app === 'sitio1') : [];
 async function openRoom(role, code) {
   if (!NET.api) { $('mMsg').textContent = L('noFriendMode'); return null; }
@@ -344,7 +374,7 @@ async function openRoom(role, code) {
   }
   Object.assign(NET, { room: r, code, role }); G.lastSeq = 0;
   NET.sub = r.onPeers(onPeers, () => toast(L('roomLost')));
-  r.presence({ app: 'sitio1', role }).catch(() => {});
+  r.presence({ app: 'sitio1', role, me: meInfo() }).catch(() => {});
   return r;
 }
 async function hostRoom() {
@@ -364,13 +394,13 @@ function onPeers() {
   const ps = others();
   if (NET.role === 'host') {
     const o = ps.find(p => p.presence.role === 'guest');
-    if (o && o.peer !== NET.guestPeer) { NET.guestPeer = o.peer; G.lastSeq = 0; toast(L('friendJoined')); broadcast(); }
-    if (!o && NET.guestPeer) { NET.guestPeer = null; toast(L('friendLeft')); }
+    if (o && o.peer !== NET.guestPeer) { NET.guestPeer = o.peer; G.lastSeq = 0; toast(o.presence.me && o.presence.me.n ? L('joinedN', o.presence.me.n) : L('friendJoined')); broadcast(); }
+    if (!o && NET.guestPeer) { NET.guestPeer = null; toast(AV.fr.name ? L('leftN', AV.fr.name) : L('friendLeft')); AV.fr.on = false; }
     if (o) {
       const pr = o.presence;
       if (pr.up && pr.up.fid === G.S.fid && sane(pr.up) && pr.up.rev > G.S.rev && !G.sent[pr.up.rev]) { G.sent[pr.up.rev] = 1; G.S = pr.up; storeFarm(G.S); toast(L('loadedFriend')); broadcast(); refresh(); }
       if (pr.acts && pr.acts.fid === G.S.fid && Array.isArray(pr.acts.q)) for (const [q, a] of pr.acts.q) if (q > G.lastSeq) { G.lastSeq = q; const r = apply(G.S, a, Date.now()); if (r.ok) { playFx(r.fx.filter(f => f[0] !== 'lvl')); r.fx.filter(f => f[0] === 'lvl').forEach(f => playFx([f])); ensureOrders(G.S); saveSoon(); broadcast(); refresh(); } }
-      if (pr.ping) G.partnerPing = pr.ping;
+      readFriend(pr);
     }
     if (!$('ovRoom').hidden) renderRoom(); updCoop();
   } else if (NET.role === 'guest') {
@@ -384,10 +414,10 @@ function onPeers() {
         if (mine && mine.rev > st.rev && !G.sent[st.fid + ':' + mine.rev]) { G.sent[st.fid + ':' + mine.rev] = 1; NET.room.presence({ up: mine }).catch(() => {}); }
         const first = G.mode !== 'guest';
         G.S = st; G.mode = 'guest'; storeFarm(st, false);
-        if (first) { $('ovMenu').hidden = true; $('hud').hidden = false; toast(L('youJoined', dispName(st.name))); }
+        if (first) { $('ovMenu').hidden = true; $('hud').hidden = false; toast(L('youJoined', farmTitle(st))); }
         refresh();
       }
-      if (h.presence.ping) G.partnerPing = h.presence.ping;
+      readFriend(h.presence);
     } else if (G.mode === 'guest' && !G.hostGoneT) {
       toast(L('lostFriend'));
       G.hostGoneT = setTimeout(() => { if (G.mode === 'guest' && !others().length) { const fid = G.S && G.S.fid; goMenu(); $('mMsg').textContent = L('connDropped'); } }, 12000);
@@ -395,9 +425,13 @@ function onPeers() {
     updCoop();
   }
 }
+function readFriend(pr) {
+  const m = pr.me || {}; AV.fr.on = true; AV.fr.name = String(m.n || '').slice(0, 16) || L('friend'); AV.fr.look = m.l === 'hair' ? 'hair' : 'hat';
+  if (pr.ping && (!G.partnerPing || pr.ping[2] !== G.partnerPing[2])) { G.partnerPing = pr.ping; walkTo(AV.fr, pr.ping[0], pr.ping[1]); }
+}
 function updCoop() {
   const on = (NET.role === 'host' && NET.guestPeer) || (NET.role === 'guest' && G.mode === 'guest');
-  $('coop').hidden = !on; $('coopT').textContent = NET.role === 'guest' ? L('coopGuest') : L('coopHost');
+  $('coop').hidden = !on; const fn = AV.fr.on && AV.fr.name; $('coopT').textContent = NET.role === 'guest' ? (G.S && ownerName(G.S) ? L('coopGuestN', ownerName(G.S)) : L('coopGuest')) : (fn ? L('coopHostN', fn) : L('coopHost'));
 }
 
 // ---------- telas ----------
@@ -405,22 +439,29 @@ let toastT = 0;
 function toast(t, ms = 2200) { const el = $('toast'); el.textContent = t; el.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { el.hidden = true; }, ms); }
 function startFarm(fid) {
   let S = loadFarm(fid); if (!S) return;
-  G.S = S; G.mode = 'solo'; ensureOrders(S); storeFarm(S);
+  const meta = loadIdx().find(x => x.fid === fid); if (meta && meta.own && ME.name) S.owner = ME.name;
+  G.S = S; G.mode = 'solo'; ensureOrders(S); storeFarm(S); AV.fr.on = false;
   $('ovMenu').hidden = true; $('hud').hidden = false; refresh();
 }
 function goMenu() {
   NET.leave(); G.mode = null; G.S = null; closeSheet(); $('hud').hidden = true; $('coop').hidden = true; $('ovRoom').hidden = true; $('ovMenu').hidden = false; $('mMsg').textContent = ''; renderFarms();
 }
+function needNameOk() { if (ME.name) return true; $('mMsg').textContent = L('needName'); $('iName').focus(); return false; }
+function renderLook() { for (const [id, l] of [['lkHat', 'hat'], ['lkHair', 'hair']]) $(id).setAttribute('aria-pressed', String(ME.look === l)); }
+$('iName').value = ME.name;
+$('iName').addEventListener('input', e => { ME.name = e.target.value.replace(/[<>]/g, '').slice(0, 16).trim(); try { localStorage.setItem('sitio-name', ME.name); } catch (er) {} if (ME.name) $('mMsg').textContent = ''; renderFarms(); });
+for (const [id, l] of [['lkHat', 'hat'], ['lkHair', 'hair']]) $(id).onclick = () => { ME.look = l; try { localStorage.setItem('sitio-look', l); } catch (er) {} renderLook(); SND.pop(); };
+renderLook();
 function renderFarms() {
   let idx = loadIdx();
   if (!idx.some(x => x.own)) { const S = newFarm(''); ensureOrders(S); storeFarm(S, true); idx = loadIdx(); }
   idx.sort((a, b) => b.own - a.own || b.last - a.last);
-  $('farms').innerHTML = idx.map(f => `<div class="farm"><div><b>${f.own ? esc(dispName(f.name)) : L('friendFarm')}</b><small>${L('lvl', f.lvl)} · ${f.own ? L('own') : L('copyHere')}</small></div>
+  $('farms').innerHTML = idx.map(f => `<div class="farm"><div><b>${esc(f.own ? (ME.name ? L('farmOf', ME.name) : dispName(f.name)) : (f.owner ? L('farmOf', f.owner) : L('friendFarm')))}</b><small>${L('lvl', f.lvl)} · ${f.own ? L('own') : L('copyHere')}</small></div>
     <button class="btn" data-play="${f.fid}" type="button">${L('play')}</button><button class="btn blue" data-host="${f.fid}" type="button" aria-label="${esc(L('inviteAria', f.own ? dispName(f.name) : L('friendFarm')))}">${L('friendBtn')}</button></div>`).join('');
 }
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-$('farms').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.play) startFarm(b.dataset.play); if (b.dataset.host) { startFarm(b.dataset.host); hostRoom(); } });
-$('bJoin').onclick = () => { const c = $('iCode').value.toUpperCase().replace(/[^A-Z]/g, ''); if (c.length !== 4) { $('mMsg').textContent = L('code4'); return; } join(c); };
+$('farms').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (!needNameOk()) return; if (b.dataset.play) startFarm(b.dataset.play); if (b.dataset.host) { startFarm(b.dataset.host); hostRoom(); } });
+$('bJoin').onclick = () => { if (!needNameOk()) return; const c = $('iCode').value.toUpperCase().replace(/[^A-Z]/g, ''); if (c.length !== 4) { $('mMsg').textContent = L('code4'); return; } join(c); };
 $('iCode').addEventListener('input', e => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4); });
 $('bRoomOk').onclick = () => { $('ovRoom').hidden = true; };
 $('bCopy').onclick = async () => { const i = $('rLink'); try { await navigator.clipboard.writeText(i.value); $('bCopy').textContent = L('copied'); } catch (e) { i.focus(); i.select(); } setTimeout(() => { $('bCopy').textContent = L('copy'); }, 1500); };
@@ -479,7 +520,7 @@ function renderSheet() {
       <div class="card"><div class="row"><b style="flex:1">${L('bigBarn')}</b><button class="btn blue" type="button" data-cap="1" ${S.coins < capCost(S.cap) ? 'disabled' : ''}>${img('coin')} ${capCost(S.cap)}</button></div><small>${L('fitsNow', S.cap)}</small></div>
       <span class="lbl">${L('soon')}</span><div class="grid">${L('exps').map(e => `<div class="tile lock">${e}<small>${L('expansion')}</small></div>`).join('')}</div>`;
   } else if (SH.type === 'menu') {
-    t.textContent = dispName(S.name);
+    t.textContent = farmTitle(S);
     const host = G.mode === 'host' || G.mode === 'solo';
     h = `<p class="sub">${L('stats', S.lvl, S.xp, S.coins)}</p>
       ${G.mode === 'guest' ? `<p class="sub">${L('guestNote')}</p>` : ''}
@@ -556,7 +597,7 @@ function draw(T, dt) {
   cx.strokeStyle = 'rgba(255,255,255,.45)'; cx.lineWidth = 2; for (let i = 0; i < 3; i++) { const r = ((T * 12 + i * 20) % 60); cx.globalAlpha = 1 - r / 60; cx.beginPath(); cx.ellipse(62, 400, r * 0.6, r, 0, 0, 6.283); cx.stroke(); } cx.globalAlpha = 1;
   // casa, celeiro, moinho
   house(cx, HOUSE.x, HOUSE.y, HOUSE.w, HOUSE.h, '#fff1d6', '#d9614b'); cx.fillStyle = '#7a4b25'; cx.fillRect(HOUSE.x - 12, HOUSE.y - 40, 24, 40); cx.fillStyle = '#8fd3ff'; cx.fillRect(HOUSE.x - 46, HOUSE.y - 66, 24, 20); cx.fillRect(HOUSE.x + 22, HOUSE.y - 66, 24, 20);
-  if (S) { cx.fillStyle = '#7a4b25'; cx.fillRect(HOUSE.x - 54, HOUSE.y + 8, 108, 22); cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(dispName(S.name).slice(0, 16), HOUSE.x, HOUSE.y + 24); }
+  if (S) { cx.fillStyle = '#7a4b25'; cx.fillRect(HOUSE.x - 64, HOUSE.y + 8, 128, 22); cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(farmTitle(S).slice(0, 20), HOUSE.x, HOUSE.y + 24); }
   house(cx, BARN.x, BARN.y, BARN.w, BARN.h, '#d9483b', '#8a2a20', 46); cx.fillStyle = '#fff'; cx.fillRect(BARN.x - 22, BARN.y - 56, 44, 56); cx.strokeStyle = '#d9483b'; cx.lineWidth = 5; cx.beginPath(); cx.moveTo(BARN.x - 22, BARN.y - 56); cx.lineTo(BARN.x + 22, BARN.y); cx.moveTo(BARN.x + 22, BARN.y - 56); cx.lineTo(BARN.x - 22, BARN.y); cx.stroke();
   if (S && invCount(S) >= S.cap) bubble(cx, BARN.x, BARN.y - 170, 'barn', T);
   const M = BUILD.moinho; shadow(cx, M.x, M.y, 90); cx.fillStyle = '#f2e3c6'; cx.beginPath(); cx.moveTo(M.x - 34, M.y); cx.lineTo(M.x - 22, M.y - M.h); cx.lineTo(M.x + 22, M.y - M.h); cx.lineTo(M.x + 34, M.y); cx.closePath(); cx.fill(); cx.strokeStyle = 'rgba(0,0,0,.2)'; cx.lineWidth = 2; cx.stroke();
@@ -615,6 +656,9 @@ function draw(T, dt) {
   for (let i = 0; i < 3; i++) { const x = ((T * 10 + i * 260) % (WW + 300)) - 150, y = 180 + i * 280; cx.fillStyle = 'rgba(30,60,20,.08)'; cx.beginPath(); cx.ellipse(x, y, 90, 36, 0, 0, 6.283); cx.ellipse(x + 60, y + 10, 60, 28, 0, 0, 6.283); cx.fill(); }
   // toques do amigo e seus
   for (const [pg, col] of [[G.partnerPing, '#9b5de5'], [G.myPing, '#ffb020']]) if (pg && Date.now() - pg[2] < 900) { const p = (Date.now() - pg[2]) / 900; cx.strokeStyle = col; cx.globalAlpha = 1 - p; cx.lineWidth = 4; cx.beginPath(); cx.arc(pg[0], pg[1], 10 + p * 26, 0, 6.283); cx.stroke(); cx.globalAlpha = 1; }
+  // personagens
+  if (S) { stepAv(AV.me, dt); const list = [[AV.me, ME.name, ME.look, true]]; if (AV.fr.on && G.mode !== 'solo') { stepAv(AV.fr, dt); list.push([AV.fr, AV.fr.name, AV.fr.look, false]); }
+    list.sort((a, b) => a[0].y - b[0].y).forEach(([av, n, l, m]) => drawAv(cx, av, n, l, T, m)); }
   // ganhos flutuando
   for (const f of FLOAT) { f.t += dt; const p = f.t / 1.2; cx.globalAlpha = 1 - Math.max(0, p - 0.6) / 0.4; cx.drawImage(iconCanvas(f.k), f.x - 18, f.y - 30 - p * 50, 36, 36); cx.fillStyle = '#fff'; cx.strokeStyle = '#3a2412'; cx.lineWidth = 4; cx.font = '900 18px Nunito, sans-serif'; cx.textAlign = 'left'; cx.strokeText('+' + f.n, f.x + 18, f.y - 6 - p * 50); cx.fillText('+' + f.n, f.x + 18, f.y - 6 - p * 50); cx.globalAlpha = 1; }
   for (let i = FLOAT.length - 1; i >= 0; i--) if (FLOAT[i].t > 1.2) FLOAT.splice(i, 1);

@@ -112,6 +112,10 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
     <div id="mLangs"></div>
     <h1 id="tTitle">Sítio do Vento</h1>
     <p id="tIntro" style="text-align:center;color:#7a5a3a">Plante, cuide dos animais e entregue encomendas. Sozinho ou com um amigo, no mesmo sítio.</p>
+    <label class="lbl" id="tName" for="iName">Seu nome</label>
+    <input class="link" id="iName" maxlength="16" autocomplete="nickname" placeholder="Como você se chama?" style="font-size:18px">
+    <span class="lbl" id="tLook">Seu personagem</span>
+    <div class="langs"><button type="button" id="lkHat" aria-pressed="true">Chapéu de palha</button><button type="button" id="lkHair" aria-pressed="false">Cabelo comprido</button></div>
     <span class="lbl" id="tFarms">Seus sítios</span>
     <div id="farms" style="display:flex;flex-direction:column;gap:8px"></div>
     <div class="or" id="tJoinOr">ou entre no sítio de um amigo</div>
