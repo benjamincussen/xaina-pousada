@@ -321,3 +321,8 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Producción continua (opción, encendida por defecto): edificios parados con materia prima de sobra fabrican lo que tenga menos stock, sin tocar lo reservado para el plan y dejando siempre 1 espacio libre para el jugador; no llena el granero (>85%).
 - Scout: si no hay nada que entregar, ayuda fabricando lo del plan (ya no queda "descansando").
 - Ayudantes: tarjeta "Prioridades para progresar" con cada obra y lo que le falta; descripciones de oficios actualizadas.
+
+## Versión grande 58: Edificios parados y por qué + plan sin duplicados (2026-11-03.59)
+- Ayudantes → "Edificios parados y por qué": cada edificio sin producción y el motivo (falta tal materia prima, granero casi lleno, ya hay stock, o listo para producir).
+- Arreglo del plan del scout: las necesidades de las obras/faro se contaban dos veces (progressNeeds + orderNeeds). Ahora el plan suma obras + pedidos (ordersOnly) una sola vez.
+- Probado con una granja grande (nivel 20, todas las tierras, 4 ayudantes): tras 40 s todos los edificios con materia prima quedaron trabajando; solo quedaron parados la Heladería (esperando el azúcar en el molino) y la Joyería (faltan piedras de la mina), y el sembrador plantó caña en las 12 parcelas.
