@@ -41,6 +41,8 @@ const TX = {
     land_leste: 'Terreno do Pomar', land_sul: 'Terreno do Lago', forSale: 'À VENDA', landDesc_leste: 'Seis árvores de laranja e manga e uma fábrica de sucos.', landDesc_sul: 'Colmeias que dão mel e um barco de pesca no lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Já é seu', boatGo: 'Mandar o barco (isca: 2 milhos)', boatBack: t => `O barco volta em ${t}`, boatIdle: 'O barco está no cais. Use 2 milhos de isca para pescar.',
     honeyIn: t => `Mel pronto em ${t}`, zoomHint: 'Use dois dedos para aproximar ou afastar o mapa.',
+    animals: 'Animais', buyHen: 'Mais uma galinha', buyCow: 'Mais uma vaca', haveN: (n, m) => `${n} de ${m}`, decos: 'Decoração', decoBonus: n => `Cada decoração faz as encomendas pagarem 5% a mais. Agora: +${n}%`,
+    deco_banco: 'Banco de madeira', deco_flores: 'Canteiro de flores', deco_espantalho: 'Espantalho', deco_fonte: 'Fonte', bought: 'Comprado', newDeco: n => `${n} enfeitando o sítio!`,
     joiningOpen: c => `A sala ${c} já está aberta. Entrando nela…`, roomWaiting: c => `Sala ${c}: esperando seu amigo entrar`, blocked: 'A sala existe, mas a conexão entre os celulares não abriu. Tentem os dois no mesmo Wi-Fi e entrem de novo.',
     addSlot: 'Mais um espaço na fila', slotsMax: 'Fila no máximo', newVersion: 'Tem uma versão nova do jogo.', update: 'Atualizar',
     sellOne: 'Vender 1', sellAll: 'Vender tudo', each: n => `${n} cada`, barnFullHint: 'O celeiro está cheio. Toque no Celeiro e venda alguma coisa.', sold: (q, k, c) => `Vendeu ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
@@ -77,6 +79,8 @@ const TX = {
     land_leste: 'Terreno del Huerto', land_sul: 'Terreno del Lago', forSale: 'SE VENDE', landDesc_leste: 'Seis árboles de naranja y mango y una fábrica de jugos.', landDesc_sul: 'Colmenas que dan miel y un barco de pesca en el lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Ya es tuyo', boatGo: 'Mandar el barco (carnada: 2 maíces)', boatBack: t => `El barco vuelve en ${t}`, boatIdle: 'El barco está en el muelle. Usa 2 maíces de carnada para pescar.',
     honeyIn: t => `Miel lista en ${t}`, zoomHint: 'Usa dos dedos para acercar o alejar el mapa.',
+    animals: 'Animales', buyHen: 'Una gallina más', buyCow: 'Una vaca más', haveN: (n, m) => `${n} de ${m}`, decos: 'Decoración', decoBonus: n => `Cada decoración hace que los pedidos paguen 5% más. Ahora: +${n}%`,
+    deco_banco: 'Banco de madera', deco_flores: 'Macizo de flores', deco_espantalho: 'Espantapájaros', deco_fonte: 'Fuente', bought: 'Comprado', newDeco: n => `¡${n} adornando la granja!`,
     joiningOpen: c => `La sala ${c} ya está abierta. Entrando…`, roomWaiting: c => `Sala ${c}: esperando que entre tu amigo`, blocked: 'La sala existe, pero la conexión entre los celulares no se abrió. Prueben los dos en el mismo Wi-Fi y vuelvan a entrar.',
     addSlot: 'Un espacio más en la fila', slotsMax: 'Fila al máximo', newVersion: 'Hay una versión nueva del juego.', update: 'Actualizar',
     sellOne: 'Vender 1', sellAll: 'Vender todo', each: n => `${n} c/u`, barnFullHint: 'El granero está lleno. Toca el Granero y vende algo.', sold: (q, k, c) => `Vendiste ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
@@ -144,6 +148,9 @@ const BOAT = { x: 640, y: 1190, t: 120, bait: { milho: 2 }, out: 'peixe', k: 2, 
 const LAKE = { x: 830, y: 1170, rx: 230, ry: 110 };
 const MAXQ = 7, qCap = (S, k) => BUILD[k].q + ((S.slots && S.slots[k]) || 0), slotCost = (S, k) => 60 * Math.pow(2, (S.slots && S.slots[k]) || 0);
 const sellPrice = k => Math.max(1, Math.round(ITEMS[k].v * 0.6));
+const PEN_MAX = { galinheiro: 6, estabulo: 4 }, animalCost = (k, n) => k === 'galinheiro' ? 60 + 40 * (n - 3) : 180 + 120 * (n - 2);
+const DECOS = { banco: { cost: 150, x: 185, y: 690 }, flores: { cost: 200, x: 255, y: 692 }, espantalho: { cost: 300, x: 510, y: 330 }, fonte: { cost: 600, x: 470, y: 700 } };
+const decoBonus = S => Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5;
 const HELPER_ORDERS = 8, SHIFT = { cost: 25, min: 20 }, HELPER_HOME = { x: 196, y: 262 };
 const PENS = {
   galinheiro: { n: 'Galinheiro', lvl: 1, feed: 'racaoG', out: 'ovo', t: 90, count: 3, xp: 2, x: 125, y: 790, w: 210, h: 140 },
@@ -171,6 +178,7 @@ function migrate(S) {
   if (!S.boat || typeof S.boat !== 'object') S.boat = { e: 0 };
   if (typeof S.done !== 'number') S.done = 0;
   if (!S.slots || typeof S.slots !== 'object') S.slots = {};
+  if (!S.deco || typeof S.deco !== 'object') S.deco = {};
   if (!S.helper || typeof S.helper !== 'object') S.helper = { on: 0, until: 0, x: HELPER_HOME.x, y: HELPER_HOME.y };
   for (const k of Object.keys(BUILD)) if (!S.bld[k]) S.bld[k] = { q: [] };
   return S;
@@ -238,7 +246,7 @@ function apply(S, a, now) {
   } else if (a.a === 'deliver') {
     const o = S.orders.find(x => x.id === a.id); if (!o || o.w > now) return fail('');
     const need = Object.fromEntries(o.it); if (!has(S, need)) return fail(L('missingProd'));
-    take(S, need); S.coins += o.c; addXp(S, o.x, out); out.fx.push(['coins', o.c]);
+    const pay = Math.round(o.c * (1 + decoBonus(S) / 100)); take(S, need); S.coins += pay; addXp(S, o.x, out); out.fx.push(['coins', pay]);
     Object.assign(o, { id: S.oid++, w: now + 12000 }, genOrder(S));
     S.done = (S.done || 0) + 1; if (S.done >= HELPER_ORDERS && !S.helper.on) { S.helper.on = 1; out.fx.push(['helper']); }
   } else if (a.a === 'discard') {
@@ -267,6 +275,12 @@ function apply(S, a, now) {
     if (!S.boat.e) { if (!has(S, BOAT.bait)) return fail(L('missingIng')); take(S, BOAT.bait); S.boat.e = now + BOAT.t * 1000; out.fx.push(['boat']); }
     else if (S.boat.e <= now) { if (invCount(S) + BOAT.k > S.cap) return fail(L('barnFull')); give(S, BOAT.out, BOAT.k); addXp(S, BOAT.xp, out); S.boat.e = 0; out.fx.push(['gain', BOAT.out, BOAT.k, 'boat', 0]); }
     else return fail(L('boatBack', fmtT(Math.ceil((S.boat.e - now) / 1000))));
+  } else if (a.a === 'animal') {
+    const P = PENS[a.k], st = P && S.pens[a.k]; if (!st || P.lvl > S.lvl || st.a.length >= PEN_MAX[a.k]) return fail('');
+    const c = animalCost(a.k, st.a.length); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; st.a.push(0); out.fx.push(['coins', -c]);
+  } else if (a.a === 'deco') {
+    const D = DECOS[a.k]; if (!D || S.deco[a.k]) return fail(''); if (S.coins < D.cost) return fail(L('noCoins'));
+    S.coins -= D.cost; S.deco[a.k] = 1; addXp(S, 10, out); out.fx.push(['deco', a.k]);
   } else if (a.a === 'slot') {
     const B = BUILD[a.b]; if (!B || !okB(S, B) || qCap(S, a.b) >= MAXQ) return fail(''); const c = slotCost(S, a.b); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; S.slots[a.b] = (S.slots[a.b] || 0) + 1; out.fx.push(['coins', -c]);
@@ -448,6 +462,7 @@ function playFx(fx) {
     if (f[0] === 'land') { SND.lvl(); toast(L('land_' + f[1]) + '!', 2600); const Ld = LANDS[f[1]]; CAM.x = Ld.r.x + Ld.r.w / 2; CAM.y = Ld.r.y + Ld.r.h / 2; clampCam(); }
     if (f[0] === 'boat') SND.plant();
     if (f[0] === 'sold') toast(L('sold', f[1], f[2], f[3]));
+    if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
     if (f[0] === 'lvl') { SND.lvl(); toast(L('lvlUp', f[1], levelNews(f[1])), 3500); }
   }
@@ -476,7 +491,7 @@ function helperTask(S, now) {
   for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; if (CROPS[crop] && S.coins >= CROPS[crop].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: crop }, now); if (re.ok) { S.plots[a.i].last = crop; res.fx.push(...re.fx); } } } S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.8';
+const BUILD_V = '2026-11-02.9';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -676,6 +691,10 @@ function renderSheet() {
     t.textContent = L('shop');
     h = `<div class="card"><div class="row"><b style="flex:1">${L('newPlot')}</b>${S.np >= MAXPLOTS ? `<small>${L('allBought')}</small>` : `<button class="btn" type="button" data-buyplot="1" ${S.coins < plotCost(S.np) ? 'disabled' : ''}>${img('coin')} ${plotCost(S.np)}</button>`}</div><small>${L('plotsOf', S.np, MAXPLOTS)}</small></div>
       <div class="card"><div class="row"><b style="flex:1">${L('bigBarn')}</b><button class="btn blue" type="button" data-cap="1" ${S.coins < capCost(S.cap) ? 'disabled' : ''}>${img('coin')} ${capCost(S.cap)}</button></div><small>${L('fitsNow', S.cap)}</small></div>
+      <span class="lbl">${L('animals')}</span>${Object.entries(PENS).filter(([, P]) => P.lvl <= S.lvl).map(([k]) => { const n = S.pens[k].a.length, m = PEN_MAX[k];
+        return `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(PENS[k].out)}</span><div style="flex:1"><b>${L(k === 'galinheiro' ? 'buyHen' : 'buyCow')}</b><br><small>${N(k)} · ${L('haveN', n, m)}</small></div>
+        ${n >= m ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-animal="${k}" ${S.coins < animalCost(k, n) ? 'disabled' : ''}>${img('coin')} ${animalCost(k, n)}</button>`}</div></div>`; }).join('')}
+      <span class="lbl">${L('decos')}</span><p class="sub">${L('decoBonus', decoBonus(S))}</p><div class="grid">${Object.entries(DECOS).map(([k, D]) => `<button class="tile" type="button" data-deco="${k}" ${S.deco[k] || S.coins < D.cost ? 'disabled' : ''}><img src="${decoIcon(k)}" alt="">${L('deco_' + k)}<small>${S.deco[k] ? L('bought') : img('coin').replace('<img', '<img style="width:14px;height:14px;vertical-align:-2px"') + ' ' + D.cost}</small></button>`).join('')}</div>
       <span class="lbl">${L('lands')}</span>${Object.entries(LANDS).map(([k, Ld]) => `<div class="card"><div class="row">${img('land')}<div style="flex:1"><b>${L('land_' + k)}</b><br><small>${L('landDesc_' + k)}</small></div>
         ${S.land[k] ? `<small>${L('landOwned')}</small>` : Ld.lvl > S.lvl ? `<small>${L('lvl', Ld.lvl)}</small>` : `<button class="btn" type="button" data-land="${k}" ${S.coins < Ld.cost ? 'disabled' : ''}>${img('coin')} ${Ld.cost}</button>`}</div></div>`).join('')}
       <p class="sub">${L('zoomHint')}</p>
@@ -702,6 +721,8 @@ $('sBody').addEventListener('click', e => {
   if (d.boat) act({ a: 'boat' });
   if (d.sell) act({ a: 'sell', k: d.sell, q: +d.q });
   if (d.slot) act({ a: 'slot', b: SH.arg });
+  if (d.animal) act({ a: 'animal', k: d.animal });
+  if (d.deco) act({ a: 'deco', k: d.deco });
   if (d.shift) act({ a: 'shift' });
   if (d.buyplot) act({ a: 'buyPlot' });
   if (d.deliver) act({ a: 'deliver', id: +d.deliver });
@@ -794,6 +815,22 @@ function saleSign(g, x, y, k, S) { const Ld = LANDS[k]; shadow(g, x, y, 90); g.f
   g.fillStyle = '#c9905a'; rr(g, x - 70, y - 104, 140, 62, 8); g.fill(); g.strokeStyle = '#7a4b25'; g.lineWidth = 4; g.stroke();
   g.fillStyle = '#fff'; g.font = '900 18px "Baloo 2", Nunito, sans-serif'; g.textAlign = 'center'; g.fillText(L('forSale'), x, y - 80);
   g.font = '900 12px Nunito, sans-serif'; g.fillText(S && Ld.lvl > S.lvl ? L('lvl', Ld.lvl) : '', x, y - 64); if (!S || Ld.lvl <= S.lvl) { g.drawImage(iconCanvas('coin'), x - 26, y - 76, 18, 18); g.fillText(String(Ld.cost), x + 6, y - 62); } }
+const SPARK = [];
+function drawDeco(g, k, x, y, T) {
+  if (k === 'banco') { shadow(g, x, y, 70); g.fillStyle = '#6b4120'; g.fillRect(x - 26, y - 14, 5, 14); g.fillRect(x + 21, y - 14, 5, 14); g.fillStyle = '#a8743f'; for (let i = 0; i < 2; i++) g.fillRect(x - 30, y - 20 - i * 7, 60, 5); for (let i = 0; i < 2; i++) g.fillRect(x - 30, y - 38 - i * 7, 60, 5); g.fillStyle = '#6b4120'; g.fillRect(x - 28, y - 44, 4, 26); g.fillRect(x + 24, y - 44, 4, 26); }
+  if (k === 'flores') { shadow(g, x, y, 70); g.fillStyle = '#8a5a33'; g.beginPath(); g.ellipse(x, y - 4, 32, 12, 0, 0, 6.283); g.fill(); g.strokeStyle = '#a9a9a0'; g.lineWidth = 4; g.stroke();
+    for (let i = 0; i < 9; i++) { const fx = x - 24 + (i % 5) * 12, fy = y - 8 - Math.floor(i / 5) * 9 + Math.sin(T * 2 + i) * 1.2; g.strokeStyle = '#3f8f2e'; g.lineWidth = 2; g.beginPath(); g.moveTo(fx, fy + 8); g.lineTo(fx, fy); g.stroke(); g.fillStyle = ['#ff6b5a', '#ffd23f', '#ff8fb1', '#b48cff'][i % 4]; for (let q = 0; q < 5; q++) { g.beginPath(); g.arc(fx + Math.cos(q * 1.26) * 3.2, fy + Math.sin(q * 1.26) * 3.2, 2.6, 0, 6.283); g.fill(); } g.fillStyle = '#fff3b0'; g.beginPath(); g.arc(fx, fy, 1.8, 0, 6.283); g.fill(); } }
+  if (k === 'espantalho') { shadow(g, x, y, 50); const sw = Math.sin(T * 1.5) * 0.05; g.save(); g.translate(x, y); g.rotate(sw); g.fillStyle = '#7a4b25'; g.fillRect(-3, -70, 6, 70); g.fillRect(-28, -54, 56, 5); g.fillStyle = '#4a6fa5'; g.fillRect(-14, -54, 28, 30);
+    g.fillStyle = '#e0533d'; for (let i = -12; i < 14; i += 8) g.fillRect(i, -54, 3, 30); g.fillStyle = '#f2d06b'; for (const sx of [-30, 26]) { g.beginPath(); g.moveTo(sx, -52); g.lineTo(sx + 4, -44); g.lineTo(sx + 2, -56); g.fill(); }
+    g.fillStyle = '#f6e7c1'; g.beginPath(); g.arc(0, -64, 10, 0, 6.283); g.fill(); g.fillStyle = '#3a2412'; g.fillRect(-5, -66, 3, 3); g.fillRect(2, -66, 3, 3); g.fillRect(-4, -60, 8, 2);
+    g.fillStyle = '#c9902a'; g.beginPath(); g.ellipse(0, -73, 16, 4, 0, 0, 6.283); g.fill(); g.fillRect(-8, -84, 16, 11); g.restore(); }
+  if (k === 'fonte') { shadow(g, x, y, 100); g.fillStyle = '#b9b9b0'; g.beginPath(); g.ellipse(x, y - 6, 42, 16, 0, 0, 6.283); g.fill(); g.fillStyle = '#5ab4e6'; g.beginPath(); g.ellipse(x, y - 9, 35, 11, 0, 0, 6.283); g.fill();
+    g.fillStyle = '#a5a59c'; g.fillRect(x - 5, y - 40, 10, 32); g.fillStyle = '#b9b9b0'; g.beginPath(); g.ellipse(x, y - 40, 16, 6, 0, 0, 6.283); g.fill();
+    for (let i = 0; i < 10; i++) { const ph = (T * 1.4 + i / 10) % 1, a = i * 0.63, r = ph * 20; g.fillStyle = `rgba(150,215,255,${1 - ph})`; g.beginPath(); g.arc(x + Math.cos(a) * r, y - 44 - Math.sin(ph * Math.PI) * 16 + ph * 26, 2.2, 0, 6.283); g.fill(); }
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 1.5; const rr2 = (T * 18) % 30; g.beginPath(); g.ellipse(x, y - 9, rr2, rr2 * 0.32, 0, 0, 6.283); g.stroke(); }
+}
+const DECO_URL = {};
+function decoIcon(k) { if (!DECO_URL[k]) { const c = document.createElement('canvas'); c.width = c.height = 96; const g = c.getContext('2d'); g.translate(48, 82); g.scale(0.9, 0.9); drawDeco(g, k, 0, 0, 0); DECO_URL[k] = c.toDataURL(); } return DECO_URL[k]; }
 const BUTTER = Array.from({ length: 7 }, (_, i) => ({ x: 120 + i * 140, y: 160 + (i % 3) * 300, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4], p: i * 1.7 }));
 function butterflies(g, T) { for (const b of BUTTER) { const x = b.x + Math.sin(T * 0.4 + b.p) * 70, y = b.y + Math.sin(T * 0.7 + b.p * 2) * 40, f = Math.abs(Math.sin(T * 14 + b.p)) * 5 + 1; g.fillStyle = b.c; g.beginPath(); g.ellipse(x - f / 2 - 1, y, f, 4, 0, 0, 6.283); g.ellipse(x + f / 2 + 1, y, f, 4, 0, 0, 6.283); g.fill(); g.fillStyle = '#3a2412'; g.fillRect(x - 0.8, y - 3, 1.6, 6); } }
 function cropPlant(g, k, st, x, y, T) {
@@ -891,6 +928,8 @@ function draw(T, dt) {
       if (ready) bubble(cx, ax, ay - 40, P.out, T); else if (hungry) bubble(cx, ax, ay - 40, P.feed, T, true);
     });
   }
+  // decorações
+  if (S) for (const k of Object.keys(DECOS)) if (S.deco[k]) drawDeco(cx, k, DECOS[k].x, DECOS[k].y, T);
   // quadro de encomendas
   shadow(cx, BOARD.x, BOARD.y, 120); cx.fillStyle = '#8a5a2b'; cx.fillRect(BOARD.x - 50, BOARD.y - 20, 8, 24); cx.fillRect(BOARD.x + 42, BOARD.y - 20, 8, 24);
   cx.fillStyle = '#c9905a'; cx.fillRect(BOARD.x - 60, BOARD.y - BOARD.h, 120, 54); cx.strokeStyle = '#7a4b25'; cx.lineWidth = 4; cx.strokeRect(BOARD.x - 60, BOARD.y - BOARD.h, 120, 54);
@@ -907,6 +946,8 @@ function draw(T, dt) {
   if (S) { stepAv(AV.me, dt); const list = [[AV.me, ME.name, ME.look, true]]; if (AV.fr.on && G.mode !== 'solo') { stepAv(AV.fr, dt); list.push([AV.fr, AV.fr.name, AV.fr.look, false]); }
     list.sort((a, b) => a[0].y - b[0].y).forEach(([av, n, l, m]) => drawAv(cx, av, n, l, T, m)); }
   butterflies(cx, T);
+  for (const p of SPARK) { p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 260 * dt; cx.globalAlpha = Math.max(0, 1 - p.t / 1.2); cx.fillStyle = p.c; cx.beginPath(); cx.arc(p.x, p.y, 3.5, 0, 6.283); cx.fill(); } cx.globalAlpha = 1;
+  for (let i = SPARK.length - 1; i >= 0; i--) if (SPARK[i].t > 1.2) SPARK.splice(i, 1);
   // ganhos flutuando
   for (const f of FLOAT) { f.t += dt; const p = f.t / 1.2; cx.globalAlpha = 1 - Math.max(0, p - 0.6) / 0.4; cx.drawImage(iconCanvas(f.k), f.x - 18, f.y - 30 - p * 50, 36, 36); cx.fillStyle = '#fff'; cx.strokeStyle = '#3a2412'; cx.lineWidth = 4; cx.font = '900 18px Nunito, sans-serif'; cx.textAlign = 'left'; cx.strokeText('+' + f.n, f.x + 18, f.y - 6 - p * 50); cx.fillText('+' + f.n, f.x + 18, f.y - 6 - p * 50); cx.globalAlpha = 1; }
   for (let i = FLOAT.length - 1; i >= 0; i--) if (FLOAT[i].t > 1.2) FLOAT.splice(i, 1);
