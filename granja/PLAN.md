@@ -18,7 +18,7 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] 13. Clima: lluvia que riega (cultivos y árboles +30 s)
 - [ ] 14. Animación de personajes y NPC (caminar, saludar, trabajar)
 - [x] 15. Feria del pueblo: puestos donde los vecinos compran tus productos
-- [ ] 16. Camión de reparto que entrega pedidos automáticamente
+- [x] 16. Camión de reparto que entrega pedidos automáticamente
 - [ ] 17. Logros co-op y metas semanales con premios
 - [ ] 18. Guía "¿qué hago ahora?" con flechas y consejos
 - [ ] 19. Optimización de rendimiento (celulares) y carga más rápida

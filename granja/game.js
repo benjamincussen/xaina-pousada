@@ -51,6 +51,7 @@ const TX = {
     city: 'Cidade', cityBtn: 'Painel da cidade', happyL: 'Felicidade', happyHint: 'Quanto mais feliz a cidade, mais rendem os aluguéis (até 1,5x).', cityPop: (p, m) => `${p} moradores · aluguéis x${m}`, serv_praca: 'Praça', servD_praca: 'Bancos, árvores e coreto: +15 de felicidade', serv_posto: 'Posto de saúde', servD_posto: 'Cuida dos vizinhos: +20 de felicidade', servDone: (n, h) => `${n} inaugurado! Felicidade: ${h}`, hpFrom: 'Sobe com: decorações, ruas, obras da vila, praça e posto.', incomeH: n => `Aluguéis: ~${n} moedas por hora`,
     upTitle: 'Melhorar prédio', upHint: (l, p) => `Nível ${l}: tudo fica ${p}% mais rápido (vale para as cópias também).`, upBtn: 'Melhorar', upDone: (n, l) => `${n} agora é nível ${l}!`, upMax: 'Nível máximo', bLvl: l => `Nv ${l}`,
     boosts: 'Impulsos', boost_abono: 'Adubo mágico', boostD_abono: 'Plantas crescem 2x mais rápido por 10 min', boost_racao: 'Ração premium', boostD_racao: 'Animais produzem 2x mais rápido por 10 min', boostDone_abono: 'Adubo ativo: plante agora!', boostDone_racao: 'Ração premium ativa: alimente os animais!', boostLeft: t => `Ativo: ${t}`,
+    truck: 'Caminhão de entregas', truckD: 'Entrega sozinho uma encomenda pronta a cada 30 s, mesmo sem ajudantes.', truckDone: 'O caminhão entregou uma encomenda!', truckBought: 'Caminhão novo! Ele entrega as encomendas prontas sozinho.',
     tourist: 'Turista', rainNow: 'Está chovendo! A chuva regou a plantação (+30 s).',
     fair: 'Feira do bairro', fairSub: 'Coloque produtos nas barracas: vizinhos e turistas compram pelo preço cheio (mais que vender no celeiro). Com a Pousada pronta chegam turistas.', fairEmpty: 'Barraca vazia: escolha o que vender', fairTake: 'Retirar', fairBuy: 'Vou levar!', fairSold: n => `Vendido na feira: ${n} moedas`, stall: i => `Barraca ${i}`,
     npcSad: 'Falta uma praça por aqui…', npcHappy: 'Amo morar nesta cidade!',
@@ -115,6 +116,7 @@ const TX = {
     city: 'Ciudad', cityBtn: 'Panel de la ciudad', happyL: 'Felicidad', happyHint: 'Mientras más feliz la ciudad, más rinden los arriendos (hasta 1,5x).', cityPop: (p, m) => `${p} vecinos · arriendos x${m}`, serv_praca: 'Plaza', servD_praca: 'Bancos, árboles y glorieta: +15 de felicidad', serv_posto: 'Posta de salud', servD_posto: 'Cuida a los vecinos: +20 de felicidad', servDone: (n, h) => `¡${n} inaugurada! Felicidad: ${h}`, hpFrom: 'Sube con: decoraciones, calles, obras de la villa, plaza y posta.', incomeH: n => `Arriendos: ~${n} monedas por hora`,
     upTitle: 'Mejorar edificio', upHint: (l, p) => `Nivel ${l}: todo sale ${p}% más rápido (también en las copias).`, upBtn: 'Mejorar', upDone: (n, l) => `¡${n} ahora es nivel ${l}!`, upMax: 'Nivel máximo', bLvl: l => `Nv ${l}`,
     boosts: 'Impulsos', boost_abono: 'Abono mágico', boostD_abono: 'Las plantas crecen 2x más rápido por 10 min', boost_racao: 'Ración premium', boostD_racao: 'Los animales producen 2x más rápido por 10 min', boostDone_abono: 'Abono activo: ¡siembra ahora!', boostDone_racao: 'Ración premium activa: ¡alimenta a los animales!', boostLeft: t => `Activo: ${t}`,
+    truck: 'Camión de reparto', truckD: 'Entrega solo un pedido listo cada 30 s, aunque no haya ayudantes.', truckDone: '¡El camión entregó un pedido!', truckBought: '¡Camión nuevo! Entrega los pedidos listos solo.',
     tourist: 'Turista', rainNow: '¡Está lloviendo! La lluvia regó los cultivos (+30 s).',
     fair: 'Feria del barrio', fairSub: 'Pon productos en los puestos: vecinos y turistas compran a precio completo (más que vender en el granero). Con la Pousada lista llegan turistas.', fairEmpty: 'Puesto vacío: elige qué vender', fairTake: 'Retirar', fairBuy: '¡Me lo llevo!', fairSold: n => `Vendido en la feria: ${n} monedas`, stall: i => `Puesto ${i}`,
     npcSad: 'Falta una plaza por aquí…', npcHappy: '¡Me encanta vivir en esta ciudad!',
@@ -318,7 +320,7 @@ function migrate(S) {
   if (!S.deco || typeof S.deco !== 'object') S.deco = {};
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
-  if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
+  if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (typeof S.truck !== 'number') S.truck = 0; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
   if (!Array.isArray(S.homes)) S.homes = []; if (!Array.isArray(S.reqs)) S.reqs = []; if (!Array.isArray(S.fair)) S.fair = [null, null, null, null];
   if (!Array.isArray(S.roads)) S.roads = []; if (typeof S.roadFree !== 'number') S.roadFree = ROAD_FREE;
   if (typeof S.silos !== 'number') S.silos = 0;
@@ -368,6 +370,14 @@ function ensureReqs(S, now) { if (!S.homes || !S.homes.length) return false; let
 // chuva: de vez em quando chove 1 minuto e rega tudo (plantas e árvores adiantam 30 s)
 function rainTick(S, now) { if (!S.wx || typeof S.wx !== 'object') S.wx = {}; if (S.wx.r > now || now < (S.wx.next || 0)) return false; if (Math.random() > 1 / 300) return false;
   S.wx = { r: now + 60000, next: now + 7 * 60000 }; for (const pl of S.plots) if (pl.c && !plotReady(pl, now)) pl.p -= 30000; (S.xt || []).forEach(t => { t.t -= 30000; }); S.trees = S.trees.map(t => t - 30000); toast(L('rainNow'), 3500); return true; }
+// caminhão de entregas: a cada 30 s entrega sozinho uma encomenda que já dá para cumprir
+const TRUCK = { cost: 2000, lvl: 9, x: 440, y: 960 };
+function truckTick(S, now) { if (!S.truck || now - (S.truckAt || 0) < 30000) return null; const o = S.orders.find(o => o.w <= now && has(S, Object.fromEntries(o.it)));
+  if (!o) return null; const r = apply(S, { a: 'deliver', id: o.id }, now); if (r.ok) S.truckAt = now; return r; }
+function drawTruck(g, x, y, d, T) { g.save(); g.translate(x, y); g.scale(d, 1); g.fillStyle = 'rgba(0,0,0,.2)'; g.beginPath(); g.ellipse(0, 4, 46, 8, 0, 0, 6.283); g.fill();
+  g.fillStyle = '#3f8fd1'; rr(g, -44, -44, 58, 40, 6); g.fill(); g.fillStyle = '#ffffff'; g.fillRect(-38, -36, 46, 4); g.fillStyle = '#e0533d'; rr(g, 14, -34, 30, 30, 6); g.fill(); g.fillStyle = '#bfe9ff'; g.fillRect(24, -30, 16, 12);
+  g.fillStyle = '#ffd23f'; g.fillRect(40, -12, 5, 5); for (const wx of [-28, 28]) { g.fillStyle = '#2b2b2b'; g.beginPath(); g.arc(wx, -2, 9, 0, 6.283); g.fill(); g.fillStyle = '#aaa'; g.beginPath(); g.arc(wx, -2, 3.5, 0, 6.283); g.fill(); }
+  g.drawImage(iconCanvas('orders'), -30, -42, 26, 26); g.restore(); }
 function fairTick(S, now) { if (!S.land.bairro || !S.fair || !S.fair.some(Boolean)) return -1; const tour = S.city.pousada && S.city.pousada.e <= now;
   const p = 0.05 + Math.min(0.1, S.homes.length * 0.01) + (tour ? 0.05 : 0); if (Math.random() > p) return -1;
   const opts = S.fair.map((st, i) => st ? i : -1).filter(i => i >= 0), i = opts[Math.floor(Math.random() * opts.length)], st = S.fair[i];
@@ -452,6 +462,8 @@ function apply(S, a, now) {
     const i = a.i | 0, k = a.k; if (!S.land.bairro || i < 0 || i >= FAIR.n || S.fair[i] || !ITEMS[k] || !(S.inv[k] > 0)) return fail(''); const q = Math.min(FAIR.max, S.inv[k]); take(S, { [k]: q }); S.fair[i] = { k, q }; out.fx.push(['fairPut', i]);
   } else if (a.a === 'fairTake') {
     const i = a.i | 0, st = S.fair[i]; if (!st) return fail(''); if (invCount(S) + st.q > S.cap) return fail(L('barnFull')); give(S, st.k, st.q); S.fair[i] = null;
+  } else if (a.a === 'truck') {
+    if (S.truck) return fail(''); if (S.lvl < TRUCK.lvl) return fail(L('unlockAt', TRUCK.lvl)); if (S.coins < TRUCK.cost) return fail(L('noCoins')); S.coins -= TRUCK.cost; S.truck = 1; S.truckAt = 0; out.fx.push(['truck']);
   } else if (a.a === 'serv') {
     const V = SERV[a.k]; if (!V || S.serv[a.k]) return fail(''); if (!S.land.bairro) return fail(L('needLand', L('land_bairro'))); if (S.lvl < V.lvl) return fail(L('unlockAt', V.lvl));
     if (S.coins < V.cost) return fail(L('noCoins')); S.coins -= V.cost; S.serv[a.k] = 1; addXp(S, 15, out); out.fx.push(['serv', a.k]);
@@ -784,6 +796,7 @@ function playFx(fx) {
     if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
     if (f[0] === 'lvl') { SND.lvl(); openSheet('lvl', f[1]); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
+    if (f[0] === 'truck') { SND.lvl(); CAM.x = TRUCK.x; CAM.y = TRUCK.y - 40; clampCam(); closeSheet(); toast(L('truckBought'), 3200); }
     if (f[0] === 'serv') { SND.hammer(); const V = SERV[f[1]]; CAM.x = V.x; CAM.y = V.y - 60; clampCam(); closeSheet(); burst(V.x, V.y - 60, 'star'); toast(L('servDone', L('serv_' + f[1]), happy(G.S)), 3200); }
     if (f[0] === 'up') { SND.lvl(); const B = BUILD[f[1]]; burst(B.x, B.y - 60, 'star'); toast(L('upDone', N(f[1]), upLv(G.S, f[1]) + 1), 3000); }
     if (f[0] === 'boost') { SND.lvl(); toast(L('boostDone_' + f[1]), 3000); }
@@ -869,7 +882,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.26';
+const BUILD_V = '2026-11-02.27';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -880,6 +893,7 @@ let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   const S = G.S, now = Date.now(); helperClock++; if (ensureReqs(S, now)) { S.rev++; saveSoon(); broadcast(); }
   if (rainTick(S, now)) { S.rev++; saveSoon(); broadcast(); }
+  { const tr = truckTick(S, now); if (tr && tr.ok) { ensureOrders(S); S.rev++; saveSoon(); broadcast(); playFx(tr.fx); toast(L('truckDone'), 2000); } }
   { const fi = fairTick(S, now); if (fi >= 0) { S.rev++; saveSoon(); broadcast(); fairFx(fi); } }
   if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { let r = null; for (let hh = 0; hh < hCount(S); hh++) { const rr = helperTask(S, now); if (rr && rr.ok) { S.helper.ps[hh] = [S.helper.x, S.helper.y]; if (r && r.ok) playFx(r.fx.filter(f => f[0] !== 'coins')); r = rr; } else if (!r) r = rr; } if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
 
@@ -1134,6 +1148,7 @@ function renderSheet() {
         return `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img(PENS[k].out)}</span><div style="flex:1"><b>${L(k === 'galinheiro' ? 'buyHen' : 'buyCow')}</b><br><small>${N(k)} · ${L('haveN', n, m)}</small></div>
         ${n >= m ? `<small>${L('slotsMax')}</small>` : `<button class="btn" type="button" data-animal="${k}" ${S.coins < animalCost(k, n) ? 'disabled' : ''}>${img('coin')} ${animalCost(k, n)}</button>`}</div></div>`; }).join('')}
       ${boostCards(S)}
+      <div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img('orders')}</span><div style="flex:1"><b>${L('truck')}</b><br><small>${L('truckD')}</small></div>${S.truck ? `<small>${L('landOwned')}</small>` : S.lvl < TRUCK.lvl ? `<small>${L('lvl', TRUCK.lvl)}</small>` : `<button class="btn" type="button" data-truck="1" ${S.coins < TRUCK.cost ? 'disabled' : ''}>${img('coin')} ${TRUCK.cost}</button>`}</div></div>
       <button class="btn blue" type="button" data-citypanel="1">${L('cityBtn')} · ${L('happyL')} ${happy(S)}</button>
       ${S.land.bairro ? `<span class="lbl">${L('homes')}</span><div class="card"><p class="sub">${L('homesN', S.homes.length, LOTS.length, S.homes.length * 2)}</p><small>${L('homeHint')}</small>${S.homes.length < LOTS.length ? `<button class="btn" type="button" data-home="1" ${S.coins < homeCost(S.homes.length) ? 'disabled' : ''}>${L('homeBuy')} · ${img('coin')} ${homeCost(S.homes.length)}</button>` : ''}</div>` : ''}
       <span class="lbl">${L('roads')}</span><div class="card"><p class="sub">${L('roadInfo', S.roads.length, roadBonus(S))}</p><button class="btn blue" type="button" data-roadmode="1">${L('roadBtn')}</button></div>
@@ -1184,6 +1199,7 @@ $('sBody').addEventListener('click', e => {
   if (d.home) act({ a: 'home' });
   if (d.up) act({ a: 'up', k: d.up });
   if (d.serv) act({ a: 'serv', k: d.serv });
+  if (d.truck) act({ a: 'truck' });
   if (d.fput) act({ a: 'fairPut', i: +d.fput, k: d.k });
   if (d.ftake) act({ a: 'fairTake', i: +d.ftake });
   if (d.citypanel) { openSheet('city'); return; }
@@ -1547,6 +1563,8 @@ function draw(T, dt) {
   if (S && S.helper && S.helper.on) for (let hh = 0; hh < hCount(S); hh++) { const H = S.helper, working = H.until > now; AV.hs = AV.hs || []; const av = AV.hs[hh] = AV.hs[hh] || { x: HELPER_HOME.x + 40 + hh * 30, y: HELPER_HOME.y + 10, tx: 0, ty: 0, t: 0 };
     const pp = H.ps && H.ps[hh]; if (working && pp) { av.tx = pp[0] + hh * 6; av.ty = pp[1]; } else if (working && hh === 0) { av.tx = H.x; av.ty = H.y; } else { av.tx = HELPER_HOME.x + 40 + hh * 30; av.ty = HELPER_HOME.y + 10 + (hh % 2) * 14; } stepAv(av, dt); drawAv(cx, av, HELPER_NAMES[hh], HELPER_LOOKS[hh], T, false);
     if (!working) { cx.fillStyle = '#fff'; cx.strokeStyle = '#3a2412'; cx.lineWidth = 3; cx.font = '900 14px Nunito, sans-serif'; cx.textAlign = 'left'; const zz = 'z' + (Math.floor(T * 2) % 3 ? 'z' : '') + (Math.floor(T * 2) % 3 === 2 ? 'Z' : ''); cx.strokeText(zz, av.x + 12, av.y - 60); cx.fillText(zz, av.x + 12, av.y - 60); } }
+  if (S && S.truck) { const e = (Date.now() - (S.truckAt || 0)) / 8000; if (e >= 1 || e < 0) drawTruck(cx, TRUCK.x, TRUCK.y, -1, T);
+    else { const go = e < 0.5, q = go ? e * 2 : (1 - e) * 2, y = TRUCK.y + q * (1540 - TRUCK.y); drawTruck(cx, 382, y, go ? 1 : -1, T); } }
   // vizinhos
   if (S) { stepNpcs(S, dt); NPCS.list.slice().sort((a, b) => a.y - b.y).forEach(n => drawNpc(cx, n, T)); }
   // personagens
