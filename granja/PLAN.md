@@ -145,3 +145,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Frutillas: mermelada (Cocina) y tarta (Panadería)
 - [x] Cumpleaños de vecinos con globos; llevar pastel paga el triple
 - [x] Tren con farol de noche
+
+## Versión grande 24: "Cosecha" (2026-11-03.25)
+- [x] Festival de la Cosecha en otoño (+1 por parcela cosechada)
+- [x] Vecinos con perrito
+- [x] Apicultor con abejas en las colmenas
