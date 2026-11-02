@@ -566,7 +566,7 @@ function playFx(fx) {
   for (const f of fx) {
     if (f[0] === 'gain') { const at = f[3] === 'plot' ? (() => { const r = plotRect(f[4]); return { x: r.x + r.w / 2, y: r.y + r.h / 2 }; })() : f[3] === 'bld' ? { x: BUILD[f[4]].x, y: BUILD[f[4]].y - 60 }
         : f[3] === 'city' ? { x: PROJ[f[4]].x, y: PROJ[f[4]].y - 120 } : f[3] === 'tree' ? (() => { const t = treeAt(G.S, f[4]) || { x: 870, y: 300 }; return { x: t.x, y: t.y - 70 }; })() : f[3] === 'hive' ? { x: 150, y: 1120 } : f[3] === 'boat' ? { x: BOAT.x, y: BOAT.y - 40 } : { x: PENS[f[4]].x, y: PENS[f[4]].y - 30 };
-      FLOAT.push({ k: f[1], n: f[2], x: at.x, y: at.y, t: 0 }); SND.pop(); }
+      FLOAT.push({ k: f[1], n: f[2], x: at.x, y: at.y, t: 0 }); SND.pop(); burst(at.x, at.y, f[1]); }
     if (f[0] === 'plant') SND.plant();
     if (f[0] === 'craft' || f[0] === 'feed') SND.pop();
     if (f[0] === 'coins') SND.coin();
@@ -607,7 +607,7 @@ function helperTask(S, now) {
   for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; if (CROPS[crop] && S.coins >= CROPS[crop].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: crop }, now); if (re.ok) { S.plots[a.i].last = crop; res.fx.push(...re.fx); } } } S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.11';
+const BUILD_V = '2026-11-02.12';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -968,6 +968,9 @@ function saleSign(g, x, y, k, S) { const Ld = LANDS[k]; shadow(g, x, y, 90); g.f
   g.fillStyle = '#fff'; g.font = '900 18px "Baloo 2", Nunito, sans-serif'; g.textAlign = 'center'; g.fillText(L('forSale'), x, y - 80);
   g.font = '900 12px Nunito, sans-serif'; g.fillText(S && Ld.lvl > S.lvl ? L('lvl', Ld.lvl) : '', x, y - 64); if (!S || Ld.lvl <= S.lvl) { g.drawImage(iconCanvas('coin'), x - 26, y - 76, 18, 18); g.fillText(String(Ld.cost), x + 6, y - 62); } }
 const SPARK = [];
+// explosão de partículas ao colher/recolher, na cor do produto
+const ITEM_COL = { trigo: '#f2c14e', milho: '#ffd23f', cenoura: '#ff8c1a', cana: '#7cc04b', ovo: '#fff3dc', leite: '#ffffff', laranja: '#ff9a1f', manga: '#ffb627', mel: '#ffb627', peixe: '#5aa9d6', coin: '#ffc23a' };
+function burst(x, y, k) { const c = ITEM_COL[k] || '#ffd23f'; for (let i = 0; i < 16; i++) { const a = Math.random() * 6.283, v = 70 + Math.random() * 130; SPARK.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 90, t: 0, c: i % 3 ? c : (i % 2 ? '#8cc63f' : '#ffffff'), leaf: i % 3 === 0 }); } }
 function drawDeco(g, k, x, y, T) {
   if (k === 'banco') { shadow(g, x, y, 70); g.fillStyle = '#6b4120'; g.fillRect(x - 26, y - 14, 5, 14); g.fillRect(x + 21, y - 14, 5, 14); g.fillStyle = '#a8743f'; for (let i = 0; i < 2; i++) g.fillRect(x - 30, y - 20 - i * 7, 60, 5); for (let i = 0; i < 2; i++) g.fillRect(x - 30, y - 38 - i * 7, 60, 5); g.fillStyle = '#6b4120'; g.fillRect(x - 28, y - 44, 4, 26); g.fillRect(x + 24, y - 44, 4, 26); }
   if (k === 'flores') { shadow(g, x, y, 70); g.fillStyle = '#8a5a33'; g.beginPath(); g.ellipse(x, y - 4, 32, 12, 0, 0, 6.283); g.fill(); g.strokeStyle = '#a9a9a0'; g.lineWidth = 4; g.stroke();
@@ -1079,6 +1082,7 @@ function draw(T, dt) {
     if (locked) { if (S && i === S.np) { cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('buy'), r.x + r.w / 2, r.y + r.h / 2 - 2); cx.drawImage(iconCanvas('coin'), r.x + r.w / 2 - 22, r.y + r.h / 2 + 4, 16, 16); cx.fillText(plotCost(S.np), r.x + r.w / 2 + 8, r.y + r.h / 2 + 17); } continue; }
     cx.strokeStyle = '#6f4626'; cx.lineWidth = 3; for (let j = 0; j < 3; j++) { cx.beginPath(); cx.moveTo(r.x + 10, r.y + 16 + j * 20); cx.lineTo(r.x + r.w - 10, r.y + 16 + j * 20); cx.stroke(); }
     if (pl.c) { const c = CROPS[pl.c], p = clamp((now - pl.p) / (c.t * 1000), 0, 1), st = p >= 1 ? 2 : p < 0.35 ? 0 : 1;
+      if (st === 2) { const pu = 0.5 + 0.5 * Math.sin(T * 4 + i), gl = cx.createRadialGradient(r.x + r.w / 2, r.y + r.h / 2, 6, r.x + r.w / 2, r.y + r.h / 2, r.w * 0.75); gl.addColorStop(0, `rgba(255,236,140,${0.35 + 0.25 * pu})`); gl.addColorStop(1, 'rgba(255,236,140,0)'); cx.fillStyle = gl; cx.fillRect(r.x - 20, r.y - 20, r.w + 40, r.h + 40); }
       for (let j = 0; j < 6; j++) cropPlant(cx, pl.c, st, r.x + 18 + (j % 3) * 30, r.y + 30 + Math.floor(j / 3) * 26, T);
       if (st < 2) progressBar(cx, r.x + r.w / 2, r.y + r.h - 6, 60, p);
       else if (Math.sin(T * 5 + i) > 0.6) { cx.fillStyle = '#fff'; cx.beginPath(); cx.arc(r.x + r.w - 12, r.y + 10, 3, 0, 6.283); cx.fill(); } }
@@ -1130,7 +1134,11 @@ function draw(T, dt) {
     for (const [k, D] of Object.entries(DECOS)) if (S.deco[k]) box(D.x - 36, D.y - 80, 72, 88, G.dragPos && G.dragPos.k === 'd_' + k);
     const a = plotRect(0), b = plotRect(MAXPLOTS - 1); box(a.x - 8, a.y - 8, b.x + b.w - a.x + 16, b.y + b.h - a.y + 16, G.dragPos && G.dragPos.k === 'campo'); cx.restore(); }
   // nuvens (sombras passando)
-  for (let i = 0; i < 5; i++) { const x = ((T * 10 + i * 300) % (WW + 300)) - 150, y = 180 + i * 260; cx.fillStyle = 'rgba(30,60,20,.08)'; cx.beginPath(); cx.ellipse(x, y, 90, 36, 0, 0, 6.283); cx.ellipse(x + 60, y + 10, 60, 28, 0, 0, 6.283); cx.fill(); }
+  for (let i = 0; i < 5; i++) { const x = ((T * 10 + i * 300) % (WW + 300)) - 150, y = 180 + i * 260; cx.fillStyle = 'rgba(30,60,20,.08)'; cx.beginPath(); cx.ellipse(x, y, 90, 36, 0, 0, 6.283); cx.ellipse(x + 60, y + 10, 60, 28, 0, 0, 6.283); cx.fill();
+    // a nuvem branca fica acima da sua sombra
+    const ux = x + 70, uy = y - 150; cx.fillStyle = 'rgba(255,255,255,.42)'; cx.beginPath(); for (const [dx, dy, r] of [[0, 0, 40], [42, 6, 32], [-40, 8, 30], [18, -18, 30], [-14, -12, 26]]) { cx.moveTo(ux + dx + r, uy + dy); cx.arc(ux + dx, uy + dy, r, 0, 6.283); } cx.fill(); }
+  for (let i = 0; i < 4; i++) { const bx = ((T * (40 + i * 6) + i * 340) % (WW + 200)) - 100, by = 120 + i * 330 + Math.sin(T * 0.8 + i) * 20, fl = Math.sin(T * 9 + i * 2) * 5;
+    cx.strokeStyle = 'rgba(40,40,40,.75)'; cx.lineWidth = 2.2; cx.lineCap = 'round'; cx.beginPath(); cx.moveTo(bx - 9, by - fl); cx.quadraticCurveTo(bx - 4, by - 3, bx, by); cx.quadraticCurveTo(bx + 4, by - 3, bx + 9, by - fl); cx.stroke(); }
   // toques do amigo e seus
   for (const [pg, col] of [[G.partnerPing, '#9b5de5'], [G.myPing, '#ffb020']]) if (pg && Date.now() - pg[2] < 900) { const p = (Date.now() - pg[2]) / 900; cx.strokeStyle = col; cx.globalAlpha = 1 - p; cx.lineWidth = 4; cx.beginPath(); cx.arc(pg[0], pg[1], 10 + p * 26, 0, 6.283); cx.stroke(); cx.globalAlpha = 1; }
   // o Juca
@@ -1141,7 +1149,7 @@ function draw(T, dt) {
   if (S) { stepAv(AV.me, dt); const list = [[AV.me, ME.name, ME.look, true]]; if (AV.fr.on && G.mode !== 'solo') { stepAv(AV.fr, dt); list.push([AV.fr, AV.fr.name, AV.fr.look, false]); }
     list.sort((a, b) => a[0].y - b[0].y).forEach(([av, n, l, m]) => drawAv(cx, av, n, l, T, m)); }
   butterflies(cx, T);
-  for (const p of SPARK) { p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 260 * dt; cx.globalAlpha = Math.max(0, 1 - p.t / 1.2); cx.fillStyle = p.c; cx.beginPath(); cx.arc(p.x, p.y, 3.5, 0, 6.283); cx.fill(); } cx.globalAlpha = 1;
+  for (const p of SPARK) { p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 260 * dt; p.vx *= 0.98; cx.globalAlpha = Math.max(0, 1 - p.t / 1.2); cx.fillStyle = p.c; cx.beginPath(); if (p.leaf) cx.ellipse(p.x, p.y, 5, 2.5, p.t * 9, 0, 6.283); else cx.arc(p.x, p.y, 3.2 * (1 - p.t / 1.6), 0, 6.283); cx.fill(); } cx.globalAlpha = 1;
   for (let i = SPARK.length - 1; i >= 0; i--) if (SPARK[i].t > 1.2) SPARK.splice(i, 1);
   // ganhos flutuando
   for (const f of FLOAT) { f.t += dt; const p = f.t / 1.2; cx.globalAlpha = 1 - Math.max(0, p - 0.6) / 0.4; cx.drawImage(iconCanvas(f.k), f.x - 18, f.y - 30 - p * 50, 36, 36); cx.fillStyle = '#fff'; cx.strokeStyle = '#3a2412'; cx.lineWidth = 4; cx.font = '900 18px Nunito, sans-serif'; cx.textAlign = 'left'; cx.strokeText('+' + f.n, f.x + 18, f.y - 6 - p * 50); cx.fillText('+' + f.n, f.x + 18, f.y - 6 - p * 50); cx.globalAlpha = 1; }
