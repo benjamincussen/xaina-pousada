@@ -101,3 +101,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Carnaval: desfile con carro alegórico, bailarines y confeti cada 30 min
 - [x] Votación de la ciudad cada hora (2 mejoras temporales)
 - [x] Cocina de la Abuela + porotos: porotos guisados y empanadas
+
+## Versión grande 15: "Hotel" (2026-11-03.16)
+- [x] Hotel de turistas de 4 pisos en el Parque (más turistas, renta alta)
+- [x] Teleférico con cabinas de colores de la granja al faro
+- [x] Flecha amarilla de ayuda en el mapa para la próxima acción
