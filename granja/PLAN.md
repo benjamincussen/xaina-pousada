@@ -194,3 +194,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Jardín botánico (Panel de la ciudad, Campo Grande, nivel 12, 2600): flores, laguna, arco de rosas y mariposas; +12 felicidad.
 - Panadero de la villa: cada 5 min cruza la villa con su canasta; tocarlo regala 2 panes (1 vez por vuelta, sincronizado en co-op).
 - Ropa tendida: de día los vecinos cuelgan ropa de colores entre las casas del barrio.
+
+## Versión grande 34: Acuario, hora del cuento y canasta de los vecinos (2026-11-03.35)
+- Acuario (Panel de la ciudad, Parque de diversiones, nivel 14, 3000): peces nadando, burbujas y ballena en el techo; +12 felicidad.
+- Hora del cuento: con el Colegio, de día una cuentacuentos lee a 6 niños sobre una alfombra en el Barrio Escolar.
+- Canasta de los vecinos (huerto comunitario): con 6+ vecinos, cada 10 min hay una canasta en la entrada de la ciudad; tocarla da 4 cosechas (sincronizado en co-op).
+- Texto de inauguración neutro en género (PT/ES).
