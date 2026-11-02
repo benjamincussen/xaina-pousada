@@ -63,3 +63,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Vecinos con oficio (panadero, pescador, profesora, doctora, feriante…) que van a trabajar de día
 - [x] Regalo del día (monedas + productos)
 - [x] Precios más bajos (Barrio Escolar 1800, Campo Grande 1200, Parque 2200, bus 1400)
+
+## Versión grande 8: "Faro" (2026-11-03.8)
+- [x] Paseo en globo (Menú): el globo sobrevuela toda la granja y la ciudad; globo de colores en el cielo
+- [x] Faro de la playa en 4 etapas, luz giratoria de noche, +15 felicidad
+- [x] Fondo del mapa por partes: hasta 8x más liviano en el celular; casas guardadas como imagen
+- [x] Sonidos: silbato del tren y fuegos en la fiesta

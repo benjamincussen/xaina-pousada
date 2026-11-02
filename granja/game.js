@@ -54,6 +54,7 @@ const TX = {
     missT: "Missões da prefeitura", missDone: "Missão cumprida! A cidade ficou mais feliz.", busT: "Ônibus do bairro", busD: "Um ônibus amarelo liga o sítio, a vila e os bairros: +8 de felicidade.", busBought: "O ônibus começou a rodar! Olhe ele passando.", serv_prefeitura: "Prefeitura", servD_prefeitura: "A sede da cidade, com cúpula e bandeira: +10 de felicidade", n_porto: "Porto de pesca (nível 13)", n_portoD: "Na praia: um píer com barco que sai para o mar. Pesque camarão com milho e faça moqueca (peixe, camarão e coco).", n_miss: "Missões da prefeitura", n_missD: "Entregas grandes para a cidade: pagam muito e cada uma dá +2 de felicidade (até +20). Ficam no Painel da cidade e os ajudantes ajudam.", n_bus: "Ônibus entre os bairros", n_busD: "Um ônibus amarelo com passageiros roda do sítio até o bairro escolar, com pontos de ônibus. +8 de felicidade.", n_pref: "Prefeitura (nível 12)", n_prefD: "Prédio com cúpula e bandeira no Bairro Escolar: +10 de felicidade.", missSub: h => `Entregas grandes para a cidade. Felicidade ganha com missões: +${h} de 20.`,
     season0: "Primavera 🌸", season1: "Verão ☀️", season2: "Outono 🍂", season3: "Inverno 🌧️", land_diversao: "Parque de Diversões", landDesc_diversao: "Um parque no extremo sul: roda gigante, carrossel e doceria. Os brinquedos vendem ingressos sozinhos.", n_park: "Parque de Diversões (nível 13)", n_parkD: "O mapa cresceu mais: roda gigante girando, carrossel com cavalinhos e Doceria (algodão-doce e pipoca). Os brinquedos dão moedas de ingressos.", n_season: "Estações do ano", n_seasonD: "A cada 30 min muda a estação: pétalas na primavera, sol no verão, folhas caindo no outono e mais chuva no inverno.", n_home: "De noite todos voltam para casa", n_homeD: "Quando escurece, os vizinhos voltam para suas casas e as janelas se acendem.", seasonNow: s => `Nova estação: ${s}`,
     trainT: "Trem e estação", trainBought: "O trem começou a passar! Ele para na estação a cada 2 minutos.", station: "Estação", dailyT: "Presente do dia", dailyBtn: "Abrir presente", job_padeiro: "padeiro", job_queijeiro: "queijeiro", job_pescador: "pescador", job_professora: "professora", job_medica: "médica", job_feirante: "feirante", job_tecela: "tecelã", job_pizzaiolo: "pizzaiolo", job_jardineira: "jardineira", job_guarda: "guarda do parque", job_motorista: "motorista do ônibus", job_doceira: "doceira", n_train: "Trem com estação (nível 12)", n_trainD: "Um trem colorido passa a cada 2 minutos pela linha entre o sítio e a praia, para na estação e paga passagens (mais com a cidade feliz). +8 de felicidade. Fica no Painel da cidade.", n_jobs: "Vizinhos com ofício", n_jobsD: "Cada vizinho tem um trabalho (padeiro, pescador, professora, médica, feirante…) e de dia vai trabalhar lá. Toque num vizinho para saber.", n_daily: "Presente do dia", n_dailyD: "Todo dia, ao entrar, um presente com moedas e produtos.", n_cheap: "Preços mais baixos", n_cheapD: "Bairro Escolar, Lavoura, Parque e ônibus ficaram mais baratos.", trainD: n => `Passa a cada 2 min, para na estação e paga ${n} moedas de passagens. +8 de felicidade.`, trainPaid: n => `Trem na estação: +${n} moedas de passagens`, dailySub: n => `Hoje: ${n} moedas e 3 produtos de presente!`, dailyGot: (n, k) => `Presente: +${n} moedas e 3 ${k}!`, jobSay: j => `Trabalho como ${j}.`,
+    farolT: "Farol da praia", farolDone: "O farol está pronto! À noite ele ilumina o mar. +15 de felicidade.", tourBtn: "Passeio de balão", tourOn: "🎈 Passeio de balão sobre o sítio e a cidade", tourStop: "Parar", n_tour: "Passeio de balão", n_tourD: "No Menu: um balão colorido sobrevoa todo o sítio e a cidade, como um filme. E às vezes você vê um balão passando no céu.", n_farol: "Farol da praia em 4 etapas (nível 10)", n_farolD: "Construa um farol listrado de vermelho e branco, etapa por etapa. Pronto, ele gira a luz à noite e dá +15 de felicidade. Os ajudantes juntam o material.", n_fast: "Muito mais rápido", n_fastD: "O mapa agora é desenhado em pedaços: o jogo ficou até 8 vezes mais leve no celular.", n_snd: "Sons novos", n_sndD: "Apito do trem e fogos na Festa do Vento.", farolSub: n => `Etapas prontas: ${n} de 4`, farolStage: n => `Etapa ${n} do farol pronta!`, farolStageN: n => `Etapa ${n}`,
     land_lavoura: 'Lavoura Grande', landDesc_lavoura: 'Campo enorme no extremo sul: mais 24 canteiros para plantar muito mais.',
     land_escolar: 'Bairro Escolar', landDesc_escolar: 'Mais um bairro ao sul: Colégio, Parque infantil, Campo de futebol e 6 lotes para casas.', serv_colegio: 'Colégio', servD_colegio: 'As crianças vão à escola: +20 de felicidade', serv_parque: 'Parque infantil', servD_parque: 'Balanço, escorregador e areia: +15 de felicidade', serv_campo: 'Campo de futebol', servD_campo: 'Peladas todo dia: +10 de felicidade',
     bigTitle: 'Ampliar casa', bigHint: 'Segundo andar: chegam mais 2 moradores e o aluguel dobra.', bigBtn: 'Ampliar', bigDone: (a, b) => `Casa ampliada! ${a} e ${b} chegaram.`, livesHere: n => `Moram aqui: ${n}`,
@@ -131,6 +132,7 @@ const TX = {
     missT: "Misiones de la alcaldía", missDone: "¡Misión cumplida! La ciudad está más feliz.", busT: "Bus del barrio", busD: "Un bus amarillo une la granja, la villa y los barrios: +8 de felicidad.", busBought: "¡El bus empezó a andar! Míralo pasar.", serv_prefeitura: "Alcaldía", servD_prefeitura: "La sede de la ciudad, con cúpula y bandera: +10 de felicidad", n_porto: "Puerto pesquero (nivel 13)", n_portoD: "En la playa: un muelle con un bote que sale al mar. Pesca camarón con maíz y haz moqueca (pescado, camarón y coco).", n_miss: "Misiones de la alcaldía", n_missD: "Entregas grandes para la ciudad: pagan mucho y cada una da +2 de felicidad (hasta +20). Están en el Panel de la ciudad y los ayudantes ayudan.", n_bus: "Bus entre los barrios", n_busD: "Un bus amarillo con pasajeros va de la granja al barrio escolar, con paraderos. +8 de felicidad.", n_pref: "Alcaldía (nivel 12)", n_prefD: "Edificio con cúpula y bandera en el Barrio Escolar: +10 de felicidad.", missSub: h => `Entregas grandes para la ciudad. Felicidad ganada con misiones: +${h} de 20.`,
     season0: "Primavera 🌸", season1: "Verano ☀️", season2: "Otoño 🍂", season3: "Invierno 🌧️", land_diversao: "Parque de Diversiones", landDesc_diversao: "Un parque al extremo sur: rueda gigante, carrusel y dulcería. Los juegos venden entradas solos.", n_park: "Parque de Diversiones (nivel 13)", n_parkD: "El mapa creció más: rueda gigante girando, carrusel con caballitos y Dulcería (algodón de azúcar y palomitas). Los juegos dan monedas por entradas.", n_season: "Estaciones del año", n_seasonD: "Cada 30 min cambia la estación: pétalos en primavera, sol en verano, hojas cayendo en otoño y más lluvia en invierno.", n_home: "De noche todos vuelven a casa", n_homeD: "Cuando oscurece, los vecinos vuelven a sus casas y se encienden las ventanas.", seasonNow: s => `¡Llegó la estación: ${s}!`,
     trainT: "Tren y estación", trainBought: "¡El tren empezó a pasar! Para en la estación cada 2 minutos.", station: "Estación", dailyT: "Regalo del día", dailyBtn: "Abrir regalo", job_padeiro: "panadero", job_queijeiro: "quesero", job_pescador: "pescador", job_professora: "profesora", job_medica: "doctora", job_feirante: "feriante", job_tecela: "tejedora", job_pizzaiolo: "pizzero", job_jardineira: "jardinera", job_guarda: "guardia del parque", job_motorista: "chofer del bus", job_doceira: "dulcera", n_train: "Tren con estación (nivel 12)", n_trainD: "Un tren de colores pasa cada 2 minutos por la vía entre la granja y la playa, para en la estación y paga pasajes (más si la ciudad está feliz). +8 de felicidad. Está en el Panel de la ciudad.", n_jobs: "Vecinos con oficio", n_jobsD: "Cada vecino tiene un trabajo (panadero, pescador, profesora, doctora, feriante…) y de día va a trabajar ahí. Toca a un vecino para saberlo.", n_daily: "Regalo del día", n_dailyD: "Cada día, al entrar, un regalo con monedas y productos.", n_cheap: "Precios más bajos", n_cheapD: "Barrio Escolar, Campo Grande, Parque y bus ahora son más baratos.", trainD: n => `Pasa cada 2 min, para en la estación y paga ${n} monedas de pasajes. +8 de felicidad.`, trainPaid: n => `Tren en la estación: +${n} monedas de pasajes`, dailySub: n => `¡Hoy: ${n} monedas y 3 productos de regalo!`, dailyGot: (n, k) => `¡Regalo: +${n} monedas y 3 ${k}!`, jobSay: j => `Trabajo de ${j}.`,
+    farolT: "Faro de la playa", farolDone: "¡El faro está listo! De noche ilumina el mar. +15 de felicidad.", tourBtn: "Paseo en globo", tourOn: "🎈 Paseo en globo sobre la granja y la ciudad", tourStop: "Parar", n_tour: "Paseo en globo", n_tourD: "En el Menú: un globo de colores sobrevuela toda la granja y la ciudad, como una película. Y a veces ves un globo pasando por el cielo.", n_farol: "Faro de la playa en 4 etapas (nivel 10)", n_farolD: "Construye un faro a rayas rojas y blancas, etapa por etapa. Listo, gira su luz de noche y da +15 de felicidad. Los ayudantes juntan el material.", n_fast: "Mucho más rápido", n_fastD: "El mapa ahora se dibuja por partes: el juego quedó hasta 8 veces más liviano en el celular.", n_snd: "Sonidos nuevos", n_sndD: "Silbato del tren y fuegos artificiales en la Fiesta del Viento.", farolSub: n => `Etapas listas: ${n} de 4`, farolStage: n => `¡Etapa ${n} del faro lista!`, farolStageN: n => `Etapa ${n}`,
     land_lavoura: 'Campo Grande', landDesc_lavoura: 'Campo enorme al extremo sur: 24 parcelas más para sembrar mucho más.',
     land_escolar: 'Barrio Escolar', landDesc_escolar: 'Otro barrio al sur: Colegio, Parque infantil, Cancha de fútbol y 6 lotes para casas.', serv_colegio: 'Colegio', servD_colegio: 'Los niños van al colegio: +20 de felicidad', serv_parque: 'Parque infantil', servD_parque: 'Columpios, tobogán y arena: +15 de felicidad', serv_campo: 'Cancha de fútbol', servD_campo: 'Partidos todos los días: +10 de felicidad',
     bigTitle: 'Ampliar casa', bigHint: 'Segundo piso: llegan 2 vecinos más y el arriendo se duplica.', bigBtn: 'Ampliar', bigDone: (a, b) => `¡Casa ampliada! Llegaron ${a} y ${b}.`, livesHere: n => `Viven aquí: ${n}`,
@@ -333,7 +335,7 @@ const SERV = { praca: { cost: 1200, hp: 15, x: 1330, y: 2250, lvl: 8 }, posto: {
   prefeitura: { land: 'escolar', cost: 2500, hp: 10, x: 980, y: 2580, lvl: 12, w: 170 },
   colegio: { land: 'escolar', cost: 3000, hp: 20, x: 300, y: 2580, lvl: 10, w: 250 }, parque: { land: 'escolar', cost: 1800, hp: 15, x: 760, y: 2580, lvl: 10, w: 260 }, campo: { land: 'escolar', cost: 1500, hp: 10, x: 1200, y: 2580, lvl: 10, w: 260 } };
 function happy(S) { let h = 30 + Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5 + roadBonus(S) * 2 + Object.keys(PROJ).filter(k => S.city[k]).length * 5;
-  for (const [k, V] of Object.entries(SERV)) if (S.serv && S.serv[k]) h += V.hp; h += (S.cityHp || 0) + (S.bus ? 8 : 0) + (S.train ? 8 : 0); return Math.min(100, h); }
+  for (const [k, V] of Object.entries(SERV)) if (S.serv && S.serv[k]) h += V.hp; h += (S.cityHp || 0) + (S.bus ? 8 : 0) + (S.train ? 8 : 0) + ((S.farol || 0) >= 4 ? 15 : 0); return Math.min(100, h); }
 const cityMult = S => 0.5 + happy(S) / 100;
 function rentNow(S, k, now) { const c = S.city[k]; if (!c || c.e > now) return 0; const per = Math.floor((now - c.c) / (RENT_EVERY * 1000)); return Math.round(Math.min(per, RENT_CAP) * PROJ[k].inc * cityMult(S)); }
 const SHIFTS = [{ min: 20, cost: 25 }, { min: 60, cost: 60 }, { min: 1440, cost: 900 }];
@@ -478,6 +480,19 @@ function drawTrain(g, x, y, T) { const car = (yy, c, roof) => { g.fillStyle = 'r
   for (let i = 3; i >= 1; i--) { car(y - i * 72, ['', '#2f9e6e', '#ffc61a', '#3d7fd6'][i], '#fff8e6'); for (let w = 0; w < 3; w++) { g.fillStyle = ['#e8b890', '#8a5a3a', '#f2c6a0'][(w + i) % 3]; g.beginPath(); g.arc(x, y - i * 72 - 18 + w * 18, 5, 0, 6.283); g.fill(); } }
   car(y, '#e0533d', '#b03a2a'); g.fillStyle = '#3a3a44'; g.beginPath(); g.arc(x, y + 22, 9, 0, 6.283); g.fill(); g.fillStyle = '#ffd23f'; g.beginPath(); g.arc(x, y + 32, 5, 0, 6.283); g.fill();
   for (let s2 = 0; s2 < 4; s2++) { const ph = (T * 1.2 + s2 / 4) % 1; g.fillStyle = `rgba(255,255,255,${0.55 * (1 - ph)})`; g.beginPath(); g.arc(x + Math.sin(ph * 6) * 6, y + 10 - ph * 70 - 40, 8 + ph * 12, 0, 6.283); g.fill(); } }
+function drawFarol(g, S, T) { const n = S.farol || 0, x = FAROL.x, y = FAROL.y; shadow(g, x, y, 90); g.fillStyle = '#8a8a80'; g.beginPath(); g.ellipse(x, y - 4, 44, 12, 0, 0, 6.283); g.fill();
+  if (!n) { g.setLineDash([6, 5]); g.strokeStyle = 'rgba(122,75,37,.7)'; g.lineWidth = 3; g.strokeRect(x - 26, y - 200, 52, 196); g.setLineDash([]); g.fillStyle = 'rgba(58,36,18,.85)'; rr(g, x - 50, y - 70, 100, 24, 8); g.fill(); g.fillStyle = '#fff'; g.font = '900 11px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText(L('farolT'), x, y - 54); return; }
+  const top = y - 48 * Math.min(n, 3) - (n >= 4 ? 40 : 0); for (let i = 0; i < Math.min(n, 3); i++) { const y1 = y - i * 48, w1 = 26 - i * 3, w2 = 26 - (i + 1) * 3; for (let b = 0; b < 2; b++) { g.fillStyle = b ? '#ffffff' : '#e0533d'; g.beginPath(); g.moveTo(x - w1 + b * 0, y1 - b * 24); g.lineTo(x + w1 - b * 0, y1 - b * 24); g.lineTo(x + (w1 + w2) / 2, y1 - (b + 1) * 24); g.lineTo(x - (w1 + w2) / 2, y1 - (b + 1) * 24); g.closePath(); g.fill(); } }
+  if (n < 4) { g.strokeStyle = '#b07a3a'; g.lineWidth = 3; for (const dx of [-30, 30]) { g.beginPath(); g.moveTo(x + dx, y); g.lineTo(x + dx * 0.6, top - 10); g.stroke(); } return; }
+  g.fillStyle = '#3a3a44'; g.fillRect(x - 22, top + 30, 44, 8); g.fillStyle = '#ffe9a0'; g.fillRect(x - 15, top + 4, 30, 26); g.fillStyle = '#e0533d'; g.beginPath(); g.moveTo(x - 20, top + 4); g.lineTo(x, top - 16); g.lineTo(x + 20, top + 4); g.closePath(); g.fill();
+  const nf = nightF(Date.now()); if (nf > 0.05) { const a = T * 1.2; g.save(); g.globalCompositeOperation = 'lighter'; g.globalAlpha = 0.35 * nf; g.fillStyle = '#fff2b0'; for (const s2 of [0, Math.PI]) { g.beginPath(); g.moveTo(x, top + 17); g.lineTo(x + Math.cos(a + s2 - 0.12) * 400, top + 17 + Math.sin(a + s2 - 0.12) * 130); g.lineTo(x + Math.cos(a + s2 + 0.12) * 400, top + 17 + Math.sin(a + s2 + 0.12) * 130); g.closePath(); g.fill(); } g.restore(); } }
+function startTour() { const S = G.S; if (!S) return; const pts = [[320, 500]]; if (S.land.vila) pts.push([560, 1500]); if (S.land.bairro) pts.push([740, 2000]); if (S.land.escolar) pts.push([700, 2560]); if (S.land.lavoura) pts.push([600, 3150]); if (S.land.diversao) pts.push([620, 3680]); if (S.land.praia) pts.push([1300, 1500], [1300, 700]); pts.push([700, 400], [320, 500]);
+  G.tour = { t0: performance.now(), pts, dur: pts.length * 4000 }; $('editBar').hidden = false; $('editT').textContent = L('tourOn'); $('bEditDone').textContent = L('tourStop'); SND.lvl(); }
+function tourCam() { const tr = G.tour; if (!tr) return; const u = (performance.now() - tr.t0) / tr.dur; if (u >= 1) { G.tour = null; $('editBar').hidden = true; return; } const f = u * (tr.pts.length - 1), i = Math.floor(f), e = f - i, k = e * e * (3 - 2 * e), a = tr.pts[i], b = tr.pts[i + 1] || a;
+  CAM.z = Math.max(zMin(), 0.55); CAM.x = a[0] + (b[0] - a[0]) * k; CAM.y = a[1] + (b[1] - a[1]) * k; clampCam(); }
+function drawBalloon(g, x, y, T, s) { g.save(); g.translate(x, y + Math.sin(T * 1.3) * 6); g.scale(s, s); g.strokeStyle = '#7a4b25'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(-14, -6); g.lineTo(-10, 22); g.moveTo(14, -6); g.lineTo(10, 22); g.stroke(); g.fillStyle = '#a8743f'; g.fillRect(-12, 22, 24, 16);
+  for (let i = 0; i < 6; i++) { g.fillStyle = ['#e0533d', '#ffd23f', '#3d7fd6', '#2f9e6e', '#ff8fb1', '#ffffff'][i]; g.beginPath(); g.moveTo(0, -78); g.quadraticCurveTo(-44 + i * 17.6, -70, -14 + i * 5.6, -4); g.lineTo(-8 + (i + 1) * 2.7, -4); g.quadraticCurveTo(-44 + (i + 1) * 17.6, -70, 0, -78); g.closePath(); g.fill(); }
+  g.fillStyle = 'rgba(255,255,255,.25)'; g.beginPath(); g.ellipse(-14, -50, 8, 18, -0.3, 0, 6.283); g.fill(); g.restore(); }
 function drawTruck(g, x, y, d, T) { g.save(); g.translate(x, y); g.scale(d, 1); g.fillStyle = 'rgba(0,0,0,.2)'; g.beginPath(); g.ellipse(0, 4, 46, 8, 0, 0, 6.283); g.fill();
   g.fillStyle = '#3f8fd1'; rr(g, -44, -44, 58, 40, 6); g.fill(); g.fillStyle = '#ffffff'; g.fillRect(-38, -36, 46, 4); g.fillStyle = '#e0533d'; rr(g, 14, -34, 30, 30, 6); g.fill(); g.fillStyle = '#bfe9ff'; g.fillRect(24, -30, 16, 12);
   g.fillStyle = '#ffd23f'; g.fillRect(40, -12, 5, 5); for (const wx of [-28, 28]) { g.fillStyle = '#2b2b2b'; g.beginPath(); g.arc(wx, -2, 9, 0, 6.283); g.fill(); g.fillStyle = '#aaa'; g.beginPath(); g.arc(wx, -2, 3.5, 0, 6.283); g.fill(); }
@@ -509,6 +524,9 @@ function genMiss(S) { const items = unlockedItems(S).filter(k => !CROPS[k]), k =
   return { it: [[k, q]], c: Math.round(val * 1.8), x: Math.round(val / 4) + 5 }; }
 function ensureMiss(S, now) { if (!S.land.bairro) return false; let ch = false; while (S.miss.length < 3) { S.miss.push({ id: S.oid++, w: now, ...genMiss(S) }); ch = true; } return ch; }
 const BUS = { cost: 1400, lvl: 10 };
+// farol da praia: monumento construído em 4 etapas; pronto, acende à noite e dá +15 de felicidade
+const FAROL = { x: 1400, y: 1640, lvl: 10, st: [{ c: 300, need: { pao: 6, milho: 10 } }, { c: 600, need: { queijo: 5, tecido: 4 } }, { c: 900, need: { suco: 6, rede: 2 } }, { c: 1200, need: { bolo: 4, mel: 6 } }] };
+const farolNext = S => S.land.praia && S.lvl >= FAROL.lvl && (S.farol || 0) < 4 ? FAROL.st[S.farol || 0] : null;
 // trem: passa a cada 2 min pela linha entre o sítio e a praia, para na estação, traz turistas e paga passagens
 const TRAIN = { cost: 2000, lvl: 12, x: 1095, st: 1560, per: 120 };
 function trainY(ms) { const t = (ms / 1000) % TRAIN.per; if (t < 40) return -300 + (TRAIN.st + 300) * (t / 40); if (t < 52) return TRAIN.st; if (t < 92) return TRAIN.st - (TRAIN.st + 300) * ((t - 52) / 40); return null; }
@@ -611,6 +629,9 @@ function apply(S, a, now) {
   } else if (a.a === 'miss') {
     const o = S.miss.find(x => x.id === a.id); if (!o || o.w > now) return fail(''); const need = Object.fromEntries(o.it); if (!has(S, need)) return fail(L('missingProd'));
     take(S, need); S.coins += o.c; addXp(S, o.x, out); S.cityHp = Math.min(20, (S.cityHp || 0) + 2); S.missDone = (S.missDone || 0) + 1; out.fx.push(['coins', o.c]); out.fx.push(['miss']); Object.assign(o, { id: S.oid++, w: now + 60000 }, genMiss(S));
+  } else if (a.a === 'farol') {
+    const st = farolNext(S); if (!st) return fail(''); if (S.coins < st.c) return fail(L('noCoins')); if (!has(S, st.need)) return fail(L('missingProd'));
+    S.coins -= st.c; take(S, st.need); S.farol = (S.farol || 0) + 1; addXp(S, 25 * S.farol, out); out.fx.push(['farol', S.farol]);
   } else if (a.a === 'train') {
     if (S.train) return fail(''); if (S.lvl < TRAIN.lvl) return fail(L('unlockAt', TRAIN.lvl)); if (S.coins < TRAIN.cost) return fail(L('noCoins')); S.coins -= TRAIN.cost; S.train = 1; S.trainAt = 0; out.fx.push(['train']);
   } else if (a.a === 'daily') {
@@ -783,6 +804,8 @@ const SND = (() => { let ac = null;
     cluck: () => { for (let i = 0; i < 3; i++) tone(700 + i * 60, 520, 0.07, 'square', 0.04, i * 0.09); },
     moo: () => { tone(150, 110, 0.9, 'sawtooth', 0.05); tone(152, 112, 0.9, 'triangle', 0.06); },
     splash: () => { tone(900, 200, 0.25, 'sine', 0.05); tone(1400, 300, 0.2, 'sine', 0.03, 0.05); },
+    whistle: () => { tone(880, 860, 0.5, 'sine', 0.06); tone(1100, 1080, 0.5, 'sine', 0.05); tone(880, 860, 0.35, 'sine', 0.06, 0.6); },
+    pops: () => { for (let i = 0; i < 5; i++) { tone(300 + Math.random() * 500, 60, 0.15, 'triangle', 0.07, i * 0.22); tone(2400, 1200, 0.25, 'sine', 0.02, i * 0.22 + 0.05); } },
     hammer: () => { for (let i = 0; i < 3; i++) { tone(180, 90, 0.06, 'square', 0.08, i * 0.18); tone(2200, 1800, 0.03, 'triangle', 0.03, i * 0.18); } },
     bird: () => { const b = 2200 + Math.random() * 1200; for (let i = 0; i < 2 + Math.floor(Math.random() * 3); i++) tone(b, b * (1.2 + Math.random() * 0.3), 0.09, 'sine', 0.025, i * 0.13); },
     get ac() { return ac; }, tone }; })();
@@ -919,6 +942,7 @@ function tapAt(p) {
   for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR(p, Ld.r)) return openSheet('land', k);
   for (const n of NPCS.list) if (Math.abs(p.x - n.x) < 20 && p.y > n.y - 60 && p.y < n.y + 8) { const rq = (S.reqs || []).find(o => 'h' + o.who === n.id && o.w <= now); if (rq) return openSheet('req', rq.id); const jb = n.id[0] === 'h' ? jobOf(S, +n.id.slice(1)) : null; n.say = L('npcHi', n.name) + ' ' + (jb ? L('jobSay', L('job_' + jb[0])) : npcLine(S)); n.sayT = 4; return; }
   if (S.land.bairro && Math.abs(p.x - FAIR.x) < 200 && p.y > FAIR.y - 120 && p.y < FAIR.y + 10) return openSheet('fair');
+  if (S.land.praia && Math.abs(p.x - FAROL.x) < 50 && p.y > FAROL.y - 230 && p.y < FAROL.y + 10) return openSheet('farol');
   for (const [k, V] of Object.entries(SERV)) if (S.land[V.land || 'bairro'] && Math.abs(p.x - V.x) < (V.w || 160) / 2 && p.y > V.y - 150 && p.y < V.y + 10) return openSheet('city');
   { for (let i = 0; i < LOTS.length; i++) { const [hx, hy] = LOTS[i]; if (!S.land[lotLand(i)]) continue; if (Math.abs(p.x - hx) < 66 && p.y > hy - 140 && p.y < hy + 10) { if (S.homes[i] && homeRent(S, i, now) > 0) return void act({ a: 'homeRent', i }); return openSheet('homes', i); } } }
   for (const [k, P] of Object.entries(PROJ)) if (S.land[P.land || 'vila'] && Math.abs(p.x - P.x) < P.w / 2 + 10 && p.y > P.y - P.h - 70 && p.y < P.y + 12) { if (rentNow(S, k, now) > 0) return void act({ a: 'rent', k }); return openSheet('proj', k); }
@@ -982,6 +1006,7 @@ function playFx(fx) {
     if (f[0] === 'lvl') { SND.lvl(); openSheet('lvl', f[1]); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
     if (f[0] === 'goal') { SND.lvl(); for (let i = 0; i < 24; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
     if (f[0] === 'miss') { SND.lvl(); toast(L('missDone'), 3000); }
+    if (f[0] === 'farol') { SND.hammer(); closeSheet(); CAM.x = FAROL.x - 60; CAM.y = FAROL.y - 120; clampCam(); burst(FAROL.x, FAROL.y - 120, 'star'); toast(f[1] >= 4 ? L('farolDone') : L('farolStage', f[1]), 3500); if (f[1] >= 4) SND.pops(); }
     if (f[0] === 'train') { SND.lvl(); closeSheet(); CAM.x = TRAIN.x; CAM.y = TRAIN.st - 60; clampCam(); toast(L('trainBought'), 3500); }
     if (f[0] === 'daily') { SND.lvl(); toast(L('dailyGot', f[1], N(f[2])), 4000); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
     if (f[0] === 'bus') { SND.lvl(); closeSheet(); const b = busPos(G.S, Date.now()); CAM.x = b.x; CAM.y = b.y; clampCam(); toast(L('busBought'), 3500); }
@@ -1004,9 +1029,9 @@ function boostCards(S) { const now = nowS(); return `<span class="lbl">${L('boos
     <button class="btn" type="button" data-boost="${k}" ${S.coins < B.cost ? 'disabled' : ''}>${img('coin')} ${B.cost}</button></div></div>`).join(''); }
 function fairFx(i) { SND.coin(); burst(fairX(i), FAIR.y - 60, 'coin'); const n = NPCS.list[Math.floor(Math.random() * NPCS.list.length)]; if (n) { n.tx = fairX(i); n.ty = FAIR.y + 26; n.wait = 3; n.say = L('fairBuy'); n.sayT = 2.5; } }
 // novidades: aparece uma vez por versão grande, com botão para ir ver cada coisa
-const NEWS_ID = 'trem-1';
-const NEWS = [['n_train', 'city'], ['n_jobs', 'bairro'], ['n_daily', null], ['n_cheap', 'shop'], ['n_park', 'diversao'], ['n_season', null], ['n_home', 'bairro'], ['n_porto', 'praia'], ['n_miss', 'city'], ['n_bus', 'city'], ['n_pref', 'escolar'], ['n_estufa', 'lavoura'], ['n_pizza', 'lavoura'], ['n_festa', 'bairro'], ['n_pets', 'farm'], ['n_team', 'helper'], ['n_chain', 'helper'], ['n_lavoura', 'lavoura'], ['n_auto', null], ['n_people', 'farm'], ['n_escolar', 'escolar'], ['n_big', 'bairro'], ['n_bairro', 'bairro'], ['n_fair', 'fair'], ['n_roads', 'road'], ['n_dup', 'shop'], ['n_goals', 'goals'], ['n_truck', 'shop'], ['n_night', null]];
-function maybeDaily() { if (!G.S || G.mode === 'guest') return; const day = Math.floor((Date.now() - 3 * 3600000) / 86400000); if (G.S.daily === day) return; let n = 0; const tryOpen = () => { if (!G.S || G.S.daily === day) return; if (!SH) openSheet('daily'); else if (++n < 30) setTimeout(tryOpen, 3000); }; setTimeout(tryOpen, 2500); }
+const NEWS_ID = 'farol-1';
+const NEWS = [['n_tour', null], ['n_farol', 'praia'], ['n_fast', null], ['n_snd', null], ['n_train', 'city'], ['n_jobs', 'bairro'], ['n_daily', null], ['n_cheap', 'shop'], ['n_park', 'diversao'], ['n_season', null], ['n_home', 'bairro'], ['n_porto', 'praia'], ['n_miss', 'city'], ['n_bus', 'city'], ['n_pref', 'escolar'], ['n_estufa', 'lavoura'], ['n_pizza', 'lavoura'], ['n_festa', 'bairro'], ['n_pets', 'farm'], ['n_team', 'helper'], ['n_chain', 'helper'], ['n_lavoura', 'lavoura'], ['n_auto', null], ['n_people', 'farm'], ['n_escolar', 'escolar'], ['n_big', 'bairro'], ['n_bairro', 'bairro'], ['n_fair', 'fair'], ['n_roads', 'road'], ['n_dup', 'shop'], ['n_goals', 'goals'], ['n_truck', 'shop'], ['n_night', null]];
+function maybeDaily() { if (!G.S || G.mode === 'guest') return; const day = Math.floor((Date.now() - 3 * 3600000) / 86400000); if (G.S.daily === day) return; let n = 0; const tryOpen = () => { if (!G.S || G.S.daily === day) return; if (!SH && $('ovRoom').hidden && !G.tour) openSheet('daily'); else if (++n < 30) setTimeout(tryOpen, 3000); }; setTimeout(tryOpen, 2500); }
 function maybeNews() { maybeDaily(); let seen = ''; try { seen = localStorage.getItem('sitio-news') || ''; } catch (e) {} if (seen === NEWS_ID) return; try { localStorage.setItem('sitio-news', NEWS_ID); } catch (e) {} setTimeout(() => { if (G.S && !SH) openSheet('news'); }, 900); }
 function newsGo(k) { closeSheet(); const S = G.S; if (k === 'shop' || k === 'goals' || k === 'helper' || k === 'city') return openSheet(k); if (k === 'road') return setRoad(true);
   const at = k === 'farm' ? [320, 700] : k === 'fair' ? [FAIR.x, FAIR.y - 60] : LANDS[k] ? (S.land[k] ? [LANDS[k].r.x + LANDS[k].r.w / 2, LANDS[k].r.y + LANDS[k].r.h / 2] : [LANDS[k].sx, LANDS[k].sy]) : null; if (at) { CAM.z = Math.max(zMin(), 0.6); CAM.x = at[0]; CAM.y = at[1]; clampCam(); } }
@@ -1040,7 +1065,7 @@ function broadcast() { if (G.mode !== 'host' || !NET.room) return; const now = D
 // escolhe e faz uma tarefa pendente; devolve a ação feita
 // o que as encomendas abertas pedem
 function orderNeeds(S, now) { const need = {}; for (const o of S.orders.concat(S.reqs || [], S.miss || [])) if (o.w <= now) for (const [k, q] of o.it) need[k] = (need[k] || 0) + q;
-  for (const [pk, P] of Object.entries(PROJ)) if (!S.city[pk] && P.lvl <= S.lvl && S.land[P.land || 'vila']) for (const [k, q] of Object.entries(P.need)) need[k] = (need[k] || 0) + q; return need; }
+  for (const [pk, P] of Object.entries(PROJ)) if (!S.city[pk] && P.lvl <= S.lvl && S.land[P.land || 'vila']) for (const [k, q] of Object.entries(P.need)) need[k] = (need[k] || 0) + q; const fn = farolNext(S); if (fn) for (const [k, q] of Object.entries(fn.need)) if (unlockedItems(S).includes(k)) need[k] = (need[k] || 0) + q; return need; }
 function findRecipe(S, out) { for (const [b, B] of Object.entries(BUILD)) { if (B.base || !okB(S, B)) continue; const i = B.rec.findIndex(r => r.o === out && okR(S, r)); if (i >= 0) { const best = fam(S, b).map(x => [x, S.bld[x].q.length / qCap(S, x)]).sort((p, q) => p[1] - q[1])[0][0]; return { b: best, i, r: B.rec[i] }; } } return null; }
 const queued = (S, b, out) => fam(S, famOf(b)).reduce((a, x) => a + S.bld[x].q.filter(j => BUILD[x].rec[j.r].o === out).length, 0) * (BUILD[b].rec.find(r => r.o === out) || { k: 1 }).k;
 // plano do scout: tudo o que falta, descendo pela cadeia (picolé -> açúcar -> cana), já contando o que está na fila, plantado ou nos animais
@@ -1102,7 +1127,7 @@ function helperTask(S, now, role) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-03.7';
+const BUILD_V = '2026-11-03.8';
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
 let UPD = null, lastTouch = Date.now(); addEventListener('pointerdown', () => { lastTouch = Date.now(); }, { capture: true });
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { let tried = ''; try { tried = sessionStorage.getItem('sitio-upd-try') || ''; } catch (e) {} if (tried !== j.v) UPD = j.v; } } catch (e) {} }
@@ -1119,7 +1144,7 @@ setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   const S = G.S, now = Date.now(); helperClock++; if (ensureReqs(S, now) | ensureMiss(S, now)) { S.rev++; saveSoon(); broadcast(); }
   if (rainTick(S, now)) { S.rev++; saveSoon(); broadcast(); }
   { const tr = truckTick(S, now); if (tr && tr.ok) { ensureOrders(S); S.rev++; saveSoon(); broadcast(); playFx(tr.fx); toast(L('truckDone'), 2000); } }
-  if (S.train) { const t = (now / 1000) % TRAIN.per, cyc = Math.floor(now / 1000 / TRAIN.per); if (t >= 40 && t < 52 && S.trainAt !== cyc) { S.trainAt = cyc; const pay = trainPay(S); S.coins += pay; S.rev++; saveSoon(); broadcast(); SND.coin(); burst(TRAIN.x + 60, TRAIN.st - 60, 'coin'); toast(L('trainPaid', pay), 2500); } }
+  if (S.train) { const t = (now / 1000) % TRAIN.per, cyc = Math.floor(now / 1000 / TRAIN.per); if (t >= 40 && t < 52 && S.trainAt !== cyc) { S.trainAt = cyc; const pay = trainPay(S); S.coins += pay; S.rev++; saveSoon(); broadcast(); SND.coin(); burst(TRAIN.x + 60, TRAIN.st - 60, 'coin'); toast(L('trainPaid', pay), 2500); SND.whistle(); } }
   { const fi = fairTick(S, now); if (fi >= 0) { S.rev++; saveSoon(); broadcast(); fairFx(fi); } }
   if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { let r = null; for (let hh = 0; hh < hCount(S); hh++) { const role = roleOf(S, hh); let rr = helperTask(S, now, role); if ((role === 'colhe' || role === 'planta') && rr && rr.ok) for (let x = 0; x < (role === 'planta' ? 4 : 2); x++) { const r2 = helperTask(S, now, role); if (!(r2 && r2.ok)) break; rr.fx.push(...r2.fx); } if (rr && rr.ok) { S.helper.ps[hh] = [S.helper.x, S.helper.y]; if (r && r.ok) playFx(r.fx.filter(f => f[0] !== 'coins')); r = rr; } else if (!r) r = rr; } if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
 
@@ -1254,7 +1279,7 @@ $('bJoin').onclick = () => { if (!needNameOk()) return; const c = $('iCode').val
 $('iCode').addEventListener('input', e => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4); });
 $('bRoomOk').onclick = () => { $('ovRoom').hidden = true; };
 $('bCopy').onclick = async () => { const i = $('rLink'); try { await navigator.clipboard.writeText(i.value); $('bCopy').textContent = L('copied'); } catch (e) { i.focus(); i.select(); } setTimeout(() => { $('bCopy').textContent = L('copy'); }, 1500); };
-$('bHelper').onclick = () => openSheet('helper'); $('bMove').onclick = () => setEdit(!G.edit); $('bEditDone').onclick = () => G.road ? setRoad(false) : setEdit(false); $('bRoad').onclick = () => setRoad(!G.road); $('tip').onclick = () => openSheet('goals');
+$('bHelper').onclick = () => openSheet('helper'); $('bMove').onclick = () => setEdit(!G.edit); $('bEditDone').onclick = () => { if (G.tour) { G.tour = null; $('editBar').hidden = true; return; } G.road ? setRoad(false) : setEdit(false); }; $('bRoad').onclick = () => setRoad(!G.road); $('tip').onclick = () => openSheet('goals');
 setInterval(() => { const el = $('tip'); if (!G.S) { el.hidden = true; return; } try { const tp = nextTip(G.S, nowS()); el.textContent = L(tp[0], tp[1]); el.hidden = false; } catch (e) { el.hidden = true; } }, 1500);
 function roadBarText() { const S = G.S; return S ? L('roadBar', S.roadFree, ROAD_COST) + ' · ' + L('roadHint') : ''; }
 function setRoad(on) { if (on && G.edit) setEdit(false); G.road = !!on; closeSheet(); $('editBar').hidden = !G.road; $('editT').textContent = roadBarText(); $('bEditDone').textContent = L('moveDone'); $('bRoad').classList.toggle('on', G.road); SND.pop(); }
@@ -1320,6 +1345,10 @@ function renderSheet() {
       <div class="card"><span class="lbl">${L('lvlUnlocked')}</span><p style="margin:0;font-weight:800">${news ? news.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <div class="card"><span class="lbl">${L('lvlNext', l + 1)}</span><p style="margin:0;font-weight:700">${nxt ? nxt.replace(/^[^:]+: /, '') : L('lvlNothing')}</p></div>
       <button class="btn" type="button" data-close="1">${L('great')}</button>`;
+  } else if (SH.type === 'farol') {
+    t.textContent = L('farolT'); const n = S.farol || 0, st = farolNext(S);
+    h = `<p class="sub">${L('farolSub', n)}</p><div style="height:12px;border-radius:6px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${n * 25}%;background:#e0533d"></i></div>`
+      + (n >= 4 ? `<div class="card"><b>${L('farolDone')}</b></div>` : !S.land.praia ? `<p class="sub">${L('land_praia')}</p>` : S.lvl < FAROL.lvl ? `<p class="sub">${L('lvl', FAROL.lvl)}</p>` : `<div class="card"><b>${L('farolStageN', n + 1)}</b>${needHtml(S, st.need)}<button class="btn" type="button" data-farol="1" ${S.coins < st.c || !has(S, st.need) ? 'disabled' : ''}>${L('build')} · ${img('coin')} ${st.c}</button></div>`);
   } else if (SH.type === 'daily') {
     t.textContent = L('dailyT'); h = `<div class="card" style="text-align:center"><div style="font-size:64px">🎁</div><p class="sub">${L('dailySub', 100 + S.lvl * 20)}</p><button class="btn" type="button" data-daily="1">${L('dailyBtn')}</button></div>`;
   } else if (SH.type === 'news') {
@@ -1412,6 +1441,7 @@ function renderSheet() {
       <button class="btn blue" type="button" data-citypanel="1">${L('cityBtn')}</button>
       <button class="btn blue" type="button" data-goals="1">🎁 ${L('goals')}</button>
       <button class="btn blue" type="button" data-newsopen="1">✨ ${L('newsT')}</button>
+      <button class="btn blue" type="button" data-tour="1">🎈 ${L('tourBtn')}</button>
       <button class="btn gray" type="button" data-exit="1">${L('backHome')}</button>`;
   }
   b.innerHTML = h;
@@ -1448,6 +1478,8 @@ $('sBody').addEventListener('click', e => {
   if (d.miss) act({ a: 'miss', id: +d.miss });
   if (d.bus) act({ a: 'bus' });
   if (d.train) act({ a: 'train' });
+  if (d.farol) act({ a: 'farol' });
+  if (d.tour) { closeSheet(); startTour(); return; }
   if (d.daily) { act({ a: 'daily' }); closeSheet(); return; }
   if (d.goal) act({ a: 'goal', id: d.goal });
   if (d.goals) { openSheet('goals'); return; }
@@ -1501,8 +1533,11 @@ function drawRoads(g, S, cull) {
     for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) { const h = ((gx * 7 + gy * 13 + i * 3 + j * 5) % 7) / 7; g.fillStyle = h < 0.5 ? '#d9c6a0' : '#bfa67b'; rr(g, x + 2 + i * 10 + ((j % 2) ? 3 : 0) - 1, y + 2 + j * 10, 8, 7, 2); g.fill(); }
     g.fillStyle = '#9c8762'; if (!has2(gx, gy - 1)) g.fillRect(x, y, RD, 3); if (!has2(gx, gy + 1)) g.fillRect(x, y + RD - 3, RD, 3); if (!has2(gx - 1, gy)) g.fillRect(x, y, 3, RD); if (!has2(gx + 1, gy)) g.fillRect(x + RD - 3, y, 3, RD); }
 }
-function makeBg(lands, S) {
-  const c = document.createElement('canvas'), K = 1.5; c.width = WW * K; c.height = WH * K; const g = c.getContext('2d'); g.scale(K, K); const R = seeded(7);
+// o fundo é cortado em faixas de 1000 de altura (textura menor = mais leve no celular) e só se desenham as faixas visíveis
+const BG_TILE = 1000;
+function makeBg(lands, S) { const K = 1.5, tiles = []; for (let y0 = 0; y0 < WH; y0 += BG_TILE) { const th = Math.min(BG_TILE, WH - y0), c = document.createElement('canvas'); c.width = WW * K; c.height = Math.ceil(th * K); const g = c.getContext('2d'); g.scale(K, K); g.translate(0, -y0); bgPaint(g, lands, S); tiles.push({ c, y0, th }); } return tiles; }
+function bgPaint(g, lands, S) {
+  const R = seeded(7);
   // grama em ladrilhos com leve variação de tom
   for (let y = 0; y < WH; y += 40) for (let x = 0; x < WW; x += 40) { const v = R(); g.fillStyle = v < 0.33 ? '#72c44c' : v < 0.66 ? '#6fc149' : '#75c74f'; g.fillRect(x, y, 40, 40); }
   const lg = g.createLinearGradient(0, 0, 0, WH); lg.addColorStop(0, 'rgba(255,255,200,.10)'); lg.addColorStop(1, 'rgba(0,40,0,.10)'); g.fillStyle = lg; g.fillRect(0, 0, WW, WH);
@@ -1554,11 +1589,16 @@ function makeBg(lands, S) {
   // cerca em volta de tudo
   g.strokeStyle = '#a8743f'; g.lineWidth = 4; g.strokeRect(10, 24, WW - 20, WH - 34); g.fillStyle = '#8a5a2b';
   for (let x = 10; x <= WW - 10; x += 32) { g.fillRect(x - 3, 12, 6, 20); g.fillRect(x - 3, WH - 22, 6, 20); } for (let y = 24; y <= WH - 10; y += 32) { g.fillRect(4, y - 4, 12, 8); g.fillRect(WW - 16, y - 4, 12, 8); }
-  return c;
+
 }
 function shadow(g, x, y, w) { const gr = g.createRadialGradient(x, y + 4, 2, x, y + 4, w / 2); gr.addColorStop(0, 'rgba(0,0,0,.28)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.beginPath(); g.ellipse(x, y + 4, w / 2, w / 6, 0, 0, 6.283); g.fill(); }
 function win(g, x, y, w, h) { g.fillStyle = '#7a4b25'; g.fillRect(x - 3, y - 3, w + 6, h + 6); const gr = g.createLinearGradient(x, y, x + w, y + h); gr.addColorStop(0, '#bfe9ff'); gr.addColorStop(1, '#6fb6e0'); g.fillStyle = gr; g.fillRect(x, y, w, h); g.fillStyle = '#7a4b25'; g.fillRect(x + w / 2 - 1.5, y, 3, h); g.fillRect(x, y + h / 2 - 1.5, w, 3); g.fillStyle = 'rgba(255,255,255,.45)'; g.fillRect(x + 2, y + 2, w / 2 - 4, 3); }
-function house(g, x, y, w, h, wall, roof, roofH = 40) {
+// casas são desenhadas uma vez numa imagem guardada e depois só copiadas (muito mais leve no celular)
+const HCACHE = new Map();
+function house(g, x, y, w, h, wall, roof, roofH = 40) { const k = w + '|' + h + '|' + wall + '|' + roof + '|' + roofH; let c = HCACHE.get(k);
+  if (!c) { const SC = 3, W = w + 80, top = h + roofH + 12, H = top + w / 6 + 14; c = document.createElement('canvas'); c.width = Math.ceil(W * SC); c.height = Math.ceil(H * SC); const cg = c.getContext('2d'); cg.scale(SC, SC); houseRaw(cg, W / 2, top, w, h, wall, roof, roofH); c.ox = W / 2; c.oy = top; c.W = W; c.H = H; HCACHE.set(k, c); }
+  g.drawImage(c, x - c.ox, y - c.oy, c.W, c.H); }
+function houseRaw(g, x, y, w, h, wall, roof, roofH = 40) {
   shadow(g, x, y, w + 40);
   const wg = g.createLinearGradient(x - w / 2, 0, x + w / 2, 0); wg.addColorStop(0, wall); wg.addColorStop(1, 'rgba(0,0,0,.12)'); g.fillStyle = wall; g.fillRect(x - w / 2, y - h, w, h); g.fillStyle = wg; g.fillRect(x - w / 2, y - h, w, h);
   g.fillStyle = 'rgba(0,0,0,.12)'; for (let yy = y - h + 12; yy < y; yy += 12) g.fillRect(x - w / 2, yy, w, 1.5);
@@ -1636,10 +1676,10 @@ function progressBar(g, x, y, w, p) { g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRec
 function lockSign(g, x, y, l) { g.fillStyle = 'rgba(58,36,18,.85)'; g.fillRect(x - 40, y - 12, 80, 24); g.fillStyle = '#fff'; g.font = '900 13px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText(L('lvl', l), x, y + 5); }
 const FLOAT = [];
 function draw(T, dt) {
-  const S = G.S, now = nowS(); applyLayout(S);
+  const S = G.S, now = nowS(); applyLayout(S); if (G.tour) tourCam();
   cx.setTransform(DPR, 0, 0, DPR, 0, 0); cx.fillStyle = '#5aa83c'; cx.fillRect(0, 0, innerWidth, innerHeight);
   cx.setTransform(DPR * CAM.z, 0, 0, DPR * CAM.z, DPR * (innerWidth / 2 - CAM.x * CAM.z), DPR * (innerHeight / 2 - CAM.y * CAM.z));
-  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia', 'bairro', 'escolar', 'lavoura', 'diversao'].map(k => lands[k] ? 1 : 0).join(','); const rkey = !S || G.road ? 'live' : (S.train ? 't' : '') + S.roads.length + ':' + S.roads.reduce((a, b) => (a * 31 + b) % 1000003, 7), fk = key + '|' + rkey; if (!BG || (fk !== BGKEY && !(BGKEY.split('|')[0] === key && performance.now() - BGT < 1500))) { BG = makeBg(lands, rkey === 'live' ? null : S); BGKEY = fk; BGT = performance.now(); } cx.drawImage(BG, 0, 0, WW, WH); if (S && G.road) drawRoads(cx, S, true);
+  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia', 'bairro', 'escolar', 'lavoura', 'diversao'].map(k => lands[k] ? 1 : 0).join(','); const rkey = !S || G.road ? 'live' : (S.train ? 't' : '') + S.roads.length + ':' + S.roads.reduce((a, b) => (a * 31 + b) % 1000003, 7), fk = key + '|' + rkey; if (!BG || (fk !== BGKEY && !(BGKEY.split('|')[0] === key && performance.now() - BGT < 1500))) { BG = makeBg(lands, rkey === 'live' ? null : S); BGKEY = fk; BGT = performance.now(); } { const vh = innerHeight / CAM.z / 2 + 20; for (const t of BG) if (t.y0 < CAM.y + vh && t.y0 + t.th > CAM.y - vh) cx.drawImage(t.c, 0, t.y0, WW, t.th); } if (S && G.road) drawRoads(cx, S, true);
   const lvl = S ? S.lvl : 1;
   // lago com brilho
   cx.strokeStyle = 'rgba(255,255,255,.45)'; cx.lineWidth = 2; for (let i = 0; i < 3; i++) { const r = ((T * 12 + i * 20) % 60); cx.globalAlpha = 1 - r / 60; cx.beginPath(); cx.ellipse(62, 400, r * 0.6, r, 0, 0, 6.283); cx.stroke(); } cx.globalAlpha = 1;
@@ -1741,6 +1781,7 @@ function draw(T, dt) {
     if (c.e > now) { const pr = clamp((now - c.s) / (c.e - c.s), 0, 1); cx.strokeStyle = '#b07a3a'; cx.lineWidth = 4; for (let x = P.x - P.w / 2; x <= P.x + P.w / 2; x += P.w / 5) { cx.beginPath(); cx.moveTo(x, P.y); cx.lineTo(x, P.y - 40 - P.h * 0.6 * pr); cx.stroke(); } progressBar(cx, P.x, P.y + 10, 100, pr); continue; }
     if (k === 'roda') drawRoda(cx, P.x, P.y, T); else drawCarrossel(cx, P.x, P.y, T);
     cx.fillStyle = '#7a4b25'; rr(cx, P.x - 64, P.y + 8, 128, 20, 6); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 11px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N(k).toUpperCase(), P.x, P.y + 22); if (rentNow(S, k, now) > 0) bubble(cx, P.x + 70, P.y - 60, 'coin', T); }
+  if (lands.praia && S) drawFarol(cx, S, T);
   if (!lands.lavoura) saleSign(cx, LANDS.lavoura.sx, LANDS.lavoura.sy, 'lavoura', S); else drawLavoura(cx, T, S);
   for (const [k, V] of Object.entries(SERV)) { if (!lands[V.land || 'bairro']) continue; const x = V.x, y = V.y;
     if (!S.serv[k]) { cx.setLineDash([8, 6]); cx.strokeStyle = 'rgba(255,255,255,.6)'; cx.lineWidth = 3; rr(cx, x - 80, y - 90, 160, 90, 12); cx.stroke(); cx.setLineDash([]); cx.fillStyle = 'rgba(58,36,18,.8)'; rr(cx, x - 64, y - 58, 128, 26, 8); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('serv_' + k) + ' · ' + V.cost, x, y - 40); continue; }
@@ -1864,10 +1905,12 @@ function draw(T, dt) {
         for (let i = 1; i < 10; i++) { const tx = x0 + i * 20, ty = y - 60 + Math.sin(i / 10 * Math.PI) * 22 + 1, c = ['#e0533d', '#ffd23f', '#3d7fd6', '#2f9e6e', '#ff8fb1'][(i + x0 / 200) % 5 | 0]; cx.fillStyle = c; cx.beginPath(); cx.moveTo(tx - 6, ty); cx.lineTo(tx + 6, ty); cx.lineTo(tx + Math.sin(T * 3 + i) * 1.5, ty + 14); cx.closePath(); cx.fill(); } } }
     for (let i = 0; i < 3; i++) { const ph = (T * 0.45 + i / 3) % 1, fx = 300 + ((i * 397 + Math.floor(T * 0.45 + i / 3) * 211) % 900), fy = 1800 - ph * 60; if (ph > 0.25) { const r = (ph - 0.25) * 110; cx.globalAlpha = 1 - ph; for (let k = 0; k < 12; k++) { cx.fillStyle = ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][(k + i) % 4]; cx.beginPath(); cx.arc(fx + Math.cos(k * 0.52) * r, fy + Math.sin(k * 0.52) * r, 3, 0, 6.283); cx.fill(); } cx.globalAlpha = 1; } else { cx.fillStyle = '#ffd23f'; cx.fillRect(fx - 1, fy + 120 - ph * 480, 2, 10); } }
     for (let i = 0; i < 4; i++) { const ph = (T * 0.6 + i / 4) % 1; cx.globalAlpha = 1 - ph; cx.fillStyle = '#3a2412'; cx.font = '900 18px Nunito, sans-serif'; cx.fillText('♪', 700 + i * 24 + Math.sin(ph * 7) * 10, 2000 - ph * 60); } cx.globalAlpha = 1; }
-  if (S) { const fo = festaOn(S, Date.now()); if (fo && !G.festaWas) toast(L('festaNow'), 4000); G.festaWas = fo; const se = season(Date.now()); if (G.seasonWas !== undefined && G.seasonWas !== se) toast(L('seasonNow', L('season' + se)), 4000); G.seasonWas = se; }
+  if (S) { const fo = festaOn(S, Date.now()); if (fo && !G.festaWas) { toast(L('festaNow'), 4000); SND.pops(); } G.festaWas = fo; const se = season(Date.now()); if (G.seasonWas !== undefined && G.seasonWas !== se) toast(L('seasonNow', L('season' + se)), 4000); G.seasonWas = se; }
   if (S && S.bus) { for (const [x, y] of [[372, 1500], [372, 2000], [1094, 2000]].concat(S.land.escolar ? [[600, 2612]] : [])) { g2stop(cx, x, y); } const b = busPos(S, Date.now()); drawBus(cx, b.x, b.y + 6, b.d, T); }
   if (S && S.train) { const x = TRAIN.x;
     drawStation(cx, x + 70, TRAIN.st + 20, T); const ty = trainY(Date.now()); if (ty !== null) drawTrain(cx, x, ty, T); }
+  if (G.tour) drawBalloon(cx, CAM.x + 70, CAM.y + 40, T, 1.5);
+  if (S && S.lvl >= 8) { const bx = ((Date.now() / 1000 * 14) % (WW + 600)) - 300, by = 600 + Math.sin(Date.now() / 20000) * 400; drawBalloon(cx, bx, by, T, 1); }
   // mascotes: um cachorro segue quem usa chapéu, um gato segue quem tem cabelo comprido
   if (S) { const pets = [[AV.me, ME.look]]; if (AV.fr.on && G.mode !== 'solo') pets.push([AV.fr, AV.fr.look]); pets.forEach(([av, look], pi) => { const pt = AV['pet' + pi] = AV['pet' + pi] || { x: av.x - 30, y: av.y + 4, t: 0, dir: 1 }; const tx = av.x - (av.dir || 1) * 30, ty = av.y + 6, dx = tx - pt.x, dy = ty - pt.y, d = Math.hypot(dx, dy);
       if (d > 4) { const k = Math.min(1, 230 * dt / d); pt.x += dx * k; pt.y += dy * k; pt.t += dt; pt.dir = dx >= 0 ? 1 : -1; pt.walk = true; } else pt.walk = false; drawPet(cx, pt, look === 'hair' ? 'cat' : 'dog', T); }); }
