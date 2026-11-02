@@ -469,3 +469,29 @@ Pedido de Benjamin: noche y lluvia más cortas; un grupo de ciudadanos elegidos 
   - Muestra el informe del vocero (qué hicieron desde tu última visita, el tesoro y un consejo militar), el tesoro con donaciones, cada miembro (cargo, nivel, cartera, responsabilidades, decisiones y última acción), la votación, la milicia, Villa Aurora y el registro de decisiones.
   - El vocero avisa en pantalla cuando el Concejo decide algo.
 - **Próximas fases:** mapa más grande, minería y minerales, comercio con Villa Aurora, más edificios militares, y miembros del Concejo caminando por la ciudad.
+
+## Versión 74: Concejo 2, con el plan PLAN-CIUDADES aplicado
+
+Tomé el plan de 6 etapas de la otra sesión (`PLAN-CIUDADES.md`, rama `granja-graficas`) y apliqué lo que faltaba de las etapas 1, 3, 4, 5 y 6 sobre lo que ya hizo la v73.
+
+- **Autonomía con la app cerrada:**
+  - Al volver, el Concejo simula hasta 8 h en pasos de 20 s, con las mismas reglas.
+  - Ejemplo: en 3 h tomó 58 decisiones (casas, terrenos, servicios, animales, murallas, soldados y ventas de minerales). Toma ~30 ms.
+  - Se abre solo el panel con "Mientras no estabas (3 h), el Concejo tomó N decisiones".
+- **Control del jugador (etapa 1 del plan):**
+  - Enfoque: Equilibrado, Casas, Producción o Defensa; cambia cómo se reparte el tesoro.
+  - Pausar gastos.
+  - "Terrenos piden OK": el Alcalde propone y espera Aprobar o Ahora no. Por defecto es totalmente autónomo, como pidió Benjamin.
+- **Reparto inteligente:** si un miembro no tiene nada que hacer (por ejemplo, ya no quedan terrenos), pasa lo que le sobra a los demás.
+- **Obras:** ahora también convierte casas ampliadas en edificios (casas de varios niveles).
+- **Mina (etapa 3) en el Valle Verde, nivel 15:**
+  - 5 niveles (3000, 6000…); los amplía Comercio o tú.
+  - Saca sola piedra, hierro y oro (por hora: 30, 12 y 2 por nivel), con montaña, túnel, carrito y montones.
+  - El hierro hace **armaduras** para la milicia (+10% de ataque y defensa por nivel, hasta 5).
+  - Comercio vende el sobrante a Villa Aurora (al tesoro); tú también puedes vender.
+- **Villa Aurora (etapas 4 y 5):**
+  - **Tributos/ultimátums:** con relación < −40 exigen monedas del tesoro. Puedes pagar o rechazar; si no decides en 20 min, decide el Concejo.
+  - **Alianza:** con relación ≥ 70 da comercio ×1,5, +30/min al tesoro y minerales mejor pagados; se rompe bajo 40.
+- **El Concejo en persona (etapa 6):** los 5 miembros, con su ícono, están frente a la Alcaldía; por turnos, uno cuenta en un globo lo último que decidió. Tocarlos abre el panel.
+- **Ingreso del tesoro:** subió (≈350/min en una ciudad grande), para que crezca de forma visible.
+- **Falta del plan (próximas fases):** mundo 5×5 con regiones, exploradores, cadenas de bosque, desierto y pantano, más ciudades vecinas, y expediciones que conquistan regiones.
