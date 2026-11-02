@@ -41,6 +41,8 @@ const TX = {
     land_leste: 'Terreno do Pomar', land_sul: 'Terreno do Lago', forSale: 'À VENDA', landDesc_leste: 'Seis árvores de laranja e manga e uma fábrica de sucos.', landDesc_sul: 'Colmeias que dão mel e um barco de pesca no lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Já é seu', boatGo: 'Mandar o barco (isca: 2 milhos)', boatBack: t => `O barco volta em ${t}`, boatIdle: 'O barco está no cais. Use 2 milhos de isca para pescar.',
     honeyIn: t => `Mel pronto em ${t}`, zoomHint: 'Use dois dedos para aproximar ou afastar o mapa.',
+    shiftLbl: 'Contratar por', sh0: '20 min', sh1: '1 hora', sh2: '24 horas', autoSell: 'Vender sobras quando o celeiro encher', autoSellHint: 'Eles só vendem o que nenhuma encomenda precisa. Ampliar o celeiro e investir continua sendo decisão sua.',
+    helperDoes2: 'Eles entregam as encomendas, plantam o que as encomendas pedem, fazem os produtos nos prédios, mantêm a ração dos animais, colhem e recolhem tudo, cuidam do pomar, das colmeias, do barco e cobram a Vila.',
     helpersTitle: 'Ajudantes', keptHost: 'Seu amigo também jogou separado: ficou o progresso desta sala.', hire: n => `Contratar ${n}`, helpersN: (n, m) => `${n} de ${m} ajudantes`, helpersWork: 'Cada ajudante faz uma tarefa ao mesmo tempo e eles constroem a Vila mais rápido.', shiftAll: n => `Pagar turno de 20 min para ${n === 1 ? 'o ajudante' : 'os ' + n + ' ajudantes'}`,
     land_vila: 'Terreno da Vila', landDesc_vila: 'A cidade: seus ajudantes constroem Pousada, Mercado e Restaurante, que dão moedas sozinhos.',
     pousada: 'Pousada', mercado: 'Mercado', restaurante: 'Restaurante', build: 'Construir', building: t => `Em obra: falta ${t}`, built: 'Pronto! Dá moedas sozinho.', rentReady: n => `Recolher ${n} moedas`, rentNext: (n, t) => `${n} moedas a cada 5 min. Próximas em ${t}`, buildFaster: n => `Com ${n} ajudante${n > 1 ? 's' : ''} a obra fica ${n}x mais rápida.`, lot: 'Lote para construir',
@@ -87,6 +89,8 @@ const TX = {
     land_leste: 'Terreno del Huerto', land_sul: 'Terreno del Lago', forSale: 'SE VENDE', landDesc_leste: 'Seis árboles de naranja y mango y una fábrica de jugos.', landDesc_sul: 'Colmenas que dan miel y un barco de pesca en el lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Ya es tuyo', boatGo: 'Mandar el barco (carnada: 2 maíces)', boatBack: t => `El barco vuelve en ${t}`, boatIdle: 'El barco está en el muelle. Usa 2 maíces de carnada para pescar.',
     honeyIn: t => `Miel lista en ${t}`, zoomHint: 'Usa dos dedos para acercar o alejar el mapa.',
+    shiftLbl: 'Contratar por', sh0: '20 min', sh1: '1 hora', sh2: '24 horas', autoSell: 'Vender lo que sobra cuando se llene el granero', autoSellHint: 'Solo venden lo que ningún pedido necesita. Ampliar el granero e invertir sigue siendo decisión tuya.',
+    helperDoes2: 'Entregan los pedidos, siembran lo que piden los pedidos, fabrican en los edificios, mantienen la ración de los animales, cosechan y recogen todo, cuidan el huerto, las colmenas, el barco y cobran en la Villa.',
     helpersTitle: 'Ayudantes', keptHost: 'Tu amigo también jugó por separado: quedó el avance de esta sala.', hire: n => `Contratar a ${n}`, helpersN: (n, m) => `${n} de ${m} ayudantes`, helpersWork: 'Cada ayudante hace una tarea al mismo tiempo y construyen la Villa más rápido.', shiftAll: n => `Pagar turno de 20 min ${n === 1 ? 'al ayudante' : 'a los ' + n + ' ayudantes'}`,
     land_vila: 'Terreno de la Villa', landDesc_vila: 'La ciudad: tus ayudantes construyen la Pousada, el Mercado y el Restaurante, que dan monedas solos.',
     pousada: 'Pousada', mercado: 'Mercado', restaurante: 'Restaurante', build: 'Construir', building: t => `En obra: falta ${t}`, built: '¡Listo! Da monedas solo.', rentReady: n => `Recoger ${n} monedas`, rentNext: (n, t) => `${n} monedas cada 5 min. Próximas en ${t}`, buildFaster: n => `Con ${n} ayudante${n > 1 ? 's' : ''} la obra va ${n}x más rápido.`, lot: 'Lote para construir',
@@ -205,6 +209,7 @@ const PROJ = {
 const RENT_EVERY = 300, RENT_CAP = 6;
 const hCount = S => S.helper && S.helper.on ? (S.helper.n || 1) : 0;
 function rentNow(S, k, now) { const c = S.city[k]; if (!c || c.e > now) return 0; const per = Math.floor((now - c.c) / (RENT_EVERY * 1000)); return Math.min(per, RENT_CAP) * PROJ[k].inc; }
+const SHIFTS = [{ min: 20, cost: 25 }, { min: 60, cost: 60 }, { min: 1440, cost: 900 }];
 const HELPER_ORDERS = 8, SHIFT = { cost: 25, min: 20 }, HELPER_HOME = { x: 196, y: 262 };
 const PENS = {
   galinheiro: { n: 'Galinheiro', lvl: 1, feed: 'racaoG', out: 'ovo', t: 90, count: 3, xp: 2, x: 125, y: 790, w: 210, h: 140 },
@@ -380,8 +385,9 @@ function apply(S, a, now) {
     const k = a.k, q = Math.min(a.q | 0, S.inv[k] || 0); if (!ITEMS[k] || q <= 0) return fail('');
     const c = q * sellPrice(k); take(S, { [k]: q }); S.coins += c; out.fx.push(['coins', c]); out.fx.push(['sold', q, k, c]);
   } else if (a.a === 'shift') {
-    if (!S.helper.on) return fail(''); const sc = SHIFT.cost * hCount(S); if (S.coins < sc) return fail(L('noCoins'));
-    S.coins -= sc; S.helper.until = Math.max(now, S.helper.until || 0) + SHIFT.min * 60000; out.fx.push(['coins', -sc]);
+    if (!S.helper.on) return fail(''); const SH = SHIFTS[a.d | 0] || SHIFTS[0], sc = SH.cost * hCount(S); if (S.coins < sc) return fail(L('noCoins'));
+    S.coins -= sc; S.helper.until = Math.max(now, S.helper.until || 0) + SH.min * 60000; out.fx.push(['coins', -sc]);
+  } else if (a.a === 'autosell') { S.helper.sell = S.helper.sell === false; 
   } else if (a.a === 'cap') {
     const c = capCost(S.cap); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; S.cap += 25;
   } else return fail('');
@@ -593,21 +599,51 @@ function ping(x, y) { G.myPing = [Math.round(x), Math.round(y), Date.now()]; wal
 let bcT = 0, bcLast = 0;
 function broadcast() { if (G.mode !== 'host' || !NET.room) return; const now = Date.now(); clearTimeout(bcT); const send = () => { bcLast = Date.now(); NET.room.presence({ st: G.S, now: Date.now() }).catch(() => {}); }; if (now - bcLast > 150) send(); else bcT = setTimeout(send, 150); }
 // escolhe e faz uma tarefa pendente; devolve a ação feita
+// o que as encomendas abertas pedem
+function orderNeeds(S, now) { const need = {}; for (const o of S.orders) if (o.w <= now) for (const [k, q] of o.it) need[k] = (need[k] || 0) + q; return need; }
+function findRecipe(S, out) { for (const [b, B] of Object.entries(BUILD)) { if (!okB(S, B)) continue; const i = B.rec.findIndex(r => r.o === out && okR(S, r)); if (i >= 0) return { b, i, r: B.rec[i] }; } return null; }
+const queued = (S, b, out) => S.bld[b].q.filter(j => BUILD[b].rec[j.r].o === out).length * (BUILD[b].rec.find(r => r.o === out) || { k: 1 }).k;
+// escolhe o que plantar: primeiro o que falta para as encomendas, depois o que falta para a ração
+function pickCrop(S, now, fallback) {
+  const want = {}, add = (k, q) => { if (q > 0 && CROPS[k] && CROPS[k].lvl <= S.lvl) want[k] = (want[k] || 0) + q; };
+  for (const [k, q] of Object.entries(orderNeeds(S, now))) { const miss = q - (S.inv[k] || 0); if (miss <= 0) continue; if (CROPS[k]) add(k, miss); else { const R = findRecipe(S, k); if (R) for (const [ik, iq] of Object.entries(R.r.i)) add(ik, iq * Math.ceil(miss / R.r.k) - (S.inv[ik] || 0)); } }
+  for (const [pk, P] of Object.entries(PENS)) if (P.lvl <= S.lvl && (S.inv[P.feed] || 0) < S.pens[pk].a.length) { const R = findRecipe(S, P.feed); if (R) for (const [ik, iq] of Object.entries(R.r.i)) add(ik, iq * 2 - (S.inv[ik] || 0)); }
+  for (const pl of S.plots) if (pl.c && want[pl.c]) want[pl.c] -= CROPS[pl.c].y;
+  const best = Object.entries(want).filter(([, v]) => v > 0).sort((x, y) => y[1] - x[1])[0];
+  return best ? best[0] : (fallback && CROPS[fallback] && CROPS[fallback].lvl <= S.lvl ? fallback : 'trigo');
+}
+// vende a maior sobra (o que nenhuma encomenda precisa), guardando um pouco de cada ingrediente
+function surplusSale(S, now) {
+  const need = orderNeeds(S, now), ingr = new Set();
+  for (const B of Object.values(BUILD)) if (okB(S, B)) for (const r of B.rec) if (okR(S, r)) Object.keys(r.i).forEach(k => ingr.add(k));
+  for (const P of Object.values(PENS)) ingr.add(P.feed); if (S.land.sul) ingr.add('milho');
+  let best = null, bs = 0; for (const [k, q] of Object.entries(S.inv)) { const sur = q - (need[k] || 0) - (ingr.has(k) ? 6 : 1); if (sur > bs) { bs = sur; best = k; } }
+  return best ? { a: 'sell', k: best, q: Math.min(bs, Math.max(3, Math.ceil(S.cap * 0.15))) } : null;
+}
 function helperTask(S, now) {
-  const tries = [];
+  applyLayout(S);
+  const tries = [], at = (x, y) => ({ x: x - 10, y: y - 10, w: 20, h: 20 });
+  for (const o of S.orders) if (o.w <= now && has(S, Object.fromEntries(o.it))) tries.push([{ a: 'deliver', id: o.id }, at(BOARD.x, BOARD.y)]);
   S.plots.forEach((pl, i) => { if (i < S.np && plotReady(pl, now)) tries.push([{ a: 'harvest', i }, plotRect(i), pl.c]); });
-  for (const k of Object.keys(BUILD)) { const q = S.bld[k].q; if (q.length && q[0].e <= now) tries.push([{ a: 'collect', b: k }, { x: BUILD[k].x - 10, y: BUILD[k].y - 10, w: 20, h: 20 }]); }
-  for (const [k, P] of Object.entries(PENS)) if (P.lvl <= S.lvl) { const st = S.pens[k], ready = st.a.some(f => f && now >= f + P.t * 1000), hungry = st.a.some(f => !f) && (S.inv[P.feed] || 0) > 0; if (ready || hungry) tries.push([{ a: 'pen', k }, { x: P.x - 10, y: P.y - 10, w: 20, h: 20 }]); }
-  applyLayout(S); treeList(S).forEach(t => { if (treeReady(S, t.i, now)) tries.push([{ a: 'tree', i: t.i }, { x: t.x - 10, y: t.y - 10, w: 20, h: 20 }]); });
-  if (S.land.sul) { if (HIVES.some((h, i) => hiveReady(S, i, now))) tries.push([{ a: 'hive' }, { x: HIVES[0][0], y: HIVES[0][1], w: 1, h: 1 }]);
-    if ((S.boat.e && S.boat.e <= now) || (!S.boat.e && (S.inv.milho || 0) >= 4)) tries.push([{ a: 'boat' }, { x: BOAT.x - 40, y: BOAT.y - 10, w: 1, h: 1 }]); }
-  for (const k of Object.keys(PROJ)) if (rentNow(S, k, now) > 0) tries.push([{ a: 'rent', k }, { x: PROJ[k].x - 10, y: PROJ[k].y - 10, w: 20, h: 20 }]);
-  S.plots.forEach((pl, i) => { if (i < S.np && !pl.c) { const c = pl.last && CROPS[pl.last] && CROPS[pl.last].lvl <= S.lvl ? pl.last : 'trigo'; if (S.coins >= CROPS[c].cost + 10) tries.push([{ a: 'plant', i, c }, plotRect(i)]); } });
+  for (const k of Object.keys(BUILD)) { const q = S.bld[k].q; if (q.length && q[0].e <= now) tries.push([{ a: 'collect', b: k }, at(BUILD[k].x, BUILD[k].y)]); }
+  for (const [k, P] of Object.entries(PENS)) if (P.lvl <= S.lvl) { const st = S.pens[k], ready = st.a.some(f => f && now >= f + P.t * 1000), hungry = st.a.some(f => !f) && (S.inv[P.feed] || 0) > 0; if (ready || hungry) tries.push([{ a: 'pen', k }, at(P.x, P.y)]); }
+  treeList(S).forEach(t => { if (treeReady(S, t.i, now)) tries.push([{ a: 'tree', i: t.i }, at(t.x, t.y)]); });
+  if (S.land.sul) { if (HIVES.some((h, i) => hiveReady(S, i, now))) tries.push([{ a: 'hive' }, at(HIVES[0][0], HIVES[0][1])]);
+    if ((S.boat.e && S.boat.e <= now) || (!S.boat.e && (S.inv.milho || 0) >= 4)) tries.push([{ a: 'boat' }, at(BOAT.x - 40, BOAT.y)]); }
+  for (const k of Object.keys(PROJ)) if (rentNow(S, k, now) > 0) tries.push([{ a: 'rent', k }, at(PROJ[k].x, PROJ[k].y)]);
+  if (S.helper.sell !== false && invCount(S) >= S.cap * 0.85) { const sale = surplusSale(S, now); if (sale) tries.push([sale, at(BARN.x, BARN.y)]); }
+  // fazer nos prédios o que as encomendas pedem
+  for (const [k, q] of Object.entries(orderNeeds(S, now))) { if (CROPS[k]) continue; const R = findRecipe(S, k); if (!R) continue; const miss = q - (S.inv[k] || 0) - queued(S, R.b, k);
+    if (miss > 0 && S.bld[R.b].q.length < qCap(S, R.b) && has(S, R.r.i)) tries.push([{ a: 'craft', b: R.b, r: R.i }, at(BUILD[R.b].x, BUILD[R.b].y)]); }
+  // ração para os animais
+  for (const [pk, P] of Object.entries(PENS)) if (P.lvl <= S.lvl) { const R = findRecipe(S, P.feed); if (R && (S.inv[P.feed] || 0) + queued(S, R.b, P.feed) < S.pens[pk].a.length && S.bld[R.b].q.length < qCap(S, R.b) && has(S, R.r.i)) tries.push([{ a: 'craft', b: R.b, r: R.i }, at(BUILD[R.b].x, BUILD[R.b].y)]); }
+  S.plots.forEach((pl, i) => { if (i < S.np && !pl.c) { const c = pickCrop(S, now, pl.last); if (S.coins >= CROPS[c].cost + 10) tries.push([{ a: 'plant', i, c }, plotRect(i)]); } });
   let blocked = false;
-  for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; if (CROPS[crop] && S.coins >= CROPS[crop].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: crop }, now); if (re.ok) { S.plots[a.i].last = crop; res.fx.push(...re.fx); } } } S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
+  for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; const nc = pickCrop(S, now, crop); if (CROPS[nc] && S.coins >= CROPS[nc].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: nc }, now); if (re.ok) { S.plots[a.i].last = nc; res.fx.push(...re.fx); } } }
+      S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.12';
+const BUILD_V = '2026-11-02.13';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -822,9 +858,11 @@ function renderSheet() {
       ${!e ? needHtml(S, BOAT.bait) + `<button class="btn blue" type="button" data-boat="1" ${has(S, BOAT.bait) ? '' : 'disabled'}>${L('boatGo')}</button>` : e <= now ? `<button class="btn" type="button" data-boat="1">${L('collectX', 'peixe')} ×${BOAT.k}</button>` : `<button class="btn" type="button" data-rushboat="1" ${S.coins < rushCost(Math.ceil((e - now) / 1000)) ? 'disabled' : ''}>⚡ ${L('rushBtn')} · ${img('coin')} ${rushCost(Math.ceil((e - now) / 1000))}</button>`}</div>`;
   } else if (SH.type === 'helper') {
     const H = S.helper; t.textContent = hCount(S) > 1 ? L('helpersTitle') : L('helperTitle');
-    h = `<div class="card"><div class="row"><span style="width:56px;height:56px;display:grid;place-items:center">${img('helper')}</span><p style="flex:1;margin:0;font-weight:800">${L('helperDoes')}</p></div></div>`
+    h = `<div class="card"><div class="row"><span style="width:56px;height:56px;display:grid;place-items:center">${img('helper')}</span><p style="flex:1;margin:0;font-weight:800">${L('helperDoes2')}</p></div></div>`
       + (!H.on ? `<div class="card"><p class="sub">${L('helperLocked', HELPER_ORDERS)}</p><div style="height:10px;border-radius:5px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${Math.min(100, (S.done || 0) / HELPER_ORDERS * 100)}%;background:#5cc04a"></i></div><small>${L('helperProg', Math.min(S.done || 0, HELPER_ORDERS), HELPER_ORDERS)}</small></div>`
-        : `<div class="card"><p class="sub">${H.until > now ? L('working', fmtT(Math.ceil((H.until - now) / 1000))) : L('resting')}</p><button class="btn" type="button" data-shift="1" ${S.coins < SHIFT.cost * hCount(S) ? 'disabled' : ''}>${L('shiftAll', hCount(S))} · ${img('coin')} ${SHIFT.cost * hCount(S)}</button></div>
+        : `<div class="card"><p class="sub">${H.until > now ? L('working', fmtT(Math.ceil((H.until - now) / 1000))) : L('resting')}</p><span class="lbl">${L('shiftLbl')}</span>
+          <div class="row">${SHIFTS.map((x, i) => `<button class="btn${i === 2 ? '' : ' blue'}" type="button" data-shift="${i}" style="flex:1;font-size:15px;flex-direction:column;gap:2px" ${S.coins < x.cost * hCount(S) ? 'disabled' : ''}>${L('sh' + i)}<small style="font-family:var(--body);font-size:12px">${img('coin').replace('<img', '<img style="width:13px;height:13px;vertical-align:-2px"')} ${x.cost * hCount(S)}</small></button>`).join('')}</div>
+          <button class="btn gray" type="button" data-autosell="1" style="font-size:15px">${S.helper.sell === false ? '☐' : '☑'} ${L('autoSell')}</button><small>${L('autoSellHint')}</small></div>
           <div class="card"><p class="sub">${L('helpersN', hCount(S), HELPER_NAMES.length)} · ${HELPER_NAMES.slice(0, hCount(S)).join(', ')}</p><p class="sub">${L('helpersWork')}</p>
           ${hCount(S) < HELPER_NAMES.length ? `<button class="btn blue" type="button" data-hire="1" ${S.coins < hireCost(hCount(S)) ? 'disabled' : ''}>${L('hire', HELPER_NAMES[hCount(S)])} · ${img('coin')} ${hireCost(hCount(S))}</button>` : ''}</div>`);
   } else if (SH.type === 'shop') {
@@ -873,7 +911,8 @@ $('sBody').addEventListener('click', e => {
   if (d.rent) act({ a: 'rent', k: d.rent });
   if (d.rushc) act({ a: 'rush', t: 'city', k: d.rushc });
   if (d.deco) act({ a: 'deco', k: d.deco });
-  if (d.shift) act({ a: 'shift' });
+  if (d.shift) act({ a: 'shift', d: +d.shift });
+  if (d.autosell) act({ a: 'autosell' });
   if (d.buyplot) act({ a: 'buyPlot' });
   if (d.deliver) act({ a: 'deliver', id: +d.deliver });
   if (d.discard) act({ a: 'discard', id: +d.discard });
