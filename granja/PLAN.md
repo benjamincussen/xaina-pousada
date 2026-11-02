@@ -649,3 +649,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
   - **Barrio Alto** (nivel 21, 18000): 12 lotes (58–69) en una colina con curvas de nivel, avenida con rotonda, faroles y flores.
 - "Ir a…", textos PT/ES, Novedades, lámparas y malla de calles para Lúcia.
 - Prueba `tests/sul2.js`: compra de los 3 terrenos, 30 parcelas hasta 114, cacao sembrado, chocolate producido, Club comprado, casa en el Barrio Alto, 3 h simuladas (187 decisiones, 65 casas), hojas sin errores; smoke y fuzz sin errores; capturas.
+
+## Versión 93: Ferrocarril de carga
+
+- **Ferrocarril de carga** (servicio en la Zona Industrial, nivel 18, 12000, 10 empleos): estación con semáforo, vías con durmientes y un puente sobre el mar hasta el Puerto de Carga (`RAIL`, 4110 px).
+- Cada 4 minutos sale un tren (locomotora + 3 vagones con los últimos productos de las fábricas, humo) que tarda 70 s; al llegar, la exportación paga **+20% durante 15 min** (`S.railUntil`, lo cuenta el host en el tick y avisa si estás cerca del puerto).
+- Prueba `tests/ferrovia.js`: compra, posiciones de la vía, exportación con bono (2251 → 2701), hojas sin errores; smoke y fuzz sin errores; capturas del puente y la estación.
