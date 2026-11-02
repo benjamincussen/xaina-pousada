@@ -23,3 +23,12 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] 18. Guía "¿qué hago ahora?" con flechas y consejos
 - [x] 19. Optimización de rendimiento (celulares) y carga más rápida
 - [x] 20. Pulido final, balance de precios y resumen con capturas
+
+## Versión grande 2: "Ciudad viva" (2026-11-03.1)
+- [x] Pantalla de Novedades al abrir la versión nueva, con botón "Ver" que lleva a cada cosa
+- [x] Mucha más gente: visitantes en la granja según el nivel, trabajadores en los edificios que producen, niños que van al colegio y al parque
+- [x] Barrio Escolar (nivel 10): mapa más grande al sur con Colegio, Parque infantil, Cancha de fútbol y 6 lotes
+- [x] Casas de dos pisos: +2 vecinos y arriendo doble
+
+## Próxima versión grande (en preparación)
+- [ ] Ideas en evaluación: invernadero de flores, pizzería, puerto pesquero, parque de diversiones, eventos de la ciudad (fiesta, mercado nocturno), mascotas, profesiones de los vecinos
