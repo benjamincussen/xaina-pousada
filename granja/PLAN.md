@@ -269,3 +269,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 ## Versión grande 47: Vecinos piden ayuda y aviso de eventos (2026-11-03.48)
 - Vecinos piden ayuda: cada 12 min (5 min) un vecino frente a su casa del barrio necesita ayuda con la mudanza (cajas), el jardín o pintar; tocarlo da +60 monedas, +6 XP y +1 felicidad (hasta +20). Sincronizado. Aparece en la agenda.
 - Aviso de evento: cuando un evento de la agenda empieza (y no lo hicieron), aparece un aviso naranja arriba 12 s; tocarlo lleva la cámara. No sale con un sheet abierto.
+
+## Versión grande 48: Ayudantes recogen regalos de la ciudad y medalla de comunidad (2026-11-03.49)
+- Opción en Ayudantes "Recoger regalos de la ciudad" (apagada por defecto): los ayudantes (scout/todo) toman la canasta de los vecinos, cavan el tesoro y ayudan a vecinos. Solo acciones gratis: nunca compran (pulgas, flores, pescador) ni gastan ingredientes (sopa). Aparece en el diario.
+- Medalla nueva "Ayudas en la comunidad" (5/25/80): ayudar a vecinos, donar a la sopa y regalar flores.
+- Avisos naranjas con textos propios por evento (vecino, tesoro, canasta, panadero).
