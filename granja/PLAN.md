@@ -207,3 +207,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Desfile del Colegio: cada 20 min los niños desfilan con tambor y banderitas por la avenida del Barrio Escolar.
 - Pescador del lago (orilla sureste): tocarlo compra 3 pescados por 60 monedas, 1 vez cada 10 min.
 - Robustez: migrate crea corrales que falten en partidas viejas.
+
+## Versión grande 36: Ayudantes que explican, biblioteca y fuegos artificiales (2026-11-03.37)
+- Cada ayudante guarda por qué no pudo trabajar: 📦❗ granero lleno, 🪙❗ faltan monedas para semillas, ☕ nada que hacer. Se ve en su tarjeta del Equipo y en un globito sobre su cabeza.
+- Biblioteca (Panel de la ciudad, Campo Grande junto al mar, nivel 12, 2400): columnas, libros en el letrero y un lector; +10 felicidad.
+- Fuegos artificiales: con felicidad ≥ 80, cada noche sobre el Barrio Nuevo (se dibujan encima de la capa de noche).
