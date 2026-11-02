@@ -546,3 +546,12 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Cantera (nivel 19, 12000):** cerros de piedra con suelo rocoso; la **Pedreira/Cantera** (fábrica) saca piedra ×6 y **hierro** (ítem nuevo, 25) con pan y caña; la **Herrería** hace **herramientas** (140) con 3 hierros + 2 maderas (del Aserradero). Dibujos: túnel, carrito que va y viene, chispas en el yunque, humo.
 - "Ir a…", textos PT/ES, Novedades.
 - Pruebas: compra de los 4 terrenos nuevos, 30 parcelas compradas hasta el tope 108, producción en Cantera y Herrería, hojas sin errores; capturas de ambos lugares.
+
+## Versión 79: Logística visible — los productos viajan
+
+- **Camiones de reparto:** cuando una fábrica lejana (a más de 900 px del granero) entrega producción, sale un camión con el producto arriba hasta el granero (hasta 6 a la vez; se apaga con "Menos animaciones").
+- **Oficios nuevos:** operario, azucarero, tejedor, minero, herrero, leñador, ladrillero y barista; los vecinos van a trabajar de día a las fábricas nuevas y piden esos productos en sus pedidos.
+- **Producción de la última hora:** contador por fábrica (`S.prod`, se reinicia cada hora) y tarjeta 🏭 en el panel del Concejo.
+- **Noche en la industria:** las fábricas nuevas encienden las ventanas.
+- **Cantera:** cerros con nieve y sombra, estilo sierra.
+- Prueba `tests/logistica.js`: producción y cobro en 6 fábricas (30 productos), 6 camiones en vuelo, 20 vecinos con oficio nuevo, 2 h simuladas, hojas sin errores, capturas de camiones, noche y cantera.
