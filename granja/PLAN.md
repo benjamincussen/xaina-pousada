@@ -752,3 +752,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
   - **Minas de Oro** (nivel 24, 28000): suelo rocoso con pepitas, dos cerros con túneles; **Mina de Oro** (oro ×2 con pan; piedras preciosas ×2 con piedra + herramienta); la Joyería hace anillos de oro (oro + piedra preciosa).
   - **Rancho de Ovejas** (nivel 22, 22000): pasto cercado, lagunita, 12 ovejas paseando que balan; **Rancho** (lana ×4 con alimento de vaca); la Tejeduría hace tela con lana (×3, 70 s).
 - Prueba `tests/oeste2.js`: compra de los 3, oro, piedras, lana, anillo de oro, tela de lana, Estación de Esquí (empleos 469), cámara hasta −3750; smoke, fuzz, partida vieja y soak sin errores; capturas.
+
+## Versión 110: Desierto y Bosque
+
+- **Desierto** (suroeste, nivel 25, 30000): dunas, 24 cactus con flor, arena; **Oasis** (dátiles ×4) con laguna y palmeras; **Vidriería** (vidrio ×2 con piedra + caña, 90); caravana de 4 camellos que cruza las dunas.
+- **Bosque** (entre la Cantera y el Parque Nacional, nivel 23, 24000): 84 árboles de tres tipos, 6 ciervos paseando, **Apiario del Bosque** (miel ×3 con girasol) y **Casa del Guardabosques** (servicio: +15, 10 empleos).
+- Ahora son 33 terrenos. Pruebas: compra, producción en los 3 edificios, servicio, hojas sin errores; smoke y fuzz sin errores; capturas.
