@@ -41,7 +41,7 @@ const TX = {
     land_leste: 'Terreno do Pomar', land_sul: 'Terreno do Lago', forSale: 'À VENDA', landDesc_leste: 'Seis árvores de laranja e manga e uma fábrica de sucos.', landDesc_sul: 'Colmeias que dão mel e um barco de pesca no lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Já é seu', boatGo: 'Mandar o barco (isca: 2 milhos)', boatBack: t => `O barco volta em ${t}`, boatIdle: 'O barco está no cais. Use 2 milhos de isca para pescar.',
     honeyIn: t => `Mel pronto em ${t}`, zoomHint: 'Use dois dedos para aproximar ou afastar o mapa.',
-    roomWaiting: c => `Sala ${c}: esperando seu amigo entrar`, blocked: 'A sala existe, mas a conexão entre os celulares não abriu. Tentem os dois no mesmo Wi-Fi e entrem de novo.',
+    joiningOpen: c => `A sala ${c} já está aberta. Entrando nela…`, roomWaiting: c => `Sala ${c}: esperando seu amigo entrar`, blocked: 'A sala existe, mas a conexão entre os celulares não abriu. Tentem os dois no mesmo Wi-Fi e entrem de novo.',
     addSlot: 'Mais um espaço na fila', slotsMax: 'Fila no máximo', newVersion: 'Tem uma versão nova do jogo.', update: 'Atualizar',
     sellOne: 'Vender 1', sellAll: 'Vender tudo', each: n => `${n} cada`, barnFullHint: 'O celeiro está cheio. Toque no Celeiro e venda alguma coisa.', sold: (q, k, c) => `Vendeu ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
     helperTitle: 'Ajudante Juca', helperAria: 'Ajudante', helperLocked: n => `Entregue ${n} encomendas e vocês ganham o Juca, um ajudante que cuida do sítio.`, helperProg: (d, n) => `${d} de ${n} encomendas entregues`,
@@ -77,7 +77,7 @@ const TX = {
     land_leste: 'Terreno del Huerto', land_sul: 'Terreno del Lago', forSale: 'SE VENDE', landDesc_leste: 'Seis árboles de naranja y mango y una fábrica de jugos.', landDesc_sul: 'Colmenas que dan miel y un barco de pesca en el lago.',
     buyFor: 'Comprar terreno', lands: 'Terrenos', landOwned: 'Ya es tuyo', boatGo: 'Mandar el barco (carnada: 2 maíces)', boatBack: t => `El barco vuelve en ${t}`, boatIdle: 'El barco está en el muelle. Usa 2 maíces de carnada para pescar.',
     honeyIn: t => `Miel lista en ${t}`, zoomHint: 'Usa dos dedos para acercar o alejar el mapa.',
-    roomWaiting: c => `Sala ${c}: esperando que entre tu amigo`, blocked: 'La sala existe, pero la conexión entre los celulares no se abrió. Prueben los dos en el mismo Wi-Fi y vuelvan a entrar.',
+    joiningOpen: c => `La sala ${c} ya está abierta. Entrando…`, roomWaiting: c => `Sala ${c}: esperando que entre tu amigo`, blocked: 'La sala existe, pero la conexión entre los celulares no se abrió. Prueben los dos en el mismo Wi-Fi y vuelvan a entrar.',
     addSlot: 'Un espacio más en la fila', slotsMax: 'Fila al máximo', newVersion: 'Hay una versión nueva del juego.', update: 'Actualizar',
     sellOne: 'Vender 1', sellAll: 'Vender todo', each: n => `${n} c/u`, barnFullHint: 'El granero está lleno. Toca el Granero y vende algo.', sold: (q, k, c) => `Vendiste ${q} ${N(k).toLowerCase()} por ${L('coins', c)}`,
     helperTitle: 'Ayudante Juca', helperAria: 'Ayudante', helperLocked: n => `Entreguen ${n} pedidos y se ganan a Juca, un ayudante que cuida la granja.`, helperProg: (d, n) => `${d} de ${n} pedidos entregados`,
@@ -476,7 +476,7 @@ function helperTask(S, now) {
   for (const [a, r, crop] of tries) { const res = apply(S, a, now); if (res.ok) { if (a.a === 'harvest') { S.plots[a.i].last = crop; if (CROPS[crop] && S.coins >= CROPS[crop].cost + 10) { const re = apply(S, { a: 'plant', i: a.i, c: crop }, now); if (re.ok) { S.plots[a.i].last = crop; res.fx.push(...re.fx); } } } S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.7';
+const BUILD_V = '2026-11-02.8';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -498,12 +498,12 @@ const NET = { api: null, room: null, sub: null, code: null, role: null, guestPee
 const CODE_AB = 'ACDEFGHJKMNPQRTUVWXY', newCode = () => Array.from({ length: 4 }, () => CODE_AB[Math.floor(Math.random() * CODE_AB.length)]).join('');
 function joinFromHash() { const h = (location.hash || '').slice(1).toUpperCase(); if (NET.api && /^[A-Z]{4}$/.test(h) && !NET.room) { $('iCode').value = h; if (ME.name) join(h); else { $('mMsg').textContent = L('needName'); $('iName').focus(); } } }
 const others = () => NET.room ? NET.room.peers().filter(p => !p.sameTab && p.presence && p.presence.app === 'sitio1') : [];
-async function openRoom(role, code) {
+async function openRoom(role, code, keep) {
   if (!NET.api) { $('mMsg').textContent = L('noFriendMode'); return null; }
   await NET.leave(); let r = null;
   for (let tries = 0; ; tries++) {
     try { r = await NET.api.join('sitio-' + code.toLowerCase(), role); break; }
-    catch (e) { const c = e && e.code; if (c === 'taken' && role === 'host' && tries < 4) { code = newCode(); continue; }
+    catch (e) { const c = e && e.code; if (c === 'taken' && role === 'host' && keep) return 'taken'; if (c === 'taken' && role === 'host' && tries < 4) { code = newCode(); continue; }
       const m = c === 'not_found' ? L('notFound') : c === 'blocked' ? L('blocked') : L('noConn');
       $('mMsg').textContent = m; $('rMsg').textContent = m; return null; }
   }
@@ -515,7 +515,10 @@ async function openRoom(role, code) {
 async function hostRoom() {
   $('rMsg').textContent = ''; $('rStatus').textContent = L('creating'); $('rCode').textContent = '----'; $('ovRoom').hidden = false;
   let saved = ''; try { saved = localStorage.getItem('sitio-code-' + G.S.fid) || ''; } catch (e) {}
-  const r = await openRoom('host', /^[A-Z]{4}$/.test(saved) ? saved : newCode()); if (!r) return;
+  const fixed = /^[A-Z]{4}$/.test(saved);
+  const r = await openRoom('host', fixed ? saved : newCode(), fixed); if (!r) return;
+  // a sala deste sítio já está aberta no celular do amigo: entra nela em vez de criar outra
+  if (r === 'taken') { $('ovRoom').hidden = true; toast(L('joiningOpen', saved), 3000); return join(saved); }
   try { localStorage.setItem('sitio-code-' + G.S.fid, NET.code); } catch (e) {}
   G.mode = 'host'; $('rCode').textContent = NET.code;
   $('rShare').hidden = !(NET.api && NET.api.p2p); $('rLink').value = location.href.split('#')[0] + '#' + NET.code;
@@ -550,7 +553,7 @@ function onPeers() {
         const mine = loadFarm(st.fid);
         if (mine && mine.rev > st.rev && !G.sent[st.fid + ':' + mine.rev]) { G.sent[st.fid + ':' + mine.rev] = 1; NET.room.presence({ up: mine }).catch(() => {}); }
         const first = G.mode !== 'guest';
-        G.S = st; G.mode = 'guest'; storeFarm(st, false);
+        G.S = st; G.mode = 'guest'; storeFarm(st, false); try { if (NET.code) localStorage.setItem('sitio-code-' + st.fid, NET.code); } catch (e) {}
         if (first) { $('ovMenu').hidden = true; $('hud').hidden = false; toast(L('youJoined', farmTitle(st))); }
         refresh();
       }
