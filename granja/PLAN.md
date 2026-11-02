@@ -397,3 +397,9 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Metro elevado: con Ciudad Nueva o Centro y el Barrio Nuevo, una vía elevada une el oeste con el barrio, con estaciones (Bairro, Cidade Nova, Centro) y un tren que va y viene.
 - Metas nuevas: comprar un terreno de la expansión (1500), Torre + Centro Empresarial (3000), cargar los 3 barcos en una ronda (2500), 60 vecinos trabajando (2500).
 - Rendimiento: con el zoom muy lejano la gente se dibuja como puntos simples (vista lejana de ~30 ms a ~4 ms en la prueba).
+
+## Versión 68: Impuestos, marina y fiesta de la Ciudad Nueva
+
+- **Impuestos en la Alcaldía:** con la Alcaldía construida, cada vecino con empleo paga 0,25 monedas por minuto (se acumulan hasta 2 horas). Aparece una moneda sobre la Alcaldía; tócala para cobrar. Los ayudantes de Ciudad y "todo" cobran solos cuando hay 30 o más. La tarjeta "Atentos" muestra cuánto hay por cobrar.
+- **Marina con yates:** en el Puerto de Carga hay un muelle con 6 yates de colores y una lancha que pasea por el mar.
+- **Fiesta de la Ciudad Nueva:** cada 40 minutos hay un show de 3 minutos en la calle de la Ciudad Nueva, con banda, público bailando y notas musicales. Cuenta para el álbum de eventos (ahora 21; premio final con 21).
