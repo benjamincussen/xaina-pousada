@@ -289,3 +289,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 ## Versión grande 51: Quién hizo qué y limpieza de textos (2026-11-03.52)
 - "Lo que hicieron" en el menú ☰: las últimas acciones de cada jugador con su nombre (sembró, cosechó, construyó, pescó, vendió, ayudó…), agrupadas (4×) y con hace cuánto. Cada acción del jugador lleva su nombre (a.by) y el host lo registra, así ambos teléfonos ven lo mismo. Los ayudantes siguen en su propio diario.
 - Limpieza: claves de texto duplicadas que pisaban noticias viejas (n_fire, n_bike) renombradas a n_bomb y n_bikeRace; ya no hay duplicados en PT ni ES.
+
+## Versión grande 52: Metas para hacer juntos (2026-11-03.53)
+- Meta conjunta cada 2 horas (rotan: entregar 8 pedidos, cosechar 40 parcelas, empezar 15 producciones, pescar 6 veces, atender 4 solicitudes, vender 12 veces). Solo cuentan acciones de los jugadores (a.by), no de los ayudantes. Muestra el aporte de cada uno; premio 500 monedas (sincronizado en apply).
+- Al cumplirla: confeti y globos sobre la granja por 2 minutos.
+- La tarjeta aparece arriba en Metas de la granja y en el sheet del mapa.
