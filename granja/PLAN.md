@@ -75,3 +75,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Medallas de bronce, plata y oro (9 tipos) con premios
 - [x] Animalitos: patos en el lago, conejos saltando, cabras (+3 felicidad cada tipo)
 - [x] Avioneta con cartel con el nombre de la granja
+
+## Versión grande 10: "Casa" (2026-11-03.10)
+- [x] Casa de los jugadores ampliable en 2 etapas (piso con balcón florido, anexo con bandera)
+- [x] Tormenta con relámpagos y trueno; arcoíris con olla de oro después de la lluvia
+- [x] Concurso del día en la feria con trofeos
