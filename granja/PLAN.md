@@ -695,3 +695,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Al abrir por primera vez: 25 s de fuegos artificiales por toda la pantalla y un saludo (una sola vez por aparato).
 - Menú → 🏙️ **Tu ciudad en números**: vecinos, bebés, casas/edificios/torres, terrenos, parcelas, fábricas, servicios y proyectos, ayudantes, calles y adornos, monedas, tesoro e ingreso, pedidos, barcos, entradas del lago, metas y versión.
 - Pruebas: hoja con 33 metas listadas, fiesta activada; smoke y fuzz sin errores.
+
+## Versión 101: Vecinos con dinero
+
+- Cada 5 min (host), los vecinos con empleo van de compras: hasta 40 clientes (empleados/4 + vecinos/12) compran 1 unidad cada uno de las **sobras** del granero (por encima del stock objetivo y de lo que piden los pedidos) pagando 30% más; las monedas van al jugador, con aviso, moneda flotante y 5 vecinos que caminan hasta el Mercado Grande (o la feria) diciendo que fueron de compras. `S.consTot`/`S.consN` en "Tu ciudad en números".
+- La feria vende más rápido con más empleos (+hasta 10%).
