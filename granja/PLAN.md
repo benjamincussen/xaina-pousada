@@ -299,3 +299,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Mundo más largo: WH 4420 → 4920. Nueva tierra "Colonia de Vacaciones" (nivel 16, 3000) después de la sierra, con camino, árboles y cartel.
 - Tres proyectos con arriendo (como la posada): Cabañas (bolo×2, suco×3; 200/turno), Piscina (sorvete×3, picolé×4; 230) y Campamento (nivel 17; pão×6, peixe×4; 170), con arte propio (cabañas con chimenea, piscina con bañistas y flotador, carpas con fogata).
 - Aparece en "Ir a…" (🏕️), en el minimapa (alto proporcional a WH) y en Novedades. Partidas viejas: la tierra simplemente está a la venta.
+
+## Versión grande 54: Vida en la Colonia de Vacaciones (2026-11-03.55)
+- Turistas con maletas de rueditas por el camino de la colonia (2 + 2 por cada proyecto construido).
+- Tobogán amarillo en la Piscina con un niño que baja y salpica.
+- Karaoke de noche junto al Campamento: cantante con micrófono, notas y público.
+- Bus de turismo cada 3 min: llega, para en el medio y sigue; aviso si la cámara está cerca.
