@@ -1,0 +1,12 @@
+// Fuzz: abre todas las hojas, toca botones al azar y da toques por todo el mapa, en PT y ES. node tests/fuzz.js [toques]
+const { open, richFarm, simulate } = require('./lib'); const N = +(process.argv[2] || 400);
+(async () => { const { pg, errs, close } = await open(); await richFarm(pg, { homes: 44, coins: 300000 });
+  const types = ['album', 'arch', 'barn', 'city', 'cv', 'decor', 'evalbum', 'fair', 'goals', 'helper', 'homes', 'jornal', 'map', 'medals', 'menu', 'mundo', 'news', 'orders', 'precos', 'seeds', 'shop', 'negocios', ['land', 'bairroSul'], ['bld', 'moinho'], ['bld', 'cantera'], ['pen', 'galinheiro'], ['homes', 0], ['urbe', 'brisa']];
+  let seed = 7; const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  const r = await pg.evaluate(async ([types, N, seed0]) => { let seed = seed0; const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff; const S = G.S; S.helper.on = 1; S.helper.until = Date.now() + 3600000; for (let i = 0; i < 6; i++) act({ a: 'hire' }, true); S.arch.on = 1; const out = { sheetErr: [], clicks: 0, taps: 0 };
+    for (const lang of ['pt', 'es']) { setLang(lang); for (const t of types) { const [ty, arg] = Array.isArray(t) ? t : [t]; try { closeSheet(); openSheet(ty, arg); const bs = Array.from(document.querySelectorAll('#sBody button:not([disabled])')); for (let k = 0; k < 3 && bs.length; k++) { const b = bs[Math.floor(rnd() * bs.length)]; if (/dem|atk|attack|discard|reset|apagar|borrar|delete|sair|salir|voltar|volver|menu\b|goMenu|data-leave|data-exit|data-del/i.test(b.outerHTML + ' ' + b.textContent)) continue; try { b.click(); out.clicks++; } catch (e) { out.sheetErr.push(ty + ':' + e.message); } } } catch (e) { out.sheetErr.push(lang + '/' + ty + ':' + e.message); } } closeSheet();
+      for (let i = 0; i < N; i++) { const x = XMIN + rnd() * (XMAX - XMIN), y = 40 + rnd() * (WH - 60); try { tapAt({ x, y }); out.taps++; } catch (e) { out.sheetErr.push('tap:' + e.message); } if (SH && rnd() < 0.7) closeSheet(); } closeSheet(); }
+    for (let i = 0; i < 30; i++) draw(i * 0.016, 0.016); out.farmAlive = !!G.S; return out; }, [types, N, seed]);
+  console.log(JSON.stringify({ ...r, sheetErr: r.sheetErr.slice(0, 8) }));
+  if (r.farmAlive) { const sim = await simulate(pg, 2); console.log('sim', JSON.stringify(sim)); } else console.log('la partida se cerró durante el fuzz (botón de salir)');
+  console.log('errors', errs.length, errs.slice(0, 6)); await close(); process.exit(errs.length || r.sheetErr.length ? 1 : 0); })();

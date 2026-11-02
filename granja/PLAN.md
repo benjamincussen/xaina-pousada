@@ -629,3 +629,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - **📰 Diario de la ciudad** (Menú): línea de tiempo única con lo que hicieron el Concejo (incluye mundo y negocios), los ayudantes y la arquitecta, con "hace X min"; lo no visto queda marcado y el botón del Menú muestra el contador de novedades.
 - Arreglo: el fondo no se actualizaba al comprar Barrio Sur, Zona Industrial, Campo Sur o Cantera (faltaban en la clave de caché).
+
+## Versión 90: Estaciones que importan, riego automático y prueba fuzz
+
+- Las estaciones afectan los cultivos: primavera +10% más rápido, invierno 25% más lento (nota en la hoja de semillas).
+- **Riego automático** (Tienda, nivel 8, 1500): aspersores animados en las parcelas y todo lo sembrado crece 15% más rápido; la Secretaría del Campo lo compra sola.
+- `tests/fuzz.js`: abre 28 hojas en PT y ES, toca 129 botones al azar y da 800 toques por todo el mapa: 0 errores. `tests/estaciones.js` para el riego.
