@@ -589,3 +589,10 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
   - **Chocolatería** (Campos del Oeste, 3500): bombón (210) con chocolate caliente + leche + azúcar, cola de 3; el Concejo encarga pagando los ingredientes.
 - Dibujos propios (banco con columnas y $, mercado con toldo y cajones, escuela con campanario y chicos entrando, chocolatería con humo), carteles "Se vende", tocar abre la hoja; todo por hooks EXT (sin tocar game.js).
 - Prueba `tests/negocios.js`: 3 h simuladas: Banco 18 pagos (8 557), Mercado 36 bonos (8 178), Escuela 17 pagos (7 116); el Concejo construyó la Escuela solo y encargó bombones; 0 errores.
+
+## Versión 84: Torres de departamentos y población
+
+- **Torre** (nivel 17, 4000): un departamento se convierte en torre de 5 pisos con antena y luz roja de noche: +8 familias (ids 2000+) y alquiler 8×. Botón en la hoja de la casa; la Secretaría de Obras la construye sola cuando el lote ya es departamento.
+- **Población visible:** el indicador 🏛️ muestra 👥 vecinos; metas nuevas: primera torre, 300 y 600 vecinos.
+- **Rendimiento:** con más de 240 vecinos (120 en "Menos animaciones") solo una parte camina por las calles.
+- Prueba `tests/torres.js`: torre construida (+8 vecinos, alquiler 8×), rechazo de torre repetida, opciones del Concejo con `homeTower`, 3 h simuladas, hojas sin errores, captura.
