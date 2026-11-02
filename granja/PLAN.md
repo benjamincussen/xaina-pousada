@@ -7,7 +7,7 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] 2. Calles: caminos que se pueden construir y colocar en el mapa (modo construir) + calles principales de la vila
 - [x] 3. Vecinos (NPC) caminando por las calles, con nombre y globos de diálogo
 - [x] 4. Barrio Nuevo (terreno grande al sur con avenida) + casas de vecinos: población, arriendo y bono en pedidos
-- [ ] 5. Pedidos especiales de los vecinos (piden cosas en persona, pagan más)
+- [x] 5. Pedidos especiales de los vecinos (piden cosas en persona, pagan más)
 - [ ] 6. Mejorar edificios por nivel (Nv 2/3: más rápido y más filas)
 - [ ] 7. Impulsos de producción: abono (cultivos más rápidos) y ración premium (animales)
 - [ ] 8. Terreno nuevo al norte + lotes urbanos para construir

@@ -48,6 +48,7 @@ const TX = {
     sound: 'Som', music: 'Música', ambient: 'Sons do sítio', on: 'sim', off: 'não',
     lvlCap: '+50 lugares no celeiro', lvlTitle: l => `Nível ${l}!`, lvlCoins: c => `+${c} moedas de prêmio`, lvlUnlocked: 'Liberado agora', lvlNext: l => `No nível ${l}`, lvlNothing: 'Prêmio em moedas, +50 lugares no celeiro e encomendas que pagam mais.', lvlRoad: 'Próximos níveis', great: 'Que bom!',
     land_bairro: 'Bairro Novo', landDesc_bairro: 'Um bairro com avenida e 12 lotes: construa casas, chegam vizinhos que pagam aluguel e dão bônus nas encomendas.',
+    reqs: 'Pedidos dos vizinhos', reqSub: 'Os vizinhos pedem em pessoa e pagam o dobro. Toque no vizinho com o balão.', reqFrom: n => `${n} quer:`, reqThanks: 'Obrigado, vizinho!', reqWait: t => `Novo pedido em ${t}`,
     homes: 'Casas do bairro', homeHint: 'Cada casa traz 2 vizinhos: +2% nas encomendas por casa (até 20%) e aluguel de 30 moedas a cada 5 min.', homeBuy: 'Construir casa', homeDone: (a, b) => `${a} e ${b} se mudaram para o bairro!`, homesN: (n, m, p) => `${n} de ${m} casas · ${p} moradores`, homeOf: (a, b) => `Casa de ${a} e ${b}`, emptyLot: 'Lote vazio', rentIn: (n, t) => `${n} moedas em ${t}`, npcHi: n => `Oi, sou ${n}!`,
     npc: ['Que dia bonito!', 'Adoro o pão daqui!', 'Essa rua ficou linda.', 'Vou na feira mais tarde.', 'Bom dia, vizinho!', 'O vento hoje está ótimo!', 'Meu filho quer ser kitesurfista.', 'Que cheiro de bolo!', 'A cidade está crescendo!', 'Tem sorvete hoje?', 'Obrigado pelas ruas novas!', 'Vou pescar no lago.'],
     roads: 'Ruas', roadHint: 'Arraste para pintar · toque para apagar · 2 dedos movem o mapa', roadBar: (f, c) => f > 0 ? `Ruas: ${f} grátis` : `Ruas: ${c} moedas cada`, roadNo: 'Aqui não dá para fazer rua', roadBtn: 'Construir ruas', roadInfo: (n, b) => `${n} pedaços de rua · +${b}% nas encomendas (1% a cada 20, até 10%)`,
@@ -105,6 +106,7 @@ const TX = {
     sound: 'Sonido', music: 'Música', ambient: 'Sonidos del campo', on: 'sí', off: 'no',
     lvlCap: '+50 espacios en el granero', lvlTitle: l => `¡Nivel ${l}!`, lvlCoins: c => `+${c} monedas de premio`, lvlUnlocked: 'Se desbloquea ahora', lvlNext: l => `En el nivel ${l}`, lvlNothing: 'Premio en monedas, +50 espacios en el granero y pedidos que pagan más.', lvlRoad: 'Próximos niveles', great: '¡Genial!',
     land_bairro: 'Barrio Nuevo', landDesc_bairro: 'Un barrio con avenida y 12 lotes: construye casas, llegan vecinos que pagan arriendo y dan bono en los pedidos.',
+    reqs: 'Pedidos de los vecinos', reqSub: 'Los vecinos piden en persona y pagan el doble. Toca al vecino con el globo.', reqFrom: n => `${n} quiere:`, reqThanks: '¡Gracias, vecino!', reqWait: t => `Nuevo pedido en ${t}`,
     homes: 'Casas del barrio', homeHint: 'Cada casa trae 2 vecinos: +2% en los pedidos por casa (hasta 20%) y arriendo de 30 monedas cada 5 min.', homeBuy: 'Construir casa', homeDone: (a, b) => `¡${a} y ${b} se mudaron al barrio!`, homesN: (n, m, p) => `${n} de ${m} casas · ${p} vecinos`, homeOf: (a, b) => `Casa de ${a} y ${b}`, emptyLot: 'Lote vacío', rentIn: (n, t) => `${n} monedas en ${t}`, npcHi: n => `¡Hola, soy ${n}!`,
     npc: ['¡Qué día tan bonito!', '¡Me encanta el pan de aquí!', 'Esta calle quedó preciosa.', 'Voy a la feria más tarde.', '¡Buen día, vecino!', '¡Hoy el viento está perfecto!', 'Mi hijo quiere ser kitesurfista.', '¡Qué olor a pastel!', '¡La ciudad está creciendo!', '¿Hay helado hoy?', '¡Gracias por las calles nuevas!', 'Voy a pescar al lago.'],
     roads: 'Calles', roadHint: 'Arrastra para pintar · toca para borrar · 2 dedos mueven el mapa', roadBar: (f, c) => f > 0 ? `Calles: ${f} gratis` : `Calles: ${c} monedas cada una`, roadNo: 'Aquí no se puede hacer calle', roadBtn: 'Construir calles', roadInfo: (n, b) => `${n} tramos de calle · +${b}% en los pedidos (1% cada 20, hasta 10%)`,
@@ -294,7 +296,7 @@ function migrate(S) {
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
   if (!S.dup || typeof S.dup !== 'object') S.dup = {};
-  if (!Array.isArray(S.homes)) S.homes = [];
+  if (!Array.isArray(S.homes)) S.homes = []; if (!Array.isArray(S.reqs)) S.reqs = [];
   if (!Array.isArray(S.roads)) S.roads = []; if (typeof S.roadFree !== 'number') S.roadFree = ROAD_FREE;
   if (typeof S.silos !== 'number') S.silos = 0;
   if (!S.capv2) { S.capv2 = 1; S.cap = (S.cap || 50) + 150; }
@@ -335,6 +337,11 @@ function genOrder(S) {
   const val = it.reduce((a, [k, q]) => a + ITEMS[k].v * q, 0);
   return { it, c: Math.round(val * 1.4) + 5, x: Math.round(val / 3) + 1 };
 }
+// pedidos dos vizinhos: cada morador pode pedir algo em pessoa e paga o dobro
+function genReq(S) { const items = unlockedItems(S), k = items[Math.floor(Math.random() * items.length)], q = clamp(Math.round((20 + S.lvl * 6) / ITEMS[k].v * (0.6 + Math.random() * 0.6)), 1, 6), val = ITEMS[k].v * q;
+  return { who: Math.floor(Math.random() * Math.max(1, S.homes.length * 2)), it: [[k, q]], c: Math.round(val * 2) + 10, x: Math.round(val / 3) + 2 }; }
+function ensureReqs(S, now) { if (!S.homes || !S.homes.length) return false; let ch = false; const want = Math.min(4, S.homes.length);
+  while (S.reqs.length < want) { const r = { id: S.oid++, w: now, ...genReq(S) }; if (S.reqs.some(o => o.who === r.who)) r.who = (r.who + 1) % (S.homes.length * 2); S.reqs.push(r); ch = true; } return ch; }
 function ensureOrders(S) { let ch = false; while (S.orders.length < 3) { S.orders.push({ id: S.oid++, w: 0, ...genOrder(S) }); ch = true; } return ch; }
 function packQ(b, now) { let t = now; for (const j of b.q) { j.s = Math.max(t, j.s); j.e = Math.max(j.e, j.s); t = j.e; } }
 // aplica uma ação; devolve {ok, msg, fx}. Determinístico a partir de "now", exceto as encomendas novas (só o dono gera).
@@ -411,6 +418,10 @@ function apply(S, a, now) {
     else if (a.t === 'boat') { if (S.boat.e && S.boat.e > now) { rem = S.boat.e - now; doIt = () => { S.boat.e = now; }; } }
     if (!doIt) return fail(''); const c = rushCost(Math.ceil(rem / 1000)); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; doIt(); out.fx.push(['coins', -c]); out.fx.push(['rush']);
+  } else if (a.a === 'req') {
+    const o = S.reqs.find(x => x.id === a.id); if (!o || o.w > now) return fail(''); const need = Object.fromEntries(o.it); if (!has(S, need)) return fail(L('missingProd'));
+    const pay = Math.round(o.c * (1 + decoBonus(S) / 100)); take(S, need); S.coins += pay; addXp(S, o.x, out); out.fx.push(['coins', pay]); out.fx.push(['req', o.who]);
+    Object.assign(o, { id: S.oid++, w: now + 45000 }, genReq(S)); if (S.reqs.some(x => x !== o && x.who === o.who)) o.who = (o.who + 1) % (S.homes.length * 2);
   } else if (a.a === 'home') {
     if (!S.land.bairro) return fail(L('needLand', L('land_bairro'))); const n = S.homes.length; if (n >= LOTS.length) return fail(L('slotsMax'));
     const c = homeCost(n); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; S.homes.push({ c: now, st: n % HOME_COL.length }); addXp(S, 10, out); out.fx.push(['home', n]);
@@ -588,7 +599,7 @@ function syncNpcs(S) { const nH = (S.homes || []).length, nP = Object.keys(PROJ)
 function stepNpcs(S, dt) { syncNpcs(S); const pts = npcSpots(S);
   for (const n of NPCS.list) { if (n.sayT > 0) n.sayT -= dt; const dx = n.tx - n.x, dy = n.ty - n.y, d = Math.hypot(dx, dy);
     if (d > 2) { const k = Math.min(1, 46 * dt / d); n.x += dx * k; n.y += dy * k; n.t += dt; n.dir = dx >= 0 ? 1 : -1; n.walk = true; }
-    else { n.walk = false; n.wait -= dt; if (n.wait <= 0) { const p = n.home && Math.random() < 0.2 ? [n.home[0], n.home[1] + 14] : pts[Math.floor(Math.random() * pts.length)]; n.tx = p[0] + (Math.random() - 0.5) * 16; n.ty = p[1] + (Math.random() - 0.5) * 8; n.wait = 2 + Math.random() * 5; } } }
+    else { n.walk = false; n.wait -= dt; if (n.wait <= 0) { const wants = n.home && (S.reqs || []).some(o => 'h' + o.who === n.id && o.w <= Date.now()); const p = n.home && (wants || Math.random() < 0.2) ? [n.home[0], n.home[1] + 14] : pts[Math.floor(Math.random() * pts.length)]; n.tx = p[0] + (Math.random() - 0.5) * 16; n.ty = p[1] + (Math.random() - 0.5) * 8; n.wait = 2 + Math.random() * 5; } } }
   NPCS.sayT -= dt; if (NPCS.sayT <= 0 && NPCS.list.length) { NPCS.sayT = 4 + Math.random() * 4; const n = NPCS.list[Math.floor(Math.random() * NPCS.list.length)]; n.say = npcLine(S); n.sayT = 3.5; } }
 function drawNpc(g, n, T) { const x = n.x, y = n.y, sc = n.kid ? 0.78 : 0.92, step = n.walk ? Math.sin(n.t * 12) : 0, bob = n.walk ? Math.abs(Math.sin(n.t * 12)) * 1.6 : 0, d = n.dir;
   g.save(); g.translate(x, y); g.scale(sc, sc); g.fillStyle = 'rgba(0,0,0,.18)'; g.beginPath(); g.ellipse(0, 2, 12, 4, 0, 0, 6.283); g.fill();
@@ -601,6 +612,7 @@ function drawNpc(g, n, T) { const x = n.x, y = n.y, sc = n.kid ? 0.78 : 0.92, st
   else { g.fillStyle = n.hr; g.beginPath(); g.arc(0, -44 - bob, 9.5, Math.PI, 0); g.fill(); }
   g.restore();
   if (CAM.z > 0.55) { g.font = '800 11px Nunito, sans-serif'; g.textAlign = 'center'; g.fillStyle = 'rgba(255,255,255,.85)'; const w = g.measureText(n.name).width + 10; rr(g, x - w / 2, y + 4, w, 15, 7); g.fill(); g.fillStyle = '#3a2412'; g.fillText(n.name, x, y + 15); }
+  const rq = G.S && (G.S.reqs || []).find(o => 'h' + o.who === n.id && o.w <= Date.now()); if (rq && !(n.sayT > 0)) { bubble(g, x, y - 72, rq.it[0][0], T); g.fillStyle = '#e0533d'; g.beginPath(); g.arc(x + 16, y - 90, 8, 0, 6.283); g.fill(); g.fillStyle = '#fff'; g.font = '900 12px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText('!', x + 16, y - 86); }
   if (n.sayT > 0 && n.say) { g.font = '800 13px Nunito, sans-serif'; const w = Math.min(220, g.measureText(n.say).width + 18), by = y - 62 * sc - 26; g.globalAlpha = Math.min(1, n.sayT * 2); g.fillStyle = '#fff'; rr(g, x - w / 2, by, w, 24, 10); g.fill(); g.beginPath(); g.moveTo(x - 5, by + 24); g.lineTo(x, by + 31); g.lineTo(x + 5, by + 24); g.fill(); g.fillStyle = '#3a2412'; g.textAlign = 'center'; g.fillText(n.say, x, by + 16, w - 10); g.globalAlpha = 1; } }
 function drawAv(g, av, name, look, T, mine) {
   const x = av.x, y = av.y, step = av.walk ? Math.sin(av.t * 14) : 0, bob = av.walk ? Math.abs(Math.sin(av.t * 14)) * 2 : 0, d = av.dir || 1;
@@ -666,7 +678,7 @@ function tapAt(p) {
   if (G.edit) return;
   ping(p.x, p.y);
   for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR(p, Ld.r)) return openSheet('land', k);
-  for (const n of NPCS.list) if (Math.abs(p.x - n.x) < 18 && p.y > n.y - 56 && p.y < n.y + 6) { n.say = L('npcHi', n.name) + ' ' + npcLine(S); n.sayT = 4; return; }
+  for (const n of NPCS.list) if (Math.abs(p.x - n.x) < 20 && p.y > n.y - 60 && p.y < n.y + 8) { const rq = (S.reqs || []).find(o => 'h' + o.who === n.id && o.w <= now); if (rq) return openSheet('req', rq.id); n.say = L('npcHi', n.name) + ' ' + npcLine(S); n.sayT = 4; return; }
   if (S.land.bairro) { for (let i = 0; i < LOTS.length; i++) { const [hx, hy] = LOTS[i]; if (Math.abs(p.x - hx) < 66 && p.y > hy - 140 && p.y < hy + 10) { if (S.homes[i] && homeRent(S, i, now) > 0) return void act({ a: 'homeRent', i }); return openSheet('homes', i); } } }
   for (const [k, P] of Object.entries(PROJ)) if (S.land[P.land || 'vila'] && Math.abs(p.x - P.x) < P.w / 2 + 10 && p.y > P.y - P.h - 70 && p.y < P.y + 12) { if (rentNow(S, k, now) > 0) return void act({ a: 'rent', k }); return openSheet('proj', k); }
   for (const t of treeList(S)) if (Math.hypot(p.x - t.x, p.y - (t.y - 40)) < 52) return treeReady(S, t.i, now) ? void act({ a: 'tree', i: t.i }) : openSheet('rush', { t: 'tree', i: t.i });
@@ -727,11 +739,15 @@ function playFx(fx) {
     if (f[0] === 'deco') { SND.lvl(); toast(L('newDeco', L('deco_' + f[1]))); const D = DECOS[f[1]]; for (let i = 0; i < 18; i++) SPARK.push({ x: D.x, y: D.y - 20, vx: (Math.random() - 0.5) * 160, vy: -60 - Math.random() * 120, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#ffffff'][i % 4] }); }
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
     if (f[0] === 'lvl') { SND.lvl(); openSheet('lvl', f[1]); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
+    if (f[0] === 'req') { SND.coin(); const n = NPCS.list.find(x => x.id === 'h' + f[1]); if (n) { n.say = L('reqThanks'); n.sayT = 3; burst(n.x, n.y - 40, 'coin'); } }
     if (f[0] === 'home') { SND.hammer(); const [hx, hy] = LOTS[f[1]]; CAM.x = hx; CAM.y = hy - 60; clampCam(); closeSheet(); burst(hx, hy - 60, 'coin'); toast(L('homeDone', NPC_NAMES[(f[1] * 2) % NPC_NAMES.length], NPC_NAMES[(f[1] * 2 + 1) % NPC_NAMES.length]), 3600); }
     if (f[0] === 'dup') { SND.hammer(); const B = BUILD[f[1]]; applyLayout(G.S); CAM.x = B.x; CAM.y = B.y - 60; clampCam(); closeSheet(); burst(B.x, B.y - 60, 'coin'); toast(L('dupDone', N(f[1])), 3000); }
     if (f[0] === 'silo') { SND.lvl(); burst(SILOS[f[1]].x, SILOS[f[1]].y - 60, 'coin'); }
   }
 }
+function reqCard(o) { const S = G.S, now = nowS(), nm = NPC_NAMES[o.who % NPC_NAMES.length];
+  return o.w > now ? `<div class="card"><p class="sub">${L('reqWait', fmtT(Math.ceil((o.w - now) / 1000)))}</p></div>`
+    : `<div class="card"><b>${L('reqFrom', nm)}</b>${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>${img('coin')}${o.c}</span><span>${img('star')}${o.x}</span></span><span style="flex:1"></span><button class="btn" type="button" data-req="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`; }
 function dupCard(S, k) {
   const n = dupN(S, k), B = BUILD[k]; if (!okB(S, B)) return '';
   const nx = n < DUP_MAX ? BUILD[k + '_' + (n + 2)] : null, landOk = !nx || S.land[nx.land];
@@ -752,7 +768,7 @@ let bcT = 0, bcLast = 0;
 function broadcast() { if (G.mode !== 'host' || !NET.room) return; const now = Date.now(); clearTimeout(bcT); const send = () => { bcLast = Date.now(); NET.room.presence({ st: G.S, now: Date.now() }).catch(() => {}); }; if (now - bcLast > 150) send(); else bcT = setTimeout(send, 150); }
 // escolhe e faz uma tarefa pendente; devolve a ação feita
 // o que as encomendas abertas pedem
-function orderNeeds(S, now) { const need = {}; for (const o of S.orders) if (o.w <= now) for (const [k, q] of o.it) need[k] = (need[k] || 0) + q;
+function orderNeeds(S, now) { const need = {}; for (const o of S.orders.concat(S.reqs || [])) if (o.w <= now) for (const [k, q] of o.it) need[k] = (need[k] || 0) + q;
   for (const [pk, P] of Object.entries(PROJ)) if (!S.city[pk] && P.lvl <= S.lvl && S.land[P.land || 'vila']) for (const [k, q] of Object.entries(P.need)) need[k] = (need[k] || 0) + q; return need; }
 function findRecipe(S, out) { for (const [b, B] of Object.entries(BUILD)) { if (B.base || !okB(S, B)) continue; const i = B.rec.findIndex(r => r.o === out && okR(S, r)); if (i >= 0) { const best = fam(S, b).map(x => [x, S.bld[x].q.length / qCap(S, x)]).sort((p, q) => p[1] - q[1])[0][0]; return { b: best, i, r: B.rec[i] }; } } return null; }
 const queued = (S, b, out) => fam(S, famOf(b)).reduce((a, x) => a + S.bld[x].q.filter(j => BUILD[x].rec[j.r].o === out).length, 0) * (BUILD[b].rec.find(r => r.o === out) || { k: 1 }).k;
@@ -777,6 +793,7 @@ function helperTask(S, now) {
   applyLayout(S);
   const tries = [], at = (x, y) => ({ x: x - 10, y: y - 10, w: 20, h: 20 });
   for (const o of S.orders) if (o.w <= now && has(S, Object.fromEntries(o.it))) tries.push([{ a: 'deliver', id: o.id }, at(BOARD.x, BOARD.y)]);
+  for (const o of S.reqs || []) if (o.w <= now && has(S, Object.fromEntries(o.it))) { const hp = LOTS[o.who >> 1] || [740, 2040]; tries.push([{ a: 'req', id: o.id }, at(hp[0], hp[1] + 20)]); }
   S.plots.forEach((pl, i) => { if (i < S.np && plotReady(pl, now)) tries.push([{ a: 'harvest', i }, plotRect(i), pl.c]); });
   for (const k of Object.keys(BUILD)) { const q = S.bld[k].q; if (q.length && q[0].e <= now) tries.push([{ a: 'collect', b: k }, at(BUILD[k].x, BUILD[k].y)]); }
   for (const [k, P] of Object.entries(PENS)) if (P.lvl <= S.lvl) { const st = S.pens[k], ready = st.a.some(f => f && now >= f + P.t * 1000), hungry = st.a.some(f => !f) && (S.inv[P.feed] || 0) > 0; if (ready || hungry) tries.push([{ a: 'pen', k }, at(P.x, P.y)]); }
@@ -797,7 +814,7 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.21';
+const BUILD_V = '2026-11-02.22';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
@@ -806,7 +823,7 @@ $('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S);
   location.href = location.href.split('#')[0]; };
 let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
-  const S = G.S, now = Date.now(); helperClock++;
+  const S = G.S, now = Date.now(); helperClock++; if (ensureReqs(S, now)) { S.rev++; saveSoon(); broadcast(); }
   if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { let r = null; for (let hh = 0; hh < hCount(S); hh++) { const rr = helperTask(S, now); if (rr && rr.ok) { S.helper.ps[hh] = [S.helper.x, S.helper.y]; if (r && r.ok) playFx(r.fx.filter(f => f[0] !== 'coins')); r = rr; } else if (!r) r = rr; } if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
 
 const NET = { api: null, room: null, sub: null, code: null, role: null, guestPeer: null,
@@ -996,6 +1013,9 @@ function renderSheet() {
       ? `<div class="card"><p class="sub">${L('newOrderIn', fmtT(Math.ceil((o.w - now) / 1000)))}</p></div>`
       : `<div class="card">${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>${img('coin')}${o.c}</span><span>${img('star')}${o.x}</span></span><span style="flex:1"></span>
         <button class="btn gray" type="button" data-discard="${o.id}" aria-label="${L('discardAria')}">✕</button><button class="btn" type="button" data-deliver="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`).join('');
+    if (S.reqs && S.reqs.length) h += `<span class="lbl">${L('reqs')}</span><p class="sub">${L('reqSub')}</p>` + S.reqs.map(reqCard).join('');
+  } else if (SH.type === 'req') {
+    const o = S.reqs.find(x => x.id === SH.arg); t.textContent = L('reqs'); h = o ? reqCard(o) : '';
   } else if (SH.type === 'lvl') {
     const l = SH.arg; t.textContent = L('lvlTitle', l); const news = levelNews(l), nxt = levelNews(l + 1);
     h = `<div class="card" style="align-items:center;text-align:center"><b style="font-family:var(--display);font-size:38px;color:#2f7a22">${l}</b><p class="sub" style="display:flex;gap:6px;align-items:center;justify-content:center">${img('coin').replace('<img', '<img style="width:24px;height:24px"')} ${L('lvlCoins', 50 * l)}</p><p class="sub">${img('barn').replace('<img', '<img style="width:24px;height:24px;vertical-align:-6px"')} ${L('lvlCap')}</p></div>
@@ -1091,6 +1111,7 @@ $('sBody').addEventListener('click', e => {
   if (d.silo) act({ a: 'silo' });
   if (d.dup) act({ a: 'dup', k: d.dup });
   if (d.home) act({ a: 'home' });
+  if (d.req) { const r = act({ a: 'req', id: +d.req }); if (r.ok && SH && SH.type === 'req') closeSheet(); }
   if (d.roadmode) { setRoad(true); return; }
   if (d.music) { MUSIC.set(!MUSIC.on); try { localStorage.setItem('sitio-music', MUSIC.on ? '1' : '0'); } catch (e) {} }
   if (d.amb) { AMB = !AMB; try { localStorage.setItem('sitio-amb', AMB ? '1' : '0'); } catch (e) {} if (AMB) SND.bird(); }
