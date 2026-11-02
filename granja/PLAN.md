@@ -294,3 +294,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Meta conjunta cada 2 horas (rotan: entregar 8 pedidos, cosechar 40 parcelas, empezar 15 producciones, pescar 6 veces, atender 4 solicitudes, vender 12 veces). Solo cuentan acciones de los jugadores (a.by), no de los ayudantes. Muestra el aporte de cada uno; premio 500 monedas (sincronizado en apply).
 - Al cumplirla: confeti y globos sobre la granja por 2 minutos.
 - La tarjeta aparece arriba en Metas de la granja y en el sheet del mapa.
+
+## Versión grande 53: El mapa crece al sur — Colonia de Vacaciones (2026-11-03.54)
+- Mundo más largo: WH 4420 → 4920. Nueva tierra "Colonia de Vacaciones" (nivel 16, 3000) después de la sierra, con camino, árboles y cartel.
+- Tres proyectos con arriendo (como la posada): Cabañas (bolo×2, suco×3; 200/turno), Piscina (sorvete×3, picolé×4; 230) y Campamento (nivel 17; pão×6, peixe×4; 170), con arte propio (cabañas con chimenea, piscina con bañistas y flotador, carpas con fogata).
+- Aparece en "Ir a…" (🏕️), en el minimapa (alto proporcional a WH) y en Novedades. Partidas viejas: la tierra simplemente está a la venta.
