@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0f5a72">
+<title>Defensa del Puerto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800;900&display=swap">
+<style>
+/* Juego de una pantalla: el mar arriba (llegan los piratas), el puerto abajo con los dos cañones. Menús como tarjetas de madera clara. */
+:root{
+  --sea:#1b7f9c; --deep:#0f5a72; --sand:#f6e7c1; --wood:#6b4423; --ink:#2a1a0c;
+  --p1:#ffb627; --p2:#3fd0c9; --red:#d8423a; --cream:#fff8e6;
+  --display:"Lilita One","Trebuchet MS",system-ui,sans-serif; --body:"Nunito",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%;background:var(--deep);overflow:hidden;font-family:var(--body);color:var(--ink);touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#cv{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.ov{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,30,40,.55);padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));z-index:5}
+.card{background:linear-gradient(#fffaf0,var(--sand));border-radius:20px;width:min(100%,420px);max-height:100%;overflow:auto;padding:22px 20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 18px 50px rgba(0,0,0,.45),inset 0 0 0 3px rgba(107,68,35,.35)}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;line-height:1;color:var(--wood);text-wrap:balance}
+h1{font-size:46px;text-align:center}
+h2{font-size:34px}
+p{margin:0;font-size:16px;line-height:1.4;font-weight:600}
+.sub{text-align:center;color:#7a5a3a;font-weight:800}
+.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;border:0;border-radius:14px;padding:12px;font-family:var(--display);font-size:24px;line-height:1.05;color:#fff;background:linear-gradient(#e2574d,#a8302a);box-shadow:0 4px 0 #6d1d18;cursor:pointer}
+.btn small{font-family:var(--body);font-size:13px;font-weight:800;opacity:.92}
+.btn.blue{background:linear-gradient(#2e9fbf,#176a85);box-shadow:0 4px 0 #0c4253}
+.btn.gold{background:linear-gradient(#ffc94a,#e09a10);box-shadow:0 4px 0 #8a5c05;color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--wood);box-shadow:none;border:2px solid rgba(107,68,35,.4);font-size:19px}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.4)}
+.btn:disabled{filter:grayscale(.8);opacity:.55}
+.btn:focus-visible,input:focus-visible{outline:3px solid var(--p1);outline-offset:2px}
+.row{display:flex;gap:8px;align-items:stretch}
+.row>*{flex:1;min-width:0}
+.or{display:flex;align-items:center;gap:8px;color:#8a6a48;font-weight:900;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.or::before,.or::after{content:"";flex:1;border-top:2px dashed rgba(107,68,35,.3)}
+input.code{font-family:var(--display);font-size:30px;text-align:center;letter-spacing:.2em;text-transform:uppercase;padding:8px;border-radius:12px;border:2px solid rgba(107,68,35,.4);background:#fff;color:var(--ink);width:100%;min-width:0}
+.bigcode{font-family:var(--display);font-size:62px;text-align:center;letter-spacing:.18em;color:var(--wood);background:rgba(255,255,255,.55);border:2px dashed rgba(107,68,35,.4);border-radius:14px;padding:8px 0 4px;-webkit-user-select:text;user-select:text}
+input.link{font:700 14px var(--body);padding:10px;border-radius:12px;border:2px solid rgba(107,68,35,.4);background:#fff;color:var(--ink);width:100%;min-width:0;-webkit-user-select:text;user-select:text}
+.lbl{font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#8a6a48}
+.msg{color:var(--red);font-weight:900}
+.msg:empty{display:none}
+.how{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:15px}
+.how b{color:var(--wood)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.stat{background:rgba(255,255,255,.55);border-radius:12px;padding:10px;text-align:center}
+.stat b{display:block;font-family:var(--display);font-size:30px;font-weight:400;color:var(--wood)}
+.stat span{font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#8a6a48}
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 64px);transform:translateX(-50%);background:rgba(20,10,4,.82);color:#fff;font-weight:800;padding:8px 14px;border-radius:999px;z-index:6;font-size:14px;max-width:calc(100% - 32px);text-align:center}
+#bQuit{position:fixed;top:calc(env(safe-area-inset-top) + 8px);right:max(10px,env(safe-area-inset-right));z-index:4;border:0;border-radius:999px;background:rgba(0,0,0,.35);color:#fff;font:800 13px var(--body);padding:6px 12px}
+</style>
+</head>
+<body>
+<canvas id="cv" aria-label="El mar y el puerto. Toca el mar para disparar tu cañón."></canvas>
+<button id="bQuit" type="button" hidden>Salir</button>
+<div class="toast" id="toast" hidden></div>
+
+<section class="ov" id="menu">
+  <div class="card">
+    <h1>Defensa del Puerto</h1>
+    <p class="sub">Tú y un amigo contra los piratas</p>
+    <ol class="how">
+      <li>Los barcos piratas bajan hacia el puerto. <b>Toca el mar</b> y tu cañón dispara justo ahí.</li>
+      <li>La bala tarda en llegar: <b>apunta un poco más abajo</b> de donde va el barco.</li>
+      <li>Si un pirata llega al muelle, pierden una bandera. Tienen 5.</li>
+      <li>Si le das al <b>barril de pólvora</b>, los dos cañones disparan rápido por un rato.</li>
+    </ol>
+    <button class="btn" id="bCreate" type="button">Crear sala<small>Tu amigo entra con el código o el enlace</small></button>
+    <div class="or">o</div>
+    <div class="row"><input class="code" id="iCode" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD" aria-label="Código de la sala"><button class="btn blue" id="bJoin" type="button" style="flex:0 0 auto;width:auto;padding-inline:18px">Unirme</button></div>
+    <button class="btn gold" id="bSolo" type="button">Jugar solo<small>La computadora maneja el otro cañón</small></button>
+    <p class="msg" id="mMsg"></p>
+    <p class="sub" id="best"></p>
+  </div>
+</section>
+
+<section class="ov" id="lobby" hidden>
+  <div class="card">
+    <h2>Sala</h2>
+    <span class="lbl">Código</span>
+    <div class="bigcode" id="lCode">----</div>
+    <div id="lShare" style="display:flex;flex-direction:column;gap:6px">
+      <span class="lbl">O mándale este enlace</span>
+      <div class="row"><input class="link" id="lLink" readonly aria-label="Enlace de la sala"><button class="btn blue" id="bCopy" type="button" style="flex:0 0 auto;width:auto;font-size:18px;padding-inline:14px">Copiar</button></div>
+    </div>
+    <p id="lStatus"></p>
+    <button class="btn" id="bStart" type="button">¡A defender!</button>
+    <p class="msg" id="lMsg"></p>
+    <button class="btn ghost" id="bBack" type="button">Volver</button>
+  </div>
+</section>
+
+<section class="ov" id="over" hidden>
+  <div class="card" style="text-align:center">
+    <h2 id="oTitle">Los piratas tomaron el puerto</h2>
+    <p id="oText"></p>
+    <div class="stats">
+      <div class="stat"><b id="oWave">1</b><span>Oleada</span></div>
+      <div class="stat"><b id="oScore">0</b><span>Puntos</span></div>
+      <div class="stat"><b id="oK0">0</b><span id="oK0l">Tus barcos</span></div>
+      <div class="stat"><b id="oK1">0</b><span id="oK1l">Tu amigo</span></div>
+    </div>
+    <button class="btn" id="bAgain" type="button">Otra vez</button>
+    <button class="btn ghost" id="bExit" type="button">Salir</button>
+  </div>
+</section>
+
+<script src="peerjs.min.js"></script>
+<script src="p2p.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
