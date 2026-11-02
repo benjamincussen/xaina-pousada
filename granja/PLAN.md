@@ -326,3 +326,8 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Ayudantes → "Edificios parados y por qué": cada edificio sin producción y el motivo (falta tal materia prima, granero casi lleno, ya hay stock, o listo para producir).
 - Arreglo del plan del scout: las necesidades de las obras/faro se contaban dos veces (progressNeeds + orderNeeds). Ahora el plan suma obras + pedidos (ordersOnly) una sola vez.
 - Probado con una granja grande (nivel 20, todas las tierras, 4 ayudantes): tras 40 s todos los edificios con materia prima quedaron trabajando; solo quedaron parados la Heladería (esperando el azúcar en el molino) y la Joyería (faltan piedras de la mina), y el sembrador plantó caña en las 12 parcelas.
+
+## Versión grande 59: Granero que aconseja (2026-11-03.60)
+- Granero: tarjeta "Sugerencia: qué vender" con lo que sobra mucho respecto a lo que usan recetas y pedidos (ej. trigo de más), cuánto y por cuántas monedas, con botón "Vender sobra" (deja el stock objetivo).
+- Aviso cuando el granero pasa del 90% (una vez cada 10 min).
+- Ayudantes (venta automática con granero lleno): venden primero lo que más sobra respecto a su stock objetivo (y el precio del día), nunca lo que falta para obras o pedidos.
