@@ -708,3 +708,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
   - **Parque Nacional** (nivel 22, 20000): bosque de 60 árboles, cerro con cascada y poza, Centro de Visitantes (servicio: +25 felicidad, 15 empleos, 3 turistas más) que cobra entradas cada 12 min (300 × felicidad × población).
   - **Ciudad Universitaria** (nivel 23, 24000): 12 lotes (70–81), avenida con rotonda, faroles y la **Universidad** (edificio de 3 pisos con reloj real y bandera: 60 empleos, +15).
 - Prueba `tests/sul3.js`: compra de los 3, 50 parcelas, uva sembrada, jugo producido, empleos 374 → 449, casa en la Universitaria, 2 h simuladas; smoke y fuzz sin errores; capturas.
+
+## Versión 103: Gráficas 3 — autitos y pájaros
+
+- Autitos de colores (3 por avenida, dos sentidos, sombra, faros encendidos y luz trasera de noche) en las avenidas del Barrio Sur (2), Barrio Alto y Ciudad Universitaria; solo se dibujan si están cerca de la cámara y se apagan con "Menos animaciones".
+- Bandada de 7 pájaros en V que cruza el cielo cada 45 s de día, con aleteo.
+- Smoke y fuzz sin errores; captura.
