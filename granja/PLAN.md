@@ -91,3 +91,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Nacen bebés con la ciudad feliz: la población crece
 - [x] Fogatas en las noches de invierno
 - [x] Monedas perdidas en el suelo para recoger
+
+## Versión grande 13: "Regata" (2026-11-03.14)
+- [x] Edificios de departamentos (4 pisos, +4 vecinos, arriendo 4x)
+- [x] Mercado nocturno con faroles (ventas +50% de noche)
+- [x] Regata en el lago cada 10 min con apuesta por un bote
