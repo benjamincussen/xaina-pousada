@@ -331,3 +331,15 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Granero: tarjeta "Sugerencia: qué vender" con lo que sobra mucho respecto a lo que usan recetas y pedidos (ej. trigo de más), cuánto y por cuántas monedas, con botón "Vender sobra" (deja el stock objetivo).
 - Aviso cuando el granero pasa del 90% (una vez cada 10 min).
 - Ayudantes (venta automática con granero lleno): venden primero lo que más sobra respecto a su stock objetivo (y el precio del día), nunca lo que falta para obras o pedidos.
+
+## Versión grande 60: Gráficas con luz, sombras y agua (2026-11-03.61)
+- Suelo: pasto con manchas de prado claras/oscuras (profundidad), tufos de dos hojas y tréboles; se quitó el mosaico de cuadrados de 40 px. Cada faja del fondo solo pinta lo que le toca (más rápido de construir).
+- Sombras: `shadow()` ahora es suave, con dirección de sol y dos tonos (se usa en todos los edificios, árboles y objetos).
+- Árboles, frutales y arbustos: contorno oscuro de la copa, sombra interna y luz arriba; tronco con degradado.
+- Casas (`houseRaw`, cacheadas): sombra del alero sobre la pared, base oscura y techo con degradado de luz.
+- Caminos: borde exterior suave que se funde con el pasto.
+- Agua (`waterDetail`): orilla mojada, franja rasa clara, fondo oscuro, reflejos y nenúfares en el lago y la lagunita; mar con arena mojada, espuma en la orilla y olitas.
+- Canteros: tierra con terrones y surcos con brillo.
+- Iluminación por frame: noche con mezcla `multiply` (conserva el contraste) + atardecer/amanecer anaranjado; charcos de luz en el piso bajo los faroles; luciérnagas de noche; sombras de nubes pasando de día (ambas se apagan en "Menos animaciones").
+- Canvas sin alfa y suavizado de imagen en alta calidad.
+- Medido en Chromium headless (sin GPU), granja nivel 14 con todas las tierras: tiempo por frame igual (mediana ~3 ms antes y después); construir el fondo pasó de ~250 ms a ~360 ms una sola vez.
