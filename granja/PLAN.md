@@ -666,3 +666,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - La dica 💡 del mapa (`nextTip`) ahora sugiere: contratar a Lúcia, aprobar sus propuestas, instalar el riego, vender lo que está en buen momento (con flecha al tablero de precios), comprar el terreno que ya se puede (flecha al cartel) y leer el Diario cuando hay 10+ novedades.
 - 7 metas nuevas con premio: arquitecta, riego, Barrio Sur, 100 parcelas, Ferrocarril, Cacao y Club del Lago.
+
+## Versión 96: Más bebés y niños
+
+- Cada torre da +2 cupos para bebés; **Guardería del Sur** (Barrio Sur, nivel 17, 3000: +4 cupos, 8 empleos, +10) con patio de bebés de día; **Parquecito del Alto** (Barrio Alto, nivel 21, 2500: +12). Meta nueva: 10 bebés.
+- Pruebas: compra de ambos, cupos 63 → 77 con 5 torres, hojas sin errores; smoke y fuzz sin errores.
