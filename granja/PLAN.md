@@ -46,3 +46,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Fiesta del Viento cada 20 min: banderines, fuegos, música, todos a la plaza, feria vende 2,5x
 - [x] Mascotas: perrito de Benjamin y gatita de Ana Luyza
 - [x] La página siempre carga la última versión (sin quedarse pegada en caché)
+
+## Versión grande 5: "Puerto" (2026-11-03.5)
+- [x] Puerto pesquero en la playa: camarón y moqueca, bote que sale al mar
+- [x] Misiones de la alcaldía (entregas grandes, +2 de felicidad cada una)
+- [x] Alcaldía con cúpula en el Barrio Escolar
+- [x] Bus amarillo con pasajeros entre la granja y los barrios, con paraderos

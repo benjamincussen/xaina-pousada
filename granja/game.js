@@ -7,11 +7,11 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 // ---------- idiomas (português e espanhol) ----------
 let LANG = (() => { try { const v = localStorage.getItem('sitio-lang'); if (v === 'es' || v === 'pt') return v; } catch (e) {} return /^es/i.test(navigator.language || '') ? 'es' : 'pt'; })();
 const NM = {
-  pt: { girassol: 'Girassol', buque: 'Buquê de flores', perfume: 'Perfume', pizza: 'Pizza', pizzaDoce: 'Pizza doce', estufa: 'Estufa', pizzaria: 'Pizzaria', trigo: 'Trigo', milho: 'Milho', cenoura: 'Cenoura', cana: 'Cana', ovo: 'Ovo', leite: 'Leite', racaoG: 'Ração de galinha', racaoV: 'Ração de vaca', pao: 'Pão', bolo: 'Bolo de cenoura', queijo: 'Queijo', acucar: 'Açúcar',
+  pt: { camarao: 'Camarão', moqueca: 'Moqueca', porto: 'Porto de pesca', girassol: 'Girassol', buque: 'Buquê de flores', perfume: 'Perfume', pizza: 'Pizza', pizzaDoce: 'Pizza doce', estufa: 'Estufa', pizzaria: 'Pizzaria', trigo: 'Trigo', milho: 'Milho', cenoura: 'Cenoura', cana: 'Cana', ovo: 'Ovo', leite: 'Leite', racaoG: 'Ração de galinha', racaoV: 'Ração de vaca', pao: 'Pão', bolo: 'Bolo de cenoura', queijo: 'Queijo', acucar: 'Açúcar',
     moinho: 'Moinho', padaria: 'Padaria', queijaria: 'Queijaria', galinheiro: 'Galinheiro', estabulo: 'Estábulo',
     algodao: 'Algodão', tecido: 'Tecido', rede: 'Rede de descanso', tecelagem: 'Tecelagem', coco: 'Coco', escola: 'Escola de kite',
     laranja: 'Laranja', manga: 'Manga', suco: 'Suco de laranja', vitamina: 'Vitamina de manga', mel: 'Mel', peixe: 'Peixe', paoMel: 'Pão de mel', sucos: 'Fábrica de sucos', apiario: 'Apiário', barco: 'Barco de pesca' },
-  es: { girassol: 'Girasol', buque: 'Ramo de flores', perfume: 'Perfume', pizza: 'Pizza', pizzaDoce: 'Pizza dulce', estufa: 'Invernadero', pizzaria: 'Pizzería', trigo: 'Trigo', milho: 'Maíz', cenoura: 'Zanahoria', cana: 'Caña', ovo: 'Huevo', leite: 'Leche', racaoG: 'Ración de gallina', racaoV: 'Ración de vaca', pao: 'Pan', bolo: 'Pastel de zanahoria', queijo: 'Queso', acucar: 'Azúcar',
+  es: { camarao: 'Camarón', moqueca: 'Moqueca', porto: 'Puerto pesquero', girassol: 'Girasol', buque: 'Ramo de flores', perfume: 'Perfume', pizza: 'Pizza', pizzaDoce: 'Pizza dulce', estufa: 'Invernadero', pizzaria: 'Pizzería', trigo: 'Trigo', milho: 'Maíz', cenoura: 'Zanahoria', cana: 'Caña', ovo: 'Huevo', leite: 'Leche', racaoG: 'Ración de gallina', racaoV: 'Ración de vaca', pao: 'Pan', bolo: 'Pastel de zanahoria', queijo: 'Queso', acucar: 'Azúcar',
     moinho: 'Molino', padaria: 'Panadería', queijaria: 'Quesería', galinheiro: 'Gallinero', estabulo: 'Establo',
     algodao: 'Algodón', tecido: 'Tela', rede: 'Hamaca', tecelagem: 'Tejeduría', coco: 'Coco', escola: 'Escuela de kite',
     laranja: 'Naranja', manga: 'Mango', suco: 'Jugo de naranja', vitamina: 'Batido de mango', mel: 'Miel', peixe: 'Pescado', paoMel: 'Pan de miel', sucos: 'Fábrica de jugos', apiario: 'Apiario', barco: 'Barco de pesca' },
@@ -51,6 +51,7 @@ const TX = {
     team: "Equipe", teamHint: "Escolha o ofício de cada ajudante. Com 4 ou mais, eles se dividem sozinhos.", role_todo: "Faz tudo", role_scout: "Scout", role_pedidos: "Pedidos", role_planta: "Plantador", role_colhe: "Coletor", roleD_todo: "Faz um pouco de cada coisa.", roleD_scout: "Vê o que falta, entrega as encomendas e vende as sobras.", roleD_pedidos: "Pede nos prédios o que as encomendas e as obras precisam (primeiro o açúcar, depois o picolé).", roleD_planta: "Planta o que falta e alimenta os animais.", roleD_colhe: "Colhe plantas, árvores, animais, prédios, colmeias e aluguéis (rápido!).", scoutList: "Lista do scout: o que falta", scoutNone: "Nada faltando agora.", ledger: "Contas dos ajudantes", ledgerD: (a, b) => `Gastaram ${a} moedas (sementes, ração) e ganharam ${b} moedas (encomendas, vendas, aluguéis) neste turno.`,
     n_team: "Equipe com ofícios (até 8 ajudantes)", n_teamD: "Scout (vê o que falta e entrega), Pedidos (faz nos prédios), Plantador (planta e alimenta animais) e Coletor (colhe tudo, rápido). Escolha o ofício de cada um.", n_chain: "Ajudantes mais espertos", n_chainD: "Agora seguem a cadeia: para o picolé fazem primeiro o açúcar com a cana. Não enchem o moinho de ração. E você vê a lista do que falta e quanto gastaram e ganharam.", n_lavoura: "Lavoura Grande: +24 canteiros (nível 11)", n_lavouraD: "O mapa cresceu de novo: um campo enorme no sul com celeiro, caixa d’água e espantalho.", n_auto: "Atualiza sozinho", n_autoD: "Sem botão: quando sai versão nova, o jogo recarrega sozinho quando você não está mexendo, e volta para a mesma sala.",
     n_estufa: "Estufa e girassol (nível 11)", n_estufaD: "Plante girassol e faça buquês de flores e perfume na Estufa de vidro, no Campo Grande.", n_pizza: "Pizzaria (nível 12)", n_pizzaD: "Pizza com trigo, queijo e cenoura, e pizza doce com mel e laranja. Forno aceso quando está assando.", n_festa: "Festa do Vento", n_festaD: "A cada 20 minutos, 3 minutos de festa no bairro: bandeirinhas, fogos, música, todos na praça e a feira vende 2,5x mais.", n_pets: "Mascotes", n_petsD: "Um cachorrinho acompanha o Benjamin e uma gatinha acompanha a Ana Luyza pelo mapa.",
+    missT: "Missões da prefeitura", missDone: "Missão cumprida! A cidade ficou mais feliz.", busT: "Ônibus do bairro", busD: "Um ônibus amarelo liga o sítio, a vila e os bairros: +8 de felicidade.", busBought: "O ônibus começou a rodar! Olhe ele passando.", serv_prefeitura: "Prefeitura", servD_prefeitura: "A sede da cidade, com cúpula e bandeira: +10 de felicidade", n_porto: "Porto de pesca (nível 13)", n_portoD: "Na praia: um píer com barco que sai para o mar. Pesque camarão com milho e faça moqueca (peixe, camarão e coco).", n_miss: "Missões da prefeitura", n_missD: "Entregas grandes para a cidade: pagam muito e cada uma dá +2 de felicidade (até +20). Ficam no Painel da cidade e os ajudantes ajudam.", n_bus: "Ônibus entre os bairros", n_busD: "Um ônibus amarelo com passageiros roda do sítio até o bairro escolar, com pontos de ônibus. +8 de felicidade.", n_pref: "Prefeitura (nível 12)", n_prefD: "Prédio com cúpula e bandeira no Bairro Escolar: +10 de felicidade.", missSub: h => `Entregas grandes para a cidade. Felicidade ganha com missões: +${h} de 20.`,
     land_lavoura: 'Lavoura Grande', landDesc_lavoura: 'Campo enorme no extremo sul: mais 24 canteiros para plantar muito mais.',
     land_escolar: 'Bairro Escolar', landDesc_escolar: 'Mais um bairro ao sul: Colégio, Parque infantil, Campo de futebol e 6 lotes para casas.', serv_colegio: 'Colégio', servD_colegio: 'As crianças vão à escola: +20 de felicidade', serv_parque: 'Parque infantil', servD_parque: 'Balanço, escorregador e areia: +15 de felicidade', serv_campo: 'Campo de futebol', servD_campo: 'Peladas todo dia: +10 de felicidade',
     bigTitle: 'Ampliar casa', bigHint: 'Segundo andar: chegam mais 2 moradores e o aluguel dobra.', bigBtn: 'Ampliar', bigDone: (a, b) => `Casa ampliada! ${a} e ${b} chegaram.`, livesHere: n => `Moram aqui: ${n}`,
@@ -125,6 +126,7 @@ const TX = {
     team: "Equipo", teamHint: "Elige el oficio de cada ayudante. Con 4 o más, se reparten solos.", role_todo: "Hace todo", role_scout: "Scout", role_pedidos: "Pedidos", role_planta: "Sembrador", role_colhe: "Recolector", roleD_todo: "Hace un poco de cada cosa.", roleD_scout: "Ve lo que falta, entrega los pedidos y vende las sobras.", roleD_pedidos: "Pide en los edificios lo que necesitan los pedidos y las obras (primero el azúcar, después la paleta).", roleD_planta: "Siembra lo que falta y alimenta a los animales.", roleD_colhe: "Recoge cultivos, árboles, animales, edificios, colmenas y arriendos (¡rápido!).", scoutList: "Lista del scout: lo que falta", scoutNone: "No falta nada ahora.", ledger: "Cuentas de los ayudantes", ledgerD: (a, b) => `Gastaron ${a} monedas (semillas, ración) y ganaron ${b} monedas (pedidos, ventas, arriendos) en este turno.`,
     n_team: "Equipo con oficios (hasta 8 ayudantes)", n_teamD: "Scout (ve lo que falta y entrega), Pedidos (hace en los edificios), Sembrador (siembra y alimenta animales) y Recolector (recoge todo, rápido). Elige el oficio de cada uno.", n_chain: "Ayudantes más inteligentes", n_chainD: "Ahora siguen la cadena: para la paleta hacen primero el azúcar con la caña. No llenan el molino de ración. Y ves la lista de lo que falta y cuánto gastaron y ganaron.", n_lavoura: "Campo Grande: +24 parcelas (nivel 11)", n_lavouraD: "El mapa creció otra vez: un campo enorme al sur con granero, estanque de agua y espantapájaros.", n_auto: "Se actualiza solo", n_autoD: "Sin botón: cuando sale una versión nueva, el juego se recarga solo cuando no estás tocando nada, y vuelve a la misma sala.",
     n_estufa: "Invernadero y girasol (nivel 11)", n_estufaD: "Siembra girasol y haz ramos de flores y perfume en el Invernadero de vidrio, en el Campo Grande.", n_pizza: "Pizzería (nivel 12)", n_pizzaD: "Pizza con trigo, queso y zanahoria, y pizza dulce con miel y naranja. El horno se enciende cuando está horneando.", n_festa: "Fiesta del Viento", n_festaD: "Cada 20 minutos, 3 minutos de fiesta en el barrio: banderines, fuegos artificiales, música, todos en la plaza y la feria vende 2,5x más.", n_pets: "Mascotas", n_petsD: "Un perrito acompaña a Benjamin y una gatita acompaña a Ana Luyza por el mapa.",
+    missT: "Misiones de la alcaldía", missDone: "¡Misión cumplida! La ciudad está más feliz.", busT: "Bus del barrio", busD: "Un bus amarillo une la granja, la villa y los barrios: +8 de felicidad.", busBought: "¡El bus empezó a andar! Míralo pasar.", serv_prefeitura: "Alcaldía", servD_prefeitura: "La sede de la ciudad, con cúpula y bandera: +10 de felicidad", n_porto: "Puerto pesquero (nivel 13)", n_portoD: "En la playa: un muelle con un bote que sale al mar. Pesca camarón con maíz y haz moqueca (pescado, camarón y coco).", n_miss: "Misiones de la alcaldía", n_missD: "Entregas grandes para la ciudad: pagan mucho y cada una da +2 de felicidad (hasta +20). Están en el Panel de la ciudad y los ayudantes ayudan.", n_bus: "Bus entre los barrios", n_busD: "Un bus amarillo con pasajeros va de la granja al barrio escolar, con paraderos. +8 de felicidad.", n_pref: "Alcaldía (nivel 12)", n_prefD: "Edificio con cúpula y bandera en el Barrio Escolar: +10 de felicidad.", missSub: h => `Entregas grandes para la ciudad. Felicidad ganada con misiones: +${h} de 20.`,
     land_lavoura: 'Campo Grande', landDesc_lavoura: 'Campo enorme al extremo sur: 24 parcelas más para sembrar mucho más.',
     land_escolar: 'Barrio Escolar', landDesc_escolar: 'Otro barrio al sur: Colegio, Parque infantil, Cancha de fútbol y 6 lotes para casas.', serv_colegio: 'Colegio', servD_colegio: 'Los niños van al colegio: +20 de felicidad', serv_parque: 'Parque infantil', servD_parque: 'Columpios, tobogán y arena: +15 de felicidad', serv_campo: 'Cancha de fútbol', servD_campo: 'Partidos todos los días: +10 de felicidad',
     bigTitle: 'Ampliar casa', bigHint: 'Segundo piso: llegan 2 vecinos más y el arriendo se duplica.', bigBtn: 'Ampliar', bigDone: (a, b) => `¡Casa ampliada! Llegaron ${a} y ${b}.`, livesHere: n => `Viven aquí: ${n}`,
@@ -190,7 +192,7 @@ const ITEMS = {
   ovo: { n: 'Ovo', v: 9 }, leite: { n: 'Leite', v: 16 }, racaoG: { n: 'Ração de galinha', v: 4 }, racaoV: { n: 'Ração de vaca', v: 7 },
   pao: { n: 'Pão', v: 15 }, bolo: { n: 'Bolo de cenoura', v: 42 }, queijo: { n: 'Queijo', v: 44 }, acucar: { n: 'Açúcar', v: 26 },
   sorvete: { n: 'Sorvete', v: 62 }, picole: { n: 'Picolé', v: 36 },
-  algodao: { n: 'Algodão', v: 14 }, girassol: { n: 'Girassol', v: 12 }, buque: { n: 'Buquê', v: 55 }, perfume: { n: 'Perfume', v: 120 }, pizza: { n: 'Pizza', v: 95 }, pizzaDoce: { n: 'Pizza doce', v: 90 }, tecido: { n: 'Tecido', v: 48 }, rede: { n: 'Rede', v: 130 }, coco: { n: 'Coco', v: 20 },
+  algodao: { n: 'Algodão', v: 14 }, girassol: { n: 'Girassol', v: 12 }, camarao: { n: 'Camarão', v: 30 }, moqueca: { n: 'Moqueca', v: 160 }, buque: { n: 'Buquê', v: 55 }, perfume: { n: 'Perfume', v: 120 }, pizza: { n: 'Pizza', v: 95 }, pizzaDoce: { n: 'Pizza doce', v: 90 }, tecido: { n: 'Tecido', v: 48 }, rede: { n: 'Rede', v: 130 }, coco: { n: 'Coco', v: 20 },
   laranja: { n: 'Laranja', v: 12 }, manga: { n: 'Manga', v: 15 }, suco: { n: 'Suco', v: 45 }, vitamina: { n: 'Vitamina', v: 58 }, mel: { n: 'Mel', v: 30 }, peixe: { n: 'Peixe', v: 28 }, paoMel: { n: 'Pão de mel', v: 70 },
 };
 const CROPS = {
@@ -240,12 +242,14 @@ const MAXQ = 7, qCap = (S, k) => BUILD[k].q + ((S.slots && S.slots[k]) || 0), sl
 const sellPrice = k => Math.max(1, Math.round(ITEMS[k].v * 0.6));
 BUILD.estufa = { n: 'Estufa', lvl: 11, q: 2, x: 1300, y: 3330, w: 170, h: 96, land: 'lavoura', rec: [
   { o: 'buque', k: 1, i: { girassol: 3 }, t: 90, lvl: 11, xp: 6 }, { o: 'perfume', k: 1, i: { buque: 1, mel: 1 }, t: 180, lvl: 12, xp: 12 }] };
+BUILD.porto = { n: 'Porto', lvl: 13, q: 2, x: 1370, y: 730, w: 130, h: 80, land: 'praia', rec: [
+  { o: 'camarao', k: 3, i: { milho: 2 }, t: 120, lvl: 13, xp: 6 }, { o: 'moqueca', k: 1, i: { peixe: 1, camarao: 2, coco: 1 }, t: 180, lvl: 13, xp: 14 }] };
 BUILD.pizzaria = { n: 'Pizzaria', lvl: 12, q: 2, x: 880, y: 3330, w: 150, h: 92, land: 'lavoura', rec: [
   { o: 'pizza', k: 1, i: { trigo: 2, queijo: 1, cenoura: 1 }, t: 150, lvl: 12, xp: 10 }, { o: 'pizzaDoce', k: 1, i: { trigo: 2, mel: 1, laranja: 1 }, t: 140, lvl: 12, xp: 9 }] };
 for (const B of Object.values(BUILD)) for (const r of B.rec) r.t = Math.max(10, Math.round(r.t * 0.6));
 // prédios duplicados: 2ª e 3ª unidade de cada prédio de produção, com fila própria (mesmas receitas)
 const DUP_TYPES = ['moinho', 'padaria', 'queijaria', 'sucos', 'tecelagem', 'sorveteria'], DUP_MAX = 2;
-const DUP_BASE = { estufa: 900, pizzaria: 1200, moinho: 300, padaria: 500, queijaria: 800, sucos: 900, tecelagem: 1200, sorveteria: 1500 };
+const DUP_BASE = { porto: 1400, estufa: 900, pizzaria: 1200, moinho: 300, padaria: 500, queijaria: 800, sucos: 900, tecelagem: 1200, sorveteria: 1500 };
 const dupCost = (k, n) => DUP_BASE[k] * (n + 1);
 const DUP_SPOTS = [[90, 1500, 'vila'], [220, 1500, 'vila'], [350, 1500, 'vila'], [480, 1500, 'vila'], [610, 1500, 'vila'], [740, 1500, 'vila'], [870, 1500, 'vila'], [1000, 1500, 'vila'],
   [310, 1130, 'sul'], [440, 1130, 'sul'], [310, 1290, 'sul'], [440, 1290, 'sul']];
@@ -317,9 +321,10 @@ function homeRent(S, i, now) { const h = S.homes[i]; if (!h) return 0; return Ma
 const hCount = S => S.helper && S.helper.on ? (S.helper.n || 1) : 0;
 // serviços do bairro e felicidade da cidade (multiplica aluguéis)
 const SERV = { praca: { cost: 1200, hp: 15, x: 1330, y: 2250, lvl: 8 }, posto: { cost: 2000, hp: 20, x: 1330, y: 1960, lvl: 10 },
+  prefeitura: { land: 'escolar', cost: 2500, hp: 10, x: 980, y: 2580, lvl: 12, w: 170 },
   colegio: { land: 'escolar', cost: 3000, hp: 20, x: 300, y: 2580, lvl: 10, w: 250 }, parque: { land: 'escolar', cost: 1800, hp: 15, x: 760, y: 2580, lvl: 10, w: 260 }, campo: { land: 'escolar', cost: 1500, hp: 10, x: 1200, y: 2580, lvl: 10, w: 260 } };
 function happy(S) { let h = 30 + Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5 + roadBonus(S) * 2 + Object.keys(PROJ).filter(k => S.city[k]).length * 5;
-  for (const [k, V] of Object.entries(SERV)) if (S.serv && S.serv[k]) h += V.hp; return Math.min(100, h); }
+  for (const [k, V] of Object.entries(SERV)) if (S.serv && S.serv[k]) h += V.hp; h += (S.cityHp || 0) + (S.bus ? 8 : 0); return Math.min(100, h); }
 const cityMult = S => 0.5 + happy(S) / 100;
 function rentNow(S, k, now) { const c = S.city[k]; if (!c || c.e > now) return 0; const per = Math.floor((now - c.c) / (RENT_EVERY * 1000)); return Math.round(Math.min(per, RENT_CAP) * PROJ[k].inc * cityMult(S)); }
 const SHIFTS = [{ min: 20, cost: 25 }, { min: 60, cost: 60 }, { min: 1440, cost: 900 }];
@@ -356,7 +361,7 @@ function migrate(S) {
   if (!S.deco || typeof S.deco !== 'object') S.deco = {};
   if (!Array.isArray(S.xt)) S.xt = [];
   if (!S.city || typeof S.city !== 'object') S.city = {};
-  if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (typeof S.truck !== 'number') S.truck = 0; if (!S.goals || typeof S.goals !== 'object') S.goals = {}; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
+  if (!S.dup || typeof S.dup !== 'object') S.dup = {}; if (!S.blv || typeof S.blv !== 'object') S.blv = {}; if (!S.serv || typeof S.serv !== 'object') S.serv = {}; if (typeof S.truck !== 'number') S.truck = 0; if (!S.goals || typeof S.goals !== 'object') S.goals = {}; if (!Array.isArray(S.miss)) S.miss = []; if (!S.boost || typeof S.boost !== 'object') S.boost = {};
   while (S.plots.length < MAXPLOTS) S.plots.push({ c: null, p: 0 });
   if (!Array.isArray(S.homes)) S.homes = []; if (!Array.isArray(S.reqs)) S.reqs = []; if (!Array.isArray(S.fair)) S.fair = [null, null, null, null];
   if (!Array.isArray(S.roads)) S.roads = []; if (typeof S.roadFree !== 'number') S.roadFree = ROAD_FREE;
@@ -469,6 +474,24 @@ function fairTick(S, now) { if (!S.land.bairro || !S.fair || !S.fair.some(Boolea
   const p = (0.05 + Math.min(0.1, S.homes.length * 0.01) + (tour ? 0.05 : 0)) * (festaOn(S, now) ? 2.5 : 1); if (Math.random() > p) return -1;
   const opts = S.fair.map((st, i) => st ? i : -1).filter(i => i >= 0), i = opts[Math.floor(Math.random() * opts.length)], st = S.fair[i];
   S.coins += ITEMS[st.k].v; S.fairSold = (S.fairSold || 0) + ITEMS[st.k].v; if (--st.q <= 0) S.fair[i] = null; return i; }
+// missões da prefeitura: entregas grandes para a cidade; pagam bem e sobem a felicidade (+2 cada, até +20)
+function genMiss(S) { const items = unlockedItems(S).filter(k => !CROPS[k]), k = items[Math.floor(Math.random() * items.length)] || 'pao', q = clamp(Math.round((150 + S.lvl * 20) / ITEMS[k].v), 3, 20), val = ITEMS[k].v * q;
+  return { it: [[k, q]], c: Math.round(val * 1.8), x: Math.round(val / 4) + 5 }; }
+function ensureMiss(S, now) { if (!S.land.bairro) return false; let ch = false; while (S.miss.length < 3) { S.miss.push({ id: S.oid++, w: now, ...genMiss(S) }); ch = true; } return ch; }
+const BUS = { cost: 1800, lvl: 10 };
+function busRoute(S) { const r = [[340, 700], [340, 1560], [340, 2034], [1062, 2034]]; if (S.land.escolar) r.push([1062, 2644], [100, 2644]); return r; }
+function busPos(S, ms) { const r = busRoute(S); let len = 0; const seg = []; for (let i = 1; i < r.length; i++) { const d = Math.hypot(r[i][0] - r[i - 1][0], r[i][1] - r[i - 1][1]); seg.push(d); len += d; }
+  const per = len / 90 + 8, t = (ms / 1000) % (per * 2), fw = t < per; let u = (fw ? t : per * 2 - t) - 4; u = clamp(u, 0, len / 90) * 90;
+  for (let i = 0; i < seg.length; i++) { if (u <= seg[i]) { const f = seg[i] ? u / seg[i] : 0, a = r[i], b = r[i + 1]; return { x: a[0] + (b[0] - a[0]) * f, y: a[1] + (b[1] - a[1]) * f, d: fw ? Math.sign(b[0] - a[0]) || 1 : -(Math.sign(b[0] - a[0]) || 1), v: b[0] === a[0] }; } u -= seg[i]; } const e = r[r.length - 1]; return { x: e[0], y: e[1], d: 1 }; }
+function g2stop(g, x, y) { g.fillStyle = '#3a3a44'; g.fillRect(x - 2, y - 50, 4, 50); g.fillStyle = '#2f9e6e'; rr(g, x - 14, y - 64, 28, 18, 4); g.fill(); g.fillStyle = '#fff'; g.font = '900 11px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText('BUS', x, y - 51); }
+function drawBus(g, x, y, d, T) { g.save(); g.translate(x, y); g.scale(d, 1); g.fillStyle = 'rgba(0,0,0,.2)'; g.beginPath(); g.ellipse(0, 4, 56, 8, 0, 0, 6.283); g.fill();
+  g.fillStyle = '#ffc61a'; rr(g, -54, -50, 108, 48, 10); g.fill(); g.fillStyle = '#2f9e6e'; g.fillRect(-54, -20, 108, 8);
+  for (let i = 0; i < 4; i++) { g.fillStyle = '#bfe9ff'; g.fillRect(-46 + i * 22, -44, 18, 16); g.fillStyle = ['#e8b890', '#c98a5a', '#f2c6a0', '#8a5a3a'][i]; g.beginPath(); g.arc(-37 + i * 22, -33 + Math.sin(T * 6 + i) * 1, 4, 0, 6.283); g.fill(); }
+  g.fillStyle = '#bfe9ff'; g.fillRect(40, -44, 12, 22); for (const wx of [-32, 32]) { g.fillStyle = '#2b2b2b'; g.beginPath(); g.arc(wx, -2, 9, 0, 6.283); g.fill(); g.fillStyle = '#aaa'; g.beginPath(); g.arc(wx, -2, 3.5, 0, 6.283); g.fill(); } g.restore(); }
+function drawPrefeitura(g, x, y, T) { shadow(g, x, y, 190); g.fillStyle = '#f6f0e2'; g.fillRect(x - 80, y - 90, 160, 90); g.fillStyle = '#e6dcc4'; g.fillRect(x - 86, y - 8, 172, 10);
+  g.fillStyle = '#ffffff'; for (let i = 0; i < 5; i++) g.fillRect(x - 66 + i * 30, y - 80, 10, 72); g.fillStyle = '#d9cfb4'; g.beginPath(); g.moveTo(x - 92, y - 90); g.lineTo(x, y - 128); g.lineTo(x + 92, y - 90); g.closePath(); g.fill();
+  g.fillStyle = '#7fb3d6'; g.beginPath(); g.arc(x, y - 128, 26, Math.PI, 0); g.fill(); g.fillStyle = '#8a8a8a'; g.fillRect(x - 1, y - 176, 3, 24); const fw = Math.sin(T * 3) * 3; g.fillStyle = '#2f9e6e'; g.beginPath(); g.moveTo(x + 2, y - 176); g.quadraticCurveTo(x + 14, y - 172 + fw, x + 26, y - 170); g.lineTo(x + 26, y - 158); g.quadraticCurveTo(x + 14, y - 160 + fw, x + 2, y - 162); g.closePath(); g.fill();
+  g.fillStyle = '#7a4b25'; g.fillRect(x - 12, y - 40, 24, 40); }
 function ensureOrders(S) { let ch = false; while (S.orders.length < 3) { S.orders.push({ id: S.oid++, w: 0, ...genOrder(S) }); ch = true; } return ch; }
 function packQ(b, now) { let t = now; for (const j of b.q) { j.s = Math.max(t, j.s); j.e = Math.max(j.e, j.s); t = j.e; } }
 // aplica uma ação; devolve {ok, msg, fx}. Determinístico a partir de "now", exceto as encomendas novas (só o dono gera).
@@ -551,6 +574,11 @@ function apply(S, a, now) {
     const i = a.i | 0, st = S.fair[i]; if (!st) return fail(''); if (invCount(S) + st.q > S.cap) return fail(L('barnFull')); give(S, st.k, st.q); S.fair[i] = null;
   } else if (a.a === 'goal') {
     const g = GOALS.find(x => x[0] === a.id); if (!g || S.goals[a.id] || !g[1](S)) return fail(''); S.goals[a.id] = 1; S.coins += g[2]; addXp(S, 10, out); out.fx.push(['coins', g[2]]); out.fx.push(['goal', a.id]);
+  } else if (a.a === 'miss') {
+    const o = S.miss.find(x => x.id === a.id); if (!o || o.w > now) return fail(''); const need = Object.fromEntries(o.it); if (!has(S, need)) return fail(L('missingProd'));
+    take(S, need); S.coins += o.c; addXp(S, o.x, out); S.cityHp = Math.min(20, (S.cityHp || 0) + 2); S.missDone = (S.missDone || 0) + 1; out.fx.push(['coins', o.c]); out.fx.push(['miss']); Object.assign(o, { id: S.oid++, w: now + 60000 }, genMiss(S));
+  } else if (a.a === 'bus') {
+    if (S.bus) return fail(''); if (!S.land.bairro) return fail(L('needLand', L('land_bairro'))); if (S.lvl < BUS.lvl) return fail(L('unlockAt', BUS.lvl)); if (S.coins < BUS.cost) return fail(L('noCoins')); S.coins -= BUS.cost; S.bus = 1; out.fx.push(['bus']);
   } else if (a.a === 'truck') {
     if (S.truck) return fail(''); if (S.lvl < TRUCK.lvl) return fail(L('unlockAt', TRUCK.lvl)); if (S.coins < TRUCK.cost) return fail(L('noCoins')); S.coins -= TRUCK.cost; S.truck = 1; S.truckAt = 0; out.fx.push(['truck']);
   } else if (a.a === 'serv') {
@@ -678,6 +706,8 @@ function drawIcon(g, k, s) {
     case 'land': g.fillStyle = '#6fbf4a'; g.fillRect(12, 40, 76, 48); g.fillStyle = '#3f8f2e'; for (const [x, y] of [[26, 52], [52, 64], [74, 50]]) { g.beginPath(); g.arc(x, y, 9, 0, 6.283); g.fill(); } g.fillStyle = '#c9905a'; g.fillRect(40, 14, 40, 26); g.fillStyle = '#7a4b25'; g.fillRect(46, 40, 6, 30); g.fillStyle = '#fff'; g.fillRect(46, 22, 28, 4); g.fillRect(46, 30, 20, 4); break;
     case 'helper': blob(50, 92, 30, 12, '#3f8f2e'); g.fillStyle = '#2f9e6e'; g.fillRect(28, 60, 44, 34); g.fillStyle = '#f2c6a0'; g.beginPath(); g.arc(50, 44, 20, 0, 6.283); g.fill(); g.fillStyle = '#3a2412'; g.beginPath(); g.arc(43, 44, 2.5, 0, 6.283); g.arc(57, 44, 2.5, 0, 6.283); g.fill(); g.strokeStyle = '#3a2412'; g.lineWidth = 3; g.beginPath(); g.arc(50, 50, 7, 0.3, 2.84); g.stroke(); g.fillStyle = '#2f9e6e'; g.beginPath(); g.arc(50, 34, 20, Math.PI, 0); g.fill(); g.fillRect(50, 30, 28, 6); g.fillStyle = '#ffc23a'; g.fillRect(36, 70, 8, 8); g.fillRect(56, 70, 8, 8); break;
     case 'algodao': g.strokeStyle = '#6b8f3a'; g.lineWidth = 5; g.beginPath(); g.moveTo(50, 94); g.lineTo(50, 50); g.stroke(); g.fillStyle = '#8a5a2b'; for (const [x, y] of [[36, 46], [64, 46], [50, 30]]) { g.beginPath(); g.moveTo(x - 14, y + 8); g.lineTo(x, y + 16); g.lineTo(x + 14, y + 8); g.fill(); } for (const [x, y, r] of [[36, 40, 13], [64, 40, 13], [50, 24, 14], [50, 42, 12]]) blob(x, y, r, r * 0.9, '#ffffff', '#cfcfcf'); break;
+    case 'camarao': g.strokeStyle = '#ff7a4a'; g.lineWidth = 16; g.beginPath(); g.arc(50, 52, 26, Math.PI * 0.15, Math.PI * 1.35); g.stroke(); g.strokeStyle = '#ffb08a'; g.lineWidth = 3; for (let i = 0; i < 5; i++) { const a = Math.PI * (0.3 + i * 0.22); g.beginPath(); g.moveTo(50 + Math.cos(a) * 18, 52 + Math.sin(a) * 18); g.lineTo(50 + Math.cos(a) * 34, 52 + Math.sin(a) * 34); g.stroke(); } blob(70, 70, 6, 6, '#3a2412'); g.strokeStyle = '#ff7a4a'; g.lineWidth = 2; g.beginPath(); g.moveTo(74, 66); g.lineTo(92, 50); g.moveTo(74, 70); g.lineTo(94, 62); g.stroke(); break;
+    case 'moqueca': blob(50, 66, 42, 26, '#5a3418'); blob(50, 60, 38, 18, '#e6a92a'); blob(36, 58, 8, 6, '#ff7a4a'); blob(60, 62, 9, 6, '#ff7a4a'); blob(48, 56, 6, 5, '#fff3dc'); blob(66, 54, 5, 4, '#4fae3a'); g.strokeStyle = '#3a2412'; g.lineWidth = 4; g.beginPath(); g.moveTo(8, 64); g.lineTo(-2, 58); g.moveTo(92, 64); g.lineTo(102, 58); g.stroke(); break;
     case 'girassol': g.strokeStyle = '#4f9a2f'; g.lineWidth = 6; g.beginPath(); g.moveTo(50, 96); g.lineTo(50, 52); g.stroke(); g.fillStyle = '#ffc61a'; for (let i = 0; i < 12; i++) { g.save(); g.translate(50, 38); g.rotate(i * Math.PI / 6); g.beginPath(); g.ellipse(0, -20, 7, 14, 0, 0, 6.283); g.fill(); g.restore(); } blob(50, 38, 14, 14, '#7a4b25'); break;
     case 'buque': g.fillStyle = '#f2e3c6'; g.beginPath(); g.moveTo(30, 50); g.lineTo(70, 50); g.lineTo(56, 96); g.lineTo(44, 96); g.closePath(); g.fill(); g.fillStyle = '#e0533d'; g.fillRect(40, 66, 20, 8); for (const [x, y, c] of [[34, 34, '#ffc61a'], [56, 26, '#ff8fb1'], [66, 42, '#ffc61a'], [46, 46, '#b48cff'], [50, 14, '#ff6b5a']]) { blob(x, y, 12, 12, c); blob(x, y, 4, 4, '#7a4b25'); } break;
     case 'perfume': g.fillStyle = '#ff8fb1'; g.beginPath(); if (g.roundRect) g.roundRect(24, 36, 52, 58, 14); else g.rect(24, 36, 52, 58); g.fill(); g.fillStyle = 'rgba(255,255,255,.5)'; g.fillRect(32, 44, 8, 40); g.fillStyle = '#ffd23f'; g.fillRect(40, 18, 20, 20); g.fillStyle = '#7b5ea7'; blob(50, 14, 10, 8, '#7b5ea7'); break;
@@ -907,6 +937,8 @@ function playFx(fx) {
     if (f[0] === 'helper') { SND.lvl(); toast(L('helperWon'), 3600); }
     if (f[0] === 'lvl') { SND.lvl(); openSheet('lvl', f[1]); for (let i = 0; i < 30; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
     if (f[0] === 'goal') { SND.lvl(); for (let i = 0; i < 24; i++) SPARK.push({ x: CAM.x + (Math.random() - 0.5) * 200, y: CAM.y - 100, vx: (Math.random() - 0.5) * 300, vy: -100 - Math.random() * 200, t: 0, c: ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][i % 4] }); }
+    if (f[0] === 'miss') { SND.lvl(); toast(L('missDone'), 3000); }
+    if (f[0] === 'bus') { SND.lvl(); closeSheet(); const b = busPos(G.S, Date.now()); CAM.x = b.x; CAM.y = b.y; clampCam(); toast(L('busBought'), 3500); }
     if (f[0] === 'truck') { SND.lvl(); CAM.x = TRUCK.x; CAM.y = TRUCK.y - 40; clampCam(); closeSheet(); toast(L('truckBought'), 3200); }
     if (f[0] === 'serv') { SND.hammer(); const V = SERV[f[1]]; CAM.x = V.x; CAM.y = V.y - 60; clampCam(); closeSheet(); burst(V.x, V.y - 60, 'star'); toast(L('servDone', L('serv_' + f[1]), happy(G.S)), 3200); }
     if (f[0] === 'up') { SND.lvl(); const B = BUILD[f[1]]; burst(B.x, B.y - 60, 'star'); toast(L('upDone', N(f[1]), upLv(G.S, f[1]) + 1), 3000); }
@@ -926,10 +958,10 @@ function boostCards(S) { const now = nowS(); return `<span class="lbl">${L('boos
     <button class="btn" type="button" data-boost="${k}" ${S.coins < B.cost ? 'disabled' : ''}>${img('coin')} ${B.cost}</button></div></div>`).join(''); }
 function fairFx(i) { SND.coin(); burst(fairX(i), FAIR.y - 60, 'coin'); const n = NPCS.list[Math.floor(Math.random() * NPCS.list.length)]; if (n) { n.tx = fairX(i); n.ty = FAIR.y + 26; n.wait = 3; n.say = L('fairBuy'); n.sayT = 2.5; } }
 // novidades: aparece uma vez por versão grande, com botão para ir ver cada coisa
-const NEWS_ID = 'festa-1';
-const NEWS = [['n_estufa', 'lavoura'], ['n_pizza', 'lavoura'], ['n_festa', 'bairro'], ['n_pets', 'farm'], ['n_team', 'helper'], ['n_chain', 'helper'], ['n_lavoura', 'lavoura'], ['n_auto', null], ['n_people', 'farm'], ['n_escolar', 'escolar'], ['n_big', 'bairro'], ['n_bairro', 'bairro'], ['n_fair', 'fair'], ['n_roads', 'road'], ['n_dup', 'shop'], ['n_goals', 'goals'], ['n_truck', 'shop'], ['n_night', null]];
+const NEWS_ID = 'porto-1';
+const NEWS = [['n_porto', 'praia'], ['n_miss', 'city'], ['n_bus', 'city'], ['n_pref', 'escolar'], ['n_estufa', 'lavoura'], ['n_pizza', 'lavoura'], ['n_festa', 'bairro'], ['n_pets', 'farm'], ['n_team', 'helper'], ['n_chain', 'helper'], ['n_lavoura', 'lavoura'], ['n_auto', null], ['n_people', 'farm'], ['n_escolar', 'escolar'], ['n_big', 'bairro'], ['n_bairro', 'bairro'], ['n_fair', 'fair'], ['n_roads', 'road'], ['n_dup', 'shop'], ['n_goals', 'goals'], ['n_truck', 'shop'], ['n_night', null]];
 function maybeNews() { let seen = ''; try { seen = localStorage.getItem('sitio-news') || ''; } catch (e) {} if (seen === NEWS_ID) return; try { localStorage.setItem('sitio-news', NEWS_ID); } catch (e) {} setTimeout(() => { if (G.S && !SH) openSheet('news'); }, 900); }
-function newsGo(k) { closeSheet(); const S = G.S; if (k === 'shop' || k === 'goals' || k === 'helper') return openSheet(k); if (k === 'road') return setRoad(true);
+function newsGo(k) { closeSheet(); const S = G.S; if (k === 'shop' || k === 'goals' || k === 'helper' || k === 'city') return openSheet(k); if (k === 'road') return setRoad(true);
   const at = k === 'farm' ? [320, 700] : k === 'fair' ? [FAIR.x, FAIR.y - 60] : LANDS[k] ? (S.land[k] ? [LANDS[k].r.x + LANDS[k].r.w / 2, LANDS[k].r.y + LANDS[k].r.h / 2] : [LANDS[k].sx, LANDS[k].sy]) : null; if (at) { CAM.z = Math.max(zMin(), 0.6); CAM.x = at[0]; CAM.y = at[1]; clampCam(); } }
 function teamHtml(S, now) { const n = hCount(S), led = S.helper.led || { sp: 0, ea: 0 }, pl = makePlan(S, now), miss = pl.order.filter(k => pl.miss[k] > 0).slice(0, 8);
   return `<span class="lbl">${L('team')}</span><p class="sub">${L('teamHint')}</p>` + Array.from({ length: n }, (_, hh) => { const r = roleOf(S, hh);
@@ -960,7 +992,7 @@ let bcT = 0, bcLast = 0;
 function broadcast() { if (G.mode !== 'host' || !NET.room) return; const now = Date.now(); clearTimeout(bcT); const send = () => { bcLast = Date.now(); NET.room.presence({ st: G.S, now: Date.now() }).catch(() => {}); }; if (now - bcLast > 150) send(); else bcT = setTimeout(send, 150); }
 // escolhe e faz uma tarefa pendente; devolve a ação feita
 // o que as encomendas abertas pedem
-function orderNeeds(S, now) { const need = {}; for (const o of S.orders.concat(S.reqs || [])) if (o.w <= now) for (const [k, q] of o.it) need[k] = (need[k] || 0) + q;
+function orderNeeds(S, now) { const need = {}; for (const o of S.orders.concat(S.reqs || [], S.miss || [])) if (o.w <= now) for (const [k, q] of o.it) need[k] = (need[k] || 0) + q;
   for (const [pk, P] of Object.entries(PROJ)) if (!S.city[pk] && P.lvl <= S.lvl && S.land[P.land || 'vila']) for (const [k, q] of Object.entries(P.need)) need[k] = (need[k] || 0) + q; return need; }
 function findRecipe(S, out) { for (const [b, B] of Object.entries(BUILD)) { if (B.base || !okB(S, B)) continue; const i = B.rec.findIndex(r => r.o === out && okR(S, r)); if (i >= 0) { const best = fam(S, b).map(x => [x, S.bld[x].q.length / qCap(S, x)]).sort((p, q) => p[1] - q[1])[0][0]; return { b: best, i, r: B.rec[i] }; } } return null; }
 const queued = (S, b, out) => fam(S, famOf(b)).reduce((a, x) => a + S.bld[x].q.filter(j => BUILD[x].rec[j.r].o === out).length, 0) * (BUILD[b].rec.find(r => r.o === out) || { k: 1 }).k;
@@ -1001,6 +1033,7 @@ function helperTask(S, now, role) {
   const tries = [], at = (x, y) => ({ x: x - 10, y: y - 10, w: 20, h: 20 }), plan = G.plan = makePlan(S, now);
   if (can('scout')) { for (const o of S.orders) if (o.w <= now && has(S, Object.fromEntries(o.it))) tries.push([{ a: 'deliver', id: o.id }, at(BOARD.x, BOARD.y)]);
     for (const o of S.reqs || []) if (o.w <= now && has(S, Object.fromEntries(o.it))) { const hp = LOTS[resHome(o.who)] || [740, 2040]; tries.push([{ a: 'req', id: o.id }, at(hp[0], hp[1] + 20)]); }
+    for (const o of S.miss || []) if (o.w <= now && has(S, Object.fromEntries(o.it))) tries.push([{ a: 'miss', id: o.id }, at(740, 2034)]);
     if (S.helper.sell !== false && invCount(S) >= S.cap * 0.85) { const sale = surplusSale(S, now); if (sale) tries.push([sale, at(BARN.x, BARN.y)]); } }
   if (can('colhe')) {
     S.plots.forEach((pl, i) => { if (i < S.np && plotReady(pl, now)) tries.push([{ a: 'harvest', i }, plotRect(i), pl.c]); });
@@ -1022,7 +1055,7 @@ function helperTask(S, now, role) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-03.4';
+const BUILD_V = '2026-11-03.5';
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
 let UPD = null, lastTouch = Date.now(); addEventListener('pointerdown', () => { lastTouch = Date.now(); }, { capture: true });
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { let tried = ''; try { tried = sessionStorage.getItem('sitio-upd-try') || ''; } catch (e) {} if (tried !== j.v) UPD = j.v; } } catch (e) {} }
@@ -1036,7 +1069,7 @@ try { if (sessionStorage.getItem('sitio-upd-done')) { sessionStorage.removeItem(
 $('bUpd').onclick = () => doUpdate(UPD);
 let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
-  const S = G.S, now = Date.now(); helperClock++; if (ensureReqs(S, now)) { S.rev++; saveSoon(); broadcast(); }
+  const S = G.S, now = Date.now(); helperClock++; if (ensureReqs(S, now) | ensureMiss(S, now)) { S.rev++; saveSoon(); broadcast(); }
   if (rainTick(S, now)) { S.rev++; saveSoon(); broadcast(); }
   { const tr = truckTick(S, now); if (tr && tr.ok) { ensureOrders(S); S.rev++; saveSoon(); broadcast(); playFx(tr.fx); toast(L('truckDone'), 2000); } }
   { const fi = fairTick(S, now); if (fi >= 0) { S.rev++; saveSoon(); broadcast(); fairFx(fi); } }
@@ -1254,6 +1287,8 @@ function renderSheet() {
     t.textContent = L('city'); const hp = happy(S), m = cityMult(S), inc = Math.round((S.homes.length * HOME_INC + Object.keys(PROJ).filter(k => S.city[k] && S.city[k].e <= now).reduce((a, k) => a + PROJ[k].inc, 0)) * m * 12);
     h = `<div class="card"><b>${L('happyL')}: ${hp}/100</b><div style="height:12px;border-radius:6px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${hp}%;background:${hp > 70 ? '#5cc04a' : hp > 45 ? '#ffc23a' : '#e0533d'}"></i></div><small>${L('happyHint')}</small><small>${L('hpFrom')}</small></div>
       <div class="card"><p class="sub">${L('cityPop', residents(S).length, m.toFixed(2))}</p><p class="sub">${L('incomeH', inc)}</p></div>
+      <span class="lbl">🏛️ ${L('missT')}</span>${S.land.bairro ? `<p class="sub">${L('missSub', S.cityHp || 0)}</p>` + S.miss.map(o => o.w > now ? `<div class="card"><p class="sub">${L('reqWait', fmtT(Math.ceil((o.w - now) / 1000)))}</p></div>` : `<div class="card">${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>${img('coin')}${o.c}</span><span>${img('star')}${o.x}</span><span>😊+2</span></span><span style="flex:1"></span><button class="btn" type="button" data-miss="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`).join('') : `<p class="sub">${L('land_bairro')}</p>`}
+      <div class="card"><div class="row"><span style="font-size:30px">🚌</span><div style="flex:1"><b>${L('busT')}</b><br><small>${L('busD')}</small></div>${S.bus ? `<small>${L('landOwned')}</small>` : !S.land.bairro ? `<small>${L('land_bairro')}</small>` : S.lvl < BUS.lvl ? `<small>${L('lvl', BUS.lvl)}</small>` : `<button class="btn" type="button" data-bus="1" ${S.coins < BUS.cost ? 'disabled' : ''}>${img('coin')} ${BUS.cost}</button>`}</div></div>
       ${Object.entries(SERV).map(([k, V]) => `<div class="card"><div class="row"><span style="width:40px;height:40px;display:grid;place-items:center">${img('star')}</span><div style="flex:1"><b>${L('serv_' + k)}</b><br><small>${L('servD_' + k)}</small></div>
         ${S.serv[k] ? `<small>${L('landOwned')}</small>` : !S.land[V.land || 'bairro'] ? `<small>${L('land_' + (V.land || 'bairro'))}</small>` : S.lvl < V.lvl ? `<small>${L('lvl', V.lvl)}</small>` : `<button class="btn" type="button" data-serv="${k}" ${S.coins < V.cost ? 'disabled' : ''}>${img('coin')} ${V.cost}</button>`}</div></div>`).join('')}`;
   } else if (SH.type === 'homes') {
@@ -1359,6 +1394,8 @@ $('sBody').addEventListener('click', e => {
   if (d.up) act({ a: 'up', k: d.up });
   if (d.serv) act({ a: 'serv', k: d.serv });
   if (d.truck) act({ a: 'truck' });
+  if (d.miss) act({ a: 'miss', id: +d.miss });
+  if (d.bus) act({ a: 'bus' });
   if (d.goal) act({ a: 'goal', id: d.goal });
   if (d.goals) { openSheet('goals'); return; }
   if (d.fput) act({ a: 'fairPut', i: +d.fput, k: d.k });
@@ -1505,7 +1542,7 @@ function saleSign(g, x, y, k, S) { const Ld = LANDS[k]; shadow(g, x, y, 90); g.f
   g.font = '900 12px Nunito, sans-serif'; g.fillText(S && Ld.lvl > S.lvl ? L('lvl', Ld.lvl) : '', x, y - 64); if (!S || Ld.lvl <= S.lvl) { g.drawImage(iconCanvas('coin'), x - 26, y - 76, 18, 18); g.fillText(String(Ld.cost), x + 6, y - 62); } }
 const SPARK = [];
 // explosão de partículas ao colher/recolher, na cor do produto
-const ITEM_COL = { girassol: '#ffc61a', buque: '#ff8fb1', perfume: '#ff8fb1', pizza: '#e0533d', pizzaDoce: '#ffd23f', algodao: '#ffffff', tecido: '#7b5ea7', rede: '#e0533d', coco: '#7a4b25', trigo: '#f2c14e', milho: '#ffd23f', cenoura: '#ff8c1a', cana: '#7cc04b', ovo: '#fff3dc', leite: '#ffffff', laranja: '#ff9a1f', manga: '#ffb627', mel: '#ffb627', peixe: '#5aa9d6', coin: '#ffc23a' };
+const ITEM_COL = { camarao: '#ff8a5a', moqueca: '#e6a92a', girassol: '#ffc61a', buque: '#ff8fb1', perfume: '#ff8fb1', pizza: '#e0533d', pizzaDoce: '#ffd23f', algodao: '#ffffff', tecido: '#7b5ea7', rede: '#e0533d', coco: '#7a4b25', trigo: '#f2c14e', milho: '#ffd23f', cenoura: '#ff8c1a', cana: '#7cc04b', ovo: '#fff3dc', leite: '#ffffff', laranja: '#ff9a1f', manga: '#ffb627', mel: '#ffb627', peixe: '#5aa9d6', coin: '#ffc23a' };
 function burst(x, y, k) { const c = ITEM_COL[k] || '#ffd23f'; for (let i = 0; i < 16; i++) { const a = Math.random() * 6.283, v = 70 + Math.random() * 130; SPARK.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 90, t: 0, c: i % 3 ? c : (i % 2 ? '#8cc63f' : '#ffffff'), leaf: i % 3 === 0 }); } }
 function drawDeco(g, k, x, y, T) {
   if (k === 'banco') { shadow(g, x, y, 70); g.fillStyle = '#6b4120'; g.fillRect(x - 26, y - 14, 5, 14); g.fillRect(x + 21, y - 14, 5, 14); g.fillStyle = '#a8743f'; for (let i = 0; i < 2; i++) g.fillRect(x - 30, y - 20 - i * 7, 60, 5); for (let i = 0; i < 2; i++) g.fillRect(x - 30, y - 38 - i * 7, 60, 5); g.fillStyle = '#6b4120'; g.fillRect(x - 28, y - 44, 4, 26); g.fillRect(x + 24, y - 44, 4, 26); }
@@ -1646,7 +1683,8 @@ function draw(T, dt) {
   if (!lands.lavoura) saleSign(cx, LANDS.lavoura.sx, LANDS.lavoura.sy, 'lavoura', S); else drawLavoura(cx, T, S);
   for (const [k, V] of Object.entries(SERV)) { if (!lands[V.land || 'bairro']) continue; const x = V.x, y = V.y;
     if (!S.serv[k]) { cx.setLineDash([8, 6]); cx.strokeStyle = 'rgba(255,255,255,.6)'; cx.lineWidth = 3; rr(cx, x - 80, y - 90, 160, 90, 12); cx.stroke(); cx.setLineDash([]); cx.fillStyle = 'rgba(58,36,18,.8)'; rr(cx, x - 64, y - 58, 128, 26, 8); cx.fill(); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('serv_' + k) + ' · ' + V.cost, x, y - 40); continue; }
-    if (k === 'colegio') { drawColegio(cx, x, y, T); }
+    if (k === 'prefeitura') { drawPrefeitura(cx, x, y, T); }
+    else if (k === 'colegio') { drawColegio(cx, x, y, T); }
     else if (k === 'parque') { drawParque(cx, x, y, T); }
     else if (k === 'campo') { drawCampo(cx, x, y, T); }
     else if (k === 'praca') { cx.fillStyle = '#e3c58f'; cx.beginPath(); cx.ellipse(x, y - 30, 90, 40, 0, 0, 6.283); cx.fill(); cx.strokeStyle = '#b8935a'; cx.lineWidth = 4; cx.stroke(); tree(cx, x - 70, y - 50, 0.7, T); tree(cx, x + 70, y - 50, 0.7, T);
@@ -1682,8 +1720,12 @@ function draw(T, dt) {
     const j = st.q[0]; if (j) { if (j.e <= now) bubble(cx, B.x, B.y - B.h - 60, B.rec[j.r].o, T); else { progressBar(cx, B.x, B.y + 10, 70, (now - j.s) / (j.e - j.s)); if (k === 'padaria') for (let s = 0; s < 3; s++) { const ph = (T * 0.6 + s / 3) % 1; cx.fillStyle = `rgba(255,255,255,${0.6 * (1 - ph)})`; cx.beginPath(); cx.arc(B.x + 36 + Math.sin(ph * 6) * 4, B.y - B.h - 34 - ph * 40, 6 + ph * 8, 0, 6.283); cx.fill(); } } }
   }
   if (S) { const j = S.bld.moinho.q[0]; if (j) { if (j.e <= now) bubble(cx, M.x + 54, M.y - 140, BUILD.moinho.rec[j.r].o, T); else progressBar(cx, M.x, M.y + 10, 70, (now - j.s) / (j.e - j.s)); } }
-  if (S && S.land.lavoura) for (const k of ['estufa', 'pizzaria']) { const B = BUILD[k], st = S.bld[k], locked = B.lvl > S.lvl; cx.save(); if (locked) cx.globalAlpha = 0.55;
-    if (k === 'estufa') { shadow(cx, B.x, B.y, B.w); cx.fillStyle = 'rgba(200,240,255,.75)'; cx.fillRect(B.x - B.w / 2, B.y - 70, B.w, 70); cx.beginPath(); cx.moveTo(B.x - B.w / 2, B.y - 70); cx.quadraticCurveTo(B.x, B.y - 140, B.x + B.w / 2, B.y - 70); cx.fill();
+  if (S) for (const k of ['estufa', 'pizzaria', 'porto']) { const B = BUILD[k], st = S.bld[k], locked = B.lvl > S.lvl; if (!S.land[B.land]) continue; cx.save(); if (locked) cx.globalAlpha = 0.55;
+    if (k === 'porto') { cx.fillStyle = '#8a5a2b'; cx.fillRect(B.x - 20, B.y - 14, WW - B.x + 20, 18); cx.fillStyle = '#a8743f'; for (let x = B.x - 18; x < WW; x += 12) cx.fillRect(x, B.y - 14, 9, 18); cx.fillStyle = '#6b4120'; for (let x = B.x; x < WW; x += 40) cx.fillRect(x, B.y + 4, 5, 14);
+      house(cx, B.x - 30, B.y, 90, 66, '#e6f2ff', '#2a8cc4', 26); cx.fillStyle = '#7a4b25'; cx.fillRect(B.x - 40, B.y - 30, 20, 30); win(cx, B.x - 12, B.y - 46, 18, 14);
+      const busy = st.q[0] && st.q[0].s <= now && st.q[0].e > now, bx = busy ? 1450 + Math.sin(T * 0.4) * 20 : 1430, by = busy ? B.y - 120 + Math.cos(T * 0.4) * 30 : B.y + 18; boatShape(cx, bx, by + Math.sin(T * 2) * 1.5, 0.8);
+      cx.save(); cx.translate(B.x + 30, B.y - 70); cx.scale(0.3, 0.3); cx.translate(-50, -50); drawIcon(cx, 'camarao', 100); cx.restore(); }
+    else if (k === 'estufa') { shadow(cx, B.x, B.y, B.w); cx.fillStyle = 'rgba(200,240,255,.75)'; cx.fillRect(B.x - B.w / 2, B.y - 70, B.w, 70); cx.beginPath(); cx.moveTo(B.x - B.w / 2, B.y - 70); cx.quadraticCurveTo(B.x, B.y - 140, B.x + B.w / 2, B.y - 70); cx.fill();
       cx.strokeStyle = '#4fae3a'; cx.lineWidth = 3; cx.strokeRect(B.x - B.w / 2, B.y - 70, B.w, 70); for (let i = 1; i < 6; i++) { const xx = B.x - B.w / 2 + i * B.w / 6; cx.beginPath(); cx.moveTo(xx, B.y); cx.lineTo(xx, B.y - 70 - Math.sin(i / 6 * Math.PI) * 70 * 0.98); cx.stroke(); }
       cx.beginPath(); cx.moveTo(B.x - B.w / 2, B.y - 70); cx.quadraticCurveTo(B.x, B.y - 140, B.x + B.w / 2, B.y - 70); cx.stroke();
       for (let i = 0; i < 7; i++) { const fx = B.x - B.w / 2 + 14 + i * 23, c = ['#ffc61a', '#ff8fb1', '#b48cff', '#ff6b5a'][i % 4]; cx.fillStyle = '#4f9a2f'; cx.fillRect(fx - 1, B.y - 22, 2, 14); cx.fillStyle = c; cx.beginPath(); cx.arc(fx, B.y - 24 + Math.sin(T * 2 + i) * 1.5, 5, 0, 6.283); cx.fill(); } }
@@ -1760,6 +1802,7 @@ function draw(T, dt) {
     for (let i = 0; i < 3; i++) { const ph = (T * 0.45 + i / 3) % 1, fx = 300 + ((i * 397 + Math.floor(T * 0.45 + i / 3) * 211) % 900), fy = 1800 - ph * 60; if (ph > 0.25) { const r = (ph - 0.25) * 110; cx.globalAlpha = 1 - ph; for (let k = 0; k < 12; k++) { cx.fillStyle = ['#ffd23f', '#ff8fb1', '#8fd3ff', '#8cc63f'][(k + i) % 4]; cx.beginPath(); cx.arc(fx + Math.cos(k * 0.52) * r, fy + Math.sin(k * 0.52) * r, 3, 0, 6.283); cx.fill(); } cx.globalAlpha = 1; } else { cx.fillStyle = '#ffd23f'; cx.fillRect(fx - 1, fy + 120 - ph * 480, 2, 10); } }
     for (let i = 0; i < 4; i++) { const ph = (T * 0.6 + i / 4) % 1; cx.globalAlpha = 1 - ph; cx.fillStyle = '#3a2412'; cx.font = '900 18px Nunito, sans-serif'; cx.fillText('♪', 700 + i * 24 + Math.sin(ph * 7) * 10, 2000 - ph * 60); } cx.globalAlpha = 1; }
   if (S) { const fo = festaOn(S, Date.now()); if (fo && !G.festaWas) toast(L('festaNow'), 4000); G.festaWas = fo; }
+  if (S && S.bus) { for (const [x, y] of [[372, 1500], [372, 2000], [1094, 2000]].concat(S.land.escolar ? [[600, 2612]] : [])) { g2stop(cx, x, y); } const b = busPos(S, Date.now()); drawBus(cx, b.x, b.y + 6, b.d, T); }
   // mascotes: um cachorro segue quem usa chapéu, um gato segue quem tem cabelo comprido
   if (S) { const pets = [[AV.me, ME.look]]; if (AV.fr.on && G.mode !== 'solo') pets.push([AV.fr, AV.fr.look]); pets.forEach(([av, look], pi) => { const pt = AV['pet' + pi] = AV['pet' + pi] || { x: av.x - 30, y: av.y + 4, t: 0, dir: 1 }; const tx = av.x - (av.dir || 1) * 30, ty = av.y + 6, dx = tx - pt.x, dy = ty - pt.y, d = Math.hypot(dx, dy);
       if (d > 4) { const k = Math.min(1, 230 * dt / d); pt.x += dx * k; pt.y += dy * k; pt.t += dt; pt.dir = dx >= 0 ? 1 : -1; pt.walk = true; } else pt.walk = false; drawPet(cx, pt, look === 'hair' ? 'cat' : 'dog', T); }); }
