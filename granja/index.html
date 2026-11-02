@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#5aa83c">
+<title>Sítio do Vento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@700;800;900&display=swap">
+<style>
+/* Um mapa de sítio que se arrasta com o dedo; em cima nível e moedas; embaixo os painéis que sobem ao tocar em algo. */
+:root{
+  --grass:#6fbf4a; --leaf:#3f8f2e; --soil:#8a5a33; --wood:#7a4b25; --cream:#fff7e3; --paper:#fdf0d0;
+  --ink:#3a2412; --gold:#ffc23a; --sky:#8fd3ff; --red:#e0533d; --blue:#2f8fd8; --me:#ffb020; --friend:#9b5de5;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif; --body:"Nunito",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%;overflow:hidden;background:#5aa83c;font-family:var(--body);color:var(--ink);touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#cv{position:fixed;inset:0;width:100%;height:100%;display:block}
+button{font-family:inherit;cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+/* barra superior */
+#hud{position:fixed;left:0;right:0;top:0;z-index:3;display:flex;gap:8px;align-items:center;padding:calc(env(safe-area-inset-top) + 8px) max(10px,env(safe-area-inset-right)) 8px max(10px,env(safe-area-inset-left));pointer-events:none}
+#hud>*{pointer-events:auto}
+.lvl{position:relative;width:52px;height:52px;flex:none;border-radius:50%;background:conic-gradient(var(--gold) calc(var(--p,0)*1%),rgba(0,0,0,.25) 0);display:grid;place-items:center;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+.lvl b{width:42px;height:42px;border-radius:50%;background:#3d8fd1;color:#fff;display:grid;place-items:center;font-family:var(--display);font-size:24px;line-height:1;border:3px solid #fff}
+.pill{display:flex;align-items:center;gap:6px;background:var(--cream);border-radius:999px;padding:4px 12px 4px 6px;font-weight:900;font-size:17px;box-shadow:0 3px 0 rgba(0,0,0,.2);border:0;min-width:0}
+.pill img{width:26px;height:26px}
+.sp{flex:1}
+.ib{width:46px;height:46px;border-radius:14px;border:0;background:var(--cream);box-shadow:0 3px 0 rgba(0,0,0,.2);display:grid;place-items:center;position:relative;flex:none;font-weight:900}
+.ib img{width:30px;height:30px}
+.ib .dot{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;border-radius:10px;background:var(--red);color:#fff;font-size:12px;display:grid;place-items:center;padding:0 5px;border:2px solid #fff}
+.ib .dot:empty{display:none}
+#coop{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 66px);z-index:3;background:rgba(58,36,18,.78);color:#fff;font-weight:800;font-size:13px;border-radius:999px;padding:5px 12px;display:flex;gap:6px;align-items:center;white-space:nowrap}
+#coop i{width:10px;height:10px;border-radius:50%;background:var(--friend);display:inline-block}
+/* panel inferior */
+#sheet{position:fixed;left:0;right:0;bottom:0;z-index:4;background:var(--paper);border-radius:22px 22px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.3);padding:14px max(14px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 14px) max(14px,env(safe-area-inset-left));max-height:72vh;overflow:auto;display:flex;flex-direction:column;gap:10px;touch-action:pan-y}
+#sheet header{display:flex;align-items:center;gap:10px}
+#sheet h2{font-family:var(--display);font-size:26px;line-height:1;margin:0;flex:1}
+#sheet .x{border:0;background:rgba(58,36,18,.1);width:38px;height:38px;border-radius:50%;font-size:20px;font-weight:900}
+.sub{font-size:14px;font-weight:800;color:#7a5a3a;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.tile{background:#fff;border:0;border-radius:14px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;box-shadow:0 3px 0 rgba(0,0,0,.12);font-weight:800;font-size:13px;text-align:center;line-height:1.15}
+.tile img{width:44px;height:44px}
+.tile small{font-size:12px;color:#7a5a3a;font-weight:800}
+.tile:disabled{opacity:.45}
+.tile.lock{filter:grayscale(1);opacity:.55}
+.row{display:flex;gap:8px;align-items:center}
+.card{background:#fff;border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;box-shadow:0 3px 0 rgba(0,0,0,.1)}
+.need{display:flex;gap:6px;flex-wrap:wrap}
+.need span{display:flex;align-items:center;gap:3px;background:var(--paper);border-radius:10px;padding:3px 8px 3px 4px;font-weight:900;font-size:14px}
+.need span img{width:28px;height:28px}
+.need span.no{color:var(--red)}
+.btn{border:0;border-radius:14px;padding:11px 14px;font-family:var(--display);font-size:20px;line-height:1;color:#fff;background:linear-gradient(#5cc04a,#3a9530);box-shadow:0 4px 0 #2b6e23;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn.blue{background:linear-gradient(#4aa8ef,#2a7cc4);box-shadow:0 4px 0 #1d5a8f}
+.btn.gray{background:#d9cbb0;color:var(--ink);box-shadow:0 4px 0 #b3a385}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.3)}
+.btn:disabled{filter:grayscale(.9);opacity:.6}
+.btn img{width:22px;height:22px}
+.q{display:flex;gap:6px;flex-wrap:wrap}
+.slot{width:58px;height:58px;border-radius:12px;background:var(--paper);display:grid;place-items:center;position:relative;font-size:11px;font-weight:900}
+.slot img{width:38px;height:38px}
+.slot em{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-style:normal}
+.slot.ready{background:#c9f0b0}
+/* menú */
+.ov{position:fixed;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;background:rgba(40,70,20,.45);padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.menu{background:var(--paper);border-radius:24px;width:min(100%,420px);max-height:100%;overflow:auto;padding:22px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 20px 50px rgba(0,0,0,.35);touch-action:pan-y}
+.menu h1{font-family:var(--display);font-size:44px;line-height:.95;margin:0;text-align:center;color:#2f7a22}
+.menu p{margin:0;font-weight:700;line-height:1.35}
+.farm{display:flex;align-items:center;gap:10px;background:#fff;border-radius:16px;padding:10px 12px;box-shadow:0 3px 0 rgba(0,0,0,.1)}
+.farm div{flex:1;min-width:0}
+.farm b{display:block;font-size:17px}
+.farm small{font-weight:800;color:#7a5a3a}
+input.code{font-family:var(--display);font-size:28px;letter-spacing:.2em;text-align:center;text-transform:uppercase;border-radius:12px;border:2px solid #d9cbb0;padding:6px;width:100%;min-width:0;background:#fff;color:var(--ink)}
+input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0;padding:10px;width:100%;min-width:0;background:#fff;color:var(--ink);-webkit-user-select:text;user-select:text}
+.bigcode{font-family:var(--display);font-size:56px;letter-spacing:.18em;text-align:center;line-height:1;background:#fff;border-radius:14px;padding:10px 0 4px;border:2px dashed #d9cbb0;-webkit-user-select:text;user-select:text}
+.lbl{font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#7a5a3a}
+.msg{color:var(--red);font-weight:900}
+.msg:empty{display:none}
+.or{display:flex;align-items:center;gap:8px;color:#9b7a55;font-weight:900;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.or::before,.or::after{content:"";flex:1;border-top:2px dashed #d9cbb0}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);transform:translateX(-50%);z-index:7;background:rgba(58,36,18,.88);color:#fff;font-weight:800;padding:9px 16px;border-radius:999px;font-size:15px;max-width:calc(100% - 32px);text-align:center;pointer-events:none}
+</style>
+</head>
+<body>
+<canvas id="cv" aria-label="O sítio. Arraste para se mover e toque nos canteiros, animais e construções."></canvas>
+
+<div id="hud" hidden>
+  <div class="lvl" id="hLvl" aria-label="Nível"><b id="hLvlN">1</b></div>
+  <button class="pill" id="hCoins" type="button" aria-label="Moedas"><img id="icCoin" alt=""><span id="hCoinsN">0</span></button>
+  <div class="sp"></div>
+  <button class="ib" id="bOrders" type="button" aria-label="Encomendas"><img id="icOrders" alt=""><span class="dot" id="dOrders"></span></button>
+  <button class="ib" id="bBarn" type="button" aria-label="Celeiro"><img id="icBarn" alt=""></button>
+  <button class="ib" id="bShop" type="button" aria-label="Loja"><img id="icShop" alt=""></button>
+  <button class="ib" id="bMenu" type="button" aria-label="Menu">☰</button>
+</div>
+<div id="coop" hidden><i></i><span id="coopT">Jogando com seu amigo</span></div>
+
+<section id="sheet" hidden aria-live="polite">
+  <header><h2 id="sTitle"></h2><button class="x" id="sClose" type="button" aria-label="Fechar">✕</button></header>
+  <div id="sBody" style="display:flex;flex-direction:column;gap:10px"></div>
+</section>
+
+<section class="ov" id="ovMenu">
+  <div class="menu">
+    <h1>Sítio do Vento</h1>
+    <p style="text-align:center;color:#7a5a3a">Plante, cuide dos animais e entregue encomendas. Sozinho ou com um amigo, no mesmo sítio.</p>
+    <span class="lbl">Seus sítios</span>
+    <div id="farms" style="display:flex;flex-direction:column;gap:8px"></div>
+    <div class="or">ou entre no sítio de um amigo</div>
+    <div class="row"><input class="code" id="iCode" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD" aria-label="Código da sala"><button class="btn blue" id="bJoin" type="button">Entrar</button></div>
+    <p class="msg" id="mMsg"></p>
+  </div>
+</section>
+
+<section class="ov" id="ovRoom" hidden>
+  <div class="menu">
+    <h1 style="font-size:34px">Convide seu amigo</h1>
+    <span class="lbl">Código</span>
+    <div class="bigcode" id="rCode">----</div>
+    <div id="rShare" style="display:flex;flex-direction:column;gap:6px"><span class="lbl">Ou mande este link</span>
+      <div class="row"><input class="link" id="rLink" readonly aria-label="Link da sala"><button class="btn blue" id="bCopy" type="button">Copiar</button></div></div>
+    <p id="rStatus"></p>
+    <p class="msg" id="rMsg"></p>
+    <button class="btn" id="bRoomOk" type="button">Continuar jogando</button>
+  </div>
+</section>
+
+<div id="toast" hidden></div>
+<script src="peerjs.min.js"></script>
+<script src="p2p.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
