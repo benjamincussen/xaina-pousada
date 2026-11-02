@@ -566,3 +566,16 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Hoja 📈 "Precios del día" (botón en el Granero): lista con flechas ▲▼ respecto a la hora anterior y etiqueta "buen momento" (≥1,25×); el Granero marca cada producto en buen momento; al vender en buen momento suena y avisa.
 - Tablero de precios en el mapa (al lado del lago, bajo los frutales) con los 3 mejores productos y flechas; tocarlo abre la hoja.
 - Prueba `tests/precos.js`: multiplicadores dentro de rango, cambio a la hora siguiente, venta con aviso, hojas sin errores, capturas.
+## Versión 82 (sesión "Corsario", solo mundo.js): flota, arqueros, comercio con las ciudades y más mundo
+
+- **Flota y arqueros** (en 🌍, necesita el Puerto de Carga):
+  - Barcos de guerra (hasta 8): 4000×n monedas + 30×n de hierro de la mina. Cada barco da +6% de ataque contra ciudades del mundo y +8 de defensa.
+  - Arqueros (5 niveles): 2500×n monedas + 40×n de piedra; +15 de defensa por nivel.
+  - Los barcos aparecen anclados frente al fuerte y los arqueros sobre la muralla (con `EXT.draw`).
+  - El Comandante del Concejo también los construye con su cartera, si hay minerales.
+- **Comercio con cada ciudad vecina:**
+  - Al visitarla, piden 2 productos que cambian cada hora según su carácter (comerciante, agricultora o guerrera).
+  - Pagan entre 1,4 y 1,9 veces el valor, más un extra por buena relación; hasta 20 de cada producto por hora. Vender sube la relación.
+  - Se ve un barco 🛳️ viajando a esa ciudad en el mapa del mundo.
+- **Más mundo:** dos ciudades nuevas, Ilhas Gêmeas (comerciante) y Cidade Real (guerrera y fuerte), y una isla libre más (Cabo Leste). Hay que explorarlas.
+- **Mapa del mundo:** barquitos ⛵ van y vienen a cada colonia; aparecen 🤝 sobre las ciudades amigas y ⚔️ sobre las hostiles.
