@@ -111,3 +111,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Cielo estrellado y estrellas fugaces: tocar = deseo con monedas
 - [x] Observatorio con telescopio (doble de estrellas, +8 felicidad)
 - [x] Ciclistas en la avenida; loros y búho como animalitos
+
+## Versión grande 17: "Mapa" (2026-11-03.18)
+- [x] Botón 🗺️ para ir directo a cada lugar del mapa
+- [x] Resumen "Mientras no estabas" (monedas, pedidos, vecinos, niveles)
+- [x] Nombre de la ciudad con arco de bienvenida en la entrada de la villa
