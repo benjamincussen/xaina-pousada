@@ -233,3 +233,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Día de lluvia: los vecinos abren paraguas de colores; aparecen charcos con gotas en calles de la villa, barrios y granja (se secan en 2 min) y niños con botas amarillas saltan en ellos.
 - Picnic en el lago: de día y sin lluvia, una familia en un mantel a cuadros con canasta, pan y jugo; los niños juegan a la pelota.
 - Sopa comunitaria en la villa: cada 20 min por 4 min; donar 3 zanahorias (o maíces) da +15 XP y +1 felicidad (hasta +20, compartido con misiones). Sincronizado en co-op.
+
+## Versión grande 41: Club de jardinería, ballenas y castañas (2026-11-03.42)
+- Club de jardinería: con 12+ vecinos, cada 5 min tres vecinos con regadera riegan las parcelas; lo que está creciendo avanza 20 s (lo aplica el host, sincronizado).
+- Ballenas: cada 3 min aparece una ballena en el mar junto a la playa, lanza un chorro y muestra la cola.
+- Castañas en otoño: carrito de castañas asadas con humo junto a la feria del barrio.
