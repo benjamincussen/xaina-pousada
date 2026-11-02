@@ -345,3 +345,16 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Mar grande: islas con palmeras, barcos de carga, lanchas y veleros cruzando.
 - Casas en los lotes nuevos con ids de vecinos propios (1000+) para no chocar con los viejos. Parcelas hasta 84; corrales con 'kind' (gallinero/establo) y nivel que depende del terreno.
 - "Ir a…" con los 7 lugares nuevos; Novedades.
+
+## Versión grande 61: Gráficas con luz, sombras y agua (de la sesión de gráficas, integrada sobre la expansión) (2026-11-03.62)
+- Suelo: pasto con manchas de prado claras/oscuras (profundidad), tufos de dos hojas y tréboles; se quitó el mosaico de cuadrados de 40 px. Cada faja del fondo solo pinta lo que le toca (más rápido de construir).
+- Sombras: `shadow()` ahora es suave, con dirección de sol y dos tonos (se usa en todos los edificios, árboles y objetos).
+- Árboles, frutales y arbustos: contorno oscuro de la copa, sombra interna y luz arriba; tronco con degradado.
+- Casas (`houseRaw`, cacheadas): sombra del alero sobre la pared, base oscura y techo con degradado de luz.
+- Caminos: borde exterior suave que se funde con el pasto.
+- Agua (`waterDetail`): orilla mojada, franja rasa clara, fondo oscuro, reflejos y nenúfares en el lago y la lagunita; mar con arena mojada, espuma en la orilla y olitas.
+- Canteros: tierra con terrones y surcos con brillo.
+- Iluminación por frame: noche con mezcla `multiply` (conserva el contraste) + atardecer/amanecer anaranjado; charcos de luz en el piso bajo los faroles; luciérnagas de noche; sombras de nubes pasando de día (ambas se apagan en "Menos animaciones").
+- Canvas sin alfa y suavizado de imagen en alta calidad.
+- Medido en Chromium headless (sin GPU), granja nivel 14 con todas las tierras: tiempo por frame igual (mediana ~3 ms antes y después); construir el fondo pasó de ~250 ms a ~360 ms una sola vez.
+- Integrado con la expansión: el oeste usa el mismo pasto nuevo y las baldosas pintan solo su franja (más rápido).
