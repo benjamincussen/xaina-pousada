@@ -305,3 +305,7 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Tobogán amarillo en la Piscina con un niño que baja y salpica.
 - Karaoke de noche junto al Campamento: cantante con micrófono, notas y público.
 - Bus de turismo cada 3 min: llega, para en el medio y sigue; aviso si la cámara está cerca.
+
+## Versión grande 55: Minigolf en la Colonia y malvaviscos (2026-11-03.56)
+- Minigolf (Colonia de Vacaciones, a la izquierda de las Cabañas): tocarlo abre un minijuego de puntería; la pelotita va y vuelve en una barra y hay que tocar "¡Golpe!" en el verde oscuro. Hoyo en uno 120 monedas (+10 XP), buen golpe 60, lejos 20. Un golpe cada 10 min por granja (sincronizado). Aparece en la agenda.
+- Malvaviscos: de día tres niños asan malvaviscos en la fogata del Campamento.
