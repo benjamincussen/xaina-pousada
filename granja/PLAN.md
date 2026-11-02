@@ -424,3 +424,11 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - **Indicadores en la plaza:** una moneda sobre el camión cuando ya tienes todo, y un ✓ cuando ya entregaste.
 - **Ayudantes de Ciudad:** entregan solos, pero solo si sobra stock (guardan lo que piden los pedidos y la mitad de su meta de stock). Queda en el diario del equipo y en el de jugadores (🚚).
 - **Co-op:** los pedidos se calculan por la hora, así que el anfitrión y el invitado ven los mismos.
+
+## Versión 72: Barrido de bugs, turistas en los food trucks y agenda completa
+
+- **Barrido de bugs:**
+  - Prueba nueva (fuzz) que abre las 36 hojas del juego y da 400 toques al azar por todo el mapa, en español y portugués: 0 errores.
+  - Rendimiento comparado con la v67, sin pérdidas.
+- **Turistas:** con el Aeropuerto listo, pasean turistas con maletas por la plaza de los food trucks y los pedidos pagan 25% más (se ve "✈️ +25%" en la hoja).
+- **Agenda del mapa:** ahora incluye el Show de la Ciudad Nueva y los pedidos de los food trucks, con botón "Ir".
