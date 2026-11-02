@@ -733,3 +733,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 ## Calidad continua (sin cambio de versión)
 - `tests/oldsave.js`: una partida con los campos mínimos de la v1 carga, migra (arquitecta, servicios, 35 fábricas), abre 11 hojas, siembra y compra terreno sin errores.
 - `tests/soak.js`: ciudad al máximo (82 torres, 1312 vecinos, 24 ayudantes, Lucía con presupuesto) con 8 h simuladas en 373 ms, 371 decisiones, guardado de 16 KB, 257 caminantes (tope), 0 errores.
+
+## Versión 107: Gráfico de crecimiento de la ciudad
+
+- Cada 30 min (también en la simulación offline) se guarda un punto con vecinos, casas, tesoro y monedas (`S.hist`, hasta 48 h, ordenado por franja de tiempo).
+- "Tu ciudad en números" muestra el gráfico 📈 con tres líneas (vecinos, casas, tesoro) y el último valor de cada una.
+- Prueba: 6 h simuladas → 13 puntos ordenados, canvas pintado; smoke y fuzz sin errores.
