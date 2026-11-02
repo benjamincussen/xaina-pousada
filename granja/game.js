@@ -700,11 +700,13 @@ function helperTask(S, now) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-02.17';
+const BUILD_V = '2026-11-02.18';
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { $('updT').textContent = L('newVersion'); $('bUpd').textContent = L('update'); $('upd').hidden = false; } } catch (e) {} }
 $('vTag').textContent = 'v ' + BUILD_V;
 setTimeout(checkVersion, 4000); setInterval(checkVersion, 90000);
-$('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S); location.reload(); };
+$('bUpd').onclick = () => { if (G.S && G.mode !== 'guest') storeFarm(G.S);
+  try { if (G.S) sessionStorage.setItem('sitio-resume', JSON.stringify({ fid: G.S.fid, mode: G.mode, code: NET.code || '' })); } catch (e) {}
+  location.href = location.href.split('#')[0]; };
 let helperClock = 0;
 setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   const S = G.S, now = Date.now(); helperClock++;
@@ -717,7 +719,12 @@ const NET = { api: null, room: null, sub: null, code: null, role: null, guestPee
   try { NET.api = window.claude && typeof window.claude.use === 'function' ? await window.claude.use('room') : null; } catch (e) { NET.api = null; }
   if (!NET.api && window.RELAY_ROOM) NET.api = window.RELAY_ROOM; // servidor intermediário: funciona em qualquer rede
   if (!NET.api && window.P2P_ROOM) NET.api = window.P2P_ROOM;
-  joinFromHash(); addEventListener('hashchange', joinFromHash);
+  let resume = null; try { resume = JSON.parse(sessionStorage.getItem('sitio-resume') || 'null'); sessionStorage.removeItem('sitio-resume'); } catch (e) {}
+  if (resume && resume.fid && ME.name) {
+    if (resume.mode === 'guest' && /^[A-Z]{4}$/.test(resume.code)) join(resume.code);
+    else if (loadFarm(resume.fid)) { startFarm(resume.fid); if (resume.mode === 'host') { await hostRoom(); $('ovRoom').hidden = true; } }
+  } else joinFromHash();
+  addEventListener('hashchange', joinFromHash);
 })();
 const CODE_AB = 'ACDEFGHJKMNPQRTUVWXY', newCode = () => Array.from({ length: 4 }, () => CODE_AB[Math.floor(Math.random() * CODE_AB.length)]).join('');
 function joinFromHash() { const h = (location.hash || '').slice(1).toUpperCase(); if (NET.api && /^[A-Z]{4}$/.test(h) && !NET.room) { $('iCode').value = h; if (ME.name) join(h); else { $('mMsg').textContent = L('needName'); $('iName').focus(); } } }
@@ -788,7 +795,7 @@ function onPeers() {
       readFriend(h.presence);
     } else if (G.mode === 'guest' && !G.hostGoneT) {
       toast(L('lostFriend'));
-      G.hostGoneT = setTimeout(() => { if (G.mode === 'guest' && !others().length) { const fid = G.S && G.S.fid; goMenu(); $('mMsg').textContent = L('connDropped'); } }, 12000);
+      G.hostGoneT = setTimeout(() => { if (G.mode === 'guest' && !others().length) { goMenu(); $('mMsg').textContent = L('connDropped'); } }, 90000);
     }
     updCoop();
   }
