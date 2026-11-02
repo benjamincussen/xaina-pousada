@@ -244,3 +244,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Muñecos de nieve en invierno (granja, villa, barrios) con bufanda, gorro o sombrero, y niños jugando.
 - Baile en ronda durante la fiesta del barrio alrededor de la fuente (sombreros de paja y faldas).
 - Novedades: "barn" abre el Granero.
+
+## Versión grande 43: Concurso de pesca, montones de hojas y ayudantes que aprovechan el precio del día (2026-11-03.44)
+- Concurso de pesca en el lago: cada 30 min por 4 min, con 3 pescadores vecinos y marcador a la orilla; pescar 3 veces durante el concurso da 150 monedas (dentro de apply, sincronizado).
+- Montones de hojas en otoño por la granja, villa y barrios, con niños saltando en ellos.
+- Ayudantes: al vender sobrantes con el granero lleno priorizan el producto del precio del día (🔥 +50%).
+- Novedades: destino 'lake' centra la cámara en el lago.
