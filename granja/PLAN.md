@@ -391,3 +391,9 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Puerto de Carga: cada 15 min llegan 3 barcos con ruta propia (Isla del Sol 2,2×, Puerto de la Sierra 2,6× pide más, Gran Ciudad 3× pide mucho más); cada ruta se cumple una vez por ronda (S.expR, compatible con S.exp viejo). Los barcos cargados zarpan hacia su destino. Los ayudantes de Ciudad cargan cualquier ruta solo con productos sobrantes.
 - Centro Moderno: Estadio (nv 17; hinchada, jugadores y pelota en vivo; arriendo 450) y Cine de la Ciudad (nv 16; marquesina con luces; arriendo 320).
 - Revisión completa: textos PT/ES sin faltantes, prueba larga de 3 h de juego sin errores, co-op con acciones nuevas idéntico en ambos teléfonos.
+
+## Versión 67: Empleos, metro elevado y metas de la gran ciudad (2026-11-03.67)
+- Empleos: Torre (20), Centro Empresarial (40), Estadio (30), Cine (15), Aeropuerto (60), Puerto de Carga (30), Colonia, Shopping (25), Hospital (30) y servicios dan puestos; los vecinos adultos los ocupan. Cada 10 trabajando = +1 felicidad (hasta +10). Se ve en Ayudantes → "Atentos a la ciudad".
+- Metro elevado: con Ciudad Nueva o Centro y el Barrio Nuevo, una vía elevada une el oeste con el barrio, con estaciones (Bairro, Cidade Nova, Centro) y un tren que va y viene.
+- Metas nuevas: comprar un terreno de la expansión (1500), Torre + Centro Empresarial (3000), cargar los 3 barcos en una ronda (2500), 60 vecinos trabajando (2500).
+- Rendimiento: con el zoom muy lejano la gente se dibuja como puntos simples (vista lejana de ~30 ms a ~4 ms en la prueba).
