@@ -135,3 +135,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Puente colgante sobre la cascada con excursionista cruzando
 - [x] Novedades cortas (solo lo nuevo + "Ver todo")
 - [x] Botones y monedas ajustados para celulares chicos (360 px)
+
+## Versión grande 22: "Sonidos y fotos" (2026-11-03.23)
+- [x] Foto de la ciudad con el nombre, para compartir por WhatsApp
+- [x] Sonidos de cada lugar (olas, pájaros, niños, peces)
+- [x] Ayudantes con accesorios de su oficio
