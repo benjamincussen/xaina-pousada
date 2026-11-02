@@ -125,3 +125,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 ## Versión grande 19: "Joyería" (2026-11-03.20)
 - [x] Joyería en la Sierra: anillos y collares (los productos más valiosos)
 - [x] Refugio de montaña con chimenea y excursionistas
+
+## Versión grande 20: "Fútbol" (2026-11-03.21)
+- [x] Globos de los turistas desde el Parque (pagan pasajes cada 2 min)
+- [x] Campeonato de fútbol entre barrios con marcador, hinchada y taquilla
+- [x] Excursionistas con gorro y mochila
