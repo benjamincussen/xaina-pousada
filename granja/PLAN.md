@@ -615,3 +615,12 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - Perfilado con una ciudad de 40 torres, 640 vecinos y 24 ayudantes (Chromium sin GPU): el frame había subido a ~40 ms. Causa principal: las monedas que vuelan usaban `shadowBlur` (2 ms por moneda en software). Ahora el brillo es un círculo translúcido: el frame vuelve a ~12 ms en vista normal.
 - Además: las ventanas se dibujan una vez por tamaño y se copian (`win` en caché), y `happy()` se memoriza medio segundo (se llamaba ~60 veces por frame vía alquileres).
+## Versión 88 (sesión "Corsario", mundo.js): el Mundo dentro del mapa
+
+- **Océano al este del mapa** (x 3000 → 14000): se recorre arrastrando, como el resto del juego. 🌍 lleva la cámara al mar; tocarlo otra vez abre el panel.
+- **Islas a escala real:** las ciudades vecinas (casas según población, castillo con su bandera, murallas, soldados, muelle) y las colonias dibujadas según su especialidad.
+- **Exploración en el mapa:** lo no explorado está cubierto de nubes con un "?"; tocar la siguiente isla la explora. Tocar una isla abre su ciudad, y desde el panel hay "Ver en el mapa".
+- **Rutas:** rutas punteadas desde nuestro puerto y barcos que van y vuelven a cada colonia, más el barco de comercio cuando vendes.
+- **Hooks en game.js:** `worldB()` amplía los límites de cámara/zoom y de la noche con `EXT.bounds`; el mundo se dibuja con `EXT.draw0`/`EXT.draw` y se toca con `EXT.tap`.
+- **Plan de progreso del Mundo:** `granja/PLAN-MUNDO.md`, compartido con la otra sesión.
+- **Pruebas:** dibujo lejano del mundo en ~4,5 ms; todas las pruebas y el fuzz pasan.
