@@ -228,3 +228,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Mariposas en primavera y verano por la granja, los barrios y el campo.
 - Los pasajeros del tren saludan con la mano.
 - Rendimiento: con zoom muy lejano el fondo usa una copia reducida en caché (mip), ~20% menos tiempo de dibujo.
+
+## Versión grande 40: Día de lluvia, picnic y sopa comunitaria (2026-11-03.41)
+- Día de lluvia: los vecinos abren paraguas de colores; aparecen charcos con gotas en calles de la villa, barrios y granja (se secan en 2 min) y niños con botas amarillas saltan en ellos.
+- Picnic en el lago: de día y sin lluvia, una familia en un mantel a cuadros con canasta, pan y jugo; los niños juegan a la pelota.
+- Sopa comunitaria en la villa: cada 20 min por 4 min; donar 3 zanahorias (o maíces) da +15 XP y +1 felicidad (hasta +20, compartido con misiones). Sincronizado en co-op.
