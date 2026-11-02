@@ -998,7 +998,7 @@ function helperTask(S, now, role) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : null;
 }
-const BUILD_V = '2026-11-03.2';
+const BUILD_V = '2026-11-03.3';
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
 let UPD = null, lastTouch = Date.now(); addEventListener('pointerdown', () => { lastTouch = Date.now(); }, { capture: true });
 async function checkVersion() { try { const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) return; const j = await r.json(); if (j && j.v && j.v !== BUILD_V) { let tried = ''; try { tried = sessionStorage.getItem('sitio-upd-try') || ''; } catch (e) {} if (tried !== j.v) UPD = j.v; } } catch (e) {} }
