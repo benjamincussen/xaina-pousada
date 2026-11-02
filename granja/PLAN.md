@@ -610,3 +610,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Hasta **24 ayudantes** (8 nombres nuevos; costos 22 000–36 000); los nuevos vienen con oficios Industria por defecto.
 - Lúcia propone árboles de sombra y bancas en el Barrio Sur.
 - Prueba `tests/ayudantes3.js`: 24 contratados, 4 con Industria, 12 tareas de Industria llenan las colas (ración 4, azúcar 3, aserradero 2), ideas de Lúcia para el sur, hojas sin errores.
+
+## Versión 87: Rendimiento con la ciudad al máximo
+
+- Perfilado con una ciudad de 40 torres, 640 vecinos y 24 ayudantes (Chromium sin GPU): el frame había subido a ~40 ms. Causa principal: las monedas que vuelan usaban `shadowBlur` (2 ms por moneda en software). Ahora el brillo es un círculo translúcido: el frame vuelve a ~12 ms en vista normal.
+- Además: las ventanas se dibujan una vez por tamaño y se copian (`win` en caché), y `happy()` se memoriza medio segundo (se llamaba ~60 veces por frame vía alquileres).
