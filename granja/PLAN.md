@@ -724,7 +724,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Oficio 💰 **Vendedor**: vende hasta 10 unidades de cada sobra (por encima del stock objetivo y de lo que piden pedidos y recetas) cuando el precio del día está en buen momento (≥1,2×). Viene por defecto en el ayudante 22.
 - **Presupuesto de Lucía por hora** (hoja de la arquitecta: Solo con mi OK / 500 / 2000 / 10000): aprueba sola las propuestas que entran en el presupuesto (queda en su registro como "aprobado por Lucía", con aviso y cámara); el resto espera el OK. Por defecto, manual.
 - Pruebas: 2 calles aprobadas solas dentro del presupuesto, vendedor vende 6 lotes (+1146), hojas sin errores; smoke y fuzz sin errores.
-## Versión 0 (sesión "Corsario", mundo.js): diplomacia en el mundo
+## Versión 106 (sesión "Corsario", mundo.js): diplomacia en el mundo
 
 - **Relaciones entre ciudades del mundo:** se alían y se declaran guerra entre ellas; las guerras se ven como flotas que cruzan entre islas y combaten.
 - **Embajadores** que llegan en barco con 🕊️ a nuestro puerto: tratado de paz, compra de productos, tributo o alianza (con alianza no atacan y defienden con el 30% de su ejército). Se aceptan o rechazan en 🌍 (tocar el barco también abre el panel). Esperan 20 min.
