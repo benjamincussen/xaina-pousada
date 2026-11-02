@@ -69,3 +69,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Faro de la playa en 4 etapas, luz giratoria de noche, +15 felicidad
 - [x] Fondo del mapa por partes: hasta 8x más liviano en el celular; casas guardadas como imagen
 - [x] Sonidos: silbato del tren y fuegos en la fiesta
+
+## Versión grande 9: "Pesca" (2026-11-03.9)
+- [x] Minijuego de pesca con caña en el lago (pez dorado raro)
+- [x] Medallas de bronce, plata y oro (9 tipos) con premios
+- [x] Animalitos: patos en el lago, conejos saltando, cabras (+3 felicidad cada tipo)
+- [x] Avioneta con cartel con el nombre de la granja
