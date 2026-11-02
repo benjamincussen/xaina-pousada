@@ -730,3 +730,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Embajadores** que llegan en barco con 🕊️ a nuestro puerto: tratado de paz, compra de productos, tributo o alianza (con alianza no atacan y defienden con el 30% de su ejército). Se aceptan o rechazan en 🌍 (tocar el barco también abre el panel). Esperan 20 min.
 - **Ranking de ciudades** y **Noticias del mundo** (guerras y alianzas) en el panel 🌍.
 - Solo `mundo.js`. Campos nuevos en `S.mu`: `dip`, `wars`, `ally2`, `allies`, `amb`, `ambNext`, `dipNext`.
+
+## Calidad continua (sin cambio de versión)
+- `tests/oldsave.js`: una partida con los campos mínimos de la v1 carga, migra (arquitecta, servicios, 35 fábricas), abre 11 hojas, siembra y compra terreno sin errores.
+- `tests/soak.js`: ciudad al máximo (82 torres, 1312 vecinos, 24 ayudantes, Lucía con presupuesto) con 8 h simuladas en 373 ms, 371 decisiones, guardado de 16 KB, 257 caminantes (tope), 0 errores.

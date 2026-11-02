@@ -1,0 +1,8 @@
+// Partida vieja (campos mínimos de la v1) debe cargar, migrar y jugar sin errores. node tests/oldsave.js
+const { open, simulate, openSheets } = require('./lib');
+(async () => { const { pg, errs, close } = await open();
+  const r = await pg.evaluate(() => { const S = { v: 1, fid: 'old1', rev: 3, name: 'Velha', coins: 900, xp: 80, lvl: 6, cap: 100, np: 8, plots: Array.from({ length: 36 }, () => ({ c: null, p: 0 })), inv: { trigo: 5 }, bld: { moinho: { q: [] }, padaria: { q: [] } }, pens: { galinheiro: { a: [0, 0, 0] } }, orders: [], oid: 7, land: { leste: 1, sul: 1 }, trees: [0, 0, 0, 0, 0, 0], hives: [0, 0, 0, 0], boat: { e: 0 } };
+    localStorage.setItem('sitio-farm-old1', JSON.stringify(S)); localStorage.setItem('sitio-farms', JSON.stringify([{ fid: 'old1', name: 'Velha', own: 1 }])); localStorage.setItem('sitio-news', NEWS_ID); ME.name = 'B'; startFarm('old1'); closeSheet(); const T = G.S; return { ok: !!T, lvl: T.lvl, homes: T.homes.length, arch: !!T.arch, serv: !!T.serv, roads: T.roads.length, bld: Object.keys(T.bld).length, np: T.np }; });
+  console.log(JSON.stringify(r)); const sheets = await openSheets(pg, ['menu', 'shop', 'barn', 'map', 'goals', 'news', 'helper', 'precos', 'jornal', 'numeros', 'seeds']); console.log(JSON.stringify(sheets));
+  const acts = await pg.evaluate(() => { const o = {}; o.plant = act({ a: 'plant', i: 0, c: 'trigo' }).ok; o.land = act({ a: 'land', k: 'colina' }).ok; for (let i = 0; i < 40; i++) draw(i * 0.016, 0.016); return o; }); console.log(JSON.stringify(acts));
+  console.log('errors', errs.length, errs.slice(0, 5)); await close(); process.exit(errs.length || !r.ok ? 1 : 0); })();
