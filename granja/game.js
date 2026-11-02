@@ -4,6 +4,84 @@
 const $ = id => document.getElementById(id);
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
+// ---------- idiomas (português e espanhol) ----------
+let LANG = (() => { try { const v = localStorage.getItem('sitio-lang'); if (v === 'es' || v === 'pt') return v; } catch (e) {} return /^es/i.test(navigator.language || '') ? 'es' : 'pt'; })();
+const NM = {
+  pt: { trigo: 'Trigo', milho: 'Milho', cenoura: 'Cenoura', cana: 'Cana', ovo: 'Ovo', leite: 'Leite', racaoG: 'Ração de galinha', racaoV: 'Ração de vaca', pao: 'Pão', bolo: 'Bolo de cenoura', queijo: 'Queijo', acucar: 'Açúcar',
+    moinho: 'Moinho', padaria: 'Padaria', queijaria: 'Queijaria', galinheiro: 'Galinheiro', estabulo: 'Estábulo' },
+  es: { trigo: 'Trigo', milho: 'Maíz', cenoura: 'Zanahoria', cana: 'Caña', ovo: 'Huevo', leite: 'Leche', racaoG: 'Ración de gallina', racaoV: 'Ración de vaca', pao: 'Pan', bolo: 'Pastel de zanahoria', queijo: 'Queso', acucar: 'Azúcar',
+    moinho: 'Molino', padaria: 'Panadería', queijaria: 'Quesería', galinheiro: 'Gallinero', estabulo: 'Establo' },
+};
+const N = k => NM[LANG][k] || NM.pt[k] || k;
+const TX = {
+  pt: {
+    title: 'Sítio do Vento', intro: 'Plante, cuide dos animais e entregue encomendas. Sozinho ou com um amigo, no mesmo sítio.',
+    farmsLbl: 'Seus sítios', joinOr: 'ou entre no sítio de um amigo', enter: 'Entrar', codeAria: 'Código da sala',
+    inviteTitle: 'Convide seu amigo', codeLbl: 'Código', shareLbl: 'Ou mande este link', linkAria: 'Link da sala', copy: 'Copiar', copied: 'Copiado', keepPlaying: 'Continuar jogando',
+    canvasAria: 'O sítio. Arraste para se mover e toque nos canteiros, animais e construções.', lvlAria: 'Nível', coinsAria: 'Moedas', ordersAria: 'Encomendas', barnAria: 'Celeiro', shopAria: 'Loja', menuAria: 'Menu', close: 'Fechar',
+    myFarm: 'Meu sítio', friendFarm: 'Sítio do amigo', lvl: n => `Nível ${n}`, own: 'seu sítio', copyHere: 'cópia salva aqui', play: 'Jogar', friendBtn: '+ Amigo', inviteAria: n => `Convidar amigo para ${n}`,
+    code4: 'O código tem 4 letras.', unlockAt: n => `Libera no nível ${n}`, noCoins: 'Moedas insuficientes', barnFull: 'O celeiro está cheio', queueFull: 'A fila está cheia',
+    missingIng: 'Faltam ingredientes', notReady: 'Ainda não está pronto', needFeed: k => `Precisa de ${N(k)}`, producing: 'Os animais ainda estão produzindo', missingProd: 'Faltam produtos',
+    readyIn: (k, t) => `${N(k)}: pronto em ${t}`, unlockName: (n, l) => `${n}: libera no nível ${l}`, lvlUp: (l, x) => `Nível ${l}! ${x}`, news: x => `Novo: ${x}.`,
+    noFriendMode: 'O modo com amigo não está disponível nesta página.', notFound: 'Não achei uma sala com esse código. Confira as letras ou peça para seu amigo criar de novo.',
+    noConn: 'Não foi possível conectar. Confira a internet e tente de novo.', roomLost: 'A conexão com a sala caiu', creating: 'Criando a sala…', searching: c => `Procurando a sala ${c}…`,
+    connected: 'Conectado! Esperando o sítio do seu amigo…', friendIn: 'Seu amigo entrou! Vocês já estão no mesmo sítio.', waitFriend: 'Mande o código ou o link para seu amigo. Pode continuar jogando enquanto isso.',
+    friendJoined: 'Seu amigo entrou no sítio!', friendLeft: 'Seu amigo saiu do sítio', loadedFriend: 'Carregamos o progresso que seu amigo fez', youJoined: n => `Você entrou no ${n}!`,
+    lostFriend: 'Perdemos a conexão com seu amigo…', connDropped: 'A conexão caiu. O sítio ficou salvo aqui como "Sítio do amigo": você pode continuar sozinho.',
+    coopGuest: 'No sítio do seu amigo', coopHost: 'Seu amigo está aqui', plant: 'Plantar', plantSub: 'Escolha o que plantar neste canteiro.',
+    coins: n => n === 1 ? '1 moeda' : `${n} moedas`, yields: n => `colhe ${n}`, empty: 'vazio', ready: 'pronto', queued: 'na fila', collect: 'Recolher', make: 'Fazer',
+    penSub: (n, k, h, b, r) => `${n} ${k === 'galinheiro' ? 'galinhas' : 'vacas'}: ${h} com fome, ${b} produzindo, ${r} prontas.`,
+    youHave: n => `Você tem ${n}. Faça mais no Moinho.`, nextIn: (k, t) => `Próximo ${N(k).toLowerCase()} em ${t}`, collectX: k => `Recolher ${N(k).toLowerCase()}`, feed: 'Alimentar',
+    barn: 'Celeiro', barnUsed: (n, c) => `${n} de ${c} lugares ocupados`, barnEmpty: 'Vazio. Colha os canteiros para encher o celeiro.', barnUp: 'Aumentar celeiro (+25)',
+    orders: 'Encomendas', ordersSub: 'O pessoal da vila paga bem. Entregue para ganhar moedas e experiência.', newOrderIn: t => `Nova encomenda chegando em ${t}…`, discardAria: 'Descartar encomenda', deliver: 'Entregar',
+    shop: 'Loja', newPlot: 'Novo canteiro', allBought: 'Todos comprados', plotsOf: (n, m) => `${n} de ${m} canteiros`, bigBarn: 'Celeiro maior (+25)', fitsNow: c => `Hoje cabem ${c} itens`,
+    soon: 'Em breve', expansion: 'expansão', exps: ['Pomar de frutas', 'Apiário com mel', 'Barco de pesca', 'Feira da vila'],
+    stats: (l, x, c) => `Nível ${l} · ${x} de experiência · ${c} moedas`, guestNote: 'Você está no sítio do seu amigo. Tudo o que fizer fica salvo nos dois celulares.',
+    seeCode: 'Ver código da sala', invite: 'Convidar um amigo', backHome: 'Voltar ao início', langLbl: 'Idioma', buy: 'Comprar', board: 'ENCOMENDAS',
+  },
+  es: {
+    title: 'Granja del Viento', intro: 'Siembra, cuida a los animales y entrega pedidos. Solo o con un amigo, en la misma granja.',
+    farmsLbl: 'Tus granjas', joinOr: 'o entra a la granja de un amigo', enter: 'Entrar', codeAria: 'Código de la sala',
+    inviteTitle: 'Invita a tu amigo', codeLbl: 'Código', shareLbl: 'O mándale este enlace', linkAria: 'Enlace de la sala', copy: 'Copiar', copied: 'Copiado', keepPlaying: 'Seguir jugando',
+    canvasAria: 'La granja. Arrastra para moverte y toca las parcelas, animales y construcciones.', lvlAria: 'Nivel', coinsAria: 'Monedas', ordersAria: 'Pedidos', barnAria: 'Granero', shopAria: 'Tienda', menuAria: 'Menú', close: 'Cerrar',
+    myFarm: 'Mi granja', friendFarm: 'Granja del amigo', lvl: n => `Nivel ${n}`, own: 'tu granja', copyHere: 'copia guardada aquí', play: 'Jugar', friendBtn: '+ Amigo', inviteAria: n => `Invitar a un amigo a ${n}`,
+    code4: 'El código tiene 4 letras.', unlockAt: n => `Se desbloquea en el nivel ${n}`, noCoins: 'No te alcanzan las monedas', barnFull: 'El granero está lleno', queueFull: 'La fila está llena',
+    missingIng: 'Faltan ingredientes', notReady: 'Todavía no está listo', needFeed: k => `Necesitas ${N(k)}`, producing: 'Los animales todavía están produciendo', missingProd: 'Faltan productos',
+    readyIn: (k, t) => `${N(k)}: listo en ${t}`, unlockName: (n, l) => `${n}: se desbloquea en el nivel ${l}`, lvlUp: (l, x) => `¡Nivel ${l}! ${x}`, news: x => `Nuevo: ${x}.`,
+    noFriendMode: 'El modo con amigo no está disponible en esta página.', notFound: 'No encontré una sala con ese código. Revisa las letras o pide a tu amigo que la cree de nuevo.',
+    noConn: 'No se pudo conectar. Revisa tu internet y prueba de nuevo.', roomLost: 'Se cortó la conexión con la sala', creating: 'Creando la sala…', searching: c => `Buscando la sala ${c}…`,
+    connected: '¡Conectado! Esperando la granja de tu amigo…', friendIn: '¡Tu amigo entró! Ya están en la misma granja.', waitFriend: 'Mándale el código o el enlace a tu amigo. Puedes seguir jugando mientras tanto.',
+    friendJoined: '¡Tu amigo entró a la granja!', friendLeft: 'Tu amigo salió de la granja', loadedFriend: 'Cargamos el avance que hizo tu amigo', youJoined: n => `¡Entraste a ${n}!`,
+    lostFriend: 'Se perdió la conexión con tu amigo…', connDropped: 'Se cortó la conexión. La granja quedó guardada aquí como "Granja del amigo": puedes seguir solo.',
+    coopGuest: 'En la granja de tu amigo', coopHost: 'Tu amigo está aquí', plant: 'Sembrar', plantSub: 'Elige qué sembrar en esta parcela.',
+    coins: n => n === 1 ? '1 moneda' : `${n} monedas`, yields: n => `cosechas ${n}`, empty: 'vacío', ready: 'listo', queued: 'en fila', collect: 'Recoger', make: 'Hacer',
+    penSub: (n, k, h, b, r) => `${n} ${k === 'galinheiro' ? 'gallinas' : 'vacas'}: ${h} con hambre, ${b} produciendo, ${r} listas.`,
+    youHave: n => `Tienes ${n}. Haz más en el Molino.`, nextIn: (k, t) => `Siguiente ${N(k).toLowerCase()} en ${t}`, collectX: k => `Recoger ${N(k).toLowerCase()}`, feed: 'Alimentar',
+    barn: 'Granero', barnUsed: (n, c) => `${n} de ${c} espacios ocupados`, barnEmpty: 'Vacío. Cosecha las parcelas para llenar el granero.', barnUp: 'Ampliar granero (+25)',
+    orders: 'Pedidos', ordersSub: 'La gente del pueblo paga bien. Entrega para ganar monedas y experiencia.', newOrderIn: t => `Llega un pedido nuevo en ${t}…`, discardAria: 'Descartar pedido', deliver: 'Entregar',
+    shop: 'Tienda', newPlot: 'Nueva parcela', allBought: 'Todas compradas', plotsOf: (n, m) => `${n} de ${m} parcelas`, bigBarn: 'Granero más grande (+25)', fitsNow: c => `Hoy caben ${c} cosas`,
+    soon: 'Muy pronto', expansion: 'expansión', exps: ['Huerto de frutas', 'Colmenas con miel', 'Barco de pesca', 'Feria del pueblo'],
+    stats: (l, x, c) => `Nivel ${l} · ${x} de experiencia · ${c} monedas`, guestNote: 'Estás en la granja de tu amigo. Todo lo que hagas queda guardado en los dos celulares.',
+    seeCode: 'Ver código de la sala', invite: 'Invitar a un amigo', backHome: 'Volver al inicio', langLbl: 'Idioma', buy: 'Comprar', board: 'PEDIDOS',
+  },
+};
+const L = (k, ...a) => { const v = TX[LANG][k] ?? TX.pt[k] ?? k; return typeof v === 'function' ? v(...a) : v; };
+const dispName = n => (!n || n === 'Meu sítio' || n === 'Mi granja') ? L('myFarm') : n;
+const langButtons = () => `<div class="langs" role="group" aria-label="${L('langLbl')}">${[['pt', 'Português'], ['es', 'Español']].map(([k, n]) => `<button type="button" data-lang="${k}" aria-pressed="${LANG === k}">${n}</button>`).join('')}</div>`;
+function setLang(l) {
+  if (l !== 'pt' && l !== 'es') return; LANG = l; try { localStorage.setItem('sitio-lang', l); } catch (e) {}
+  applyLang(); renderFarms(); if (!$('ovRoom').hidden && NET.room) renderRoom(); updCoop(); if (SH) { $('sBody').dataset.sig = ''; renderSheet(); } refresh();
+}
+function applyLang() {
+  document.documentElement.lang = LANG === 'es' ? 'es' : 'pt-BR'; document.title = L('title');
+  const set = (id, k) => { const e = $(id); if (e) e.textContent = L(k); };
+  set('tTitle', 'title'); set('tIntro', 'intro'); set('tFarms', 'farmsLbl'); set('tJoinOr', 'joinOr'); set('bJoin', 'enter'); set('tInvite', 'inviteTitle'); set('tCodeLbl', 'codeLbl'); set('tShareLbl', 'shareLbl'); set('bCopy', 'copy'); set('bRoomOk', 'keepPlaying');
+  const aria = { iCode: 'codeAria', rLink: 'linkAria', cv: 'canvasAria', hLvl: 'lvlAria', hCoins: 'coinsAria', bOrders: 'ordersAria', bBarn: 'barnAria', bShop: 'shopAria', bMenu: 'menuAria', sClose: 'close' };
+  for (const [id, k] of Object.entries(aria)) { const e = $(id); if (e) e.setAttribute('aria-label', L(k)); }
+  $('mLangs').innerHTML = langButtons();
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) { setLang(b.dataset.lang); SND.pop(); } });
+
 // ---------- dados do jogo ----------
 const ITEMS = {
   trigo: { n: 'Trigo', v: 2 }, milho: { n: 'Milho', v: 4 }, cenoura: { n: 'Cenoura', v: 7 }, cana: { n: 'Cana', v: 10 },
@@ -35,7 +113,6 @@ const MAXPLOTS = 12, PLOT0 = 6, WW = 640, WH = 980;
 const plotRect = i => ({ x: 168 + (i % 3) * 104, y: 290 + Math.floor(i / 3) * 82, w: 96, h: 72 });
 const plotCost = np => Math.round(25 * Math.pow(1.55, np - PLOT0));
 const capCost = cap => 80 + (cap - 50) / 25 * 70;
-const EXPANSOES = ['Pomar de frutas', 'Apiário com mel', 'Barco de pesca', 'Feira da vila'];
 
 // ---------- estado ----------
 const rid = () => Math.random().toString(36).slice(2, 10);
@@ -74,44 +151,44 @@ function apply(S, a, now) {
   if (a.a === 'plant') {
     const i = a.i | 0, pl = S.plots[i], c = CROPS[a.c];
     if (!pl || i >= S.np || pl.c || !c) return fail('');
-    if (c.lvl > S.lvl) return fail(`Libera no nível ${c.lvl}`);
-    if (S.coins < c.cost) return fail('Moedas insuficientes');
+    if (c.lvl > S.lvl) return fail(L('unlockAt', c.lvl));
+    if (S.coins < c.cost) return fail(L('noCoins'));
     S.coins -= c.cost; S.plots[i] = { c: a.c, p: now }; out.fx.push(['plant', i]);
   } else if (a.a === 'harvest') {
     const i = a.i | 0, pl = S.plots[i]; if (!pl || !plotReady(pl, now)) return fail('');
-    const c = CROPS[pl.c]; if (invCount(S) + c.y > S.cap) return fail('O celeiro está cheio');
+    const c = CROPS[pl.c]; if (invCount(S) + c.y > S.cap) return fail(L('barnFull'));
     give(S, pl.c, c.y); out.fx.push(['gain', pl.c, c.y, 'plot', i]); addXp(S, c.xp, out); S.plots[i] = { c: null, p: 0 };
   } else if (a.a === 'craft') {
     const B = BUILD[a.b], r = B && B.rec[a.r | 0], st = B && S.bld[a.b];
     if (!r || B.lvl > S.lvl || r.lvl > S.lvl) return fail('');
-    if (st.q.length >= B.q) return fail('A fila está cheia');
-    if (!has(S, r.i)) return fail('Faltam ingredientes');
+    if (st.q.length >= B.q) return fail(L('queueFull'));
+    if (!has(S, r.i)) return fail(L('missingIng'));
     take(S, r.i); const s = st.q.length ? Math.max(now, st.q[st.q.length - 1].e) : now;
     st.q.push({ r: a.r | 0, s, e: s + r.t * 1000 }); out.fx.push(['craft', a.b]);
   } else if (a.a === 'collect') {
     const B = BUILD[a.b], st = B && S.bld[a.b]; if (!st) return fail('');
-    let n = 0; while (st.q.length && st.q[0].e <= now) { const r = B.rec[st.q[0].r]; if (invCount(S) + r.k > S.cap) { if (!n) return fail('O celeiro está cheio'); break; } give(S, r.o, r.k); addXp(S, r.xp, out); out.fx.push(['gain', r.o, r.k, 'bld', a.b]); st.q.shift(); n++; }
-    if (!n) return fail('Ainda não está pronto'); packQ(st, now);
+    let n = 0; while (st.q.length && st.q[0].e <= now) { const r = B.rec[st.q[0].r]; if (invCount(S) + r.k > S.cap) { if (!n) return fail(L('barnFull')); break; } give(S, r.o, r.k); addXp(S, r.xp, out); out.fx.push(['gain', r.o, r.k, 'bld', a.b]); st.q.shift(); n++; }
+    if (!n) return fail(L('notReady')); packQ(st, now);
   } else if (a.a === 'pen') {
     const P = PENS[a.k], st = P && S.pens[a.k]; if (!st || P.lvl > S.lvl) return fail('');
     let got = 0;
-    for (let j = 0; j < st.a.length; j++) if (st.a[j] && now >= st.a[j] + P.t * 1000) { if (invCount(S) + 1 > S.cap) { if (!got) return fail('O celeiro está cheio'); break; } give(S, P.out, 1); addXp(S, P.xp, out); st.a[j] = 0; got++; }
+    for (let j = 0; j < st.a.length; j++) if (st.a[j] && now >= st.a[j] + P.t * 1000) { if (invCount(S) + 1 > S.cap) { if (!got) return fail(L('barnFull')); break; } give(S, P.out, 1); addXp(S, P.xp, out); st.a[j] = 0; got++; }
     if (got) out.fx.push(['gain', P.out, got, 'pen', a.k]);
     else { let fed = 0; for (let j = 0; j < st.a.length; j++) if (!st.a[j] && (S.inv[P.feed] || 0) > 0) { take(S, { [P.feed]: 1 }); st.a[j] = now; fed++; }
-      if (!fed) return fail(st.a.some(x => !x) ? `Precisa de ${ITEMS[P.feed].n}` : 'Os animais ainda estão produzindo'); out.fx.push(['feed', a.k, fed]); }
+      if (!fed) return fail(st.a.some(x => !x) ? L('needFeed', P.feed) : L('producing')); out.fx.push(['feed', a.k, fed]); }
   } else if (a.a === 'deliver') {
     const o = S.orders.find(x => x.id === a.id); if (!o || o.w > now) return fail('');
-    const need = Object.fromEntries(o.it); if (!has(S, need)) return fail('Faltam produtos');
+    const need = Object.fromEntries(o.it); if (!has(S, need)) return fail(L('missingProd'));
     take(S, need); S.coins += o.c; addXp(S, o.x, out); out.fx.push(['coins', o.c]);
     Object.assign(o, { id: S.oid++, w: now + 12000 }, genOrder(S));
   } else if (a.a === 'discard') {
     const o = S.orders.find(x => x.id === a.id); if (!o || o.w > now) return fail('');
     Object.assign(o, { id: S.oid++, w: now + 40000 }, genOrder(S));
   } else if (a.a === 'buyPlot') {
-    if (S.np >= MAXPLOTS) return fail(''); const c = plotCost(S.np); if (S.coins < c) return fail('Moedas insuficientes');
+    if (S.np >= MAXPLOTS) return fail(''); const c = plotCost(S.np); if (S.coins < c) return fail(L('noCoins'));
     S.coins -= c; S.np++; out.fx.push(['coins', -c]);
   } else if (a.a === 'cap') {
-    const c = capCost(S.cap); if (S.coins < c) return fail('Moedas insuficientes'); S.coins -= c; S.cap += 25;
+    const c = capCost(S.cap); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; S.cap += 25;
   } else return fail('');
   out.ok = true; S.rev++; return out;
 }
@@ -195,14 +272,14 @@ function tapAt(p) {
     if (i >= S.np) return openSheet('shop');
     if (!pl.c) return openSheet('seeds', i);
     if (plotReady(pl, now)) return act({ a: 'harvest', i });
-    const left = Math.ceil((pl.p + CROPS[pl.c].t * 1000 - now) / 1000); return toast(`${ITEMS[pl.c].n}: pronto em ${fmtT(left)}`);
+    const left = Math.ceil((pl.p + CROPS[pl.c].t * 1000 - now) / 1000); return toast(L('readyIn', pl.c, fmtT(left)));
   }
   for (const [k, B] of Object.entries(BUILD)) if (inR(p, bRect(B))) {
-    if (B.lvl > S.lvl) return toast(`${B.n}: libera no nível ${B.lvl}`);
+    if (B.lvl > S.lvl) return toast(L('unlockName', N(k), B.lvl));
     const q = S.bld[k].q; if (q.length && q[0].e <= now) act({ a: 'collect', b: k }, true); return openSheet('bld', k);
   }
   for (const [k, P] of Object.entries(PENS)) if (inR(p, penRect(P))) {
-    if (P.lvl > S.lvl) return toast(`${P.n}: libera no nível ${P.lvl}`);
+    if (P.lvl > S.lvl) return toast(L('unlockName', N(k), P.lvl));
     const r = act({ a: 'pen', k }, true); if (!r.ok) openSheet('pen', k); return;
   }
   if (inR(p, bRect(BARN))) return openSheet('barn');
@@ -230,15 +307,15 @@ function playFx(fx) {
     if (f[0] === 'plant') SND.plant();
     if (f[0] === 'craft' || f[0] === 'feed') SND.pop();
     if (f[0] === 'coins') SND.coin();
-    if (f[0] === 'lvl') { SND.lvl(); toast(`Nível ${f[1]}! ${levelNews(f[1])}`, 3500); }
+    if (f[0] === 'lvl') { SND.lvl(); toast(L('lvlUp', f[1], levelNews(f[1])), 3500); }
   }
 }
 function levelNews(l) {
   const n = [];
-  for (const [k, c] of Object.entries(CROPS)) if (c.lvl === l) n.push(ITEMS[k].n);
-  for (const b of Object.values(BUILD)) { if (b.lvl === l) n.push(b.n); else for (const r of b.rec) if (r.lvl === l && b.lvl < l) n.push(ITEMS[r.o].n); }
-  for (const p of Object.values(PENS)) if (p.lvl === l) n.push(p.n);
-  return n.length ? 'Novo: ' + n.join(', ') + '.' : '';
+  for (const [k, c] of Object.entries(CROPS)) if (c.lvl === l) n.push(N(k));
+  for (const [bk, b] of Object.entries(BUILD)) { if (b.lvl === l) n.push(N(bk)); else for (const r of b.rec) if (r.lvl === l && b.lvl < l) n.push(N(r.o)); }
+  for (const [pk, p] of Object.entries(PENS)) if (p.lvl === l) n.push(N(pk));
+  return n.length ? L('news', n.join(', ')) : '';
 }
 function ping(x, y) { G.myPing = [Math.round(x), Math.round(y), Date.now()]; if (NET.room) NET.room.presence({ ping: G.myPing }).catch(() => {}); }
 let bcT = 0, bcLast = 0;
@@ -257,41 +334,41 @@ const CODE_AB = 'ACDEFGHJKMNPQRTUVWXY', newCode = () => Array.from({ length: 4 }
 function joinFromHash() { const h = (location.hash || '').slice(1).toUpperCase(); if (NET.api && /^[A-Z]{4}$/.test(h) && !NET.room) { $('iCode').value = h; join(h); } }
 const others = () => NET.room ? NET.room.peers().filter(p => !p.sameTab && p.presence && p.presence.app === 'sitio1') : [];
 async function openRoom(role, code) {
-  if (!NET.api) { $('mMsg').textContent = 'O modo com amigo não está disponível nesta página.'; return null; }
+  if (!NET.api) { $('mMsg').textContent = L('noFriendMode'); return null; }
   await NET.leave(); let r = null;
   for (let tries = 0; ; tries++) {
     try { r = await NET.api.join('sitio-' + code.toLowerCase(), role); break; }
     catch (e) { const c = e && e.code; if (c === 'taken' && role === 'host' && tries < 4) { code = newCode(); continue; }
-      const m = c === 'not_found' ? 'Não achei uma sala com esse código. Confira as letras ou peça para seu amigo criar de novo.' : 'Não foi possível conectar. Confira a internet e tente de novo.';
+      const m = c === 'not_found' ? L('notFound') : L('noConn');
       $('mMsg').textContent = m; $('rMsg').textContent = m; return null; }
   }
   Object.assign(NET, { room: r, code, role }); G.lastSeq = 0;
-  NET.sub = r.onPeers(onPeers, () => toast('A conexão com a sala caiu'));
+  NET.sub = r.onPeers(onPeers, () => toast(L('roomLost')));
   r.presence({ app: 'sitio1', role }).catch(() => {});
   return r;
 }
 async function hostRoom() {
-  $('rMsg').textContent = ''; $('rStatus').textContent = 'Criando a sala…'; $('rCode').textContent = '----'; $('ovRoom').hidden = false;
+  $('rMsg').textContent = ''; $('rStatus').textContent = L('creating'); $('rCode').textContent = '----'; $('ovRoom').hidden = false;
   const r = await openRoom('host', newCode()); if (!r) return;
   G.mode = 'host'; $('rCode').textContent = NET.code;
   $('rShare').hidden = !(NET.api && NET.api.p2p); $('rLink').value = location.href.split('#')[0] + '#' + NET.code;
   renderRoom(); broadcast();
 }
 async function join(code) {
-  $('mMsg').textContent = `Procurando a sala ${code}…`;
+  $('mMsg').textContent = L('searching', code);
   const r = await openRoom('guest', code); if (!r) return;
-  $('mMsg').textContent = 'Conectado! Esperando o sítio do seu amigo…';
+  $('mMsg').textContent = L('connected');
 }
-function renderRoom() { const o = others().find(p => p.presence.role === 'guest'); $('rStatus').textContent = o ? 'Seu amigo entrou! Vocês já estão no mesmo sítio.' : 'Mande o código ou o link para seu amigo. Pode continuar jogando enquanto isso.'; updCoop(); }
+function renderRoom() { const o = others().find(p => p.presence.role === 'guest'); $('rStatus').textContent = o ? L('friendIn') : L('waitFriend'); updCoop(); }
 function onPeers() {
   const ps = others();
   if (NET.role === 'host') {
     const o = ps.find(p => p.presence.role === 'guest');
-    if (o && o.peer !== NET.guestPeer) { NET.guestPeer = o.peer; G.lastSeq = 0; toast('Seu amigo entrou no sítio!'); broadcast(); }
-    if (!o && NET.guestPeer) { NET.guestPeer = null; toast('Seu amigo saiu do sítio'); }
+    if (o && o.peer !== NET.guestPeer) { NET.guestPeer = o.peer; G.lastSeq = 0; toast(L('friendJoined')); broadcast(); }
+    if (!o && NET.guestPeer) { NET.guestPeer = null; toast(L('friendLeft')); }
     if (o) {
       const pr = o.presence;
-      if (pr.up && pr.up.fid === G.S.fid && sane(pr.up) && pr.up.rev > G.S.rev && !G.sent[pr.up.rev]) { G.sent[pr.up.rev] = 1; G.S = pr.up; storeFarm(G.S); toast('Carregamos o progresso que seu amigo fez'); broadcast(); refresh(); }
+      if (pr.up && pr.up.fid === G.S.fid && sane(pr.up) && pr.up.rev > G.S.rev && !G.sent[pr.up.rev]) { G.sent[pr.up.rev] = 1; G.S = pr.up; storeFarm(G.S); toast(L('loadedFriend')); broadcast(); refresh(); }
       if (pr.acts && pr.acts.fid === G.S.fid && Array.isArray(pr.acts.q)) for (const [q, a] of pr.acts.q) if (q > G.lastSeq) { G.lastSeq = q; const r = apply(G.S, a, Date.now()); if (r.ok) { playFx(r.fx.filter(f => f[0] !== 'lvl')); r.fx.filter(f => f[0] === 'lvl').forEach(f => playFx([f])); ensureOrders(G.S); saveSoon(); broadcast(); refresh(); } }
       if (pr.ping) G.partnerPing = pr.ping;
     }
@@ -307,20 +384,20 @@ function onPeers() {
         if (mine && mine.rev > st.rev && !G.sent[st.fid + ':' + mine.rev]) { G.sent[st.fid + ':' + mine.rev] = 1; NET.room.presence({ up: mine }).catch(() => {}); }
         const first = G.mode !== 'guest';
         G.S = st; G.mode = 'guest'; storeFarm(st, false);
-        if (first) { $('ovMenu').hidden = true; $('hud').hidden = false; toast(`Você entrou no ${st.name}!`); }
+        if (first) { $('ovMenu').hidden = true; $('hud').hidden = false; toast(L('youJoined', dispName(st.name))); }
         refresh();
       }
       if (h.presence.ping) G.partnerPing = h.presence.ping;
     } else if (G.mode === 'guest' && !G.hostGoneT) {
-      toast('Perdemos a conexão com seu amigo…');
-      G.hostGoneT = setTimeout(() => { if (G.mode === 'guest' && !others().length) { const fid = G.S && G.S.fid; goMenu(); $('mMsg').textContent = 'A conexão caiu. O sítio ficou salvo aqui como "Sítio do amigo": você pode continuar sozinho.'; } }, 12000);
+      toast(L('lostFriend'));
+      G.hostGoneT = setTimeout(() => { if (G.mode === 'guest' && !others().length) { const fid = G.S && G.S.fid; goMenu(); $('mMsg').textContent = L('connDropped'); } }, 12000);
     }
     updCoop();
   }
 }
 function updCoop() {
   const on = (NET.role === 'host' && NET.guestPeer) || (NET.role === 'guest' && G.mode === 'guest');
-  $('coop').hidden = !on; $('coopT').textContent = NET.role === 'guest' ? 'No sítio do seu amigo' : 'Seu amigo está aqui';
+  $('coop').hidden = !on; $('coopT').textContent = NET.role === 'guest' ? L('coopGuest') : L('coopHost');
 }
 
 // ---------- telas ----------
@@ -336,17 +413,17 @@ function goMenu() {
 }
 function renderFarms() {
   let idx = loadIdx();
-  if (!idx.some(x => x.own)) { const S = newFarm('Meu sítio'); ensureOrders(S); storeFarm(S, true); idx = loadIdx(); }
+  if (!idx.some(x => x.own)) { const S = newFarm(''); ensureOrders(S); storeFarm(S, true); idx = loadIdx(); }
   idx.sort((a, b) => b.own - a.own || b.last - a.last);
-  $('farms').innerHTML = idx.map(f => `<div class="farm"><div><b>${f.own ? esc(f.name) : 'Sítio do amigo'}</b><small>Nível ${f.lvl} · ${f.own ? 'seu sítio' : 'cópia salva aqui'}</small></div>
-    <button class="btn" data-play="${f.fid}" type="button">Jogar</button><button class="btn blue" data-host="${f.fid}" type="button" aria-label="Convidar amigo para ${esc(f.name)}">+ Amigo</button></div>`).join('');
+  $('farms').innerHTML = idx.map(f => `<div class="farm"><div><b>${f.own ? esc(dispName(f.name)) : L('friendFarm')}</b><small>${L('lvl', f.lvl)} · ${f.own ? L('own') : L('copyHere')}</small></div>
+    <button class="btn" data-play="${f.fid}" type="button">${L('play')}</button><button class="btn blue" data-host="${f.fid}" type="button" aria-label="${esc(L('inviteAria', f.own ? dispName(f.name) : L('friendFarm')))}">${L('friendBtn')}</button></div>`).join('');
 }
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 $('farms').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.play) startFarm(b.dataset.play); if (b.dataset.host) { startFarm(b.dataset.host); hostRoom(); } });
-$('bJoin').onclick = () => { const c = $('iCode').value.toUpperCase().replace(/[^A-Z]/g, ''); if (c.length !== 4) { $('mMsg').textContent = 'O código tem 4 letras.'; return; } join(c); };
+$('bJoin').onclick = () => { const c = $('iCode').value.toUpperCase().replace(/[^A-Z]/g, ''); if (c.length !== 4) { $('mMsg').textContent = L('code4'); return; } join(c); };
 $('iCode').addEventListener('input', e => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4); });
 $('bRoomOk').onclick = () => { $('ovRoom').hidden = true; };
-$('bCopy').onclick = async () => { const i = $('rLink'); try { await navigator.clipboard.writeText(i.value); $('bCopy').textContent = 'Copiado'; } catch (e) { i.focus(); i.select(); } setTimeout(() => { $('bCopy').textContent = 'Copiar'; }, 1500); };
+$('bCopy').onclick = async () => { const i = $('rLink'); try { await navigator.clipboard.writeText(i.value); $('bCopy').textContent = L('copied'); } catch (e) { i.focus(); i.select(); } setTimeout(() => { $('bCopy').textContent = L('copy'); }, 1500); };
 $('bOrders').onclick = () => openSheet('orders'); $('bBarn').onclick = () => openSheet('barn'); $('bShop').onclick = () => openSheet('shop'); $('bMenu').onclick = () => openSheet('menu'); $('hCoins').onclick = () => openSheet('shop');
 $('sClose').onclick = () => closeSheet();
 $('icCoin').src = icon('coin'); $('icOrders').src = icon('orders'); $('icBarn').src = icon('barn'); $('icShop').src = icon('shop');
@@ -361,53 +438,54 @@ function refresh() {
   const now = nowS(), can = S.orders.filter(o => o.w <= now && has(S, Object.fromEntries(o.it))).length; $('dOrders').textContent = can || '';
   if (SH) renderSheet();
 }
-function needHtml(S, need) { return `<div class="need">${Object.entries(need).map(([k, q]) => `<span class="${(S.inv[k] || 0) >= q ? '' : 'no'}">${img(k, ITEMS[k].n)}${S.inv[k] || 0}/${q}</span>`).join('')}</div>`; }
+function needHtml(S, need) { return `<div class="need">${Object.entries(need).map(([k, q]) => `<span class="${(S.inv[k] || 0) >= q ? '' : 'no'}">${img(k, N(k))}${S.inv[k] || 0}/${q}</span>`).join('')}</div>`; }
 function renderSheet() {
   const S = G.S; if (!S || !SH) return; const now = nowS(), t = $('sTitle'), b = $('sBody'); let h = '';
-  const sig = JSON.stringify([SH, S.rev, Math.floor(now / 1000)]); if (b.dataset.sig === sig) return; b.dataset.sig = sig;
+  const sig = JSON.stringify([SH, S.rev, Math.floor(now / 1000), LANG]); if (b.dataset.sig === sig) return; b.dataset.sig = sig;
   if (SH.type === 'seeds') {
-    t.textContent = 'Plantar';
-    h = `<p class="sub">Escolha o que plantar neste canteiro.</p><div class="grid">${Object.entries(CROPS).map(([k, c]) => c.lvl > S.lvl
-      ? `<button class="tile lock" type="button" disabled>${img(k)}${ITEMS[k].n}<small>Nível ${c.lvl}</small></button>`
-      : `<button class="tile" type="button" data-plant="${k}" ${S.coins < c.cost ? 'disabled' : ''}>${img(k)}${ITEMS[k].n}<small>${c.cost} moeda${c.cost > 1 ? 's' : ''} · ${fmtT(c.t)}</small><small>colhe ${c.y}</small></button>`).join('')}</div>`;
+    t.textContent = L('plant');
+    h = `<p class="sub">${L('plantSub')}</p><div class="grid">${Object.entries(CROPS).map(([k, c]) => c.lvl > S.lvl
+      ? `<button class="tile lock" type="button" disabled>${img(k)}${N(k)}<small>${L('lvl', c.lvl)}</small></button>`
+      : `<button class="tile" type="button" data-plant="${k}" ${S.coins < c.cost ? 'disabled' : ''}>${img(k)}${N(k)}<small>${L('coins', c.cost)} · ${fmtT(c.t)}</small><small>${L('yields', c.y)}</small></button>`).join('')}</div>`;
   } else if (SH.type === 'bld') {
-    const B = BUILD[SH.arg], st = S.bld[SH.arg]; t.textContent = B.n;
-    const slots = Array.from({ length: B.q }, (_, i) => { const j = st.q[i]; if (!j) return '<div class="slot">vazio</div>'; const r = B.rec[j.r], ready = j.e <= now; return `<div class="slot ${ready ? 'ready' : ''}">${img(r.o)}<em>${ready ? 'pronto' : j.s <= now ? fmtT(Math.ceil((j.e - now) / 1000)) : 'na fila'}</em></div>`; }).join('');
-    h = `<div class="row"><div class="q" style="flex:1">${slots}</div>${st.q.some(j => j.e <= now) ? '<button class="btn" type="button" data-collect="1">Recolher</button>' : ''}</div>
-      ${B.rec.map((r, i) => r.lvl > S.lvl ? `<div class="card" style="opacity:.55"><div class="row">${img(r.o)}<b style="flex:1">${ITEMS[r.o].n}</b><small>Nível ${r.lvl}</small></div></div>`
-        : `<div class="card"><div class="row"><span style="width:44px;height:44px;display:grid;place-items:center">${img(r.o)}</span><div style="flex:1"><b>${ITEMS[r.o].n}${r.k > 1 ? ' ×' + r.k : ''}</b><br><small>${fmtT(r.t)}</small></div>
-          <button class="btn" type="button" data-craft="${i}" ${!has(S, r.i) || st.q.length >= B.q ? 'disabled' : ''}>Fazer</button></div>${needHtml(S, r.i)}</div>`).join('')}`;
+    const B = BUILD[SH.arg], st = S.bld[SH.arg]; t.textContent = N(SH.arg);
+    const slots = Array.from({ length: B.q }, (_, i) => { const j = st.q[i]; if (!j) return `<div class="slot">${L('empty')}</div>`; const r = B.rec[j.r], ready = j.e <= now; return `<div class="slot ${ready ? 'ready' : ''}">${img(r.o)}<em>${ready ? L('ready') : j.s <= now ? fmtT(Math.ceil((j.e - now) / 1000)) : L('queued')}</em></div>`; }).join('');
+    h = `<div class="row"><div class="q" style="flex:1">${slots}</div>${st.q.some(j => j.e <= now) ? `<button class="btn" type="button" data-collect="1">${L('collect')}</button>` : ''}</div>
+      ${B.rec.map((r, i) => r.lvl > S.lvl ? `<div class="card" style="opacity:.55"><div class="row">${img(r.o)}<b style="flex:1">${N(r.o)}</b><small>${L('lvl', r.lvl)}</small></div></div>`
+        : `<div class="card"><div class="row"><span style="width:44px;height:44px;display:grid;place-items:center">${img(r.o)}</span><div style="flex:1"><b>${N(r.o)}${r.k > 1 ? ' ×' + r.k : ''}</b><br><small>${fmtT(r.t)}</small></div>
+          <button class="btn" type="button" data-craft="${i}" ${!has(S, r.i) || st.q.length >= B.q ? 'disabled' : ''}>${L('make')}</button></div>${needHtml(S, r.i)}</div>`).join('')}`;
   } else if (SH.type === 'pen') {
-    const P = PENS[SH.arg], st = S.pens[SH.arg]; t.textContent = P.n;
+    const P = PENS[SH.arg], st = S.pens[SH.arg]; t.textContent = N(SH.arg);
     const ready = st.a.filter(x => x && now >= x + P.t * 1000).length, busy = st.a.filter(x => x && now < x + P.t * 1000), hungry = st.a.filter(x => !x).length;
-    h = `<p class="sub">${st.a.length} ${SH.arg === 'galinheiro' ? 'galinhas' : 'vacas'}: ${hungry} com fome, ${busy.length} produzindo, ${ready} prontas.</p>
-      <div class="card"><div class="row">${img(P.feed)}<div style="flex:1"><b>${ITEMS[P.feed].n}</b><br><small>Você tem ${S.inv[P.feed] || 0}. Faça mais no Moinho.</small></div></div>
-      ${busy.length ? `<small>Próximo ${ITEMS[P.out].n.toLowerCase()} em ${fmtT(Math.ceil((Math.min(...busy) + P.t * 1000 - now) / 1000))}</small>` : ''}</div>
-      <button class="btn" type="button" data-pen="1">${ready ? 'Recolher ' + ITEMS[P.out].n.toLowerCase() : 'Alimentar'}</button>`;
+    h = `<p class="sub">${L('penSub', st.a.length, SH.arg, hungry, busy.length, ready)}</p>
+      <div class="card"><div class="row">${img(P.feed)}<div style="flex:1"><b>${N(P.feed)}</b><br><small>${L('youHave', S.inv[P.feed] || 0)}</small></div></div>
+      ${busy.length ? `<small>${L('nextIn', P.out, fmtT(Math.ceil((Math.min(...busy) + P.t * 1000 - now) / 1000)))}</small>` : ''}</div>
+      <button class="btn" type="button" data-pen="1">${ready ? L('collectX', P.out) : L('feed')}</button>`;
   } else if (SH.type === 'barn') {
-    const n = invCount(S); t.textContent = 'Celeiro';
+    const n = invCount(S); t.textContent = L('barn');
     const ks = Object.keys(S.inv).filter(k => S.inv[k] > 0);
-    h = `<p class="sub">${n} de ${S.cap} lugares ocupados</p><div style="height:10px;border-radius:5px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${Math.min(100, n / S.cap * 100)}%;background:${n >= S.cap ? '#e0533d' : '#5cc04a'}"></i></div>
-      <div class="grid">${ks.length ? ks.map(k => `<div class="tile">${img(k)}${ITEMS[k].n}<small>×${S.inv[k]}</small></div>`).join('') : '<p class="sub">Vazio. Colha os canteiros para encher o celeiro.</p>'}</div>
-      <button class="btn blue" type="button" data-cap="1" ${S.coins < capCost(S.cap) ? 'disabled' : ''}>Aumentar celeiro (+25) · ${img('coin')} ${capCost(S.cap)}</button>`;
+    h = `<p class="sub">${L('barnUsed', n, S.cap)}</p><div style="height:10px;border-radius:5px;background:#e6d6b5;overflow:hidden"><i style="display:block;height:100%;width:${Math.min(100, n / S.cap * 100)}%;background:${n >= S.cap ? '#e0533d' : '#5cc04a'}"></i></div>
+      <div class="grid">${ks.length ? ks.map(k => `<div class="tile">${img(k)}${N(k)}<small>×${S.inv[k]}</small></div>`).join('') : `<p class="sub">${L('barnEmpty')}</p>`}</div>
+      <button class="btn blue" type="button" data-cap="1" ${S.coins < capCost(S.cap) ? 'disabled' : ''}>${L('barnUp')} · ${img('coin')} ${capCost(S.cap)}</button>`;
   } else if (SH.type === 'orders') {
-    t.textContent = 'Encomendas';
-    h = `<p class="sub">O pessoal da vila paga bem. Entregue para ganhar moedas e experiência.</p>` + S.orders.map(o => o.w > now
-      ? `<div class="card"><p class="sub">Nova encomenda chegando em ${fmtT(Math.ceil((o.w - now) / 1000))}…</p></div>`
+    t.textContent = L('orders');
+    h = `<p class="sub">${L('ordersSub')}</p>` + S.orders.map(o => o.w > now
+      ? `<div class="card"><p class="sub">${L('newOrderIn', fmtT(Math.ceil((o.w - now) / 1000)))}</p></div>`
       : `<div class="card">${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>${img('coin')}${o.c}</span><span>${img('star')}${o.x}</span></span><span style="flex:1"></span>
-        <button class="btn gray" type="button" data-discard="${o.id}" aria-label="Descartar encomenda">✕</button><button class="btn" type="button" data-deliver="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>Entregar</button></div></div>`).join('');
+        <button class="btn gray" type="button" data-discard="${o.id}" aria-label="${L('discardAria')}">✕</button><button class="btn" type="button" data-deliver="${o.id}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`).join('');
   } else if (SH.type === 'shop') {
-    t.textContent = 'Loja';
-    h = `<div class="card"><div class="row"><b style="flex:1">Novo canteiro</b>${S.np >= MAXPLOTS ? '<small>Todos comprados</small>' : `<button class="btn" type="button" data-buyplot="1" ${S.coins < plotCost(S.np) ? 'disabled' : ''}>${img('coin')} ${plotCost(S.np)}</button>`}</div><small>${S.np} de ${MAXPLOTS} canteiros</small></div>
-      <div class="card"><div class="row"><b style="flex:1">Celeiro maior (+25)</b><button class="btn blue" type="button" data-cap="1" ${S.coins < capCost(S.cap) ? 'disabled' : ''}>${img('coin')} ${capCost(S.cap)}</button></div><small>Hoje cabem ${S.cap} itens</small></div>
-      <span class="lbl">Em breve</span><div class="grid">${EXPANSOES.map(e => `<div class="tile lock">${e}<small>expansão</small></div>`).join('')}</div>`;
+    t.textContent = L('shop');
+    h = `<div class="card"><div class="row"><b style="flex:1">${L('newPlot')}</b>${S.np >= MAXPLOTS ? `<small>${L('allBought')}</small>` : `<button class="btn" type="button" data-buyplot="1" ${S.coins < plotCost(S.np) ? 'disabled' : ''}>${img('coin')} ${plotCost(S.np)}</button>`}</div><small>${L('plotsOf', S.np, MAXPLOTS)}</small></div>
+      <div class="card"><div class="row"><b style="flex:1">${L('bigBarn')}</b><button class="btn blue" type="button" data-cap="1" ${S.coins < capCost(S.cap) ? 'disabled' : ''}>${img('coin')} ${capCost(S.cap)}</button></div><small>${L('fitsNow', S.cap)}</small></div>
+      <span class="lbl">${L('soon')}</span><div class="grid">${L('exps').map(e => `<div class="tile lock">${e}<small>${L('expansion')}</small></div>`).join('')}</div>`;
   } else if (SH.type === 'menu') {
-    t.textContent = S.name;
+    t.textContent = dispName(S.name);
     const host = G.mode === 'host' || G.mode === 'solo';
-    h = `<p class="sub">Nível ${S.lvl} · ${S.xp} de experiência · ${S.coins} moedas</p>
-      ${G.mode === 'guest' ? '<p class="sub">Você está no sítio do seu amigo. Tudo o que fizer fica salvo nos dois celulares.</p>' : ''}
-      ${host ? `<button class="btn blue" type="button" data-invite="1">${NET.role === 'host' ? 'Ver código da sala' : 'Convidar um amigo'}</button>` : ''}
-      <button class="btn gray" type="button" data-exit="1">Voltar ao início</button>`;
+    h = `<p class="sub">${L('stats', S.lvl, S.xp, S.coins)}</p>
+      ${G.mode === 'guest' ? `<p class="sub">${L('guestNote')}</p>` : ''}
+      ${host ? `<button class="btn blue" type="button" data-invite="1">${NET.role === 'host' ? L('seeCode') : L('invite')}</button>` : ''}
+      <span class="lbl">${L('langLbl')}</span>${langButtons()}
+      <button class="btn gray" type="button" data-exit="1">${L('backHome')}</button>`;
   }
   b.innerHTML = h;
 }
@@ -466,7 +544,7 @@ function cropPlant(g, k, st, x, y, T) {
 }
 function bubble(g, x, y, k, T, faded) { const b = Math.sin(T * 4) * 3; g.save(); g.globalAlpha = faded ? 0.6 : 1; g.fillStyle = '#fff'; g.beginPath(); g.arc(x, y + b, 20, 0, 6.283); g.fill(); g.beginPath(); g.moveTo(x - 6, y + 16 + b); g.lineTo(x, y + 26 + b); g.lineTo(x + 6, y + 16 + b); g.fill(); g.drawImage(iconCanvas(k), x - 16, y - 16 + b, 32, 32); g.restore(); }
 function progressBar(g, x, y, w, p) { g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(x - w / 2, y, w, 8); g.fillStyle = '#5cc04a'; g.fillRect(x - w / 2 + 1, y + 1, (w - 2) * clamp(p, 0, 1), 6); }
-function lockSign(g, x, y, l) { g.fillStyle = 'rgba(58,36,18,.85)'; g.fillRect(x - 40, y - 12, 80, 24); g.fillStyle = '#fff'; g.font = '900 13px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText(`Nível ${l}`, x, y + 5); }
+function lockSign(g, x, y, l) { g.fillStyle = 'rgba(58,36,18,.85)'; g.fillRect(x - 40, y - 12, 80, 24); g.fillStyle = '#fff'; g.font = '900 13px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText(L('lvl', l), x, y + 5); }
 const FLOAT = [];
 function draw(T, dt) {
   const S = G.S, now = nowS();
@@ -478,7 +556,7 @@ function draw(T, dt) {
   cx.strokeStyle = 'rgba(255,255,255,.45)'; cx.lineWidth = 2; for (let i = 0; i < 3; i++) { const r = ((T * 12 + i * 20) % 60); cx.globalAlpha = 1 - r / 60; cx.beginPath(); cx.ellipse(62, 400, r * 0.6, r, 0, 0, 6.283); cx.stroke(); } cx.globalAlpha = 1;
   // casa, celeiro, moinho
   house(cx, HOUSE.x, HOUSE.y, HOUSE.w, HOUSE.h, '#fff1d6', '#d9614b'); cx.fillStyle = '#7a4b25'; cx.fillRect(HOUSE.x - 12, HOUSE.y - 40, 24, 40); cx.fillStyle = '#8fd3ff'; cx.fillRect(HOUSE.x - 46, HOUSE.y - 66, 24, 20); cx.fillRect(HOUSE.x + 22, HOUSE.y - 66, 24, 20);
-  if (S) { cx.fillStyle = '#7a4b25'; cx.fillRect(HOUSE.x - 54, HOUSE.y + 8, 108, 22); cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(S.name.slice(0, 16), HOUSE.x, HOUSE.y + 24); }
+  if (S) { cx.fillStyle = '#7a4b25'; cx.fillRect(HOUSE.x - 54, HOUSE.y + 8, 108, 22); cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(dispName(S.name).slice(0, 16), HOUSE.x, HOUSE.y + 24); }
   house(cx, BARN.x, BARN.y, BARN.w, BARN.h, '#d9483b', '#8a2a20', 46); cx.fillStyle = '#fff'; cx.fillRect(BARN.x - 22, BARN.y - 56, 44, 56); cx.strokeStyle = '#d9483b'; cx.lineWidth = 5; cx.beginPath(); cx.moveTo(BARN.x - 22, BARN.y - 56); cx.lineTo(BARN.x + 22, BARN.y); cx.moveTo(BARN.x + 22, BARN.y - 56); cx.lineTo(BARN.x - 22, BARN.y); cx.stroke();
   if (S && invCount(S) >= S.cap) bubble(cx, BARN.x, BARN.y - 170, 'barn', T);
   const M = BUILD.moinho; shadow(cx, M.x, M.y, 90); cx.fillStyle = '#f2e3c6'; cx.beginPath(); cx.moveTo(M.x - 34, M.y); cx.lineTo(M.x - 22, M.y - M.h); cx.lineTo(M.x + 22, M.y - M.h); cx.lineTo(M.x + 34, M.y); cx.closePath(); cx.fill(); cx.strokeStyle = 'rgba(0,0,0,.2)'; cx.lineWidth = 2; cx.stroke();
@@ -491,7 +569,7 @@ function draw(T, dt) {
   for (let i = 0; i < MAXPLOTS; i++) {
     const r = plotRect(i), pl = S ? S.plots[i] : { c: null }, locked = !S || i >= S.np;
     cx.fillStyle = locked ? 'rgba(120,80,40,.25)' : '#8a5a33'; cx.beginPath(); cx.roundRect ? cx.roundRect(r.x, r.y, r.w, r.h, 10) : cx.rect(r.x, r.y, r.w, r.h); cx.fill();
-    if (locked) { if (S && i === S.np) { cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText('Comprar', r.x + r.w / 2, r.y + r.h / 2 - 2); cx.drawImage(iconCanvas('coin'), r.x + r.w / 2 - 22, r.y + r.h / 2 + 4, 16, 16); cx.fillText(plotCost(S.np), r.x + r.w / 2 + 8, r.y + r.h / 2 + 17); } continue; }
+    if (locked) { if (S && i === S.np) { cx.fillStyle = '#fff'; cx.font = '900 13px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('buy'), r.x + r.w / 2, r.y + r.h / 2 - 2); cx.drawImage(iconCanvas('coin'), r.x + r.w / 2 - 22, r.y + r.h / 2 + 4, 16, 16); cx.fillText(plotCost(S.np), r.x + r.w / 2 + 8, r.y + r.h / 2 + 17); } continue; }
     cx.strokeStyle = '#6f4626'; cx.lineWidth = 3; for (let j = 0; j < 3; j++) { cx.beginPath(); cx.moveTo(r.x + 10, r.y + 16 + j * 20); cx.lineTo(r.x + r.w - 10, r.y + 16 + j * 20); cx.stroke(); }
     if (pl.c) { const c = CROPS[pl.c], p = clamp((now - pl.p) / (c.t * 1000), 0, 1), st = p >= 1 ? 2 : p < 0.35 ? 0 : 1;
       for (let j = 0; j < 6; j++) cropPlant(cx, pl.c, st, r.x + 18 + (j % 3) * 30, r.y + 30 + Math.floor(j / 3) * 26, T);
@@ -504,7 +582,7 @@ function draw(T, dt) {
     cx.save(); if (locked) cx.globalAlpha = 0.55;
     house(cx, B.x, B.y, B.w, B.h, k === 'padaria' ? '#ffe2b0' : '#e6f2ff', k === 'padaria' ? '#c8702a' : '#3f8fd1', 34);
     cx.fillStyle = '#7a4b25'; cx.fillRect(B.x - 14, B.y - 40, 28, 40); cx.fillStyle = '#fff'; cx.fillRect(B.x - 48, B.y - 66, 26, 18); cx.fillRect(B.x + 22, B.y - 66, 26, 18);
-    cx.fillStyle = '#7a4b25'; cx.fillRect(B.x - 40, B.y - B.h - 30, 80, 20); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(B.n.toUpperCase(), B.x, B.y - B.h - 16);
+    cx.fillStyle = '#7a4b25'; cx.fillRect(B.x - 40, B.y - B.h - 30, 80, 20); cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(N(k).toUpperCase(), B.x, B.y - B.h - 16);
     cx.restore();
     if (locked) { lockSign(cx, B.x, B.y - 40, B.lvl); continue; }
     const j = st.q[0]; if (j) { if (j.e <= now) bubble(cx, B.x, B.y - B.h - 60, B.rec[j.r].o, T); else { progressBar(cx, B.x, B.y + 10, 70, (now - j.s) / (j.e - j.s)); if (k === 'padaria') for (let s = 0; s < 3; s++) { const ph = (T * 0.6 + s / 3) % 1; cx.fillStyle = `rgba(255,255,255,${0.6 * (1 - ph)})`; cx.beginPath(); cx.arc(B.x + 36 + Math.sin(ph * 6) * 4, B.y - B.h - 34 - ph * 40, 6 + ph * 8, 0, 6.283); cx.fill(); } } }
@@ -532,7 +610,7 @@ function draw(T, dt) {
   shadow(cx, BOARD.x, BOARD.y, 120); cx.fillStyle = '#8a5a2b'; cx.fillRect(BOARD.x - 50, BOARD.y - 20, 8, 24); cx.fillRect(BOARD.x + 42, BOARD.y - 20, 8, 24);
   cx.fillStyle = '#c9905a'; cx.fillRect(BOARD.x - 60, BOARD.y - BOARD.h, 120, 54); cx.strokeStyle = '#7a4b25'; cx.lineWidth = 4; cx.strokeRect(BOARD.x - 60, BOARD.y - BOARD.h, 120, 54);
   if (S) S.orders.forEach((o, i) => { const x = BOARD.x - 50 + i * 36, y = BOARD.y - BOARD.h + 6; cx.fillStyle = o.w > now ? 'rgba(255,255,255,.4)' : '#fff'; cx.fillRect(x, y, 30, 40); if (o.w <= now) { cx.drawImage(iconCanvas(o.it[0][0]), x + 3, y + 8, 24, 24); if (has(S, Object.fromEntries(o.it))) { cx.fillStyle = '#5cc04a'; cx.beginPath(); cx.arc(x + 26, y + 4, 6, 0, 6.283); cx.fill(); } } });
-  cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText('ENCOMENDAS', BOARD.x, BOARD.y + 22);
+  cx.fillStyle = '#fff'; cx.font = '900 12px Nunito, sans-serif'; cx.textAlign = 'center'; cx.fillText(L('board'), BOARD.x, BOARD.y + 22);
   // nuvens (sombras passando)
   for (let i = 0; i < 3; i++) { const x = ((T * 10 + i * 260) % (WW + 300)) - 150, y = 180 + i * 280; cx.fillStyle = 'rgba(30,60,20,.08)'; cx.beginPath(); cx.ellipse(x, y, 90, 36, 0, 0, 6.283); cx.ellipse(x + 60, y + 10, 60, 28, 0, 0, 6.283); cx.fill(); }
   // toques do amigo e seus
@@ -544,4 +622,4 @@ function draw(T, dt) {
 let last = performance.now(), TT = 0;
 function frame(now) { requestAnimationFrame(frame); const dt = Math.min(0.05, (now - last) / 1000); last = now; TT += dt; try { draw(TT, dt); } catch (e) { console.error(e); } }
 requestAnimationFrame(frame);
-renderFarms();
+applyLang(); renderFarms();

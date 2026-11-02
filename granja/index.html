@@ -82,6 +82,9 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 .msg:empty{display:none}
 .or{display:flex;align-items:center;gap:8px;color:#9b7a55;font-weight:900;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
 .or::before,.or::after{content:"";flex:1;border-top:2px dashed #d9cbb0}
+.langs{display:flex;gap:6px;justify-content:center}
+.langs button{border:2px solid #d9cbb0;background:#fff;border-radius:999px;padding:6px 14px;font-weight:900;font-size:14px;color:var(--ink)}
+.langs button[aria-pressed="true"]{background:#2f7a22;border-color:#2f7a22;color:#fff}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);transform:translateX(-50%);z-index:7;background:rgba(58,36,18,.88);color:#fff;font-weight:800;padding:9px 16px;border-radius:999px;font-size:15px;max-width:calc(100% - 32px);text-align:center;pointer-events:none}
 </style>
 </head>
@@ -106,11 +109,12 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 
 <section class="ov" id="ovMenu">
   <div class="menu">
-    <h1>Sítio do Vento</h1>
-    <p style="text-align:center;color:#7a5a3a">Plante, cuide dos animais e entregue encomendas. Sozinho ou com um amigo, no mesmo sítio.</p>
-    <span class="lbl">Seus sítios</span>
+    <div id="mLangs"></div>
+    <h1 id="tTitle">Sítio do Vento</h1>
+    <p id="tIntro" style="text-align:center;color:#7a5a3a">Plante, cuide dos animais e entregue encomendas. Sozinho ou com um amigo, no mesmo sítio.</p>
+    <span class="lbl" id="tFarms">Seus sítios</span>
     <div id="farms" style="display:flex;flex-direction:column;gap:8px"></div>
-    <div class="or">ou entre no sítio de um amigo</div>
+    <div class="or" id="tJoinOr">ou entre no sítio de um amigo</div>
     <div class="row"><input class="code" id="iCode" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD" aria-label="Código da sala"><button class="btn blue" id="bJoin" type="button">Entrar</button></div>
     <p class="msg" id="mMsg"></p>
   </div>
@@ -118,10 +122,10 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 
 <section class="ov" id="ovRoom" hidden>
   <div class="menu">
-    <h1 style="font-size:34px">Convide seu amigo</h1>
-    <span class="lbl">Código</span>
+    <h1 style="font-size:34px" id="tInvite">Convide seu amigo</h1>
+    <span class="lbl" id="tCodeLbl">Código</span>
     <div class="bigcode" id="rCode">----</div>
-    <div id="rShare" style="display:flex;flex-direction:column;gap:6px"><span class="lbl">Ou mande este link</span>
+    <div id="rShare" style="display:flex;flex-direction:column;gap:6px"><span class="lbl" id="tShareLbl">Ou mande este link</span>
       <div class="row"><input class="link" id="rLink" readonly aria-label="Link da sala"><button class="btn blue" id="bCopy" type="button">Copiar</button></div></div>
     <p id="rStatus"></p>
     <p class="msg" id="rMsg"></p>
