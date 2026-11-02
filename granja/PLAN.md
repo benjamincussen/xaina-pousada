@@ -121,3 +121,7 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Sierra (nivel 15, mapa más grande): montañas nevadas, cascada, mirador
 - [x] Mina: piedras y piedras preciosas
 - [x] Navidad en diciembre: luces en las casas y árbol en la pileta del barrio
+
+## Versión grande 19: "Joyería" (2026-11-03.20)
+- [x] Joyería en la Sierra: anillos y collares (los productos más valiosos)
+- [x] Refugio de montaña con chimenea y excursionistas
