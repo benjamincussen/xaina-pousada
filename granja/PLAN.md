@@ -52,3 +52,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Misiones de la alcaldía (entregas grandes, +2 de felicidad cada una)
 - [x] Alcaldía con cúpula en el Barrio Escolar
 - [x] Bus amarillo con pasajeros entre la granja y los barrios, con paraderos
+
+## Versión grande 6: "Diversión" (2026-11-03.6)
+- [x] Parque de Diversiones (nivel 13, mapa más grande): rueda gigante, carrusel con caballitos, Dulcería (algodón de azúcar, palomitas); entradas dan monedas
+- [x] Estaciones del año cada 30 min (pétalos, sol, hojas, más lluvia en invierno)
+- [x] De noche los vecinos vuelven a casa y se encienden las ventanas
