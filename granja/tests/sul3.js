@@ -1,0 +1,8 @@
+// v103: viñedo, parque nacional, universidad. node tests/sul3.js [carpeta]
+const { open, richFarm, simulate, openSheets, shot } = require('./lib'); const out = process.argv[2] || '/tmp';
+(async () => { const { pg, errs, close } = await open(); await richFarm(pg, { skipLands: ['vinhedo', 'parqueNac', 'universidade'], coins: 400000, homes: 70, inv: { uva: 12, acucar: 10, trigo: 50, milho: 50, pao: 40 } });
+  const r = await pg.evaluate(() => { const S = G.S, o = {}; S.lvl = 23; delete S.serv.visitantes; delete S.serv.universidade; o.WH = WH; o.lots = LOTS.length; o.l = ['vinhedo', 'parqueNac', 'universidade'].map(k => act({ a: 'land', k }).ok); o.np0 = S.np; for (let i = 0; i < 50; i++) act({ a: 'buyPlot' }, true); o.np = S.np; S.plots[124] = { c: null, p: 0 }; o.plant = act({ a: 'plant', i: 124, c: 'uva' }).ok; o.suco = apply(S, { a: 'craft', b: 'vinicola', r: 0 }, Date.now()).ok; o.jobs0 = jobsInfo(S).jobs; o.v = act({ a: 'serv', k: 'visitantes' }).ok; o.u = act({ a: 'serv', k: 'universidade' }).ok; o.jobs = jobsInfo(S).jobs; o.home = act({ a: 'home' }).ok; o.lotLand70 = lotLand(70); return o; });
+  console.log(JSON.stringify(r)); const sim = await simulate(pg, 2, 200000); console.log('sim', JSON.stringify(sim));
+  const sheets = await openSheets(pg, ['map', 'city', 'seeds', ['land', 'parqueNac'], ['bld', 'vinicola'], 'numeros']); console.log(JSON.stringify(sheets));
+  await shot(pg, 740, 8250, 0.6, out + '/sul3-vinhedo.png'); await shot(pg, -750, 8500, 0.45, out + '/sul3-parque.png'); await shot(pg, 740, 9000, 0.6, out + '/sul3-univ.png');
+  console.log('errors', errs.length, errs.slice(0, 5)); await close(); process.exit(errs.length || r.l.some(x => !x) || !r.plant || !r.suco || !r.v || !r.u ? 1 : 0); })();

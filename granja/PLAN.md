@@ -700,3 +700,11 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - Cada 5 min (host), los vecinos con empleo van de compras: hasta 40 clientes (empleados/4 + vecinos/12) compran 1 unidad cada uno de las **sobras** del granero (por encima del stock objetivo y de lo que piden los pedidos) pagando 30% más; las monedas van al jugador, con aviso, moneda flotante y 5 vecinos que caminan hasta el Mercado Grande (o la feria) diciendo que fueron de compras. `S.consTot`/`S.consN` en "Tu ciudad en números".
 - La feria vende más rápido con más empleos (+hasta 10%).
+
+## Versión 102: Más al sur 3 — Viñedo, Parque Nacional y Universidad
+
+- El mundo crece otra franja (WH 9400). Tres terrenos nuevos:
+  - **Viñedo** (nivel 21, 16000): 16 parcelas (124–139, `MAXPLOTS` 140), cultivo uva (260 s) con planta e ícono, hileras de parras decorativas y Casa de Jugos de Uva (jugo de uva ×2, 110).
+  - **Parque Nacional** (nivel 22, 20000): bosque de 60 árboles, cerro con cascada y poza, Centro de Visitantes (servicio: +25 felicidad, 15 empleos, 3 turistas más) que cobra entradas cada 12 min (300 × felicidad × población).
+  - **Ciudad Universitaria** (nivel 23, 24000): 12 lotes (70–81), avenida con rotonda, faroles y la **Universidad** (edificio de 3 pisos con reloj real y bandera: 60 empleos, +15).
+- Prueba `tests/sul3.js`: compra de los 3, 50 parcelas, uva sembrada, jugo producido, empleos 374 → 449, casa en la Universitaria, 2 h simuladas; smoke y fuzz sin errores; capturas.
