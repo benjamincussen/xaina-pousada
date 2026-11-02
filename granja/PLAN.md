@@ -309,3 +309,7 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 ## Versión grande 55: Minigolf en la Colonia y malvaviscos (2026-11-03.56)
 - Minigolf (Colonia de Vacaciones, a la izquierda de las Cabañas): tocarlo abre un minijuego de puntería; la pelotita va y vuelve en una barra y hay que tocar "¡Golpe!" en el verde oscuro. Hoyo en uno 120 monedas (+10 XP), buen golpe 60, lejos 20. Un golpe cada 10 min por granja (sincronizado). Aparece en la agenda.
 - Malvaviscos: de día tres niños asan malvaviscos en la fogata del Campamento.
+
+## Versión grande 56: Tiro al blanco y carrera de sacos (2026-11-03.57)
+- Tiro al blanco (Parque de diversiones, junto a la rueda): puesto con toldo rojo y blancos que se mueven; minijuego de mira que va y vuelve más rápido que el minigolf. Centro 100 monedas, cerca 50, fallo 15. Una vez cada 10 min (sincronizado). En la agenda.
+- Carrera de sacos: con la Cancha, cada 25 min cinco niños saltan en sacos de lado a lado. Nuevo evento en el álbum (ahora 20; el premio final es por verlos todos).
