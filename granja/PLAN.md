@@ -140,3 +140,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Foto de la ciudad con el nombre, para compartir por WhatsApp
 - [x] Sonidos de cada lugar (olas, pájaros, niños, peces)
 - [x] Ayudantes con accesorios de su oficio
+
+## Versión grande 23: "Frutilla" (2026-11-03.24)
+- [x] Frutillas: mermelada (Cocina) y tarta (Panadería)
+- [x] Cumpleaños de vecinos con globos; llevar pastel paga el triple
+- [x] Tren con farol de noche
