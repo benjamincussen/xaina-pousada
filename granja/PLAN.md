@@ -689,3 +689,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - Con el Club del Lago, cada 10 min cruza el lago un **bote con turistas** (estela, cartel) y al terminar el viaje pagan entrada: 260 × (1 + 10% por torre, hasta 10) × felicidad de la ciudad, con aviso y moneda flotante (`S.lagoTot` acumula). También pasean 3 turistas más por la ciudad.
 - Pruebas: viaje visible, 10 turistas, pago al terminar; smoke sin errores.
+
+## Versión 100: Fiesta y "Tu ciudad en números"
+
+- Al abrir por primera vez: 25 s de fuegos artificiales por toda la pantalla y un saludo (una sola vez por aparato).
+- Menú → 🏙️ **Tu ciudad en números**: vecinos, bebés, casas/edificios/torres, terrenos, parcelas, fábricas, servicios y proyectos, ayudantes, calles y adornos, monedas, tesoro e ingreso, pedidos, barcos, entradas del lago, metas y versión.
+- Pruebas: hoja con 33 metas listadas, fiesta activada; smoke y fuzz sin errores.
