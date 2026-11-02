@@ -358,3 +358,11 @@ Problema: 400 trigos y 10 cañas; edificios parados con materia prima; scout "si
 - Canvas sin alfa y suavizado de imagen en alta calidad.
 - Medido en Chromium headless (sin GPU), granja nivel 14 con todas las tierras: tiempo por frame igual (mediana ~3 ms antes y después); construir el fondo pasó de ~250 ms a ~360 ms una sola vez.
 - Integrado con la expansión: el oeste usa el mismo pasto nuevo y las baldosas pintan solo su franja (más rápido).
+
+## Versión grande 62: Vida en la gran ciudad (2026-11-03.63)
+- Autos en las avenidas de la Ciudad Nueva y del Centro Moderno (dos sentidos, horizontales y verticales).
+- Gente caminando por las veredas de la Ciudad Nueva y el Centro (más gente cuantas más casas hay en esos lotes), algunos con bolsas.
+- Turistas con maletas frente al Aeropuerto.
+- Tranvía del Oeste: con 2+ terrenos del oeste, sube y baja por el camino del Oeste (aviso al pasar cerca).
+- Terrenos (Panel de la ciudad): primero los disponibles ordenados por nivel, luego los ya comprados; cada uno con botón "Ir".
+- Verificado: los ayudantes alimentan los corrales nuevos y siembran las parcelas del oeste (cultivos variados).
