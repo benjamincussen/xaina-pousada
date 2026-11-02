@@ -255,3 +255,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Desfile de mascotas: con 3+ casas, cada 25 min seis vecinos pasean perros y gatos con moño por la avenida del barrio.
 - Guardia de tránsito: con el Colegio, de día una guardia con chaleco y señal PARE/OK; paso de cebra y niños con mochila cruzando.
 - Florería en primavera (villa): comprar un ramo por 40 monedas para regalar a un vecino da +1 felicidad (hasta +20) y +5 XP, cada 10 min. Sincronizado.
+
+## Versión grande 45: Tesoro en la playa, heladero en bici y "Menos animaciones" (2026-11-03.46)
+- Búsqueda del tesoro: cada 15 min una X roja con brillo en la arena; tocarla desentierra 150 o 90 monedas, una joya o un pez dorado (+8 XP). 1 por ronda, sincronizado.
+- Heladero en bicicleta: en verano cruza la villa cada 4 min con niños detrás.
+- Opción "Menos animaciones" (menú ☰, guardada en el teléfono): menos visitantes y sin adornos (mariposas, volantines, tendederos, muñecos de nieve, hojas, picnic). No cambia la partida.
