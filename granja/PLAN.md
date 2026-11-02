@@ -559,3 +559,10 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 ## Versión 80: Arreglo del HUD en celular (reporte de la otra sesión)
 
 - En pantallas de hasta 560 px la píldora 🏛️ del tesoro pasa a una segunda fila (debajo del nivel y las monedas), compacta y con el número abreviado (47.1k). Prueba `tests/hud-movil.js` a 390×800: sin superposición con monedas ni botones.
+
+## Versión 81: Precios del día (mercado que sube y baja)
+
+- Cada hora el precio de venta de cada producto cambia entre 0,8× y 1,3× (determinístico por hora, igual para los dos jugadores) y lo que piden los pedidos vale +15% (`priceMult`, tope 1,5×). `sellPrice` lo usa, así que los ayudantes, la venta de sobras y la Secretaría de Comercio ya venden mirando el precio.
+- Hoja 📈 "Precios del día" (botón en el Granero): lista con flechas ▲▼ respecto a la hora anterior y etiqueta "buen momento" (≥1,25×); el Granero marca cada producto en buen momento; al vender en buen momento suena y avisa.
+- Tablero de precios en el mapa (al lado del lago, bajo los frutales) con los 3 mejores productos y flechas; tocarlo abre la hoja.
+- Prueba `tests/precos.js`: multiplicadores dentro de rango, cambio a la hora siguiente, venta con aviso, hojas sin errores, capturas.
