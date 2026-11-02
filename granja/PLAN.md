@@ -96,3 +96,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Edificios de departamentos (4 pisos, +4 vecinos, arriendo 4x)
 - [x] Mercado nocturno con faroles (ventas +50% de noche)
 - [x] Regata en el lago cada 10 min con apuesta por un bote
+
+## Versión grande 14: "Carnaval" (2026-11-03.15)
+- [x] Carnaval: desfile con carro alegórico, bailarines y confeti cada 30 min
+- [x] Votación de la ciudad cada hora (2 mejoras temporales)
+- [x] Cocina de la Abuela + porotos: porotos guisados y empanadas
