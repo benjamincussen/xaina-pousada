@@ -2,6 +2,10 @@
 // Quem cria a sala (ou joga sozinho) é o dono do estado: aplica as ações e salva. O convidado manda ações e guarda uma cópia.
 'use strict';
 const $ = id => document.getElementById(id);
+// ===== extensões (arquivos separados se registram aqui; ver PLAN-EXT.md) =====
+const EXT = { apply: [], step: [], tick: [], draw0: [], draw: [], sheet: {}, click: [], fx: [], opts: [], tap: [], migrate: [], go: {}, agenda: [] };
+function extApply(S, a, now, out, fail) { for (const h of EXT.apply) if (typeof a.a === 'string' && a.a.slice(0, h.pre.length) === h.pre) { const r = h.fn(S, a, now, out, fail); if (r !== undefined && r !== null) return r; } return null; }
+const extHas = a => !!a && typeof a.a === 'string' && EXT.apply.some(h => a.a.slice(0, h.pre.length) === h.pre);
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 // ---------- idiomas (português e espanhol) ----------
@@ -657,6 +661,7 @@ function migrate(S) {
   if (!S.arch || typeof S.arch !== 'object') S.arch = { on: 0, props: [], log: [], no: {}, next: 0, n: 0 }; if (!Array.isArray(S.arch.props)) S.arch.props = []; if (!Array.isArray(S.arch.log)) S.arch.log = []; if (!S.arch.no || typeof S.arch.no !== 'object') S.arch.no = {};
   if (!S.helper || typeof S.helper !== 'object') S.helper = { on: 0, until: 0, x: HELPER_HOME.x, y: HELPER_HOME.y };
   for (const k of Object.keys(BUILD)) if (!S.bld[k]) S.bld[k] = { q: [] };
+  for (const h of EXT.migrate) h(S);
   return S;
 }
 const okB = (S, B) => B.lvl <= S.lvl && (!B.land || S.land[B.land]) && (!B.base || (dupN(S, B.base) >= B.idx - 1 && (!B.baseLand || S.land[B.baseLand])));
@@ -1202,6 +1207,7 @@ function apply(S, a, now) {
     S.masc.done[key] = 1;
   } else if (a.a === 'export') {
     if (!S.land.porto2 || !S.city.cargo || S.city.cargo.e > now) return fail(''); const n = expN(now), j = clamp(a.j | 0, 0, ROTAS.length - 1), o = expOrder(S, n, j); if (!o || expDone(S, n, j)) return fail(L('expDone')); const need = Object.fromEntries(o.it); if (!has(S, need)) return fail(L('missingProd')); take(S, need); if (!S.expR || S.expR.n !== n) S.expR = { n, d: [0, 0, 0] }; S.expR.d[j] = 1; if (j === 0) S.exp = n; S.coins += o.c; addXp(S, 20 + j * 10, out); out.fx.push(['coins', o.c]); out.fx.push(['export', o.c]);
+  } else if (extHas(a)) { const r = extApply(S, a, now, out, fail); if (r !== true) return r || fail('');
   } else if (typeof a.a === 'string' && a.a.slice(0, 2) === 'mu' && typeof muApply === 'function') { const r = muApply(S, a, now, out, fail); if (r !== true) return r || fail('');
   } else if (a.a === 'cvVote') {
     if (!cvOn(S) || !S.cv || !CV_ROLES.includes(a.r)) return fail(''); const n = elN(now); if (S.cv.vn !== n) { S.cv.v = {}; S.cv.vn = n; } S.cv.v[a.r] = a.c ? 1 : 0; out.fx.push(['cvVote']);
@@ -1673,6 +1679,7 @@ function tapAt(p) {
     if (P.lvl > S.lvl) return toast(L('unlockName', N(k), P.lvl));
     const r = act({ a: 'pen', k }, true); if (!r.ok) openSheet('pen', k); return;
   }
+  for (const h of EXT.tap) if (h(p, S)) return;
   if (S.arch && S.arch.on && AV.arch && Math.hypot(p.x - AV.arch.x, p.y - (AV.arch.y - 30)) < 34) return openSheet('arch');
   if (S.helper && S.helper.on && (AV.hs || []).some(av => Math.hypot(p.x - av.x, p.y - (av.y - 30)) < 34)) return openSheet('helper');
   for (let i = 0; i < S.silos; i++) if (Math.abs(p.x - SILOS[i].x) < 30 && p.y > SILOS[i].y - 110 && p.y < SILOS[i].y + 8) return openSheet('barn');
@@ -1741,6 +1748,7 @@ function playFx(fx) {
     if (f[0] === 'golf') { toast(L('golfRes' + f[1], f[2]), 3000); if (f[1] === 2) { SND.lvl(); burst(GOLF.x, GOLF.y - 30, 'star'); } }
     if (f[0] === 'mine') toast(L('mineUpT', f[1]), 3000);
     if (f[0] === 'minSold') toast(L('minSoldT', f[1]), 3000);
+    if (EXT.fx.some(h => h(f))) continue;
     if (typeof muFx === 'function' && muFx(f)) continue;
     if (f[0] === 'battle') { toast(f[1] ? L('batWinT', f[2]) : L('batLoseT'), 4500); burst(NBC.x, NBC.y - 120, f[1] ? 'coin' : 'star'); }
     if (f[0] === 'nbGift') toast(L('nbGiftT'), 3000);
@@ -1802,7 +1810,7 @@ function maybeAway() { const S = G.S; if (!S) return; let o = null; try { o = JS
   if (!['coins', 'done', 'res', 'lvl', 'babies', 'homes'].some(k => d[k] > 0)) return; let tries = 0; const tryOpen = () => { if (!G.S) return; if (!SH && $('ovRoom').hidden) openSheet('away', d); else if (++tries < 30) setTimeout(tryOpen, 2500); }; setTimeout(tryOpen, 1500); }
 function maybeAnniv() { const S = G.S; if (!S || G.mode === 'guest') return; const n = annivN(S, Date.now()); if (n < 1 || (S.annivN || 0) >= n) return; let k = 0; const tryOpen = () => { if (!G.S) return; if (!SH && $('ovRoom').hidden) openSheet('anniv'); else if (++k < 30) setTimeout(tryOpen, 3000); }; setTimeout(tryOpen, 4000); }
 function maybeNews() { maybeDaily(); maybeAway(); maybeAnniv(); let seen = ''; try { seen = localStorage.getItem('sitio-news') || ''; } catch (e) {} if (seen === NEWS_ID) return; try { localStorage.setItem('sitio-news', NEWS_ID); } catch (e) {} setTimeout(() => { if (G.S && !SH) openSheet('news'); }, 900); }
-function newsGo(k) { closeSheet(); const S = G.S; if (k === 'cv') return openSheet('cv'); if (k === 'mundo') return openSheet('mundo'); if (k === 'nb') { CAM.z = Math.max(zMin(), 0.5); CAM.x = NBC.x; CAM.y = NBC.y - 300; clampCam(); return; } if (k === 'shop' || k === 'goals' || k === 'helper' || k === 'city' || k === 'orders' || k === 'barn' || k === 'map' || k === 'evalbum' || k === 'arch') return openSheet(k); if (k === 'menu') return openSheet('menu'); if (k === 'road') return setRoad(true);
+function newsGo(k) { closeSheet(); const S = G.S; if (EXT.go[k]) return EXT.go[k](); if (k === 'cv') return openSheet('cv'); if (k === 'mundo') return openSheet('mundo'); if (k === 'nb') { CAM.z = Math.max(zMin(), 0.5); CAM.x = NBC.x; CAM.y = NBC.y - 300; clampCam(); return; } if (k === 'shop' || k === 'goals' || k === 'helper' || k === 'city' || k === 'orders' || k === 'barn' || k === 'map' || k === 'evalbum' || k === 'arch') return openSheet(k); if (k === 'menu') return openSheet('menu'); if (k === 'road') return setRoad(true);
   const at = k === 'farm' ? [320, 700] : k === 'lake' ? [LAKE.x, LAKE.y + 60] : k === 'fair' ? [FAIR.x, FAIR.y - 60] : PROJ[k] && S.land[PROJ[k].land] ? [PROJ[k].x, PROJ[k].y - 120] : LANDS[k] ? (S.land[k] ? [LANDS[k].r.x + LANDS[k].r.w / 2, LANDS[k].r.y + LANDS[k].r.h / 2] : [LANDS[k].sx, LANDS[k].sy]) : null; if (at) { CAM.z = Math.max(zMin(), 0.6); CAM.x = at[0]; CAM.y = at[1]; clampCam(); } }
 function teamHtml(S, now) { const n = hCount(S), led = S.helper.led || { sp: 0, ea: 0 }, pl = makePlan(S, now), miss = pl.order.filter(k => pl.miss[k] > 0).slice(0, 8);
   return `<span class="lbl">${L('team')}</span><p class="sub">${L('teamHint')}</p>` + Array.from({ length: n }, (_, hh) => { const r = roleOf(S, hh);
@@ -2072,7 +2080,7 @@ function cvOpts(S, now, r) { const o = [], m = milOf(S), nb = nbOf(S);
   if (r === 'comercio') { const ups = [], svs = []; for (const [k, B] of Object.entries(BUILD)) { if (B.base || !okB(S, B)) continue; const l = upLv(S, k); if (l < 2 && S.lvl >= UP_LVL[l + 1]) ups.push([{ a: 'up', k }, upCost(k, l)]); } for (const [k, V] of Object.entries(SERV)) if (!S.serv[k] && S.land[V.land || 'bairro'] && S.lvl >= (V.lvl || 0)) svs.push([{ a: 'serv', k }, V.cost]); ups.sort((a, b) => a[1] - b[1]); svs.sort((a, b) => a[1] - b[1]); if (svs[0]) o.push(svs[0]); const mi = mineOf(S); if (S.land.vale && S.lvl >= MINE.lvl && mi.lv < 5) o.push([{ a: 'mineUp' }, mineCost(mi.lv)]); if (ups[0]) o.push(ups[0]); }
   if (r === 'defesa' && S.land.porto2) { const thr = nb.sol > milDef(S) * 0.9, cap = Math.min(MIL_MAX, Math.ceil(nb.sol * 1.2) + 20); if (m.sol < cap && (m.sol < 20 || thr)) o.push([{ a: 'milTrain' }, 300]); if (m.wall < 5) o.push([{ a: 'milWall' }, 2000 * (m.wall + 1)]); if (m.tw < 4) o.push([{ a: 'milTower' }, 1500 * (m.tw + 1)]); const mn = minOf(S); if ((m.arm || 0) < 5 && mn.ferro >= 30 * ((m.arm || 0) + 1)) o.push([{ a: 'milArm' }, 1000 * ((m.arm || 0) + 1)]); }
   if (r === 'pref') { const ls = []; for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && Ld.lvl <= S.lvl) ls.push([{ a: 'land', k }, Ld.cost]); ls.sort((a, b) => a[1] - b[1]); if (ls[0] && !(S.cv.no && S.cv.no[ls[0][0].k] > now)) { if (S.cv.ask) { if (!S.cv.prop) { S.cv.prop = { k: ls[0][0].k, c: ls[0][1], t: now }; cvLog(S, now, 'pref', 'propLand', ls[0][0].k); } } else o.push(ls[0]); } }
-  if (typeof muOpts === 'function') muOpts(S, now, r, o);
+  if (typeof muOpts === 'function') muOpts(S, now, r, o); for (const h of EXT.opts) h(S, now, r, o);
   return o; }
 function cvElect(S, n, now) { const C = S.cv, vote = C.vn === n - 1 ? C.v : {}; C.m = C.m.map((m, ri) => { const ch = cvChal(S, n - 1, ri), si = 50 + m.lv * 6 + Math.min(20, m.d) + (vote[m.r] === 0 ? 35 : 0), sc = 38 + hashN(n, ri + 11) % 34 + (vote[m.r] === 1 ? 35 : 0);
     if (sc > si) { const nm = { r: m.r, id: ch, lv: 1, xp: 0, d: 0 }; cvLog(S, now, m.r, 'elect', ch, 1); return nm; } cvLog(S, now, m.r, 'elect', m.id, 2); return Object.assign({}, m, { d: 0 }); }); C.eN = n; C.v = {}; C.vn = n; }
@@ -2095,7 +2103,7 @@ function cvStep(S, now) { const C = S.cv; let ch = false; CV_NOW = now; cvAdd(S,
   const n = elN(now); if (C.eN < n) { cvElect(S, n, now); ch = true; } if (cvDemand(S, now)) ch = true; if (cvSellMin(S, now)) ch = true;
   if (!C.pause) for (const m of C.m) { const per = 1 + Math.floor(m.lv / 2); for (let j = 0; j < per; j++) { const op = cvPick(S, now, m.r); if (!op) break; const r = cvDo(S, now, op[0], m.r); if (!r.ok) break;
       m.xp++; m.d++; m.lv = Math.min(5, 1 + Math.floor(m.xp / 12)); const a = op[0]; if (a.a.slice(0, 2) !== 'mu') cvLog(S, now, m.r, a.a, a.k != null ? a.k : a.i != null ? a.i : '', op[1]); ch = true; } }
-  if (typeof muTick === 'function' && muTick(S, now)) ch = true;
+  if (typeof muTick === 'function' && muTick(S, now)) ch = true; for (const h of EXT.step) if (h(S, now)) ch = true;
   if (cvShare(S, now)) ch = true;
   if (nbTick(S, now)) ch = true; return ch; }
 // mina, minerais, ultimatos e o Conselho em pessoa
@@ -2165,6 +2173,7 @@ setInterval(() => { if (!G.S) return; if (G.mode !== 'guest') {
   if (S.serv && S.serv.campo) { const n = futN(now); if (futT(now) >= FUT.dur && S.futAt !== n) { S.futAt = n; const [a, b] = futScore(n, FUT.dur), pay = 50 + (a + b) * 15; S.coins += pay; S.futGoals = (S.futGoals || 0) + a + b; S.rev++; saveSoon(); broadcast(); toast(L('futEnd', a, b, pay), 3500); } }
   { const fi = fairTick(S, now); if (fi >= 0) { S.rev++; saveSoon(); broadcast(); fairFx(fi); } }
   if (helperClock % 20 === 7 && cvTick(S, now)) { S.rev++; saveSoon(); broadcast(); }
+  for (const h of EXT.tick) if (h(S, now)) { S.rev++; saveSoon(); broadcast(); }
   if (helperClock % 3 === 0 && archTick(S, now)) { S.rev++; saveSoon(); broadcast(); toast(L('archNew'), 3200); if (SH && SH.type === 'arch') renderSheet(); }
   if (S.helper && S.helper.on && S.helper.until > now && helperClock % 2 === 0) { let r = null; for (let hh = 0; hh < hCount(S); hh++) { const role = roleOf(S, hh); let rr = helperTask(S, now, role, hh); if (rr && rr.ok && bdayHelper(S, now) === hh) { const r3 = helperTask(S, now, role, hh); if (r3 && r3.ok) rr.fx.push(...r3.fx); } (S.helper.why = Array.isArray(S.helper.why) ? S.helper.why : [])[hh] = rr && rr.ok ? 0 : rr && rr.full ? 'full' : rr && rr.poor ? 'coins' : 'idle'; if ((role === 'colhe' || role === 'planta') && rr && rr.ok) for (let x = 0; x < (role === 'planta' ? 4 : 2); x++) { const r2 = helperTask(S, now, role, hh); if (!(r2 && r2.ok)) break; rr.fx.push(...r2.fx); } if (rr && rr.ok) { S.helper.ps[hh] = [S.helper.x, S.helper.y]; if (r && r.ok) playFx(r.fx.filter(f => f[0] !== 'coins')); r = rr; } else if (!r) r = rr; } if (r && r.ok) { playFx(r.fx.filter(f => f[0] !== 'coins')); ensureOrders(S); saveSoon(); broadcast(); } else if (r && r.full && !G.helperWarned) { G.helperWarned = 1; toast(L('helperFull'), 3200); } if (r && r.ok) G.helperWarned = 0; } if (ensureOrders(G.S)) { G.S.rev++; saveSoon(); } } if (G.mode === 'host' && (G.S.rev !== G.bcRev || Date.now() - bcLast > 4000)) { G.bcRev = G.S.rev; broadcast(); } refresh(); }, 1000);
 
@@ -2392,6 +2401,7 @@ function renderSheet() {
     h = `<div class="card" style="background:#fffdf3"><p style="font-family:Georgia,serif;font-size:17px;line-height:1.5;margin:0">${L('mailDear')}<br><br>${m}<br><br>${L('mailBye')}<br><b>${resName(who)}</b></p></div>${mailOn(S, Date.now()) ? `<button class="btn" type="button" data-mail="1">${L('mailOpen', 30 + S.lvl * 3)}</button>` : ''}`;
   } else if (SH.type === 'export') {
     t.textContent = L('expT'); const n = expN(Date.now()); h = `<p class="sub">${L('expSub')} ⏳ ${fmtT(Math.ceil(EXP.per - (Date.now() / 1000) % EXP.per))}</p>` + ROTAS.map((R, j) => { const o = expOrder(S, n, j); if (!o) return ''; return expDone(S, n, j) ? `<div class="card"><b>${R.ic} ${L('rota' + j)}</b><small>✅ ${L('expDone')}</small></div>` : `<div class="card"><b>${R.ic} ${L('rota' + j)}</b>${needHtml(S, Object.fromEntries(o.it))}<div class="row"><span class="need"><span>🪙 ${o.c}</span><span>${img('star')} ${20 + j * 10}</span></span><span style="flex:1"></span><button class="btn" type="button" data-expgo="${j + 1}" ${has(S, Object.fromEntries(o.it)) ? '' : 'disabled'}>${L('deliver')}</button></div></div>`; }).join('');
+  } else if (EXT.sheet[SH.type]) { h = EXT.sheet[SH.type](S, t, SH.arg);
   } else if ((SH.type === 'mundo' || SH.type === 'urbe') && typeof muSheet === 'function') {
     h = muSheet(S, t);
   } else if (SH.type === 'cv') {
@@ -2582,7 +2592,7 @@ function paintMini() { const c = document.getElementById('miniMap'), S = G.S; if
   const who = [[AV.me, '#ffb020', ME.name]]; if (AV.fr.on && G.mode !== 'solo') who.push([AV.fr, '#9b5de5', AV.fr.name]); for (const [av, col, nm] of who) { const mx = av.x * k, my = av.y * k; g.fillStyle = '#fff'; g.beginPath(); g.arc(mx, my, 15, 0, 6.283); g.fill(); g.fillStyle = col; g.beginPath(); g.arc(mx, my, 11, 0, 6.283); g.fill(); g.fillStyle = '#fff'; g.font = '900 14px Nunito, sans-serif'; g.fillText(String(nm || '?').slice(0, 1).toUpperCase(), mx, my + 1); }
   g.restore(); c.onclick = ev => { const r = c.getBoundingClientRect(), x = XMIN + (ev.clientX - r.left) / r.width * WTOT, y = (ev.clientY - r.top) / r.height * WH; closeSheet(); CAM.z = Math.max(CAM.z, 0.7); CAM.x = x; CAM.y = y; clampCam(); }; }
 $('sBody').addEventListener('click', e => {
-  const btn = e.target.closest('button'); if (!btn || btn.disabled || !SH) return; const d = btn.dataset;
+  const btn = e.target.closest('button'); if (!btn || btn.disabled || !SH) return; const d = btn.dataset; if (EXT.click.some(h => h(d, SH))) return;
   if (d.plant) { const r = act({ a: 'plant', i: SH.arg, c: d.plant }); if (r.ok) closeSheet(); }
   if (d.craft) act({ a: 'craft', b: SH.arg, r: +d.craft });
   if (d.collect) act({ a: 'collect', b: SH.arg });
@@ -2942,7 +2952,7 @@ function draw(T, dt) {
   const S = G.S, now = nowS(); applyLayout(S); if (G.tour) tourCam();
   cx.setTransform(DPR, 0, 0, DPR, 0, 0); cx.fillStyle = '#5aa83c'; cx.fillRect(0, 0, innerWidth, innerHeight);
   cx.setTransform(DPR * CAM.z, 0, 0, DPR * CAM.z, DPR * (innerWidth / 2 - CAM.x * CAM.z), DPR * (innerHeight / 2 - CAM.y * CAM.z));
-  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia', 'bairro', 'escolar', 'lavoura', 'diversao', 'serra', 'ferias', 'oeste', 'curral', 'cidade', 'porto2', 'vale', 'centro', 'aero'].map(k => lands[k] ? 1 : 0).join(','); const rkey = !S || G.road ? 'live' : (S.train ? 't' : '') + S.roads.length + ':' + S.roads.reduce((a, b) => (a * 31 + b) % 1000003, 7), fk = key + '|' + rkey; if (!BG || (fk !== BGKEY && !(BGKEY.split('|')[0] === key && performance.now() - BGT < 1500))) { BG = { lands, S: rkey === 'live' ? null : S, tiles: new Map(), ov: null, n: 0 }; BGKEY = fk; BGT = performance.now(); } drawBg(cx); if (S && G.road) drawRoads(cx, S, true);
+  const lands = S ? S.land : {}, key = ['leste', 'sul', 'colina', 'vila', 'praia', 'bairro', 'escolar', 'lavoura', 'diversao', 'serra', 'ferias', 'oeste', 'curral', 'cidade', 'porto2', 'vale', 'centro', 'aero'].map(k => lands[k] ? 1 : 0).join(','); const rkey = !S || G.road ? 'live' : (S.train ? 't' : '') + S.roads.length + ':' + S.roads.reduce((a, b) => (a * 31 + b) % 1000003, 7), fk = key + '|' + rkey; if (!BG || (fk !== BGKEY && !(BGKEY.split('|')[0] === key && performance.now() - BGT < 1500))) { BG = { lands, S: rkey === 'live' ? null : S, tiles: new Map(), ov: null, n: 0 }; BGKEY = fk; BGT = performance.now(); } drawBg(cx); if (S && G.road) drawRoads(cx, S, true); for (const h of EXT.draw0) h(cx, S, T, dt, now);
   // sombras de nuvens passando devagar (de dia, fora do modo calmo)
   if (S && !CALM) { const nf0 = nightF(Date.now()); if (nf0 < 0.6) { const hw = innerWidth / CAM.z / 2, hh = innerHeight / CAM.z / 2; cx.save(); cx.globalCompositeOperation = 'multiply'; for (let i = 0; i < 5; i++) { const r = 170 + (i % 3) * 70, x = ((i * 611 + T * (9 + i * 2)) % (WW + r * 2)) - r, y = ((i * 937 + T * 2.5) % (WH + r * 2)) - r; if (Math.abs(x - CAM.x) > hw + r || Math.abs(y - CAM.y) > hh + r) continue; const gr = cx.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(190,205,215,${0.85 - nf0})`); gr.addColorStop(0.6, `rgba(190,205,215,${0.9 - nf0})`); gr.addColorStop(1, 'rgba(255,255,255,1)'); cx.fillStyle = gr; cx.fillRect(x - r, y - r, r * 2, r * 2); } cx.restore(); } }
   const lvl = S ? S.lvl : 1;
@@ -3448,6 +3458,7 @@ function draw(T, dt) {
       if (S.land.centro) { const gl = cx.createRadialGradient(FT.x, FT.y - 40, 4, FT.x, FT.y - 40, 220); gl.addColorStop(0, `rgba(255,190,120,${0.65 * nf})`); gl.addColorStop(1, 'rgba(255,190,120,0)'); cx.fillStyle = gl; cx.fillRect(FT.x - 220, FT.y - 260, 440, 440); }
       cx.restore(); } }
   // dinheiro em movimento: moedas voam das casas/empregos até a Prefeitura e da Prefeitura até cada obra; caminhão do comércio
+  for (const h of EXT.draw) h(cx, S, T, dt, now);
   if (S && cvOn(S) && S.cv) coinFlights(S, T, dt);
   drawFogos(cx, S, T);
   // luz de sol quente e vinheta suave, na tela
