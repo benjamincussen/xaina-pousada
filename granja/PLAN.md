@@ -566,7 +566,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Hoja 📈 "Precios del día" (botón en el Granero): lista con flechas ▲▼ respecto a la hora anterior y etiqueta "buen momento" (≥1,25×); el Granero marca cada producto en buen momento; al vender en buen momento suena y avisa.
 - Tablero de precios en el mapa (al lado del lago, bajo los frutales) con los 3 mejores productos y flechas; tocarlo abre la hoja.
 - Prueba `tests/precos.js`: multiplicadores dentro de rango, cambio a la hora siguiente, venta con aviso, hojas sin errores, capturas.
-## Versión 82 (sesión "Corsario", solo mundo.js): flota, arqueros, comercio con las ciudades y más mundo
+## Versión 97 (sesión "Corsario", solo mundo.js): flota, arqueros, comercio con las ciudades y más mundo
 
 - **Flota y arqueros** (en 🌍, necesita el Puerto de Carga):
   - Barcos de guerra (hasta 8): 4000×n monedas + 30×n de hierro de la mina. Cada barco da +6% de ataque contra ciudades del mundo y +8 de defensa.
@@ -615,7 +615,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - Perfilado con una ciudad de 40 torres, 640 vecinos y 24 ayudantes (Chromium sin GPU): el frame había subido a ~40 ms. Causa principal: las monedas que vuelan usaban `shadowBlur` (2 ms por moneda en software). Ahora el brillo es un círculo translúcido: el frame vuelve a ~12 ms en vista normal.
 - Además: las ventanas se dibujan una vez por tamaño y se copian (`win` en caché), y `happy()` se memoriza medio segundo (se llamaba ~60 veces por frame vía alquileres).
-## Versión 88 (sesión "Corsario", mundo.js): el Mundo dentro del mapa
+## Versión 97 (sesión "Corsario", mundo.js): el Mundo dentro del mapa
 
 - **Océano al este del mapa** (x 3000 → 14000): se recorre arrastrando, como el resto del juego. 🌍 lleva la cámara al mar; tocarlo otra vez abre el panel.
 - **Islas a escala real:** las ciudades vecinas (casas según población, castillo con su bandera, murallas, soldados, muelle) y las colonias dibujadas según su especialidad.
@@ -671,8 +671,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - Cada torre da +2 cupos para bebés; **Guardería del Sur** (Barrio Sur, nivel 17, 3000: +4 cupos, 8 empleos, +10) con patio de bebés de día; **Parquecito del Alto** (Barrio Alto, nivel 21, 2500: +12). Meta nueva: 10 bebés.
 - Pruebas: compra de ambos, cupos 63 → 77 con 5 torres, hojas sin errores; smoke y fuzz sin errores.
-## Versión 93 (sesión "Corsario", mundo.js): islas con vida y flotas en el mar
-## Versión 96 (sesión "Corsario", mundo.js): islas con vida y flotas en el mar
+## Versión 97 (sesión "Corsario", mundo.js): islas con vida y flotas en el mar
+## Versión 97 (sesión "Corsario", mundo.js): islas con vida y flotas en el mar
 
 - **Vida en las islas del mundo:** vecinos que pasean, humo de chimeneas y gaviotas; cuando fundas o mejoras una colonia, se ve la obra durante 2 minutos (andamios, grúa y cartel "En obra").
 - **Expediciones navales animadas:** al atacar una ciudad del mundo, la flota sale del fuerte, cruza el mar (45 s), combate frente a la isla (12 s: humo, chispas y 💥, sin heridos) y vuelve con el cartel del resultado. El aviso de victoria o derrota sale al terminar el combate; las monedas se acreditan en el momento.
