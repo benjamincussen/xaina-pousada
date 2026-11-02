@@ -4,7 +4,9 @@
 'use strict';
 window.P2P_ROOM = (() => {
   if (typeof window.Peer !== 'function') return null;
-  const OPTS = window.PEER_OPTS || { debug: 0, config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' }] } };
+  // STUN acha o caminho direto; o TURN público retransmite quando a rede do celular bloqueia a conexão direta (dados móveis)
+  const OPTS = window.PEER_OPTS || { debug: 0, config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' },
+    { urls: ['turn:openrelay.metered.ca:80', 'turn:openrelay.metered.ca:443', 'turn:openrelay.metered.ca:443?transport=tcp'], username: 'openrelayproject', credential: 'openrelayproject' }] } };
   const FATAL = ['browser-incompatible', 'invalid-id', 'invalid-key', 'network', 'server-error', 'socket-error', 'socket-closed', 'ssl-unavailable', 'webrtc'];
   function join(name, role) {
     return new Promise((resolve, reject) => {
@@ -54,7 +56,8 @@ window.P2P_ROOM = (() => {
         if (!settled) { if (t === 'peer-unavailable') return fail('not_found'); if (t === 'unavailable-id') return fail('taken'); if (FATAL.includes(t)) return fail('upstream_error'); }
         else if (t === 'peer-unavailable' && role === 'guest') retry();
       });
-      const to = setTimeout(() => fail(role === 'guest' ? 'not_found' : 'upstream_error'), 15000);
+      // sem resposta de "sala não existe": a sala existe, mas a conexão entre os celulares não abriu
+      const to = setTimeout(() => fail(role === 'guest' ? 'blocked' : 'upstream_error'), 20000);
     });
   }
   return { join, p2p: true };

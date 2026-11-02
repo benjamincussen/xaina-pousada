@@ -36,6 +36,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-o
 .ib .dot:empty{display:none}
 @media (max-width:430px){#hud{gap:5px}.ib{width:40px;height:40px;border-radius:12px}.ib img{width:26px;height:26px}.lvl{width:46px;height:46px}.lvl b{width:37px;height:37px;font-size:21px}.pill{font-size:15px;padding:3px 9px 3px 4px}.pill img{width:22px;height:22px}}
 #coop{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 66px);z-index:3;background:rgba(58,36,18,.78);color:#fff;font-weight:800;font-size:13px;border-radius:999px;padding:5px 12px;display:flex;gap:6px;align-items:center;white-space:nowrap}
+#coop.wait i{background:#ffc23a}
 #coop i{width:10px;height:10px;border-radius:50%;background:var(--friend);display:inline-block}
 /* panel inferior */
 #sheet{position:fixed;left:0;right:0;bottom:0;z-index:4;background:var(--paper);border-radius:22px 22px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.3);padding:14px max(14px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 14px) max(14px,env(safe-area-inset-left));max-height:72vh;overflow:auto;display:flex;flex-direction:column;gap:10px;touch-action:pan-y}
@@ -145,7 +146,7 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 <div id="toast" hidden></div>
 <div id="upd" hidden style="position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 100px);z-index:8;background:#fff7e3;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.3);padding:10px 12px;display:flex;gap:10px;align-items:center;font-weight:800;max-width:calc(100% - 24px)"><span id="updT">Tem uma versão nova do jogo.</span><button class="btn" id="bUpd" type="button" style="font-size:17px;padding:8px 12px">Atualizar</button></div>
 <script src="peerjs.min.js"></script>
-<script src="p2p.js?v=2026-11-02.5"></script>
-<script src="game.js?v=2026-11-02.5"></script>
+<script src="p2p.js?v=2026-11-02.6"></script>
+<script src="game.js?v=2026-11-02.6"></script>
 </body>
 </html>
