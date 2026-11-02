@@ -655,3 +655,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Ferrocarril de carga** (servicio en la Zona Industrial, nivel 18, 12000, 10 empleos): estación con semáforo, vías con durmientes y un puente sobre el mar hasta el Puerto de Carga (`RAIL`, 4110 px).
 - Cada 4 minutos sale un tren (locomotora + 3 vagones con los últimos productos de las fábricas, humo) que tarda 70 s; al llegar, la exportación paga **+20% durante 15 min** (`S.railUntil`, lo cuenta el host en el tick y avisa si estás cerca del puerto).
 - Prueba `tests/ferrovia.js`: compra, posiciones de la vía, exportación con bono (2251 → 2701), hojas sin errores; smoke y fuzz sin errores; capturas del puente y la estación.
+
+## Versión 94: Clima 2 — viento, nieve y niebla
+
+- **Viento** (`WIND`, ráfagas con tres ondas lentas, más fuerte en otoño/invierno y con lluvia): mueve árboles y palmeras, acelera el molino y el Parque Eólico, arrastra pétalos y hojas.
+- **Invierno:** nieve cayendo (se apaga en "Menos animaciones") y niebla baja en amaneceres y atardeceres.
+- Captura de invierno al atardecer; smoke sin errores.
