@@ -160,3 +160,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Álbum de productos con premios cada 10
 - [x] Silo gigante (+500)
 - [x] Prueba de partidas antiguas (cargan sin errores)
+
+## Versión grande 27: "Cartas" (2026-11-03.28)
+- [x] Cartas de agradecimiento de los vecinos en el buzón (con regalito)
+- [x] Pedidos de vecinos según su oficio
+- [x] Animalitos raros: pavo real y alpacas
