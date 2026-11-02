@@ -10,9 +10,9 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] 5. Pedidos especiales de los vecinos (piden cosas en persona, pagan más)
 - [x] 6. Mejorar edificios por nivel (Nv 2/3: más rápido y más filas)
 - [x] 7. Impulsos de producción: abono (cultivos más rápidos) y ración premium (animales)
-- [ ] 8. Terreno nuevo al norte + lotes urbanos para construir
-- [ ] 9. Edificios de servicio: plaza, posta de salud, estación (bonos a la ciudad)
-- [ ] 10. Felicidad de la ciudad = multiplicador de ingresos + panel de la ciudad
+- [x] 8. Terreno nuevo con lotes urbanos (hecho con el Barrio Nuevo)
+- [x] 9. Edificios de servicio: plaza con glorieta y posta de salud
+- [x] 10. Felicidad de la ciudad = multiplicador de ingresos + panel de la ciudad
 - [ ] 11. Turistas que llegan a la Pousada y compran
 - [ ] 12. Ciclo día/noche con faroles en las calles
 - [ ] 13. Clima: lluvia que riega (cultivos más rápidos), sol, viento para el molino
