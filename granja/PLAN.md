@@ -212,3 +212,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - Cada ayudante guarda por qué no pudo trabajar: 📦❗ granero lleno, 🪙❗ faltan monedas para semillas, ☕ nada que hacer. Se ve en su tarjeta del Equipo y en un globito sobre su cabeza.
 - Biblioteca (Panel de la ciudad, Campo Grande junto al mar, nivel 12, 2400): columnas, libros en el letrero y un lector; +10 felicidad.
 - Fuegos artificiales: con felicidad ≥ 80, cada noche sobre el Barrio Nuevo (se dibujan encima de la capa de noche).
+
+## Versión grande 37: Alcalde, mercado de pulgas y cumpleaños de ayudantes (2026-11-03.38)
+- Discurso del alcalde: con la Alcaldía, cada 15 min (1 min) el alcalde con sombrero de copa habla desde el estrado con datos reales de la ciudad (vecinos, felicidad, calles) y los vecinos se juntan.
+- Mercado de pulgas en la villa: cada 30 min por 5 min; tocarlo compra un lote sorpresa de 3 cosas por 40 monedas (1 por mercado, sincronizado en co-op).
+- Cumpleaños de los ayudantes: cada media hora le toca a uno; usa gorro de fiesta y hace el doble de trabajo por 5 minutos.
