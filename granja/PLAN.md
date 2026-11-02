@@ -624,3 +624,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Hooks en game.js:** `worldB()` amplía los límites de cámara/zoom y de la noche con `EXT.bounds`; el mundo se dibuja con `EXT.draw0`/`EXT.draw` y se toca con `EXT.tap`.
 - **Plan de progreso del Mundo:** `granja/PLAN-MUNDO.md`, compartido con la otra sesión.
 - **Pruebas:** dibujo lejano del mundo en ~4,5 ms; todas las pruebas y el fuzz pasan.
+
+## Versión 89: Diario de la ciudad (todo lo que hizo el grupo) + arreglo del fondo
+
+- **📰 Diario de la ciudad** (Menú): línea de tiempo única con lo que hicieron el Concejo (incluye mundo y negocios), los ayudantes y la arquitecta, con "hace X min"; lo no visto queda marcado y el botón del Menú muestra el contador de novedades.
+- Arreglo: el fondo no se actualizaba al comprar Barrio Sur, Zona Industrial, Campo Sur o Cantera (faltaban en la clave de caché).
