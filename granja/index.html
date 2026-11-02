@@ -35,6 +35,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-o
 .ib.on{background:#ffc23a}
 #bMove{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:calc(env(safe-area-inset-bottom) + 18px);z-index:3;width:58px;height:58px;border-radius:50%;box-shadow:0 4px 0 rgba(0,0,0,.25),0 6px 16px rgba(0,0,0,.25)}
 #bMove img,#bRoad img{width:34px;height:34px}
+@media (max-width:380px){#hud{gap:3px!important}#hud .ib{width:35px!important;height:35px!important;border-radius:10px!important}#hud .ib img{width:22px!important;height:22px!important}.lvl{width:42px!important;height:42px!important}.lvl b{width:34px!important;height:34px!important;font-size:19px!important}.pill{font-size:13px!important;padding:3px 7px 3px 3px!important}.pill img{width:19px!important;height:19px!important}#bMove,#bRoad,#bMap{width:48px!important;height:48px!important}#bRoad{bottom:calc(env(safe-area-inset-bottom) + 74px)!important}#bMap{bottom:calc(env(safe-area-inset-bottom) + 130px)!important;font-size:22px!important}#bMove img,#bRoad img{width:28px;height:28px}}
 #bMap{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:calc(env(safe-area-inset-bottom) + 158px);z-index:3;width:58px;height:58px;border-radius:50%;box-shadow:0 4px 0 rgba(0,0,0,.25),0 6px 16px rgba(0,0,0,.25)}
 #hud[hidden] ~ #bMap{display:none}
 body:has(#sheet:not([hidden])) #bMap{display:none}
@@ -166,7 +167,7 @@ input.link{font:800 14px var(--body);border-radius:12px;border:2px solid #d9cbb0
 <script src="peerjs.min.js"></script>
 <script>
 // carrega sempre a versão mais nova do jogo, mesmo se esta página estiver guardada no celular
-(function () { var FALL = '2026-11-03.21', done = false;
+(function () { var FALL = '2026-11-03.22', done = false;
   function go(v) { ['relay.js', 'p2p.js', 'game.js'].reduce(function (p, f) { return p.then(function () { return new Promise(function (res, rej) { var s = document.createElement('script'); s.src = f + '?v=' + encodeURIComponent(v); s.onload = res; s.onerror = rej; document.body.appendChild(s); }); }); }, Promise.resolve()).catch(function () { if (v !== FALL) go(FALL); }); }
   var t = setTimeout(function () { if (!done) { done = true; go(FALL); } }, 2500);
   fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) { if (!done) { done = true; clearTimeout(t); go((j && j.v) || FALL); } }).catch(function () { if (!done) { done = true; clearTimeout(t); go(FALL); } });

@@ -130,3 +130,8 @@ Reglas fijas: sala UVDE no cambia nunca · no romper partidas guardadas ni el co
 - [x] Globos de los turistas desde el Parque (pagan pasajes cada 2 min)
 - [x] Campeonato de fútbol entre barrios con marcador, hinchada y taquilla
 - [x] Excursionistas con gorro y mochila
+
+## Versión grande 21: "Puente" (2026-11-03.22)
+- [x] Puente colgante sobre la cascada con excursionista cruzando
+- [x] Novedades cortas (solo lo nuevo + "Ver todo")
+- [x] Botones y monedas ajustados para celulares chicos (360 px)
