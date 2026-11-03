@@ -32,9 +32,9 @@ const A = {
     g.fillStyle = '#9aa3ad'; rr(g, x - w / 2 + 10, y - 36, 40, 36, 3); g.fill(); g.fillStyle = 'rgba(0,0,0,.18)'; for (let k = 0; k < 6; k++) g.fillRect(x - w / 2 + 12, y - 32 + k * 6, 36, 2); win(g, x + 4, y - h + 44, 20, 14); if (w > 100) win(g, x + 30, y - h + 44, 20, 14);
     if (lv >= 3) { g.fillStyle = '#dfe6ee'; rr(g, x - w / 2 - 22, y - 70, 20, 70, 8); g.fill(); g.fillStyle = '#9aa3ad'; g.fillRect(x - w / 2 - 22, y - 46, 20, 3); } } };
 const ART = {
-  casa: (g, b, C, lv, T) => A.casa(g, b.x, b.y, C.w, C.h + (lv - 1) * 10, lv, hv(b.x, b.y), T),
-  sobrado: (g, b, C, lv, T) => A.sobrado(g, b.x, b.y, C.w, C.h + (lv - 1) * 10, lv, hv(b.x, b.y), T),
-  predio: (g, b, C, lv, T) => A.predio(g, b.x, b.y, C.w, C.h + (lv - 1) * 10, lv, hv(b.x, b.y), T),
+  casa: (g, b, C, lv, T, vv) => A.casa(g, b.x, b.y, C.w, C.h + (lv - 1) * 10, lv, vv != null ? vv : hv(b.x, b.y), T),
+  sobrado: (g, b, C, lv, T, vv) => A.sobrado(g, b.x, b.y, C.w, C.h + (lv - 1) * 10, lv, vv != null ? vv : hv(b.x, b.y), T),
+  predio: (g, b, C, lv, T, vv) => A.predio(g, b.x, b.y, C.w, C.h + (lv - 1) * 10, lv, vv != null ? vv : hv(b.x, b.y), T),
   cafe: (g, b, C, lv, T) => { const x = b.x, y = b.y; A.shop(g, x, y, C.w, C.h + (lv - 1) * 8, 'cafe', 0, T, '#fff1d6', '#8a5a2b', '#fff4e0', () => { for (const dx of [C.w / 2 + 16, -C.w / 2 - 16]) { g.fillStyle = '#8a5a2b'; g.fillRect(x + dx - 1, y - 26, 2, 26); g.fillStyle = dx > 0 ? '#e0533d' : '#2f9e6e'; g.beginPath(); g.moveTo(x + dx - 16, y - 24); g.quadraticCurveTo(x + dx, y - 38, x + dx + 16, y - 24); g.closePath(); g.fill(); g.fillStyle = '#fff'; g.fillRect(x + dx - 9, y - 10, 18, 3); } smoke(g, x - C.w / 4, y - 40, T, 0.4); }); },
   loja: (g, b, C, lv, T) => { const x = b.x, y = b.y; A.shop(g, x, y, C.w, C.h + (lv - 1) * 8, 'loja', 0, T, '#ffe4ee', '#ff7aa8', '#fff', () => { const cs = ['#e0533d', '#3d7fd6', '#ffd23f', '#2f9e6e']; for (let k = 0; k < 4; k++) { g.fillStyle = cs[k]; rr(g, x - C.w / 2 + 12 + k * 14, y - 24 - (k % 2) * 6, 10, 14 + (k % 2) * 6, 3); g.fill(); } }); },
   pizzaria: (g, b, C, lv, T) => { const x = b.x, y = b.y, h = C.h + (lv - 1) * 8; A.shop(g, x, y, C.w, h, 'pizzaria', 0, T, '#f4d7b0', '#2f9e6e', '#fff', () => { g.fillStyle = '#e0533d'; g.fillRect(x + C.w / 2 - 28, y - h - 30, 14, 30); smoke(g, x + C.w / 2 - 21, y - h - 34, T, 0.9); circ(g, x - C.w / 4 + 4, y - 20, 9, '#f4b860'); circ(g, x - C.w / 4 + 4, y - 20, 6, '#e0533d'); circ(g, x - C.w / 4 + 2, y - 22, 1.6, '#fff4c2'); }); },
@@ -43,12 +43,27 @@ const ART = {
   banco: (g, b, C, lv, T) => { const x = b.x, y = b.y, w = C.w, h = C.h + (lv - 1) * 8; shadow(g, x, y, w + 30); g.fillStyle = '#d8d0c0'; g.fillRect(x - w / 2 - 6, y - 12, w + 12, 12); g.fillStyle = '#c9c1b0'; g.fillRect(x - w / 2 - 2, y - 18, w + 4, 6); g.fillStyle = '#f2ece0'; g.fillRect(x - w / 2 + 6, y - h + 26, w - 12, h - 44); for (let k = 0; k < 5; k++) { const cx0 = x - w / 2 + 16 + k * ((w - 32) / 4); g.fillStyle = '#fff'; g.fillRect(cx0 - 6, y - h + 30, 12, h - 48); g.fillStyle = 'rgba(0,0,0,.08)'; g.fillRect(cx0 + 2, y - h + 30, 4, h - 48); }
     g.fillStyle = '#e8e0d0'; g.fillRect(x - w / 2, y - h + 18, w, 10); g.fillStyle = '#7d828c'; g.beginPath(); g.moveTo(x - w / 2 - 4, y - h + 18); g.lineTo(x, y - h - 14); g.lineTo(x + w / 2 + 4, y - h + 18); g.closePath(); g.fill(); g.fillStyle = '#ffd23f'; g.font = '900 12px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText(lbl('banco'), x, y - h + 12); door(g, x, y - 18, 22, 30, '#6b3e1e'); },
   granja: (g, b, C, lv, T) => { const x = b.x, y = b.y, w = C.w - 30, h = C.h + (lv - 1) * 8; shadow(g, x, y, w + 60); g.fillStyle = '#dfe6ee'; rr(g, x + w / 2 + 2, y - h - 10, 26, h + 10, 12); g.fill(); g.fillStyle = '#9aa3ad'; g.beginPath(); g.arc(x + w / 2 + 15, y - h - 10, 13, 3.1416, 0); g.fill(); house(g, x - 8, y, w, h - 30, '#c0392b', '#7a2a20', 30); g.strokeStyle = '#fff'; g.lineWidth = 3; g.strokeRect(x - 26, y - 40, 36, 40); g.beginPath(); g.moveTo(x - 26, y - 40); g.lineTo(x + 10, y); g.moveTo(x + 10, y - 40); g.lineTo(x - 26, y); g.stroke(); g.fillStyle = '#e6c35c'; rr(g, x - w / 2 - 22, y - 16, 22, 16, 4); g.fill(); },
-  fabrica: (g, b, C, lv, T) => A.fabrica(g, b.x, b.y, C.w, C.h + (lv - 1) * 8, lv + 1, hv(b.x, b.y), T) };
-window.cbArt = (g, b, C, lv, T, now) => { const f = ART[b.k]; if (!f) return false; f(g, b, C, lv, T, now); return true; };
+  fabrica: (g, b, C, lv, T, vv) => A.fabrica(g, b.x, b.y, C.w, C.h + (lv - 1) * 8, lv + 1, vv != null ? vv : hv(b.x, b.y), T) };
+window.cbArt = (g, b, C, lv, T) => { const f = ART[b.k]; if (!f) return false; f(g, b, C, lv, T); return true; };
 // lotes da 🏙️: R casas → sobrado → prédio → torre; C loja → pizzaria → escritório → torre de vidro; I oficina → fábrica → indústria grande
-window.ciArt = (g, t, i, T, now, ev) => { const x = t.x, y = t.y, lv = t.lv | 0, v = hv(x, y); if (!lv) return false;
+window.ciArt = (g, t, i, T, now, ev, vv) => { const x = t.x, y = t.y, lv = t.lv | 0, v = vv != null ? vv : hv(x, y); if (!lv) return false;
   if (t.k === 'r') { if (lv === 1) A.casa(g, x, y, 92, 70, 1, v, T); else if (lv === 2) A.sobrado(g, x, y, 104, 92, 2, v, T); else A.predio(g, x, y, lv === 3 ? 96 : 104, lv === 3 ? 130 : 200, lv, v, T); }
-  else if (t.k === 'c') { if (lv <= 2) { const k = v % 2 ? 'loja' : 'cafe'; ART[lv === 2 ? 'pizzaria' : k](g, t, { w: 96 + lv * 4, h: 64 + lv * 8 }, 1, T); } else A.office(g, x, y, lv === 3 ? 96 : 100, lv === 3 ? 140 : 220, lv, v, T); }
+  else if (t.k === 'c') { if (lv <= 2) { const k = v % 2 ? 'loja' : 'cafe'; ART[lv === 2 ? 'pizzaria' : k](g, t, { w: 96 + lv * 4, h: 64 + lv * 8 }, 1, T, v); } else A.office(g, x, y, lv === 3 ? 96 : 100, lv === 3 ? 140 : 220, lv, v, T); }
   else A.fabrica(g, x, y, 92 + lv * 4, 62 + lv * 16, lv, v, T, ev);
   return true; };
+
+// ---------- zoom longe: cada desenho vira uma miniatura guardada (sprite) e é colado de uma vez, rápido e bonito ----------
+const SPR = new Map(), SC = 0.5;
+function sprite(key, w, h, draw) { let c = SPR.get(key); if (c) return c; const W = w + 140, Hh = h + 230; c = document.createElement('canvas'); c.width = Math.ceil(W * SC); c.height = Math.ceil(Hh * SC); const cg = c.getContext('2d'); cg.scale(SC, SC); cg.translate(W / 2, Hh - 40); try { draw(cg); } catch (e) {} c.W = W; c.H = Hh; if (SPR.size > 600) SPR.clear(); SPR.set(key, c); return c; }
+const put = (g, c, x, y) => g.drawImage(c, x - c.W / 2, y - (c.H - 40), c.W, c.H);
+const O = { x: 0, y: 0 };
+window.cbFar = (g, b, C, lv) => { const v = hv(b.x, b.y) % PAL.length;
+  if (ART[b.k]) { put(g, sprite('cb|' + b.k + '|' + lv + '|' + v, C.w, C.h + lv * 10, cg => ART[b.k](cg, Object.assign({ k: b.k }, O), C, lv, 0, v)), b.x, b.y); return true; }
+  if (C.g === 'mon' && typeof monArt === 'function') { put(g, sprite('mon|' + b.k, C.w + 120, C.h + 120, cg => monArt(cg, Object.assign({ k: b.k }, O), C, 0, 0)), b.x, b.y); return true; }
+  if (C.g === 'lazer') { put(g, sprite('lz|' + b.k, C.w + 60, C.h, cg => { cg.fillStyle = C.wall; cg.beginPath(); cg.ellipse(0, -C.h / 2, C.w / 2 + 20, C.h / 2 + 18, 0, 0, 6.283); cg.fill(); cg.fillStyle = C.roof; cg.beginPath(); cg.ellipse(0, -C.h / 2, C.w / 2, C.h / 2 + 6, 0, 0, 6.283); cg.fill(); cg.font = '46px sans-serif'; cg.textAlign = 'center'; cg.fillText(C.ic, 0, -C.h / 2 + 16); }), b.x, b.y); return true; }
+  if (b.k === 'horta') { put(g, sprite('horta', C.w, C.h, cg => { cg.fillStyle = '#8a5a2b'; cg.fillRect(-C.w / 2, -C.h, C.w, C.h); for (let k = 0; k < 4; k++) { cg.fillStyle = k % 2 ? '#5fa83c' : '#7cc46a'; cg.fillRect(-C.w / 2 + 6, -C.h + 6 + k * 13, C.w - 12, 8); } }), b.x, b.y); return true; }
+  return false; };
+window.ciFar = (g, t) => { const lv = t.lv | 0; if (!lv) { const col = t.k === 'r' ? '47,158,110' : t.k === 'c' ? '61,127,214' : '230,169,42'; g.fillStyle = `rgba(${col},.25)`; g.fillRect(t.x - 55, t.y - 80, 110, 80); g.strokeStyle = `rgba(${col},.9)`; g.lineWidth = 6; g.strokeRect(t.x - 55, t.y - 80, 110, 80); return true; }
+  const v = hv(t.x, t.y) % PAL.length; put(g, sprite('ci|' + t.k + '|' + lv + '|' + v, 110, 230, cg => ciArt(cg, { k: t.k, lv, x: 0, y: 0 }, 0, 0, 0, false, v)), t.x, t.y); return true; };
+window.ciPlFar = (g, S, p) => { if (!window.CI || !CI.drawPlant || !CI.PL[p.k]) return false; const P = CI.PL[p.k]; put(g, sprite('pl|' + p.k, P.w + 40, P.h + 80, cg => CI.drawPlant(cg, S, { k: p.k, x: 0, y: 0 }, 0, 0)), p.x, p.y); return true; };
 })();

@@ -874,3 +874,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Guía "Primeros pasos"** arriba de la ficha 🏙️ mientras falte algo: explica que los lotes pintados esperan demanda, luz y agua, cuántos lotes están esperando y cuál es el siguiente paso.
 - `cidade.js` suma ganchos (`top`, `mx` nivel máximo, `capM` capacidad, `RG` grupos con radio) y `cidade2.js` expone `CI.traffic`, `CI.tour`, `CI.upkeep`.
 - 3 metas (100 chips, primera Brisa IA, Brisa IA 5) y novedad `n_tec`. Prueba nueva: `tests/cidade3.js`.
+
+## Versión 125 (sesión "Corsario"): cobradores y dibujos de verdad con el zoom lejos
+
+- **Cobradores (`cobrador.js`)**: hasta 3 (15.000, 50.000 y 120.000). El 1 cobra las construcciones del 🔨, el 2 también las colonias de las islas y el 3 también la caja de la 🏙️. Pasan cada 5 minutos (tick del host, usando las mismas acciones `cbAllCol`, `muCollect` y `ciCol`) y se quedan con el 5%. Cartel en el 🔨, en la 🏙️ y en el 🌍 (si hay colonias) con la última vuelta, el total y "Cobrar ahora". Se ven caminando por los barrios con traje y bolsa de monedas, y avisan cuánto juntaron. Estado en `S.cob` (`n`, `at`, `tot`, `last`).
+- **Zoom lejos con dibujos**: antes, con el zoom muy alejado, lo construido con 🔨, los lotes de la 🏙️ y sus servicios se pintaban como rectángulos del color del techo. Ahora cada dibujo se guarda una vez como miniatura (sprite a media resolución, por tipo, nivel y color) y se pega de un golpe: se ve igual que de cerca sin hacer más lento el juego. Lotes vacíos: recuadro del color de la zona.
+- Prueba nueva: `tests/cobrador.js` (contrata los 3, cobra construcciones, colonias y ciudad, verifica la vuelta automática y saca fotos de lejos y de cerca).
