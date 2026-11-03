@@ -1024,3 +1024,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
   5. Nico empieza por un campo (antes exigía primero el silo, que es más caro).
 - **Más plata para la ciudad**: el aporte automático de fábrica pasa a **10%** por turno sobre lo que tengas por encima de tu **reserva de 30.000** (antes 5% sobre 100.000). Opciones nuevas: aporte 20% y reserva 30K.
 - Pruebas: `tests/solo.js` (30 minutos sin tocar nada: cuenta nivel 21 que gana 1.500/min pasa de 7 a 12 terrenos, 12 zonas, casas y campo; cuenta nivel 104 con 255K llega a 24 zonas, 12 servicios, campo y 94% de aprobación) y `tests/desk.js` (pantalla 1440×900, panel lateral y teclado).
+
+## Versión 141 (sesión "Corsario"): comprar varias cosas seguidas
+
+- Al elegir algo para construir (ciudad 🏙️, construir 🔨, campo 🚜 o adornos), después de colocarlo la ficha **vuelve a abrirse sola en el mismo lugar** (misma posición de la lista), lista para comprar lo siguiente. Si cancelas, no se vuelve a abrir. Las zonas y los campos siguen en modo de pintar varios seguidos; los adornos vuelven a la ficha al tocar "Listo".
+- Prueba: `tests/multi.js` (colegio, parque infantil y una casa seguidos: se colocan y la ficha vuelve abierta donde estaba).

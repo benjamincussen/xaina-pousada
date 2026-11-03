@@ -2152,7 +2152,7 @@ function helperTask(S, now, role, hh) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; logHelper(S, now, hh | 0, a, crop); return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : poor ? { poor: true } : null;
 }
-const BUILD_V = '2026-11-03.140';
+const BUILD_V = '2026-11-03.141';
 // sons de cada lugar: ondas na praia, pássaros na serra e no sítio, crianças no bairro escolar (com 'Sons do sítio' ligado)
 setInterval(() => { if (!G.S || !AMB || document.hidden) return; const x = CAM.x, y = CAM.y; if (x > 1150) SND.wave(); else if (y > 3930) { if (Math.random() < 0.7) SND.bird(); } else if (y > 2330 && y < 2930 && G.S.serv && (G.S.serv.parque || G.S.serv.campo)) { if (Math.random() < 0.4) SND.kids(); } else if (Math.hypot((x - LAKE.x) / LAKE.rx, (y - LAKE.y) / LAKE.ry) < 1.6 && G.S.land.sul) { if (Math.random() < 0.3) SND.splash(); } }, 3200);
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
@@ -2504,12 +2504,16 @@ $('bJoin').onclick = () => { if (!needNameOk()) return; const c = $('iCode').val
 $('iCode').addEventListener('input', e => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4); });
 $('bRoomOk').onclick = () => { $('ovRoom').hidden = true; };
 $('bCopy').onclick = async () => { const i = $('rLink'); try { await navigator.clipboard.writeText(i.value); $('bCopy').textContent = L('copied'); } catch (e) { i.focus(); i.select(); } setTimeout(() => { $('bCopy').textContent = L('copy'); }, 1500); };
-$('bHelper').onclick = () => openSheet('helper'); if ($('hTreas')) $('hTreas').onclick = () => openSheet('cv'); $('bMove').onclick = () => setEdit(!G.edit); $('bEditDone').onclick = () => { if (G.decoK) { setDecor(null); return; } if (G.tour) { G.tour = null; $('editBar').hidden = true; return; } G.road ? setRoad(false) : setEdit(false); }; $('bRoad').onclick = () => setRoad(!G.road); $('bMap').onclick = () => openSheet('map'); $('tip').onclick = () => openSheet('goals');
+$('bHelper').onclick = () => openSheet('helper'); if ($('hTreas')) $('hTreas').onclick = () => openSheet('cv'); $('bMove').onclick = () => setEdit(!G.edit); $('bEditDone').onclick = () => { if (G.decoK) { setDecor(null); pickBack(); return; } if (G.tour) { G.tour = null; $('editBar').hidden = true; return; } G.road ? setRoad(false) : setEdit(false); }; $('bRoad').onclick = () => setRoad(!G.road); $('bMap').onclick = () => openSheet('map'); $('tip').onclick = () => openSheet('goals');
 setInterval(() => { const el = $('tip'); if (!G.S) { el.hidden = true; return; } try { const tp = nextTip(G.S, nowS()); el.textContent = L(tp[0], tp[1]); el.hidden = false; } catch (e) { el.hidden = true; } }, 1500);
 function roadBarText() { const S = G.S; return S ? L('roadBar', S.roadFree, ROAD_COST) + ' · ' + L('roadHint') : ''; }
 function decorBarText() { const S = G.S; return S && G.decoK ? `${decorIc(G.decoK)} ${L('dec_' + G.decoK)} · ${DECOR[G.decoK]} · ${L('decorHint')}` : ''; }
 const decorIc = k => ({ banco: '🪑', poste: '🏮', arvore: '🌳', flores: '🌷', estatua: '🗿', chafariz: '⛲', caramanchao: '🛖', cata: '🌀' })[k] || '✨';
-function setDecor(k) { if (G.edit) setEdit(false); if (G.road) setRoad(false); G.decoK = k || null; closeSheet(); $('editBar').hidden = !G.decoK; $('editT').textContent = decorBarText(); $('bEditDone').textContent = L('moveDone'); }
+// comprar varias cosas seguidas: al elegir algo en una ficha se recuerda la ficha y, al terminar de colocarlo, se vuelve a abrir donde estaba
+function pickSave() { G.pickFrom = SH ? { type: SH.type, arg: SH.arg, top: $('sheet').scrollTop } : null; }
+function pickBack() { const f = G.pickFrom; G.pickFrom = null; if (!f) return; setTimeout(() => { if (SH || !G.S || G.cbPlace || G.ciPlace || G.agPlace || G.decoK) return; openSheet(f.type, f.arg); requestAnimationFrame(() => { $('sheet').scrollTop = f.top; }); }, 450); }
+window.pickSave = pickSave; window.pickBack = pickBack;
+function setDecor(k) { if (G.edit) setEdit(false); if (G.road) setRoad(false); if (k) pickSave(); G.decoK = k || null; closeSheet(); $('editBar').hidden = !G.decoK; $('editT').textContent = decorBarText(); $('bEditDone').textContent = L('moveDone'); }
 function setRoad(on) { if (on && G.edit) setEdit(false); G.road = !!on; closeSheet(); $('editBar').hidden = !G.road; $('editT').textContent = roadBarText(); $('bEditDone').textContent = L('moveDone'); $('bRoad').classList.toggle('on', G.road); SND.pop(); }
 function setEdit(on) { if (G.road) { G.road = false; $('bRoad').classList.remove('on'); } G.edit = !!on; closeSheet(); $('editBar').hidden = !G.edit; $('editT').textContent = L('moveHint'); $('bEditDone').textContent = L('moveDone'); $('bMove').classList.toggle('on', G.edit); SND.pop(); } $('bOrders').onclick = () => openSheet('orders'); $('bBarn').onclick = () => openSheet('barn'); $('bShop').onclick = () => openSheet('shop'); $('bMenu').onclick = () => openSheet('menu'); $('hCoins').onclick = () => openSheet('shop');
 $('sClose').onclick = () => closeSheet();
