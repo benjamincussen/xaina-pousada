@@ -26,7 +26,7 @@ EOF
   sed -i "s/$cur/2026-11-03.$n/" granja/version.json; sed -i "s/var FALL = '2026-11-03\.[0-9]*'/var FALL = '2026-11-03.$n'/" granja/index.html; sed -i "0,/2026-11-03\.[0-9]*/s//2026-11-03.$n/" granja/game.js
   sed -i "s/^## Versión 0 (sesión \"Corsario\"/## Versión $n (sesión \"Corsario\"/" granja/PLAN.md
   [ "$(grep -c 'function worldB' granja/game.js)" = 1 ] || { echo "worldB perdido"; exit 3; }
-  node --check granja/game.js && node --check granja/mundo.js && node --check granja/cidade.js && node --check granja/cidade2.js && node --check granja/cidade3.js && node --check granja/tecno.js && node --check granja/arte.js && node --check granja/cobrador.js && node --check granja/equipo.js && node --check granja/poniente.js && node --check granja/tecno.js && node --check granja/construir.js || exit 4
+  node --check granja/game.js && node --check granja/mundo.js && node --check granja/cidade.js && node --check granja/cidade2.js && node --check granja/cidade3.js && node --check granja/tecno.js && node --check granja/arte.js && node --check granja/cobrador.js && node --check granja/equipo.js && node --check granja/poniente.js && node --check granja/tecno2.js && node --check granja/tecno.js && node --check granja/construir.js || exit 4
   git add -A granja; git commit -q -m "Granja v$n (mundo.js): $SUBJ
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>

@@ -910,3 +910,11 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Rosa reurbaniza**: si no hay lugar para un servicio que falta (policía, hospital, escuela…), demuele un lote vacío o una casa o negocio chico cercano (con el reembolso de siempre) y pone el servicio ahí. Pone plaza, parque y juegos en cada barrio nuevo a medida que crece.
 - **Prioridades**: Rosa solo pinta zonas nuevas cuando la luz y el agua cubren el 80% y la seguridad y la salud la mitad (o en barrios con núcleo propio); las compras chicas (≤ 1.000) solo respetan la mitad de la meta de ahorro; el impuesto no baja de 8%.
 - noche.js 10 h: aprobación 30% → 52–76% según la noche, lotes 30 → 43–59, monedas estables (~232k de 250k invertidos) y servicios cubriendo la ciudad vieja.
+
+## Versión 129 (sesión "Corsario"): robots, autos eléctricos, celulares y fondo tecnológico de Ada
+
+- **Nuevo `tecno2.js`**: fábrica de robots (40.000, 6/h, 5 chips, 400 cada uno), de celulares (30.000, 20/h, 2 chips, 150) y de autos eléctricos (70.000, 3/h, 10 chips, 1.200). Usan los chips que sobran después de los data centers y **exportan solas** a las ciudades vecinas (pagan en monedas al momento); camiones salen de cada fábrica con su producto. Dibujos propios (brazo robótico, celular brillante, auto eléctrico en la línea). Empleos 40/30/60.
+- **Valor de Brisa IA** con gráfico (un punto por hora): servidores, modelos, suscriptores, fábricas, exportaciones y chips. Meta nueva: exportar 100.000.
+- **Ada con fondo propio**: el equipo empieza con el 20% de las monedas para obras y el 25% para tecnología, y cada turno el 30% de lo que entra a la billetera va al fondo tecnológico. Ada arma primero central y agua en su parque, después chips, data center, robots, universidad, laboratorio, más fábricas de chips según la demanda, más data centers, celulares y autos; vende chips mientras no tiene dónde usarlos.
+- La ficha 💻 lista las fábricas desde el grupo `tech` (cualquier extensión puede sumar edificios).
+- Prueba: `tests/tecno2.js`.
