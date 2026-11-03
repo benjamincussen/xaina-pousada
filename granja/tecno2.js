@@ -7,11 +7,11 @@ for (const [k, P] of Object.entries(PR)) PL[k] = Object.assign({ g: 'tech' }, P)
 { const g = GR.find(q => q[0] === 'tech'); if (g) g[1].push(...Object.keys(PR)); }
 const T_ = S => techOf(S);
 // ---------- produção: os data centers recebem chips primeiro; o resto vira produto e é exportado (paga na hora) ----------
-H.step.push(S => { if (!S.tech) return; const T = T_(S), C = ciOf(S), pw = techPow(S); T.pf = T.pf || {}; T.pu = T.pu || {}; T.pn = {}; let rev = 0;
+H.step.push((S, now, v, m = 1) => { if (!S.tech) return; const T = T_(S), C = ciOf(S), pw = techPow(S); T.pf = T.pf || {}; T.pu = T.pu || {}; T.pn = {}; let rev = 0;
   C.p.forEach((p, j) => { const P = PR[p.k]; if (!P || !pw[j] || !pw[j].on) return; T.pn[p.k] = (T.pn[p.k] || 0) + 1; });
-  for (const [k, P] of Object.entries(PR)) { const n = T.pn[k] || 0; if (!n) continue; T.pf[k] = Math.min(4, (T.pf[k] || 0) + n * P.rate / 60); let u = Math.floor(T.pf[k]); u = Math.min(u, Math.floor((T.chips || 0) / P.chip)); if (u <= 0) continue; T.pf[k] -= u; T.chips -= u * P.chip; T.pu[k] = (T.pu[k] || 0) + u; rev += u * P.price; }
-  if (rev) { S.coins += rev; T.exp = (T.exp || 0) + rev; } T.prodH = Math.round((T.prodH || 0) * 0.97 + rev * 60 * 0.03);
-  T.sc = (T.sc || 0) + 1; if (T.sc % 60 === 0) { T.vh = (T.vh || []).concat([value(S)]).slice(-48); } });
+  for (const [k, P] of Object.entries(PR)) { const n = T.pn[k] || 0; if (!n) continue; T.pf[k] = Math.min(4 * m, (T.pf[k] || 0) + n * P.rate / 60 * m); let u = Math.floor(T.pf[k]); u = Math.min(u, Math.floor((T.chips || 0) / P.chip)); if (u <= 0) continue; T.pf[k] -= u; T.chips -= u * P.chip; T.pu[k] = (T.pu[k] || 0) + u; rev += u * P.price; }
+  if (rev) { S.coins += rev; T.exp = (T.exp || 0) + rev; } T.prodH = Math.round((T.prodH || 0) * 0.97 + rev / m * 60 * 0.03);
+  T.sc = (T.sc || 0) + m; if (Math.floor(T.sc / 60) !== Math.floor((T.sc - m) / 60)) { T.vh = (T.vh || []).concat([value(S)]).slice(-48); } });
 function value(S) { const T = T_(S), C = ciOf(S); return Math.round((T.srv || 0) * 400 + (T.ver || 0) * 60000 + (T.prodH || 0) * 20 + Math.floor(T.chips || 0) * 50 + C.p.filter(p => PL[p.k] && PL[p.k].g === 'tech').length * 20000 + (T.subs || 0) * 100); }
 const chipNeedH = S => { const T = T_(S), C = ciOf(S), dc = C.p.filter(p => p.k === 'datacenter').length; let n = Math.max(0, dc * 120 - (T.srv || 0)) > 0 ? 40 : 0; for (const [k, P] of Object.entries(PR)) n += C.p.filter(p => p.k === k).length * P.rate * P.chip; return n; };
 window.techChipNeed = chipNeedH; window.techValue = value;

@@ -32,16 +32,16 @@ function opinions(S) { const C = ciOf(S), d = demand(S), o = []; if (!C.z.length
 function apTarget(S) { const C = ciOf(S); if (!C.z.some(t => t.lv)) return 50; const lz = Math.min(10, (S.cb || []).filter(b => b.k === 'praca' || b.k === 'parque' || b.k === 'play').length * 3), hp = typeof happy === 'function' ? Math.min(12, happy(S) / 8) : 6;
   return clamp(Math.round(28 + 14 * pct(S, 'pw') + 14 * pct(S, 'wa') + 8 * pct(S, 'pol') + 8 * pct(S, 'fire') + 8 * pct(S, 'hos') - 6 * C.ev.length + lz + hp + hs('apM', S)), 0, 100); }
 // ---------- passo (1 min; host; recupera até 4 h) ----------
-function step(S, now) { const C = ciOf(S), d = demand(S), v = cov(S); let y = 0;
-  C.z.forEach((t, i) => { const Z = ZK[t.k]; if (!Z) return; const ev = evOn(S, i), dm = d[t.k], svc = (v[i].pw ? 1 : 0.4) * (v[i].wa ? 1 : 0.4); if (ev) t.g = Math.max(0, (t.g || 0) - 2);
-    else if (dm > 0 && t.lv < Math.min(5, ...H.mx.map(f => f(S, t, i)))) { t.g = (t.g || 0) + dm / 100 * 8 * svc * (0.5 + Math.random()) * hm('gM', S, t, i); if (t.g >= 100) { t.lv++; t.g = 0; t.at = now; } }
-    else if (dm < -20 && t.lv > 1) { t.g = (t.g || 0) - 4; if (t.g < 0) { t.lv--; t.g = 60; } }
+function step(S, now, m = 1) { const C = ciOf(S); C._lvs = C.z.reduce((a, t) => a + t.lv, 0); const d = demand(S), v = cov(S); let y = 0;
+  C.z.forEach((t, i) => { const Z = ZK[t.k]; if (!Z) return; const ev = evOn(S, i), dm = d[t.k], svc = (v[i].pw ? 1 : 0.4) * (v[i].wa ? 1 : 0.4); if (ev) t.g = Math.max(0, (t.g || 0) - 2 * m);
+    else if (dm > 0 && t.lv < Math.min(5, ...H.mx.map(f => f(S, t, i)))) { t.g = (t.g || 0) + dm / 100 * 8 * svc * (0.5 + Math.random()) * hm('gM', S, t, i) * m; if (t.g >= 100) { t.lv++; t.g = 0; C._lvs++; t.at = now; } }
+    else if (dm < -20 && t.lv > 1) { t.g = (t.g || 0) - 4 * m; if (t.g < 0) { t.lv--; t.g = 60; C._lvs--; } }
     y += tileY(S, t, i); });
-  const ex = hs('inc', S), tot = yieldH(S) + ex; C.box = Math.min(tot * CAPH, (C.box || 0) + (y + ex - hs('up', S)) / 60); if (C.box < 0) { S.coins = Math.max(0, S.coins + C.box); C.box = 0; } H.step.forEach(f => f(S, now, v));
+  const ex = hs('inc', S), tot = yieldH(S) + ex; C.box = Math.min(tot * CAPH, (C.box || 0) + (y + ex - hs('up', S)) / 60 * m); if (C.box < 0) { S.coins = Math.max(0, S.coins + C.box); C.box = 0; } H.step.forEach(f => f(S, now, v, m));
   C.ev = C.ev.filter(e => now - e.t < EVDUR && C.z[e.i] && !(v[e.i] && v[e.i][EVK[e.k].g]));
-  if (C.ev.length < EVMAX) C.z.forEach((t, i) => { if (!t.lv || evOn(S, i) || C.ev.length >= EVMAX) return; for (const [k, E] of Object.entries(EVK)) if (!v[i][E.g] && Math.random() < E.p) { C.ev.push({ k, i, t: now }); break; } });
-  const tg = apTarget(S); C.ap = clamp(C.ap + clamp(tg - C.ap, -3, 3), 0, 100); }
-EXT.tick.push((S, now) => { const C = ciOf(S); if (!C.z.length) { C.at = now; return false; } const dt = now - (C.at || now); if (dt < TICK) { if (!C.at) C.at = now; return false; } const n = clamp(Math.floor(dt / TICK), 1, 240); for (let k = n - 1; k >= 0; k--) step(S, now - k * TICK); C.at = now; return true; });
+  if (C.ev.length < EVMAX) C.z.forEach((t, i) => { if (!t.lv || evOn(S, i) || C.ev.length >= EVMAX) return; for (const [k, E] of Object.entries(EVK)) if (!v[i][E.g] && Math.random() < E.p * m) { C.ev.push({ k, i, t: now }); break; } });
+  const tg = apTarget(S); C.ap = clamp(C.ap + clamp(tg - C.ap, -3 * m, 3 * m), 0, 100); }
+EXT.tick.push((S, now) => { const C = ciOf(S); if (!C.z.length) { C.at = now; return false; } const dt = now - (C.at || now); if (dt < TICK) { if (!C.at) C.at = now; return false; } const n = clamp(Math.floor(dt / TICK), 1, 240); if (n > 30) { for (let k = Math.floor(n / 5) - 1; k >= 0; k--) step(S, now - k * 5 * TICK, 5); } else for (let k = n - 1; k >= 0; k--) step(S, now - k * TICK); C.at = now; return true; });
 window.ciStep = step; window.ciDbg = S => ({ d: demand(S), pw: pct(S, 'pw'), wa: pct(S, 'wa'), pol: pct(S, 'pol'), fire: pct(S, 'fire'), hos: pct(S, 'hos'), tg: apTarget(S), j: typeof jobsInfo === 'function' ? jobsInfo(S) : null });
 // ---------- integração: moradores, empregos, felicidade, prestígio, lugares ocupados ----------
 const W = (name, f) => { const p = window[name]; window[name] = S => (typeof p === 'function' ? p(S) : 0) + f(S); };
@@ -138,5 +138,6 @@ Object.assign(TX.es, { ciT: 'Ciudad', ciSub: 'Pinta zonas residenciales, comerci
   g_ci10: 'Tener 10 zonas construidas', g_ci4: 'Tener una zona ★4 (edificio alto)', g_ciAp: 'Aprobación 80% con 10 zonas', g_ciSvc: 'Tener luz, agua, policía, bomberos y hospital', n_ci: 'Ciudad estilo SimCity', n_ciD: 'Nuevo botón 🏙️: pinta zonas residenciales, comerciales e industriales y mira cómo los edificios crecen solos según la demanda (medidor R·C·I). Construye centrales, torres de agua, policía, bomberos y hospital con radio de cobertura: sin ellos hay apagones, robos, incendios y enfermos. Los vecinos piden cosas en globitos y la barra de aprobación muestra cómo va la ciudad.' });
 if (typeof NEWS === 'object' && Array.isArray(NEWS) && !NEWS.some(n => n[0] === 'n_ci')) NEWS.unshift(['n_ci', 'cidade']);
 if (typeof GOALS === 'object' && Array.isArray(GOALS) && !GOALS.some(g => g[0] === 'g_ci10')) GOALS.push(['g_ci10', S => stats(S).built >= 10, 8000], ['g_ci4', S => ciOf(S).z.some(t => t.lv >= 4), 15000], ['g_ciAp', S => stats(S).built >= 10 && ciOf(S).ap >= 80, 25000], ['g_ciSvc', S => ['pw', 'wa', 'pol', 'fire', 'hos'].every(g => ciOf(S).p.some(p => PL[p.k] && PL[p.k].g === g)), 20000]);
-window.CI = { drawPlant, H, GR, RG, ciOf, cov, stats, pct, demand, yieldH, tileY, opinions, apTarget, ZK, PL, EVK, ZW, ZH, near, evOn };
+const lvSum = S => { const C = ciOf(S); return C._lvs != null ? C._lvs : C.z.reduce((a, t) => a + t.lv, 0); };
+window.CI = { lvSum, drawPlant, H, GR, RG, ciOf, cov, stats, pct, demand, yieldH, tileY, opinions, apTarget, ZK, PL, EVK, ZW, ZH, near, evOn };
 })();

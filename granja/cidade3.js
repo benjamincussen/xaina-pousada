@@ -15,7 +15,7 @@ H.apM.push(S => ciOf(S).z.some(t => t.lv) ? 5 * Math.max(pct(S, 'edu'), pct(S, '
 H.ops.push((S, o) => { const C = ciOf(S), v = cov(S), d = demand(S); if (C.z.some((t, i) => t.lv === 3 && d[t.k] > 0 && !edu(v, i))) o.push(['opSchool', 8]); });
 // ---------- poluição: indústria (e fábrica de chips) suja o ar das casas perto; parques e reciclagem limpam ----------
 let PC = { k: null };
-function smog(S) { const C = ciOf(S), cb = S.cb || [], k = C.n + '|' + C.z.reduce((a, t) => a + t.lv, 0) + '|' + cb.length + '|' + (ordOf(S).rec ? 1 : 0); if (PC.S === S && PC.k === k) return PC.v;
+function smog(S) { const C = ciOf(S), cb = S.cb || [], k = C.n + '|' + CI.lvSum(S) + '|' + cb.length + '|' + (ordOf(S).rec ? 1 : 0); if (PC.S === S && PC.k === k) return PC.v;
   const src = []; C.z.forEach(t => { if (t.k === 'i' && t.lv) src.push([t.x, t.y, t.lv]); }); C.p.forEach(p => { if (p.k === 'chipfab' || p.k === 'usina') src.push([p.x, p.y, 2]); }); cb.forEach(b => { if (b.k === 'fabrica') src.push([b.x, b.y, 2]); });
   const parks = cb.filter(b => b.k === 'praca' || b.k === 'parque' || b.k === 'play'), f = ordOf(S).rec ? 0.6 : 1;
   const v = C.z.map(t => { if (t.k !== 'r' || !t.lv) return 0; let s = 0; for (const [x, y, a] of src) if (Math.hypot(x - t.x, y - t.y) < 340) s += a; s -= 2 * parks.filter(b => Math.hypot(b.x - t.x, b.y - t.y) < 420).length; return Math.max(0, s * f); });

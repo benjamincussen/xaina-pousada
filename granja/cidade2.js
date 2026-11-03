@@ -19,8 +19,8 @@ H.up.push(upkeep);
 H.ops.push((S, o) => { if (tax(S) >= 13) o.push(['opTax', (tax(S) - 9) * 1.5]); if (fund(S) === 0.5 && ciOf(S).p.length) o.push(['opFund', 5]); });
 // ---------- trânsito e transporte ----------
 let TC = { k: null };
-function traffic(S) { const C = ciOf(S), v = cov(S), k = C.n + '|' + C.z.reduce((a, t) => a + t.lv, 0) + '|' + C.p.length + '|' + fund(S) + '|' + (H.jamT || []).reduce((a, f) => a + f(S), 0); if (TC.S === S && TC.k === k) return TC.v;
-  const th = 20 + (H.jamT || []).reduce((a, f) => a + f(S), 0), d = C.z.map(t => t.lv ? C.z.reduce((a, u) => a + (u.lv && Math.abs(u.x - t.x) < 420 && Math.abs(u.y - t.y) < 420 ? u.lv : 0), 0) : 0), jam = d.map((x, i) => x >= th && !(v[i] && v[i].tr));
+function traffic(S) { const C = ciOf(S), v = cov(S), k = C.n + '|' + CI.lvSum(S) + '|' + C.p.length + '|' + fund(S) + '|' + (H.jamT || []).reduce((a, f) => a + f(S), 0); if (TC.S === S && TC.k === k) return TC.v;
+  const th = 20 + (H.jamT || []).reduce((a, f) => a + f(S), 0), grid = new Map(), cell = 420, ck = (a, b) => a * 100003 + b; C.z.forEach(u => { if (!u.lv) return; const kk = ck(Math.floor(u.x / cell), Math.floor(u.y / cell)); let l = grid.get(kk); if (!l) grid.set(kk, l = []); l.push(u); }); const d = C.z.map(t => { if (!t.lv) return 0; const cx = Math.floor(t.x / cell), cy = Math.floor(t.y / cell); let a = 0; for (let ix = cx - 1; ix <= cx + 1; ix++) for (let iy = cy - 1; iy <= cy + 1; iy++) for (const u of grid.get(ck(ix, iy)) || []) if (Math.abs(u.x - t.x) < 420 && Math.abs(u.y - t.y) < 420) a += u.lv; return a; }), jam = d.map((x, i) => x >= th && !(v[i] && v[i].tr));
   TC = { S, k, v: { d, jam } }; return TC.v; }
 const jamShare = S => { const T = traffic(S), n = ciOf(S).z.filter(t => t.lv).length; return n ? T.jam.filter(Boolean).length / n : 0; };
 H.yM.push((S, t, i) => traffic(S).jam[i] ? 0.85 : (t.k === 'c' && cov(S)[i] && cov(S)[i].tr ? 1.1 : 1));
@@ -35,10 +35,10 @@ H.ops.push((S, o) => { const T = tour(S); if (T.sc > T.cap + 10) o.push(['opHote
 // ---------- desastres leves ----------
 const DUR = { torn: 180000, quake: 30000, apag: 600000 };
 const tornPos = (D, now) => { const u = Math.max(0, now - D.t) / 1000; return { x: D.x + Math.cos(D.a) * u * 2.2 + Math.sin(u * 0.8) * 60, y: D.y + Math.sin(D.a) * u * 1.4 }; };
-H.step.push((S, now, v) => { const C = ciOf(S), built = []; C.z.forEach((t, i) => { if (t.lv) built.push(i); });
+H.step.push((S, now, v, m) => { const C = ciOf(S), built = []; C.z.forEach((t, i) => { if (t.lv) built.push(i); });
   C.ev = C.ev.filter(e => !(e.k === 'mess' && v[e.i] && v[e.i].fire && now - e.t > 180000));
   const D = C.dz; if (D && now - D.t < DUR[D.k]) { if (D.k === 'torn') { const p = tornPos(D, now); C.z.forEach((t, i) => { if (t.lv && Math.hypot(t.x - p.x, t.y - p.y) < 140 && !C.ev.some(e => e.i === i) && C.ev.length < 10) C.ev.push({ k: 'mess', i, t: now }); }); } return; }
-  if (!disOn(S) || built.length < 8 || Math.random() > 0.0025) return;
+  if (!disOn(S) || built.length < 8 || Math.random() > 0.0025 * (m || 1)) return;
   const pw = C.p.filter(p => PL[p.k] && PL[p.k].g === 'pw'), ks = ['torn', 'quake'].concat(pw.length ? ['apag'] : []), k = ks[Math.floor(Math.random() * ks.length)], t0 = C.z[built[Math.floor(Math.random() * built.length)]];
   C.dz = { k, t: now, x: t0.x, y: t0.y, a: Math.random() * 6.283 };
   if (k === 'quake') for (let j = 0; j < 3; j++) { const i = built[Math.floor(Math.random() * built.length)]; if (!C.ev.some(e => e.i === i)) C.ev.push({ k: 'mess', i, t: now }); }

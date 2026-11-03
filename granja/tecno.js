@@ -15,10 +15,10 @@ function techPow(S) { const C = ciOf(S), v = cov(S), now = Date.now(), res = {},
 function techStat(S) { const C = ciOf(S), T = techOf(S), pw = techPow(S); const n = { chipfab: 0, datacenter: 0, ialab: 0 }, on = { chipfab: 0, datacenter: 0, ialab: 0 }; C.p.forEach((p, j) => { if (n[p.k] == null) return; n[p.k]++; if (pw[j] && pw[j].on) on[p.k]++; });
   const act = Math.min(T.srv, on.datacenter * SRV), uni = C.p.some(p => p.k === 'universidade'), rate = on.ialab && uni ? act / 40 * on.ialab * (CI.ordOf && CI.ordOf(S).code ? 1.25 : 1) : 0;
   return { n, on, act, uni, rate, chipH: on.chipfab * 20, cloudH: act * SRV_Y, pw }; }
-H.step.push(S => { if (!S.tech && !ciOf(S).p.some(p => PL[p.k] && PL[p.k].g === 'tech')) return; const T = techOf(S), st = techStat(S);
-  T.cf += st.on.chipfab / 3; const mk = Math.floor(T.cf); T.cf -= mk; T.chips = Math.min(5000, T.chips + mk); T.made += mk;
-  if (T.auto !== 0) { const room = st.n.datacenter * SRV - T.srv, ins = Math.min(T.chips, room, st.on.datacenter * 4); if (ins > 0) { T.chips -= ins; T.srv += ins; } }
-  if (st.rate && !T.ready) { T.prog += st.rate; if (T.prog >= target(T)) { T.prog = target(T); T.ready = 1; } } });
+H.step.push((S, now, v, m = 1) => { if (!S.tech && !ciOf(S).p.some(p => PL[p.k] && PL[p.k].g === 'tech')) return; const T = techOf(S), st = techStat(S);
+  T.cf += st.on.chipfab / 3 * m; const mk = Math.floor(T.cf); T.cf -= mk; T.chips = Math.min(5000, T.chips + mk); T.made += mk;
+  if (T.auto !== 0) { const room = st.n.datacenter * SRV - T.srv, ins = Math.min(T.chips, room, st.on.datacenter * 4 * m); if (ins > 0) { T.chips -= ins; T.srv += ins; } }
+  if (st.rate && !T.ready) { T.prog += st.rate * m; if (T.prog >= target(T)) { T.prog = target(T); T.ready = 1; } } });
 H.inc.push(S => S.tech ? techStat(S).cloudH + (techOf(S).subs || 0) : 0);
 { const p = window.cbJobs; window.cbJobs = S => (typeof p === 'function' ? p(S) : 0) + (S.ci && Array.isArray(S.ci.p) ? S.ci.p.reduce((a, q) => a + ((PL[q.k] && PL[q.k].job) || 0), 0) : 0); }
 // ---------- ações ----------

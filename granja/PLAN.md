@@ -941,3 +941,11 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - La capacidad de turistas acepta ganchos (`H.tourCap`).
 - **Iris** construye la estación cuando la ciudad tiene 25 lotes y el aeropuerto con 50 lotes y caja grande.
 - Prueba: `tests/viajes.js`.
+
+## Versión 133 (sesión "Corsario"): presupuestos del equipo y recuperación 10 veces más rápida
+
+- **Presupuestos por persona**: lo que entra a la caja del equipo cada turno (ganancias, cobros y aporte del tesoro) va 30% al fondo de Ada y el resto se reparte: Rosa 45%, Clara 13%, Marta 12%, Iris 12%, Tomás 10%, Lino 8%. Cada uno ahorra para lo suyo (ya no hay metas que bloqueen a todos). Los **servicios esenciales** de Rosa (luz, agua, bomberos, policía, hospital) pueden usar la caja de todos. Si alguien pasa 2 horas sin trabajar, la mitad de su caja pasa a Rosa. La ficha 👥 muestra la caja de cada uno.
+- Rosa ahorra para luz, agua, bomberos, policía y hospital antes de comprar cosas más baratas.
+- El aporte del tesoro del Concejo empieza con 20.000 (antes 30.000): hasta 15% del excedente, máximo 12.000 por turno.
+- **Rendimiento**: la recuperación de 12 horas con 300 lotes, 200 construcciones y 44 servicios pasa de **25 s a 2,4 s**. Pasos de 5 minutos durante la recuperación (con todo multiplicado: crecimiento, renta, aprobación, emergencias, chips, fábricas), índice espacial de obstáculos para buscar lugar, terrenos propios precalculados por turno, terrenos llenos recordados, tráfico con grilla y suma de niveles incremental.
+- Prueba nueva: `tests/perf.js` (ciudad enorme, perfil y cuadros por segundo).
