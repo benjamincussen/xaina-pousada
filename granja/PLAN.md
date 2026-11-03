@@ -894,3 +894,11 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Se activa solo en partidas desde el nivel 20.
 - **Cobradores al 2%** (antes 5%).
 - Pruebas: `tests/noche.js` (noche simulada) y `tests/equipo_ui.js`.
+
+## Versión 127 (sesión "Corsario"): Tierras del Poniente, 64 terrenos nuevos
+
+- **Nuevo `poniente.js`**: región al oeste (x −18000 a −6000) con **64 terrenos** de 1460 × 1120 en cuadrícula de 8 × 8, caminos de tierra entre ellos, árboles en los caminos y cartel de entrada. Precio de 8.000 a 102.500 (los más cercanos primero), desde el nivel 26. El mapa pasa de **39 a 103 terrenos** (más de 2,5 veces).
+- Se compran como cualquier terreno (cartel de venta, ficha y Concejo) y la **Marta** del equipo compra hasta 2 por turno. Rosa y Ada abren barrios y parques tecnológicos ahí.
+- Dibujo propio y rápido: pasto y monte con texturas repetidas (patrones), solo lo que está en pantalla. El fondo original no ve estos terrenos (se envuelve `bgPaintAll`).
+- Botón "🧭 Ir a las Tierras del Poniente" en el 🔨 y en el equipo 👥.
+- Prueba: `tests/poniente.js`.
