@@ -1,0 +1,9 @@
+(async () => { const n = Date.now(); const all = { leste: 1, sul: 1, colina: 1, vila: 1, bairro: 1, escolar: 1, praia: 1, lavoura: 1, cidade: 1, centro: 1, porto2: 1, oeste: 1, curral: 1, vale: 1, aero: 1, livre1: 1 };
+  const { b, A, errs, shot } = await require('./look.js')({ land: all, lvl: 40, coins: 900000, inv: { leite: 40, acucar: 40, queijo: 40, pao: 40, tecido: 40, milho: 80 }, homes: Array.from({ length: 20 }, (_, i) => ({ c: n - 9e6, st: i })), serv: { praca: 1 } });
+  await A.evaluate(() => { const D = Date.now; let o = 0; while (nightF(D() + o) > 0) o += 20000; window._o = o; Date.now = () => D() + window._o; if (SH) closeSheet(); });
+  console.log(await A.evaluate(() => { const S = G.S; const pts = [['casa', -5800, 400], ['cafe', -4700, 1900], ['sobrado', -5300, 1500], ['loja', -5000, 600], ['pizzaria', -5600, 1100], ['casa', -4800, 1200], ['predio', -5400, 2100], ['fabrica', -5100, 1800], ['casa', -5700, 1700], ['cinema', -4900, 2200]]; let ok = 0; for (const [k, x, y] of pts) if (act({ a: 'cbPut', k, x, y }).ok) ok++; return 'placed ' + ok; }));
+  await shot(-5250, 1300, 0.28, 'arr_before.png');
+  console.log(await A.evaluate(() => { const S = G.S; const r = act({ a: 'cbArr', land: 'livre1' }); const s2 = act({ a: 'cbSup' }); return JSON.stringify({ arr: r.ok, msg: r.msg, streets: (S.cbst || []).length, sup: s2.ok, supplied: S.cb.filter(b => b.s > Date.now()).length, inv: S.inv }); }));
+  console.log(await A.evaluate(() => { const S = G.S; S.cb.forEach(b => b.at = Date.now() - 3600000); const c0 = S.coins; act({ a: 'cbAllCol' }); return 'collect1h ' + (S.coins - c0); }));
+  await shot(-5250, 1300, 0.28, 'arr_after.png'); await shot(-5400, 700, 0.6, 'arr_zoom.png'); console.log('by', await A.evaluate(() => G.S.cb[0].by));
+  console.log(errs.length, errs.slice(0, 3)); await b.close(); })();

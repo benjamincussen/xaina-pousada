@@ -1,0 +1,28 @@
+const { chromium } = require('playwright');
+(async () => {
+  const args = ['--disable-background-timer-throttling', '--disable-renderer-backgrounding'];
+  const init = { content: `window.MQTT_URLS = ['ws://127.0.0.1:8885/mqtt'];` };
+  const b1 = await chromium.launch({ args }), b2 = await chromium.launch({ args }); const errs = [];
+  const mk = async (b, name, lang) => { const c = await b.newContext({ viewport: { width: 390, height: 800 }, deviceScaleFactor: 1 }); await c.addInitScript(init); await c.addInitScript({ content: `try{localStorage.setItem('sitio-name','${name}');localStorage.setItem('sitio-lang','${lang}')}catch(e){}` }); return c; };
+  const cA = await mk(b1, 'Benjamin', 'es'), cB = await mk(b2, 'Ana Luyza', 'pt');
+  const A = await cA.newPage(); A.on('pageerror', e => errs.push('A: ' + e.message)); A.on('console', m => { if (m.type() === 'error') errs.push('A console: ' + m.text().slice(0, 200)); });
+  await A.goto('http://127.0.0.1:8767/granja/index.html'); await A.waitForTimeout(400);
+  await A.evaluate(() => { const n = Date.now(); const S = { v: 1, fid: 'co2', rev: 5, sy: 5, name: '', owner: 'Benjamin', coins: 20000, xp: 1400, lvl: 12, cap: 600, capv2: 1, np: 12, plots: Array.from({ length: 12 }, () => ({ c: null, p: 0 })), inv: { trigo: 60, milho: 30, pao: 10 }, bld: { moinho: { q: [] }, padaria: { q: [] }, queijaria: { q: [] } }, pens: { galinheiro: { a: [0, 0, 0] }, estabulo: { a: [0, 0] } }, orders: [], oid: 10, land: { leste: 1, sul: 1, colina: 1, vila: 1 }, trees: [n, n, n, n, n, n], hives: [n, n, n, n], boat: { e: 0 }, city: {}, done: 20, helper: { on: 1, until: 0, n: 2 } };
+    localStorage.setItem('sitio-farm-co2', JSON.stringify(S)); localStorage.setItem('sitio-index', JSON.stringify([{ fid: 'co2', name: '', lvl: 12, rev: 5, own: true, owner: 'Benjamin', last: n }])); });
+  await A.reload(); await A.waitForTimeout(500); await A.click('[data-play="co2"]'); await A.waitForTimeout(500);
+  await A.click('#bMenu'); await A.click('[data-invite]'); await A.waitForTimeout(6000); const link = await A.inputValue('#rLink'); await A.click('#bRoomOk');
+  const B = await cB.newPage(); B.on('pageerror', e => errs.push('B: ' + e.message)); B.on('console', m => { if (m.type() === 'error') errs.push('B console: ' + m.text().slice(0, 200)); });
+  await B.goto(link); await B.waitForTimeout(9000);
+  console.log('joined', await B.evaluate(() => [G.mode, G.S && G.S.coins]));
+  await A.evaluate(() => { const n = Date.now(); Object.assign(G.S.land, { bairro: 1, escolar: 1, praia: 1, lavoura: 1, porto2: 1 }); G.S.lvl = 20; G.S.xp = 60000; G.S.coins = 300000; G.S.np = 36; G.S.helper = { on: 1, until: n + 3600000, n: 2, ps: [] }; G.S.city.cargo = { s: n - 9e6, e: n - 8e6, c: n - 8e6 }; Object.assign(G.S.inv, { queijo: 20, tecido: 20, suco: 20, pao: 20, bolo: 10, geleia: 10, perfume: 10, paoMel: 10, coco: 10, acucar: 10, colar: 10 }); G.S.rev++; broadcast(); });
+  await B.waitForTimeout(4000);
+  const res = await B.evaluate(() => { const out = {}; const t = (k, a) => { const r = act(a); out[k] = r.ok ? 'ok' : 'x:' + r.msg; };
+    t('landOeste', { a: 'land', k: 'oeste' }); t('landCurral', { a: 'land', k: 'curral' }); t('plot', { a: 'buyPlot' }); t('hen', { a: 'animal', k: 'galinheiro2' }); t('hire', { a: 'hire' }); t('arch', { a: 'archHire' }); t('role', { a: 'role', h: 1, r: 'cidade' });
+    const o = expOrder(G.S, expN(Date.now())); if (o) for (const [k, q] of o.it) G.S.inv[k] = Math.max(G.S.inv[k] || 0, q); t('export', { a: 'export' }); t('golf', { a: 'golf', q: 2 }); t('busy', { a: 'helperBusy' }); return out; });
+  console.log('guest acts', JSON.stringify(res));
+  await A.waitForTimeout(5000);
+  const sum2 = S => JSON.stringify({ land: ['oeste', 'curral'].map(k => !!S.land[k]), np: S.np, hen: S.pens.galinheiro2 && S.pens.galinheiro2.a.length, n: S.helper.n, arch: !!(S.arch && S.arch.on), role: S.helper.roles && S.helper.roles[1], exp: S.exp, golf: S.golf, busy: S.helper.busy });
+  console.log('host ', await A.evaluate(`(${sum2})(G.S)`)); console.log('guest', await B.evaluate(`(${sum2})(G.S)`));
+  console.log('coins', await A.evaluate(() => G.S.coins), await B.evaluate(() => G.S.coins));
+  console.log('errors', errs); await b1.close(); await b2.close();
+})();

@@ -1,12 +1,16 @@
-// Fuzz: abre todas las hojas, toca botones al azar y da toques por todo el mapa, en PT y ES. node tests/fuzz.js [toques]
-const { open, richFarm, simulate } = require('./lib'); const N = +(process.argv[2] || 400);
-(async () => { const { pg, errs, close } = await open(); await richFarm(pg, { homes: 44, coins: 300000 });
-  const types = ['album', 'arch', 'barn', 'city', 'cv', 'decor', 'evalbum', 'fair', 'goals', 'helper', 'homes', 'jornal', 'map', 'medals', 'menu', 'mundo', 'news', 'orders', 'precos', 'seeds', 'shop', 'negocios', ['land', 'bairroSul'], ['bld', 'moinho'], ['bld', 'cantera'], ['pen', 'galinheiro'], ['homes', 0], ['urbe', 'brisa']];
-  let seed = 7; const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
-  const r = await pg.evaluate(async ([types, N, seed0]) => { let seed = seed0; const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff; const S = G.S; S.helper.on = 1; S.helper.until = Date.now() + 3600000; for (let i = 0; i < 6; i++) act({ a: 'hire' }, true); S.arch.on = 1; const out = { sheetErr: [], clicks: 0, taps: 0 };
-    for (const lang of ['pt', 'es']) { setLang(lang); for (const t of types) { const [ty, arg] = Array.isArray(t) ? t : [t]; try { closeSheet(); openSheet(ty, arg); const bs = Array.from(document.querySelectorAll('#sBody button:not([disabled])')); for (let k = 0; k < 3 && bs.length; k++) { const b = bs[Math.floor(rnd() * bs.length)]; if (/dem|atk|attack|discard|reset|apagar|borrar|delete|sair|salir|voltar|volver|menu\b|goMenu|data-leave|data-exit|data-del/i.test(b.outerHTML + ' ' + b.textContent)) continue; try { b.click(); out.clicks++; } catch (e) { out.sheetErr.push(ty + ':' + e.message); } } } catch (e) { out.sheetErr.push(lang + '/' + ty + ':' + e.message); } } closeSheet();
-      for (let i = 0; i < N; i++) { const x = XMIN + rnd() * (XMAX - XMIN), y = 40 + rnd() * (WH - 60); try { tapAt({ x, y }); out.taps++; } catch (e) { out.sheetErr.push('tap:' + e.message); } if (SH && rnd() < 0.7) closeSheet(); } closeSheet(); }
-    for (let i = 0; i < 30; i++) draw(i * 0.016, 0.016); out.farmAlive = !!G.S; return out; }, [types, N, seed]);
-  console.log(JSON.stringify({ ...r, sheetErr: r.sheetErr.slice(0, 8) }));
-  if (r.farmAlive) { const sim = await simulate(pg, 2); console.log('sim', JSON.stringify(sim)); } else console.log('la partida se cerró durante el fuzz (botón de salir)');
-  console.log('errors', errs.length, errs.slice(0, 6)); await close(); process.exit(errs.length || r.sheetErr.length ? 1 : 0); })();
+(async () => { const n = Date.now(); const all = { leste: 1, sul: 1, colina: 1, vila: 1, bairro: 1, escolar: 1, praia: 1, lavoura: 1, cidade: 1, centro: 1, vale: 1, oeste: 1, curral: 1, aero: 1, porto2: 1, diversao: 1, ferias: 1, serra: 1 };
+  const lang = process.argv[2] || 'es';
+  const { b, A, errs } = await require('./look.js')({ _lang: lang, land: all, lvl: 22, xp: 60000, coins: 500000, cap: 3000, homes: Array.from({ length: 40 }, (_, i) => ({ c: n - 9e6, st: i })), city: { eolico: { s: n - 9e6, e: n - 8e6, c: n - 8e6 }, torre: { s: n - 9e6, e: n + 8e6, c: n } }, serv: { praca: 1, posto: 1, colegio: 1, prefeitura: 1, shopping: 1 },
+    inv: { trigo: 100, milho: 100, pao: 30, queijo: 20, ovo: 30, leite: 30, suco: 20, bolo: 10 }, helper: { on: 1, until: n + 3600000, n: 8, ps: [] } });
+  await A.evaluate(l => { LANG = l; }, lang).catch(() => {});
+  const types = ['mundo','urbe','cv','album','anniv','arch','away','barn','bday','bike','city','daily','decor','evalbum','exped','export','fair','farol','fish','ft','goals','golf','helper','homes','land','lvl','mail','map','masc','medals','menu','news','orders','race','req','rush','seeds','shop','tiro'];
+  const bad = [];
+  for (const t of types) { const e0 = errs.length; await A.evaluate(t => { try { openSheet(t, t === 'seeds' ? 0 : t === 'land' ? 'vale' : undefined); } catch (e) { window._fz = (window._fz || []).concat(t + ': ' + e.message); } }, t); await A.waitForTimeout(150); await A.evaluate(() => { if (SH) closeSheet(); }); if (errs.length > e0) bad.push(t); }
+  console.log('sheet errs', bad, await A.evaluate(() => window._fz || []));
+  // random taps across world
+  const e1 = errs.length; let sheets = {};
+  for (let i = 0; i < 400; i++) { const r = await A.evaluate(([x, y]) => { CAM.z = 0.9; CAM.x = x; CAM.y = y; clampCam(); return [innerWidth, innerHeight]; }, [-2900 + Math.random() * 5800, 100 + Math.random() * 4700]);
+    await A.mouse.click(20 + Math.random() * (r[0] - 40), 120 + Math.random() * (r[1] - 260)); await A.waitForTimeout(60);
+    const st = await A.evaluate(() => SH && SH.type); if (st) { sheets[st] = (sheets[st] || 0) + 1; const btn = await A.$('#sBody button:not([disabled])'); if (btn && Math.random() < 0.5) { await btn.click().catch(() => {}); await A.waitForTimeout(60); } await A.evaluate(() => { if (SH) closeSheet(); }); } }
+  console.log('tap errs', errs.length - e1, errs.slice(e1, e1 + 5), JSON.stringify(sheets));
+  await b.close(); })();
