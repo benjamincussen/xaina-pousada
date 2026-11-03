@@ -822,3 +822,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 | Aeropuerto Internacional | 300k | +6000 | +12 | 1600 |
 
 - La felicidad entra en `happyRaw` (hook `cbHappy`, tope +40) y el prestigio en el ranking del mundo (`cbPrest`). Se mejoran a ★5 como las demás construcciones.
+
+## Versión 0 (sesión "Corsario"): la arquitecta ordena tus barrios y negocios con productos
+
+- **Arquitecta Lúcia, "Ordenar barrio"** (en 🔨, un botón por terreno con 2 o más construcciones): acomoda tus construcciones en manzanas (casas, luego negocios, producción y monumentos) y pone calles de asfalto con veredas y línea amarilla, horizontales entre filas y una vertical. Si no entra, no cambia nada.
+- **Calles:** lo que queda junto a una calle rinde **+10%** (se ve 🛣️ en su ficha). No se puede construir encima de las calles.
+- **Abastecer negocios:** café (leche + azúcar), tienda (tela), pizzería (queso + pan), cine (maíz), granja (maíz) y fábrica (tela). "Abastecer todo con el granero" carga hasta 4 h, y durante ese tiempo **rinden el doble** (📦 en el edificio).
