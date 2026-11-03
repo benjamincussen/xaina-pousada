@@ -63,3 +63,9 @@ Objetivo de Benjamin: llevar el juego "al siguiente nivel": mapa enorme, dinero 
 ## Cómo nos avisamos
 - `send_message` entre sesiones al terminar una versión (qué cambió, hooks tocados, números de la prueba).
 - Si una sesión necesita algo de la otra (un hook, un campo de S), lo pide por mensaje y sigue con otra cosa mientras tanto.
+
+## Pendiente para la próxima sesión (pedido de Benjamin, 2026-11-03)
+1. **Niveles hasta 100** (`LV` en game.js hoy termina en el nivel 12; la XP se acumula sin subir). Extender la curva (p. ej. LV[n] ≈ LV[n−1] × 1,18 + 200), premio por nivel (monedas 50×nivel y +50 de granero ya existen en `addXp`) y hitos cada 5 niveles: +1 ayudante máximo, descuentos en terrenos/casas, decoraciones exclusivas, +5% de precios de venta, títulos de la ciudad; hoja "Nivel" al tocar la insignia con la lista de premios futuros. Novedades + meta.
+2. **Niveles para las ciudades vecinas** (sesión del Mundo): `lvlOf(nb)` ya deriva un nivel de la población; mostrarlo en la isla y en 🌍, con premios al aliarse con ciudades de nivel alto.
+3. **Minimapa con el océano**: la sesión del Mundo pidió un hook en `paintMini` (`for (const h of EXT.mini || []) h(g, S, k)` antes de `g.restore()`) y, si se puede, que el ancho use `worldB()`.
+4. Para ahorrar tokens: leer solo las últimas secciones de PLAN.md, PLAN-EXT.md y este archivo; probar con `node granja/tests/smoke.js /tmp` y `fuzz.js`; capturas solo si cambia algo visual; código nuevo en extensiones.
