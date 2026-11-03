@@ -808,7 +808,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Cada 10 niveles hay un premio especial de 1000 × nivel monedas (nivel 70: 70.000), con aviso.
 - Construir con 🔨 da la mitad de experiencia que antes, para que subir siga siendo un desafío.
 
-## Versión 0 (sesión "Corsario"): monumentos
+## Versión 118 (sesión "Corsario"): monumentos
 
 - Nuevo grupo **Monumentos** en 🔨 (uno de cada uno), para invertir fortunas:
 
