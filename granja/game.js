@@ -703,7 +703,7 @@ PENS.estabulo3 = { n: 'Fazenda de vacas 2', kind: 'estabulo', get lvl() { return
 const pk = k => (PENS[k] && PENS[k].kind) || k;
 const BARN = { x: 548, y: 205, w: 124, h: 96 }, HOUSE = { x: 96, y: 205, w: 120, h: 86 }, BOARD = { x: 320, y: 905, w: 120, h: 70 };
 const LV = [0, 12, 35, 70, 120, 190, 280, 400, 550, 750, 1000, 1300];
-for (let l = 12; l < 40; l++) LV.push(LV[l - 1] + 300 + (l - 11) * 160); // níveis até 40
+for (let l = 12; l < 60; l++) LV.push(LV[l - 1] + 300 + (l - 11) * 160); // níveis até 60
 const MAXPLOTS = 140, FIELD1 = 12, PLOT0 = 6, WW = 1500, WH = 9400, XMIN = -4500, XMAX = 3000, WTOT = XMAX - XMIN;
 const plotRect = i => i >= 124 ? { x: 120 + ((i - 124) % 8) * 104, y: 8060 + Math.floor((i - 124) / 8) * 90, w: 96, h: 72 } : i >= 108 ? { x: 120 + ((i - 108) % 8) * 104, y: 6560 + Math.floor((i - 108) / 8) * 90, w: 96, h: 72 } : i >= 84 ? { x: -1400 + ((i - 84) % 8) * 104, y: 5200 + Math.floor((i - 84) / 8) * 90, w: 96, h: 72 } : i >= 60 ? { x: -2900 + ((i - 60) % 8) * 104, y: 300 + Math.floor((i - 60) / 8) * 90, w: 96, h: 72 } : i >= 36 ? { x: -1400 + ((i - 36) % 8) * 104, y: 300 + Math.floor((i - 36) / 8) * 90, w: 96, h: 72 } : i < FIELD1 ? { x: 168 + FIELD.dx + (i % 3) * 104, y: 290 + FIELD.dy + Math.floor(i / 3) * 82, w: 96, h: 72 } : { x: 100 + ((i - FIELD1) % 6) * 104 + (i - FIELD1 >= 6 * 2 ? 0 : 0), y: 3000 + Math.floor((i - FIELD1) / 6) * 82, w: 96, h: 72 };
 const plotCost = np => np < FIELD1 ? Math.round(25 * Math.pow(1.55, np - PLOT0)) : 150 + (np - FIELD1) * 30;

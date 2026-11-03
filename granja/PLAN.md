@@ -785,3 +785,13 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
   - Todo se ve en la isla y se cobra con "Cobrar" (acumula hasta 4 h). Obras del Concejo también construye casas en las colonias.
 - **Colonias más accesibles:** fundar cuesta 15.000 (antes 40.000) y mejorar cuesta 6000×nivel^1,3 (antes 12000×nivel^1,35).
 - Prueba: colonia nueva + 12 casas + 4 negocios = 75.720 monedas, que rinden 2.180 por hora.
+
+## Versión 0 (sesión "Corsario", ahora la única): Construir donde quieras
+
+- **Nuevo `construir.js`** (cargado después de negocios.js): botón 🔨 abajo a la derecha. Se elige en un catálogo y se toca cualquier lugar libre de un terreno propio.
+  - Casas: casa 800, casona 2000, edificio 5000.
+  - Negocios: café, tienda, pizzería, cine, banco.
+  - Producción: huerta, granja, fábrica.
+- Cada construcción rinde monedas por hora: se cobra tocándola o con "Cobrar todo" (acumula hasta 4 h). Se mejora hasta ★5 (+50% por nivel) y se demuele con 50% de devolución. Cada una igual que repites cuesta +4%.
+- Valida que el lugar esté libre (edificios, parcelas, lotes, servicios, caminos y otras construcciones) y dentro de un terreno comprado. Tope de 300 construcciones.
+- **Experiencia:** construir, mejorar y cobrar dan XP. **Nivel máximo: 60** (antes 40).
