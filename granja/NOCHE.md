@@ -12,7 +12,7 @@ Lo que quiere ver en la mañana: el mapa mucho más grande (triple o cuádruple 
 
 ## Backlog (en orden)
 1. ✅ Equipo de la ciudad (v126): Marta, Rosa, Ada, Tomás y Clara; recuperación de hasta 12 h al abrir; informe "Mientras no estabas"; billetera con metas de ahorro; aporte del tesoro del Concejo; barrios planificados con núcleo de servicios; parque tecnológico. Cobradores al 2%.
-2. **Mapa más grande:** agregar muchas tierras nuevas para comprar (más allá del oeste, norte o sur; usar `EXT.bounds` y sumar a `LANDS` desde una extensión, con suelo dibujado) para triplicar el área. Marta las compra.
+2. ✅ (v127) **Mapa más grande:** agregar muchas tierras nuevas para comprar (más allá del oeste, norte o sur; usar `EXT.bounds` y sumar a `LANDS` desde una extensión, con suelo dibujado) para triplicar el área. Marta las compra.
 3. **Economía:** que el equipo haga crecer las monedas y no solo gastarlas (rentas de lotes y data centers, prioridades de inversión por retorno, aporte del Concejo). Medir con noche.js.
 4. **Tecnología:** robots, autos eléctricos y celulares hechos con chips; exportar a las ciudades vecinas de `mundo.js`; bolsa de valores de Brisa IA.
 5. **Barrios con estilo** (colonial, moderno, playa) elegidos por Lúcia, rascacielos ★5 y horizonte de noche.
@@ -24,3 +24,4 @@ Lo que quiere ver en la mañana: el mapa mucho más grande (triple o cuádruple 
 
 ## Bitácora
 - **04:10Z · v126** — Equipo de la ciudad (`equipo.js`) y cobradores al 2%. Prueba `noche.js` 10 h: terrenos 16 → 29, lotes 30 → 32–73 según balance, vecinos 204 → 670–1450, recuperación ~1,6 s. Pendiente: economía más fuerte (el equipo gasta casi todo lo que entra) y mapa más grande.
+- **05:10Z · v127** — Tierras del Poniente (`poniente.js`): 64 terrenos nuevos al oeste (de 39 a 103), caminos, árboles, cartel; Marta compra hasta 2 por turno. noche.js 10 h: terrenos 16 → 32 (el Concejo compra la mayoría), lotes 30 → 65, vecinos 204 → 788, monedas 250k → 228k. Cuello de botella: la plata del equipo (billetera ~4k, tesoro de la prueba < 30k). Próximo: economía (ítem 3).
