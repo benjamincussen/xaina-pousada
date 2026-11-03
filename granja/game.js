@@ -688,7 +688,7 @@ const SORV = { x: 1262, y: 1010, per: 600, max: 6 }, sorvN = ms => Math.floor(ms
 const POST = { per: 240, dur: 50 };
 const HAPPY_CACHE = new WeakMap();
 function happy(S) { const b = Date.now() >> 9, hc = HAPPY_CACHE.get(S); if (hc && hc.b === b) return hc.v; const v = happyRaw(S); HAPPY_CACHE.set(S, { b, v }); return v; }
-function happyRaw(S) { let h = 30 + Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5 + roadBonus(S) * 2 + Object.keys(PROJ).filter(k => S.city[k]).length * 5;
+function happyRaw(S) { let h = 30 + (typeof cbHappy === 'function' ? cbHappy(S) : 0) + Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5 + roadBonus(S) * 2 + Object.keys(PROJ).filter(k => S.city[k]).length * 5;
   for (const [k, V] of Object.entries(SERV)) if (S.serv && S.serv[k]) h += V.hp; h += (S.bal ? 6 : 0) + (S.ref ? 6 : 0) + (S.obs ? 8 : 0) + Object.keys(S.pets || {}).filter(k => k === 'papagaio' || k === 'coruja').length * 0 + (S.tele ? 8 : 0) + (voteOn(S, 'v_trees', Date.now()) || voteOn(S, 'v_music', Date.now()) ? 10 : 0) + ((S.roads || []).length >= 20 ? 3 : 0) + ((S.homes || []).length >= 4 ? 5 : 0) + (S.cine ? 8 : 0) + decorHp(S) + (S.casa || 0) * 5 + Object.keys(S.pets || {}).length * 3 + (S.cityHp || 0) + (S.bus ? 8 : 0) + (S.train ? 8 : 0) + ((S.farol || 0) >= 4 ? 15 : 0) + Math.min(10, Math.floor(jobsInfo(S).emp / 10)); return Math.min(100, h); }
 const cityMult = S => 0.5 + happy(S) / 100;
 function rentNow(S, k, now) { const c = S.city[k]; if (!c || c.e > now) return 0; const per = Math.floor((now - c.c) / (RENT_EVERY * 1000)); return Math.round(Math.min(per, RENT_CAP) * PROJ[k].inc * cityMult(S)); }

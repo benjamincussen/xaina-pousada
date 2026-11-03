@@ -807,3 +807,18 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - `LV` llega a 200: después del 60, cada nivel pide ~4,5% más de experiencia que el anterior (nivel 61: 8.300 XP; nivel 100: 46.000 XP por nivel).
 - Cada 10 niveles hay un premio especial de 1000 × nivel monedas (nivel 70: 70.000), con aviso.
 - Construir con 🔨 da la mitad de experiencia que antes, para que subir siga siendo un desafío.
+
+## Versión 0 (sesión "Corsario"): monumentos
+
+- Nuevo grupo **Monumentos** en 🔨 (uno de cada uno), para invertir fortunas:
+
+| Monumento | Precio | Renta por hora | Felicidad | Prestigio |
+|---|---|---|---|---|
+| Estatua Gigante | 50k | +1200 | +5 | 300 |
+| Torre del Reloj | 80k | +1800 | +6 | 450 |
+| Catedral | 120k | +2600 | +8 | 700 |
+| Rueda Gigante | 150k | +3200 | +10 | 850 |
+| Estadio Olímpico | 220k | +4500 | +12 | 1200 |
+| Aeropuerto Internacional | 300k | +6000 | +12 | 1600 |
+
+- La felicidad entra en `happyRaw` (hook `cbHappy`, tope +40) y el prestigio en el ranking del mundo (`cbPrest`). Se mejoran a ★5 como las demás construcciones.
