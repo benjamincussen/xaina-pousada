@@ -1012,3 +1012,15 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Refinerías** nuevas en la fábrica: olaria, serraria, vidraria, ferraria, joalheria y mina.
 - **Nico** construye minas, aserraderos, pesca y mercado según la cantidad de campos, y más fábricas para refinar.
 - Prueba: `tests/v139.js` (playa, formato de monedas, extracción → refinado → venta, turbo y botón 🚜).
+
+## Versión 140 (sesión "Corsario"): jugar en el computador y ciudad que crece sola de verdad
+
+- **Computador** (pantallas de 900 px o más): las fichas se abren como **panel lateral** a la derecha (el mapa queda a la vista y se puede seguir tocando), con letras, botones y tarjetas más compactos y efecto al pasar el mouse. **Teclado**: Esc cierra la ficha, + / − acercan y alejan, flechas o WASD mueven el mapa. La rueda del mouse ya hacía zoom.
+- **Por qué no crecían los terrenos nuevos**:
+  1. Con la aprobación debajo de la meta (80%) el equipo frenaba toda la expansión. Ahora solo se detiene si está muy por debajo (más de 25 puntos); entre medio crece despacio (1 terreno por turno) mientras los encargados del bienestar trabajan.
+  2. Marta, Nico y Tomás tenían presupuestos muy chicos (10% y 11% de la caja). Ahora pueden usar hasta el 70% de la caja de todo el equipo, y el presupuesto del campo queda último para los demás, así Nico siempre puede plantar.
+  3. Marta compra terrenos nuevos solo cuando los que ya hay están en uso (no acumula terrenos vacíos).
+  4. Sofía no toca ordenanzas ni impuestos mientras la ciudad tiene menos de 10 edificios.
+  5. Nico empieza por un campo (antes exigía primero el silo, que es más caro).
+- **Más plata para la ciudad**: el aporte automático de fábrica pasa a **10%** por turno sobre lo que tengas por encima de tu **reserva de 30.000** (antes 5% sobre 100.000). Opciones nuevas: aporte 20% y reserva 30K.
+- Pruebas: `tests/solo.js` (30 minutos sin tocar nada: cuenta nivel 21 que gana 1.500/min pasa de 7 a 12 terrenos, 12 zonas, casas y campo; cuenta nivel 104 con 255K llega a 24 zonas, 12 servicios, campo y 94% de aprobación) y `tests/desk.js` (pantalla 1440×900, panel lateral y teclado).

@@ -1722,6 +1722,13 @@ cv.addEventListener('pointermove', e => { if (PTR.has(e.pointerId)) PTR.set(e.po
 const endPtr = e => { PTR.delete(e.pointerId); if (G.paint && e.pointerId === G.paint.id) { G.paint = null; return; }
   if (G.dragObj && e.pointerId === G.dragObj.id) { const dp = G.dragPos; G.dragObj = null; G.dragPos = null; G.dragXt = null; if (dp && e.type === 'pointerup') { const r = act({ a: 'move', k: dp.k, x: dp.x, y: dp.y }); if (r.ok) toast(L('moved'), 1200); } return; } if (pinch) { if (PTR.size < 2) pinch = null; drag = null; return; } if (!drag || e.pointerId !== drag.id) return; const d = drag; drag = null; if (!d.moved && e.type === 'pointerup') tapAt(toWorld(e.clientX, e.clientY)); };
 cv.addEventListener('pointerup', endPtr); cv.addEventListener('pointercancel', endPtr);
+// teclado (computador): Esc cierra, +/- zoom, flechas o WASD mueven el mapa
+const KEYS = new Set(); addEventListener('keydown', e => { const t = e.target; if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return; if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === 'Escape') { if (typeof SH !== 'undefined' && SH) { closeSheet(); e.preventDefault(); } return; }
+  if (e.key === '+' || e.key === '=') { zoomAt(CAM.z * 1.2, innerWidth / 2, innerHeight / 2); e.preventDefault(); return; } if (e.key === '-' || e.key === '_') { zoomAt(CAM.z / 1.2, innerWidth / 2, innerHeight / 2); e.preventDefault(); return; }
+  const k = { ArrowLeft: 'l', ArrowRight: 'r', ArrowUp: 'u', ArrowDown: 'd', a: 'l', d: 'r', w: 'u', s: 'd', A: 'l', D: 'r', W: 'u', S: 'd' }[e.key]; if (k) { if (!KEYS.size) requestAnimationFrame(keyPan); KEYS.add(k); e.preventDefault(); } });
+addEventListener('keyup', e => { const k = { ArrowLeft: 'l', ArrowRight: 'r', ArrowUp: 'u', ArrowDown: 'd', a: 'l', d: 'r', w: 'u', s: 'd', A: 'l', D: 'r', W: 'u', S: 'd' }[e.key]; if (k) KEYS.delete(k); }); addEventListener('blur', () => KEYS.clear());
+let keyT = 0; function keyPan(t) { if (!KEYS.size) { keyT = 0; return; } const dt = keyT ? Math.min(50, t - keyT) : 16; keyT = t; const v = 0.9 * dt / CAM.z; if (KEYS.has('l')) CAM.x -= v; if (KEYS.has('r')) CAM.x += v; if (KEYS.has('u')) CAM.y -= v; if (KEYS.has('d')) CAM.y += v; clampCam(); requestAnimationFrame(keyPan); }
 cv.addEventListener('wheel', e => { e.preventDefault(); zoomAt(CAM.z * Math.exp(-e.deltaY * 0.0015), e.clientX, e.clientY); }, { passive: false });
 function paintAt(w) { const P = G.paint, S = G.S; if (!P || !S) return; const gx = Math.floor(w.x / RD), gy = Math.floor(w.y / RD), key = roadKey(gx, gy); if (key === P.last) return; P.last = key;
   if (P.on === S.roads.includes(key)) return; const r = act({ a: 'road', x: gx, y: gy, on: P.on }, true); if (r.ok) { SND.pop(); $('editT').textContent = roadBarText(); } else if (r.msg) { toast(r.msg, 1400); G.paint = null; } }
@@ -2145,7 +2152,7 @@ function helperTask(S, now, role, hh) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; logHelper(S, now, hh | 0, a, crop); return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : poor ? { poor: true } : null;
 }
-const BUILD_V = '2026-11-03.139';
+const BUILD_V = '2026-11-03.140';
 // sons de cada lugar: ondas na praia, pássaros na serra e no sítio, crianças no bairro escolar (com 'Sons do sítio' ligado)
 setInterval(() => { if (!G.S || !AMB || document.hidden) return; const x = CAM.x, y = CAM.y; if (x > 1150) SND.wave(); else if (y > 3930) { if (Math.random() < 0.7) SND.bird(); } else if (y > 2330 && y < 2930 && G.S.serv && (G.S.serv.parque || G.S.serv.campo)) { if (Math.random() < 0.4) SND.kids(); } else if (Math.hypot((x - LAKE.x) / LAKE.rx, (y - LAKE.y) / LAKE.ry) < 1.6 && G.S.land.sul) { if (Math.random() < 0.3) SND.splash(); } }, 3200);
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
