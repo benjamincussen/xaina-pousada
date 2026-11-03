@@ -776,7 +776,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Segundo anillo del mundo:** al explorar las 12 primeras islas, el mar se amplía hacia el este (hasta x 18800) con Porto Gelo (comerciante), Ilha do Fogo (guerrera), Vila Jade (agricultora) y 3 islas libres para colonias. El mapa del panel 🌍 se reescala para mostrarlas.
 - Solo `mundo.js`. Campos nuevos en `S.mu`: `tres`, `tresN`, `texp`, `relics`.
 
-## Versión 0 (sesión "Corsario", mundo.js): barrios en las colonias y casas más baratas
+## Versión 114 (sesión "Corsario", mundo.js): barrios en las colonias y casas más baratas
 
 - **Casas de la ciudad más baratas:** `homeCost = 400 + min(n, 20) × 150`, con un máximo de 3.400 (antes llegaba a más de 20.000). Es una línea en game.js, avisada a la otra sesión.
 - **Cada colonia es un barrio que construyes tú:**
