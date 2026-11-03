@@ -829,7 +829,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Calles:** lo que queda junto a una calle rinde **+10%** (se ve 🛣️ en su ficha). No se puede construir encima de las calles.
 - **Abastecer negocios:** café (leche + azúcar), tienda (tela), pizzería (queso + pan), cine (maíz), granja (maíz) y fábrica (tela). "Abastecer todo con el granero" carga hasta 4 h, y durante ese tiempo **rinden el doble** (📦 en el edificio).
 
-## Versión 0 (sesión "Corsario"): plazas, parques y metas grandes
+## Versión 120 (sesión "Corsario"): plazas, parques y metas grandes
 
 - **Recreación en 🔨:** plaza ⛲ (3000, +15% a 380), parque 🌳 (6000, +20% a 450) y juegos infantiles 🛝 (4000, +15% a 350). Suben la renta de todo lo que está dentro del círculo (se ve punteado), hasta +30%. La arquitecta los ubica junto a las casas al ordenar.
 - **12 metas nuevas** (en `GOALS`, desde construir.js): 10/50/150 construcciones, los 3 tipos de barrio, 6 calles, 3 lugares de recreación, 3.000 vecinos, los 6 monumentos, 5 colonias, conquistar una ciudad, nivel 80 y nivel 100. Premios de 5.000 a 200.000.
