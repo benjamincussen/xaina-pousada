@@ -1,0 +1,30 @@
+// Sítio do Vento — Viagens: estação de trem de passageiros (turistas e clientes) e aeroporto regional com voos para as ilhas (colônias).
+(function () {
+if (!window.CI) return;
+const { H, GR, ciOf, PL, near } = CI;
+Object.assign(PL, { trem: { g: 'via', c: 25000, rad: 0, w: 150, h: 110, ic: '🚆', wall: '#f6ecd8', roof: '#c0392b', k: 'fabrica', u: 60, job: 15 }, aeroporto: { g: 'via', c: 80000, rad: 0, w: 360, h: 150, ic: '✈️', wall: '#eef2f6', roof: '#2f6e9e', k: 'aeroInt', u: 200, job: 40 } });
+{ const g = GR.find(q => q[0] === 'tr'); if (g) g[1].push('trem', 'aeroporto'); }
+const n = (S, k) => ciOf(S).p.filter(p => p.k === k).length, cols = S => S.mu && S.mu.col ? Object.keys(S.mu.col).length : 0;
+H.tourM = H.tourM || []; H.tourM.push(S => 1 + 0.2 * Math.min(2, n(S, 'trem')) + 0.3 * Math.min(1, n(S, 'aeroporto')));
+H.tourCap = H.tourCap || []; H.tourCap.push(S => 40 * Math.min(2, n(S, 'trem')) + 60 * Math.min(1, n(S, 'aeroporto')));
+H.dM.push((S, o) => { o.c += 10 * Math.min(2, n(S, 'trem')); });
+H.inc.push(S => n(S, 'aeroporto') ? 1500 + 400 * cols(S) : 0);
+{ const p = window.cbJobs; window.cbJobs = S => (typeof p === 'function' ? p(S) : 0) + (S.ci && Array.isArray(S.ci.p) ? S.ci.p.reduce((a, q) => a + (q.k === 'trem' || q.k === 'aeroporto' ? PL[q.k].job : 0), 0) : 0); }
+// ---------- desenho ----------
+const circ = (g, x, y, r, c) => { g.fillStyle = c; g.beginPath(); g.arc(x, y, r, 0, 6.283); g.fill(); };
+H.drawP.trem = (g, p, P, T) => { const x = p.x, y = p.y; shadow(g, x, y, 170); house(g, x - 20, y, 110, 60, P.wall, P.roof, 26); win(g, x - 64, y - 48, 20, 16); win(g, x + 4, y - 48, 20, 16); g.fillStyle = '#6b3e1e'; rr(g, x - 32, y - 34, 24, 34, 6); g.fill();
+  g.fillStyle = '#fff'; g.beginPath(); g.arc(x - 20, y - 98, 11, 0, 6.283); g.fill(); g.strokeStyle = '#3a2412'; g.lineWidth = 2; g.stroke(); const d = new Date(); g.beginPath(); g.moveTo(x - 20, y - 98); g.lineTo(x - 20 + Math.cos(d.getMinutes() * 0.1047 - 1.57) * 8, y - 98 + Math.sin(d.getMinutes() * 0.1047 - 1.57) * 8); g.stroke();
+  g.fillStyle = '#8a95a8'; g.fillRect(x + 42, y - 50, 4, 50); g.fillRect(x + 74, y - 50, 4, 50); g.fillStyle = P.roof; g.beginPath(); g.moveTo(x + 30, y - 50); g.lineTo(x + 90, y - 50); g.lineTo(x + 84, y - 62); g.lineTo(x + 36, y - 62); g.closePath(); g.fill(); g.fillStyle = '#ffd23f'; g.font = '900 10px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText(L('ciP_trem').toUpperCase(), x - 20, y - 70); };
+H.drawP.aeroporto = (g, p, P, T, now) => { if (typeof monArt === 'function') monArt(g, { k: 'aeroInt', x: p.x, y: p.y }, P, T, now); g.fillStyle = '#3a2412'; rr(g, p.x - 70, p.y - 128, 140, 20, 6); g.fill(); g.fillStyle = '#fff'; g.font = '900 11px Nunito, sans-serif'; g.textAlign = 'center'; g.fillText('✈️ ' + L('ciP_aeroporto').toUpperCase(), p.x - 0, p.y - 114); };
+// trilhos debaixo de tudo e o trem por cima
+EXT.draw0.push((g, S) => { if (!S || !S.ci || CAM.z < 0.2) return; for (const p of ciOf(S).p) { if (p.k !== 'trem' || !near(p.x, p.y, 800)) continue; const y = p.y + 34; g.fillStyle = '#8a6a4a'; for (let x = p.x - 760; x < p.x + 760; x += 22) g.fillRect(x, y - 9, 8, 18); g.fillStyle = '#9aa3ad'; g.fillRect(p.x - 760, y - 6, 1520, 3); g.fillRect(p.x - 760, y + 4, 1520, 3); g.fillStyle = '#c9a66b'; g.fillRect(p.x + 20, y - 26, 90, 12); } });
+EXT.draw.push((g, S, T) => { if (!S || !S.ci || CAM.z < 0.25) return; for (const p of ciOf(S).p) { if (p.k !== 'trem' || !near(p.x, p.y, 900)) continue; const u = (T + p.x * 0.01) % 40; if (u >= 28) continue; const y = p.y + 30, x = u < 10 ? p.x - 760 + (1 - Math.pow(1 - u / 10, 2)) * 820 : u < 18 ? p.x + 60 : p.x + 60 + Math.pow((u - 18) / 10, 2) * 820;
+    for (let c = 3; c >= 0; c--) { const cx0 = x - c * 74; if (c === 0) { g.fillStyle = '#c0392b'; rr(g, cx0 - 34, y - 30, 70, 30, 8); g.fill(); g.fillStyle = '#2b2b2b'; g.fillRect(cx0 + 14, y - 40, 10, 12); g.fillStyle = '#ffd23f'; circ(g, cx0 + 34, y - 14, 4, '#ffd23f'); if (u < 10 || u >= 18) for (let s = 0; s < 3; s++) { const q = ((T * 0.8) + s / 3) % 1; circ(g, cx0 + 19 - q * 30, y - 46 - q * 26, 4 + q * 8, `rgba(235,235,235,${0.7 * (1 - q)})`); } }
+      else { g.fillStyle = '#3d7fd6'; rr(g, cx0 - 34, y - 28, 68, 28, 6); g.fill(); g.fillStyle = '#bfe9ff'; for (let w = 0; w < 4; w++) g.fillRect(cx0 - 28 + w * 15, y - 22, 11, 9); g.fillStyle = '#ffd23f'; g.fillRect(cx0 - 34, y - 6, 68, 3); }
+      g.fillStyle = '#222'; circ(g, cx0 - 22, y + 2, 5, '#222'); circ(g, cx0 + 22, y + 2, 5, '#222'); }
+    if (u >= 10 && u < 18 && typeof kid === 'function') for (let k = 0; k < 4; k++) { const q = ((u - 10) / 8 + k * 0.25) % 1, kx = p.x + 30 + k * 18, ky = y - 34 + (k % 2 ? q : 1 - q) * 6; g.save(); g.translate(kx, ky - 8); g.scale(1.1, 1.1); kid(g, 0, 0, ['#e0533d', '#ffd23f', '#2f9e6e', '#9b5de5'][k], T, k); g.restore(); } } });
+// ---------- textos ----------
+Object.assign(TX.pt, { ciP_trem: 'Estação de trem', ciP_aeroporto: 'Aeroporto regional', ciP_tremD: 'Trem de passageiros: traz turistas (+20%, +40 vagas) e clientes para o comércio.', ciP_aeroportoD: 'Voos para as ilhas: 1.500 por hora mais 400 por colônia, e +30% de turistas (+60 vagas).', n_via: 'Trem de passageiros e aeroporto', n_viaD: 'Na 🏙️ (transporte): estação de trem com trem chegando, parando e partindo, e aeroporto regional com voos para as ilhas. Trazem turistas, clientes e dinheiro das colônias. A Iris constrói sozinha quando a cidade cresce.' });
+Object.assign(TX.es, { ciP_trem: 'Estación de tren', ciP_aeroporto: 'Aeropuerto regional', ciP_tremD: 'Tren de pasajeros: trae turistas (+20%, +40 lugares) y clientes para el comercio.', ciP_aeroportoD: 'Vuelos a las islas: 1.500 por hora más 400 por colonia, y +30% de turistas (+60 lugares).', n_via: 'Tren de pasajeros y aeropuerto', n_viaD: 'En 🏙️ (transporte): estación de tren con el tren llegando, parando y saliendo, y aeropuerto regional con vuelos a las islas. Traen turistas, clientes y dinero de las colonias. Iris los construye sola cuando la ciudad crece.' });
+if (typeof NEWS === 'object' && Array.isArray(NEWS) && !NEWS.some(q => q[0] === 'n_via')) NEWS.unshift(['n_via', 'cidade']);
+})();

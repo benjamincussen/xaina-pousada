@@ -25,6 +25,7 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 | `poniente.js` | Tierras del Poniente: 64 terrenos nuevos (`pon0`…`pon63`) al oeste, con suelo dibujado aparte y cámara ampliada (`EXT.bounds`). |
 | `tecno2.js` | Fábricas de robots, celulares y autos eléctricos (exportan con chips), valor de Brisa IA con gráfico. |
 | `calles.js` | Vida en las calles: semáforos y cebras, ferias junto a las plazas, fuegos con aprobación alta, vecinos caminando. |
+| `viajes.js` | Estación de tren con tren animado y aeropuerto regional con vuelos a las islas. |
 | `NOCHE.md` | Plan, backlog y bitácora de la noche autónoma. |
 | `index.html` | Carga: relay.js, p2p.js, game.js, mundo.js, negocios.js, construir.js, cidade.js, cidade2.js, cidade3.js, tecno.js, arte.js, cobrador.js, equipo.js. |
 
@@ -35,7 +36,7 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 - **Publicar:** `granja/tests/pushloop.sh "<resumen>"`. Rebasa sobre main, pone versión = main + 1, reemplaza `## Versión 0 (sesión …` en PLAN.md y pushea a main y a la rama actual (edita la línea de atribución del commit con la sesión actual).
 
 ## Estado
-- Versión **131**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles, ciudad SimCity (zonas, luz/agua, servicios, aprobación, tráfico, presupuesto, desastres leves, turismo, noche, monumentos dibujados), Lúcia que ordena todo y sola, casas con dibujos nuevos, tecnología e IA, educación, contaminación, mapa y ordenanzas, cobradores y dibujos de verdad con el zoom lejos, equipo de la ciudad que trabaja solo.
+- Versión **132**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles, ciudad SimCity (zonas, luz/agua, servicios, aprobación, tráfico, presupuesto, desastres leves, turismo, noche, monumentos dibujados), Lúcia que ordena todo y sola, casas con dibujos nuevos, tecnología e IA, educación, contaminación, mapa y ordenanzas, cobradores y dibujos de verdad con el zoom lejos, equipo de la ciudad que trabaja solo.
 
 ## Próxima ronda pedida ("dale con todo", estilo SimCity)
 1. ✅ Zonas que crecen solas con medidor RCI (v122, `cidade.js`).

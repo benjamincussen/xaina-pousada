@@ -1,0 +1,9 @@
+(async () => { const { b, A, errs, shot } = await require('./look.js')({ lvl: 70, coins: 5000000, land: { leste: 1, sul: 1, colina: 1, vila: 1, bairro: 1, escolar: 1, praia: 1, cidade: 1, livre1: 1, livre2: 1 } });
+  await A.evaluate(() => { const D = Date.now; let o = 0; while (nightF(D() + o) > 0) o += 20000; window._o = o; Date.now = () => D() + window._o; if (SH) closeSheet(); });
+  console.log('build', await A.evaluate(() => { const S = G.S, r = LANDS.livre1.r; for (let j = 0; j < 20; j++) act({ a: 'ciZone', k: 'rrc'[j % 3], x: r.x + 160 + (j % 8) * 140, y: r.y + 300 + Math.floor(j / 8) * 150 }); S.ci.z.forEach(t => t.lv = 3); S.ci.n++; const t0 = CI.tour(S), d0 = CI.demand(S).c;
+    const put = (k, y0) => { for (let y = y0; y < r.y + r.h; y += 60) for (let x = r.x + 200; x < r.x + r.w - 200; x += 70) if (cbFree(S, CI.PL[k].k, x, y) && act({ a: 'ciPl', k, x, y }).ok) return [x, y]; return null; };
+    const tr = put('trem', r.y + 900), ae = put('aeroporto', r.y + 1300); S.mu = S.mu || {}; S.mu.col = { c1: { lv: 2, type: 'turismo', at: Date.now(), nm: 'x' }, c2: { lv: 2, type: 'agro', at: Date.now(), nm: 'y' } }; S.ci.n++;
+    const t1 = CI.tour(S); return JSON.stringify({ tr, ae, tour0: t0, tour1: t1, dc: [d0, CI.demand(S).c], inc: CI.H.inc.map(f => f(S)), jobs: cbJobs(S) }); }));
+  const tr = await A.evaluate(() => { const p = G.S.ci.p.find(q => q.k === 'trem'); return [p.x, p.y]; }); await A.evaluate(() => { document.getElementById('hud').style.visibility = 'hidden'; });
+  await A.evaluate(() => { window._T0 = performance.now(); }); await shot(tr[0], tr[1] - 40, 0.55, 'via_trem.png'); const ae = await A.evaluate(() => { const p = G.S.ci.p.find(q => q.k === 'aeroporto'); return [p.x, p.y]; }); await shot(ae[0], ae[1] - 80, 0.5, 'via_aero.png');
+  console.log('errs', errs.length, errs.slice(0, 4)); await b.close(); })();

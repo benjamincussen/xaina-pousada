@@ -29,7 +29,7 @@ H.apM.push(S => -10 * jamShare(S));
 H.ops.push((S, o) => { const j = jamShare(S); if (j > 0) o.push(['opTraf', 4 + j * 12]); });
 // ---------- turismo ----------
 function tour(S) { const C = ciOf(S), cb = S.cb || [], mon = cb.filter(b => MONK.includes(b.k)).length, lz = cb.filter(b => LZK.includes(b.k)).length, cl = C.z.reduce((a, t) => a + (t.k === 'c' ? t.lv : 0), 0), hot = C.p.filter(p => p.k === 'hotel').length;
-  let sc = 25 * mon + 6 * lz + 1.5 * cl + Math.max(0, C.ap - 50) * 0.6; if (cb.some(b => b.k === 'aeroInt')) sc *= 1.5; sc *= (H.tourM || []).reduce((m, f) => m * f(S), 1); if (C.p.some(p => p.k === 'metro')) sc *= 1.15; const cap = 30 + 80 * hot; return { n: Math.round(Math.min(cap, sc)), cap, sc: Math.round(sc), hot }; }
+  let sc = 25 * mon + 6 * lz + 1.5 * cl + Math.max(0, C.ap - 50) * 0.6; if (cb.some(b => b.k === 'aeroInt')) sc *= 1.5; sc *= (H.tourM || []).reduce((m, f) => m * f(S), 1); if (C.p.some(p => p.k === 'metro')) sc *= 1.15; const cap = 30 + 80 * hot + (H.tourCap || []).reduce((a, f) => a + f(S), 0); return { n: Math.round(Math.min(cap, sc)), cap, sc: Math.round(sc), hot }; }
 H.inc.push(S => tour(S).n * 4);
 H.ops.push((S, o) => { const T = tour(S); if (T.sc > T.cap + 10) o.push(['opHotel', 6]); });
 // ---------- desastres leves ----------

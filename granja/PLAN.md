@@ -932,3 +932,12 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Autobuses que paran**: llegan a la parada, esperan 3 segundos mientras suben dos pasajeros y siguen.
 - **Equipo**: 🌳 **Lino** (jardinero: plazas o parques donde hay humo y donde falta valor del suelo para llegar a ★5), 📦 **Beto** (repartidor: abastece cafés, tiendas, pizzerías y fábricas con el granero para que rindan el doble) e 🏨 **Iris** (turismo: hoteles cuando los turistas no caben y monumentos cuando sobra mucho dinero). Los roles nuevos empiezan encendidos también en equipos que ya existían.
 - Prueba: `tests/calles.js`.
+
+## Versión 132 (sesión "Corsario"): tren de pasajeros y aeropuerto con vuelos a las islas
+
+- **Nuevo `viajes.js`** (grupo transporte de la 🏙️):
+  - **Estación de tren** (25.000, mantenimiento 60/h): edificio con reloj de verdad y andén techado, vías a los dos lados y un tren de pasajeros (locomotora con humo y tres vagones) que llega, para 8 segundos mientras suben y bajan pasajeros, y sigue viaje cada 40 segundos. Turismo +20% y +40 lugares (hasta 2 estaciones), +10 de demanda comercial, 15 empleos.
+  - **Aeropuerto regional** (80.000, mantenimiento 200/h): terminal, torre y aviones despegando. **Vuelos a las islas**: rinde 1.500 por hora más 400 por cada colonia; turismo +30% y +60 lugares; 40 empleos.
+- La capacidad de turistas acepta ganchos (`H.tourCap`).
+- **Iris** construye la estación cuando la ciudad tiene 25 lotes y el aeropuerto con 50 lotes y caja grande.
+- Prueba: `tests/viajes.js`.
