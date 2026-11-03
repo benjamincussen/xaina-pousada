@@ -2144,7 +2144,7 @@ function helperTask(S, now, role, hh) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; logHelper(S, now, hh | 0, a, crop); return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : poor ? { poor: true } : null;
 }
-const BUILD_V = '2026-11-03.122';
+const BUILD_V = '2026-11-03.123';
 // sons de cada lugar: ondas na praia, pássaros na serra e no sítio, crianças no bairro escolar (com 'Sons do sítio' ligado)
 setInterval(() => { if (!G.S || !AMB || document.hidden) return; const x = CAM.x, y = CAM.y; if (x > 1150) SND.wave(); else if (y > 3930) { if (Math.random() < 0.7) SND.bird(); } else if (y > 2330 && y < 2930 && G.S.serv && (G.S.serv.parque || G.S.serv.campo)) { if (Math.random() < 0.4) SND.kids(); } else if (Math.hypot((x - LAKE.x) / LAKE.rx, (y - LAKE.y) / LAKE.ry) < 1.6 && G.S.land.sul) { if (Math.random() < 0.3) SND.splash(); } }, 3200);
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)

@@ -22,6 +22,7 @@ const CAT = {
   olimpico: { g: 'mon', c: 220000, y: 4500, w: 320, h: 160, wall: '#c9ced6', roof: '#3d7fd6', ic: '🏟️', hap: 12, pr: 1200 },
   aeroInt: { g: 'mon', c: 300000, y: 6000, w: 360, h: 150, wall: '#eef2f6', roof: '#2f6e9e', ic: '✈️', hap: 12, pr: 1600 },
 };
+window.CB_CAT = CAT;
 const MAXB = 300, CAPH = 4, LVMAX = 5;
 const POP = { casa: 4, sobrado: 8, predio: 20 }, JOB = { cafe: 3, loja: 4, pizzaria: 6, cinema: 10, banco: 15, horta: 2, granja: 4, fabrica: 12 };
 window.cbHappy = S => Math.min(40, (Array.isArray(S.cb) ? S.cb : []).reduce((a, b) => a + ((CAT[b.k] && CAT[b.k].hap) || 0) * (b.lv || 1), 0));
@@ -76,6 +77,7 @@ EXT.draw0.push((g, S, T, dt, now) => { if (!S || !Array.isArray(S.cb) || !S.cb.l
     if (far) { g.fillStyle = C.roof; g.fillRect(b.x - C.w / 2, b.y - C.h, C.w, C.h); return; }
     if (C.g === 'prod' && b.k === 'horta') { g.fillStyle = '#8a5a2b'; g.fillRect(b.x - C.w / 2, b.y - C.h, C.w, C.h); for (let k = 0; k < 4; k++) { g.fillStyle = k % 2 ? '#5fa83c' : '#7cc46a'; g.fillRect(b.x - C.w / 2 + 6, b.y - C.h + 6 + k * 13, C.w - 12, 8); } }
     else if (C.g === 'lazer') { g.fillStyle = C.wall; g.beginPath(); g.ellipse(b.x, b.y - C.h / 2, C.w / 2 + 20, C.h / 2 + 18, 0, 0, 6.283); g.fill(); g.fillStyle = C.roof; g.beginPath(); g.ellipse(b.x, b.y - C.h / 2, C.w / 2, C.h / 2 + 6, 0, 0, 6.283); g.fill(); g.font = '46px sans-serif'; g.textAlign = 'center'; g.fillText(C.ic, b.x, b.y - C.h / 2 + 16); if (CAM.z > 0.35) { g.strokeStyle = 'rgba(255,255,255,.25)'; g.setLineDash([10, 10]); g.lineWidth = 3; g.beginPath(); g.arc(b.x, b.y - C.h / 2, C.rad, 0, 6.283); g.stroke(); g.setLineDash([]); } }
+    else if (C.g === 'mon' && typeof monArt === 'function' && monArt(g, b, C, T, now)) { /* desenho próprio (cidade2.js) */ }
     else if (C.g === 'mon') { g.fillStyle = 'rgba(0,0,0,.15)'; g.beginPath(); g.ellipse(b.x, b.y + 4, C.w * 0.6, 18, 0, 0, 6.283); g.fill(); g.fillStyle = '#b9a98f'; g.fillRect(b.x - C.w / 2, b.y - 26, C.w, 26); g.fillStyle = C.wall; g.fillRect(b.x - C.w * 0.38, b.y - C.h, C.w * 0.76, C.h - 26); g.fillStyle = C.roof; g.beginPath(); g.moveTo(b.x - C.w * 0.45, b.y - C.h); g.lineTo(b.x, b.y - C.h - 50); g.lineTo(b.x + C.w * 0.45, b.y - C.h); g.closePath(); g.fill(); g.font = `${Math.round(C.h * 0.55)}px sans-serif`; g.textAlign = 'center'; g.fillText(C.ic, b.x, b.y - C.h * 0.3); if (Math.sin(T * 2 + b.x) > 0.7) { g.fillStyle = '#fff'; g.beginPath(); g.arc(b.x + C.w * 0.3, b.y - C.h + 20, 5, 0, 6.283); g.fill(); } }
     else house(g, b.x, b.y, C.w, C.h + (lv - 1) * 10, C.wall, C.roof, 30);
     if (C.g !== 'mon' && C.g !== 'lazer') { g.font = '30px sans-serif'; g.textAlign = 'center'; g.fillText(C.ic, b.x, b.y - C.h - (lv - 1) * 10 - 34); }
