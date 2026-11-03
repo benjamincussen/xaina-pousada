@@ -786,7 +786,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Colonias más accesibles:** fundar cuesta 15.000 (antes 40.000) y mejorar cuesta 6000×nivel^1,3 (antes 12000×nivel^1,35).
 - Prueba: colonia nueva + 12 casas + 4 negocios = 75.720 monedas, que rinden 2.180 por hora.
 
-## Versión 0 (sesión "Corsario", ahora la única): Construir donde quieras
+## Versión 115 (sesión "Corsario", ahora la única): Construir donde quieras
 
 - **Nuevo `construir.js`** (cargado después de negocios.js): botón 🔨 abajo a la derecha. Se elige en un catálogo y se toca cualquier lugar libre de un terreno propio.
   - Casas: casa 800, casona 2000, edificio 5000.
