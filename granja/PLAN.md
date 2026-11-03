@@ -902,3 +902,11 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Dibujo propio y rápido: pasto y monte con texturas repetidas (patrones), solo lo que está en pantalla. El fondo original no ve estos terrenos (se envuelve `bgPaintAll`).
 - Botón "🧭 Ir a las Tierras del Poniente" en el 🔨 y en el equipo 👥.
 - Prueba: `tests/poniente.js`.
+
+## Versión 128 (sesión "Corsario"): economía de la ciudad, valor del suelo y reurbanización
+
+- **Lotes más rentables** (por hora, nivel 1 → 4): residencial 40/90/180/320, comercial 65/135/270/480, industrial 80/175/350/600 (antes 25–200, 40–300, 50–380).
+- **Valor del suelo** (como en SimCity): plazas (+12%), parques (+15%) y juegos (+10%) a menos de 450, y monumentos a menos de 800 (+15%), suben la renta del lote hasta +30%. Nueva capa 🌳 en el mapa de cobertura.
+- **Rosa reurbaniza**: si no hay lugar para un servicio que falta (policía, hospital, escuela…), demuele un lote vacío o una casa o negocio chico cercano (con el reembolso de siempre) y pone el servicio ahí. Pone plaza, parque y juegos en cada barrio nuevo a medida que crece.
+- **Prioridades**: Rosa solo pinta zonas nuevas cuando la luz y el agua cubren el 80% y la seguridad y la salud la mitad (o en barrios con núcleo propio); las compras chicas (≤ 1.000) solo respetan la mitad de la meta de ahorro; el impuesto no baja de 8%.
+- noche.js 10 h: aprobación 30% → 52–76% según la noche, lotes 30 → 43–59, monedas estables (~232k de 250k invertidos) y servicios cubriendo la ciudad vieja.
