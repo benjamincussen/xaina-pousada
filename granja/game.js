@@ -589,7 +589,7 @@ function residents(S) { const r = []; (S.homes || []).forEach((h, i) => { if (i 
 const BIG_COST = 600, APT_COST = 1500, APT_LVL = 12, TOWER_COST = 4000, TOWER_LVL = 17;
 // feira do bairro: 4 barracas onde vizinhos e turistas compram pelo preço cheio
 const FAIR = { x: 630, y: 2250, n: 4, max: 10 }, fairX = i => FAIR.x - 150 + i * 100;
-const HOME_INC = 30, homeCost = n => 400 + n * 250, popBonus = S => Math.min(25, residents(S).length);
+const HOME_INC = 30, homeCost = n => 400 + Math.min(n, 20) * 150, popBonus = S => Math.min(25, residents(S).length);
 const HOME_COL = [['#fff1d6', '#d9614b'], ['#e6f2ff', '#3f8fd1'], ['#f3ffe6', '#4f9a2f'], ['#ffe4ee', '#c2477a'], ['#fff4d6', '#e6a92a'], ['#f3e9ff', '#7b5ea7']];
 const NPC_NAMES = ['Dona Rosa', 'Seu Zé', 'Lia', 'Caio', 'Dona Cida', 'Tião', 'Malu', 'Davi', 'Iara', 'Beto', 'Lena', 'Rui', 'Dona Fia', 'Nico', 'Sol', 'Teo', 'Mel', 'Gui', 'Bela', 'Duda', 'Kiko', 'Rita', 'Leo', 'Vivi'];
 function homeRent(S, i, now) { const h = S.homes[i]; if (!h) return 0; return Math.round(Math.min(Math.floor((now - h.c) / (RENT_EVERY * 1000)), RENT_CAP) * HOME_INC * (h.tw ? 8 : h.apt ? 4 : h.big ? 2 : 1) * cityMult(S) * (voteOn(S, 'v_rent', now) ? 1.25 : 1)); }

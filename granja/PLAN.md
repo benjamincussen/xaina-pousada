@@ -775,3 +775,13 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
   - Cada islote se recarga cada 90 min. El Alcalde del Concejo también manda expediciones; ese premio va al tesoro.
 - **Segundo anillo del mundo:** al explorar las 12 primeras islas, el mar se amplía hacia el este (hasta x 18800) con Porto Gelo (comerciante), Ilha do Fogo (guerrera), Vila Jade (agricultora) y 3 islas libres para colonias. El mapa del panel 🌍 se reescala para mostrarlas.
 - Solo `mundo.js`. Campos nuevos en `S.mu`: `tres`, `tresN`, `texp`, `relics`.
+
+## Versión 0 (sesión "Corsario", mundo.js): barrios en las colonias y casas más baratas
+
+- **Casas de la ciudad más baratas:** `homeCost = 400 + min(n, 20) × 150`, con un máximo de 3.400 (antes llegaba a más de 20.000). Es una línea en game.js, avisada a la otra sesión.
+- **Cada colonia es un barrio que construyes tú:**
+  - Hasta 24 casas: 1500 + 150 por cada casa, +40/h cada una.
+  - Hasta 8 negocios (máx. 3 del mismo tipo): panadería 3000 (+150/h), mercado 4000 (+200/h), restaurante 6000 (+300/h), hotel 9000 (+450/h), fábrica 12000 (+600/h) y puerto 15000 (+800/h); cada repetido cuesta +50%.
+  - Todo se ve en la isla y se cobra con "Cobrar" (acumula hasta 4 h). Obras del Concejo también construye casas en las colonias.
+- **Colonias más accesibles:** fundar cuesta 15.000 (antes 40.000) y mejorar cuesta 6000×nivel^1,3 (antes 12000×nivel^1,35).
+- Prueba: colonia nueva + 12 casas + 4 negocios = 75.720 monedas, que rinden 2.180 por hora.
