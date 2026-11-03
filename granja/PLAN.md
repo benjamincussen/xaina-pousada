@@ -978,3 +978,13 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Ayudantes**: contratar cuesta mucho menos (el 10.º: 2.300 en vez de 10.000) y se pueden tener hasta **40**; los turnos cuestan 10, 25 y 300 (antes 25, 60 y 900).
 - **Más luz y agua**: molino de viento y torre de agua abastecen 16 zonas (antes 12); central y planta de agua 60 (antes 40).
 - Prueba: `tests/agro.js`.
+
+## Versión 137 (sesión "Corsario"): caja propia del equipo, ritmo turbo, Tierras del Norte y del Sur, granja solar
+
+- **Caja real del equipo** (arreglo importante): antes la billetera era un permiso sobre tus monedas y las donaciones se descontaban dos veces (al donar y al gastar). Ahora el equipo tiene su propia caja: cada turno recibe el **90%** de lo que ganaste (tú te quedas con el 10%; se puede cambiar a 30% o 50%), el **aporte automático** (5% por turno de lo que tengas por encima de tu reserva de 100.000; se puede apagar o subir a 10%, y la reserva puede ser 500.000 o 2 millones), el aporte del tesoro del Concejo y tus donaciones. Todo lo que el equipo compra sale solo de esa caja; las ganancias de sus acciones vuelven a ti.
+- **Ritmo** en la ficha 👥: 🐢 normal (turno cada 10 min), 🐇 rápido (cada 5 min, crecimiento ×2, de fábrica) y 🚀 turbo (cada 2,5 min, crecimiento ×4). Afecta a la ciudad y al campo, también en la recuperación.
+- **Rosa** abre un barrio nuevo cuando el actual llega a 20 lotes (sin esperar a que no haya lugar).
+- **Tierras del Norte** (pinos, 78 terrenos, arriba del mapa) y **Tierras del Sur** (playas, 78 terrenos, abajo), desde el nivel 30, con mar a los costados, caminos y carteles. El mapa pasa de 103 a **259 terrenos**. Botones para ir a cada región en el 🔨 y en el equipo. Las placas de venta solo se dibujan cerca de la cámara.
+- **Granja solar** (7.000, energía limpia para 24 zonas, sin humo); Rosa la prefiere a los molinos.
+- **Campesinos** trabajando en los campos (más cuantos más niveles tenga el campo).
+- Prueba nueva: `tests/ritmo.js` (30 minutos por ritmo; `TES=1` simula un tesoro como el de Benjamin). Turbo con tesoro: lotes 12 → 22, servicios 9 → 20, terrenos 19 → 21 en 30 minutos.

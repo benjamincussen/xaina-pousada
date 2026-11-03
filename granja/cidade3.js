@@ -3,6 +3,9 @@
 if (!window.CI) return;
 const { H, GR, RG, ciOf, cov, pct, stats, demand, PL, ZW, ZH, near } = CI;
 Object.assign(PL, { escola: { g: 'edu', c: 6000, rad: 550, w: 130, h: 100, ic: '🏫', wall: '#fff3c4', roof: '#d9483b', k: 'cinema', u: 30 }, universidade: { g: 'uni', c: 30000, rad: 900, w: 140, h: 100, ic: '🎓', wall: '#f2ece0', roof: '#5a6b8a', k: 'cinema', u: 90 } });
+PL.solar = { g: 'pw', c: 7000, rad: 550, cap: 24, w: 140, h: 90, ic: '☀️', wall: '#2f4f8a', roof: '#9fd3ef', k: 'granja', u: 15 }; { const gp = GR.find(q => q[0] === 'pw'); if (gp) gp[1].push('solar'); }
+H.drawP.solar = (g, p, P, T) => { const x = p.x, y = p.y; shadow(g, x, y, 160); for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) { const px = x - 66 + c * 34, py = y - 80 + r * 26; g.fillStyle = '#5b5f68'; g.fillRect(px + 13, py + 18, 3, 8); g.save(); g.translate(px, py); g.transform(1, 0, -0.35, 1, 0, 0); const gg = g.createLinearGradient(0, 0, 30, 18); gg.addColorStop(0, '#3d7fd6'); gg.addColorStop(1, '#1e3f73'); g.fillStyle = gg; g.fillRect(0, 0, 30, 18); g.strokeStyle = 'rgba(255,255,255,.45)'; g.lineWidth = 1; g.strokeRect(0, 0, 30, 18); g.beginPath(); g.moveTo(15, 0); g.lineTo(15, 18); g.moveTo(0, 9); g.lineTo(30, 9); g.stroke(); g.restore(); } const sh = (Math.sin(T * 0.8) + 1) / 2; g.fillStyle = `rgba(255,255,255,${0.25 * sh})`; g.fillRect(x - 40, y - 78, 20, 4); };
+Object.assign(TX.pt, { ciP_solar: 'Fazenda solar', ciP_solarD: 'Energia limpa (sem fumaça) para até 24 zonas perto.' }); Object.assign(TX.es, { ciP_solar: 'Granja solar', ciP_solarD: 'Energía limpia (sin humo) para hasta 24 zonas cercanas.' });
 RG.push('edu', 'uni'); GR.push(['edu', ['escola', 'universidade']]);
 const ordOf = S => { const C = ciOf(S); if (!C.ord || typeof C.ord !== 'object') C.ord = {}; return C.ord; };
 const ORD = { rec: { u: 40, ic: '♻️' }, bici: { u: 30, ic: '🚲' }, festa: { u: 60, ic: '🎉' }, code: { u: 80, ic: '👩‍💻' }, luz: { u: 50, ic: '💡' } };
