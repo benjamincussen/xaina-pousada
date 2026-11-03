@@ -949,3 +949,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - El aporte del tesoro del Concejo empieza con 20.000 (antes 30.000): hasta 15% del excedente, máximo 12.000 por turno.
 - **Rendimiento**: la recuperación de 12 horas con 300 lotes, 200 construcciones y 44 servicios pasa de **25 s a 2,4 s**. Pasos de 5 minutos durante la recuperación (con todo multiplicado: crecimiento, renta, aprobación, emergencias, chips, fábricas), índice espacial de obstáculos para buscar lugar, terrenos propios precalculados por turno, terrenos llenos recordados, tráfico con grilla y suma de niveles incremental.
 - Prueba nueva: `tests/perf.js` (ciudad enorme, perfil y cuadros por segundo).
+
+## Versión 134 (sesión "Corsario"): gráficos de la ciudad y Lúcia ordenando sola por defecto
+
+- **Nuevo `stats.js`**: un punto por hora de vecinos, monedas, aprobación, lotes construidos, terrenos, renta de la ciudad por hora y servidores (hasta 96 puntos). También se toman puntos durante la recuperación del equipo (uno por cada hora que el juego estuvo cerrado), así a la mañana se ve cómo creció todo durante la noche. Ficha 📈 con gráficos de línea (máximo, mínimo, último valor y cuánto subió), botón en la 🏙️ y en el informe "Mientras no estabas". Los puntos fuera de orden se intercalan.
+- **Lúcia sola** queda encendida por defecto en las partidas con equipo (desde el nivel 20), así ordena en manzanas con calles todo lo que esté desordenado unos segundos después de abrir el juego. Aparece en la ficha 👥 con su interruptor.
+- `tests/noche.js` ahora cierra la primera sesión antes de reabrir (antes seguía corriendo y a veces hacía la recuperación por su cuenta, lo que explicaba una corrida rara de 24 s).

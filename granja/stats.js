@@ -1,0 +1,22 @@
+// Sítio do Vento — Estatísticas da cidade: um ponto por hora (também enquanto o jogo esteve fechado) e gráficos de linha.
+(function () {
+const H1 = 3600000, MAXP = 96;
+const KEYS = [['pop', '👥', '#3d7fd6'], ['c', '🪙', '#e6a92a'], ['ap', '😊', '#2f9e6e'], ['z', '🏢', '#9b5de5'], ['land', '🗺️', '#a0683a'], ['inc', '💰', '#e0533d'], ['srv', '🖥️', '#2f6e9e']];
+function sample(S, t) { if (!S) return false; const st = S.st && typeof S.st === 'object' ? S.st : (S.st = { t: [] }); let at = st.t.length; while (at > 0 && st.t[at - 1] > t) at--; if ((at > 0 && t - st.t[at - 1] < H1) || (at < st.t.length && st.t[at] - t < H1)) return false;
+  const C = S.ci, v = { pop: (typeof residents === 'function' ? residents(S).length : 0) + (typeof cbPop === 'function' ? cbPop(S) : 0), c: Math.round(S.coins), ap: C ? C.ap : 0, z: C ? C.z.filter(q => q.lv).length : 0, land: Object.keys(S.land || {}).filter(k => S.land[k]).length, inc: window.CI && C ? Math.round(CI.yieldH(S) + (CI.H.inc || []).reduce((a, f) => a + f(S), 0)) : 0, srv: S.tech ? S.tech.srv || 0 : 0 };
+  st.t.splice(at, 0, t); for (const [k] of KEYS) { (st[k] = st[k] || []).splice(at, 0, v[k]); } if (st.t.length > MAXP) { st.t.splice(0, st.t.length - MAXP); for (const [k] of KEYS) st[k].splice(0, st[k].length - MAXP); } return true; }
+window.statSample = sample;
+EXT.tick.push((S, now) => sample(S, now));
+const fmt = v => v >= 1e6 ? (v / 1e6).toFixed(1) + 'M' : v >= 1e4 ? Math.round(v / 1000) + 'k' : String(Math.round(v));
+function chart(vs, col) { const W = 300, Hh = 70; if (vs.length < 2) return `<small>${L('stWait')}</small>`; const mx = Math.max(...vs), mn = Math.min(...vs), y = v => Hh - 6 - (mx === mn ? 0.5 : (v - mn) / (mx - mn)) * (Hh - 14); const pts = vs.map((v, i) => `${(i / (vs.length - 1) * W).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+  return `<svg viewBox="0 0 ${W} ${Hh}" width="100%" height="${Hh}"><polyline points="0,${Hh} ${pts} ${W},${Hh}" fill="${col}22" stroke="none"/><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><text x="2" y="10" font-size="10" fill="#7a6a5a">${fmt(mx)}</text><text x="2" y="${Hh - 2}" font-size="10" fill="#7a6a5a">${fmt(mn)}</text></svg>`; }
+EXT.sheet.stats = (S, t) => { t.textContent = '📈 ' + L('stT'); const st = S.st || { t: [] }, n = st.t.length; let h = `<p class="sub">${L('stSub', n)}</p>`;
+  for (const [k, ic, col] of KEYS) { const vs = st[k] || [], last = vs[vs.length - 1], first = vs[0]; h += `<div class="card"><div class="row" style="justify-content:space-between"><b>${ic} ${L('st_' + k)}</b><b style="color:${col}">${last != null ? fmt(last) : '–'}${n > 1 && last > first ? ` <small style="color:#2f9e6e">▲ ${fmt(last - first)}</small>` : ''}</b></div>${chart(vs, col)}</div>`; }
+  return h; };
+EXT.click.push(d => { if (d.stats) { openSheet('stats'); return true; } return false; });
+if (window.CI) CI.H.cards.unshift(S => `<button class="btn" type="button" data-stats="1" style="margin-bottom:8px;font-size:14px;background:#3d7fd6;color:#fff">📈 ${L('stOpen')}</button>`);
+EXT.go.stats = () => openSheet('stats');
+Object.assign(TX.pt, { stT: 'Estatísticas', stOpen: 'Ver gráficos da cidade', stSub: (n) => `Um ponto por hora (${n} até agora), também enquanto o jogo estava fechado.`, stWait: 'O gráfico aparece depois de 2 horas.', st_pop: 'Moradores', st_c: 'Moedas', st_ap: 'Aprovação', st_z: 'Lotes construídos', st_land: 'Terrenos', st_inc: 'Renda da cidade por hora', st_srv: 'Servidores', n_st: 'Gráficos da cidade', n_stD: 'Na 🏙️: gráficos de moradores, moedas, aprovação, lotes, terrenos, renda e servidores, com um ponto por hora (também da noite, quando a equipe trabalha sozinha). E a Lúcia agora organiza sozinha por padrão.' });
+Object.assign(TX.es, { stT: 'Estadísticas', stOpen: 'Ver gráficos de la ciudad', stSub: (n) => `Un punto por hora (${n} hasta ahora), también mientras el juego estaba cerrado.`, stWait: 'El gráfico aparece después de 2 horas.', st_pop: 'Vecinos', st_c: 'Monedas', st_ap: 'Aprobación', st_z: 'Lotes construidos', st_land: 'Terrenos', st_inc: 'Renta de la ciudad por hora', st_srv: 'Servidores', n_st: 'Gráficos de la ciudad', n_stD: 'En 🏙️: gráficos de vecinos, monedas, aprobación, lotes, terrenos, renta y servidores, con un punto por hora (también de la noche, cuando el equipo trabaja solo). Y Lúcia ahora ordena sola por defecto.' });
+if (typeof NEWS === 'object' && Array.isArray(NEWS) && !NEWS.some(q => q[0] === 'n_st')) NEWS.unshift(['n_st', 'stats']);
+})();
