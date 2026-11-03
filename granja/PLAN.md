@@ -823,7 +823,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - La felicidad entra en `happyRaw` (hook `cbHappy`, tope +40) y el prestigio en el ranking del mundo (`cbPrest`). Se mejoran a ★5 como las demás construcciones.
 
-## Versión 0 (sesión "Corsario"): la arquitecta ordena tus barrios y negocios con productos
+## Versión 119 (sesión "Corsario"): la arquitecta ordena tus barrios y negocios con productos
 
 - **Arquitecta Lúcia, "Ordenar barrio"** (en 🔨, un botón por terreno con 2 o más construcciones): acomoda tus construcciones en manzanas (casas, luego negocios, producción y monumentos) y pone calles de asfalto con veredas y línea amarilla, horizontales entre filas y una vertical. Si no entra, no cambia nada.
 - **Calles:** lo que queda junto a una calle rinde **+10%** (se ve 🛣️ en su ficha). No se puede construir encima de las calles.
