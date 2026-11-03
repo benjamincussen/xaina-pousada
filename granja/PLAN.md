@@ -1001,3 +1001,14 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Ficha 😊 Bienestar (tarjeta arriba de la 🏙️): aprobación y meta, felicidad, pedidos, caja y última entrega de cada región.
 - Prueba: `tests/bienestar.js`: ciudad de 66 lotes en 4 regiones con aprobación 55% → 77, 95 y 100% en 3 turnos; felicidad por región de ~30% a ~98%; recién entonces vuelve a comprar terrenos.
 - **Rendimiento con equipo grande**: Tomás ya no le pide a Lúcia reordenar cada vez que construye si Lúcia está en modo automático, y Rosa, cuando le falta lugar, solo le avisa a Lúcia (antes cada reordenamiento de un terreno grande tardaba ~1 s y se repetía en la recuperación). El cálculo de obstáculos del juego base tiene una memoria corta de 250 ms, la búsqueda de lugar confía en su índice espacial y la recuperación usa pasos de 10 minutos. Recuperación de 12 h con ciudad de 400 lotes: de ~35 s a ~6,5 s (con la carga de la página).
+
+## Versión 139 (sesión "Corsario"): playa construible, monedas con K/M, turbo de fábrica y producción de materias primas
+
+- **Arreglo**: ya se puede construir y pintar lotes en los terrenos de playa del Norte y del Sur (antes el control de caminos rechazaba los terrenos de la columna central fuera del mapa original).
+- **Monedas** sin decimales y con formato corto: 999, 1.6K, 10K, 787K, 1M, 1.25M, 2.33M (también en la caja del equipo).
+- **🚀 Turbo de fábrica** (también en partidas guardadas, una vez). La tarjeta 🏙️ del equipo tiene botones rápidos: 👥 ver equipo, turbo sí/no, 🎁 donar 100K y 🚜 campo.
+- **La ciudad se queda con la plata**: el equipo recibe el 90% de lo que produces y las monedas se redondean en cada turno.
+- **Materias primas** en el campo (🚜, botón nuevo desde el nivel 10): ⛏️ **Mina** (piedra, hierro, oro), 🪚 **Aserradero** (madera), 🎣 **Pesca** (peces, camarones) y 🏪 **Mercado de exportación** (+10% por nivel al precio de venta de la cooperativa, hasta +50%).
+- **Refinerías** nuevas en la fábrica: olaria, serraria, vidraria, ferraria, joalheria y mina.
+- **Nico** construye minas, aserraderos, pesca y mercado según la cantidad de campos, y más fábricas para refinar.
+- Prueba: `tests/v139.js` (playa, formato de monedas, extracción → refinado → venta, turbo y botón 🚜).

@@ -37,7 +37,7 @@ function step(S, now, m = 1) { const C = ciOf(S); C._lvs = C.z.reduce((a, t) => 
     else if (dm > 0 && t.lv < Math.min(5, ...H.mx.map(f => f(S, t, i)))) { t.g = (t.g || 0) + dm / 100 * 8 * svc * (0.5 + Math.random()) * hm('gM', S, t, i) * m; if (t.g >= 100) { t.lv++; t.g = 0; C._lvs++; t.at = now; } }
     else if (dm < -20 && t.lv > 1) { t.g = (t.g || 0) - 4 * m; if (t.g < 0) { t.lv--; t.g = 60; C._lvs--; } }
     y += tileY(S, t, i); });
-  const ex = hs('inc', S), tot = yieldH(S) + ex; C.box = Math.min(tot * CAPH, (C.box || 0) + (y + ex - hs('up', S)) / 60 * m); if (C.box < 0) { S.coins = Math.max(0, S.coins + C.box); C.box = 0; } H.step.forEach(f => f(S, now, v, m));
+  const ex = hs('inc', S), tot = yieldH(S) + ex; C.box = Math.min(tot * CAPH, (C.box || 0) + (y + ex - hs('up', S)) / 60 * m); if (C.box < 0) { S.coins = Math.max(0, Math.round(S.coins + C.box)); C.box = 0; } H.step.forEach(f => f(S, now, v, m));
   C.ev = C.ev.filter(e => now - e.t < EVDUR && C.z[e.i] && !(v[e.i] && v[e.i][EVK[e.k].g]));
   if (C.ev.length < EVMAX) C.z.forEach((t, i) => { if (!t.lv || evOn(S, i) || C.ev.length >= EVMAX) return; for (const [k, E] of Object.entries(EVK)) if (!v[i][E.g] && Math.random() < E.p * m) { C.ev.push({ k, i, t: now }); break; } });
   const tg = apTarget(S); C.ap = clamp(C.ap + clamp(tg - C.ap, -3 * m, 3 * m), 0, 100); }

@@ -2145,7 +2145,7 @@ function helperTask(S, now, role, hh) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; logHelper(S, now, hh | 0, a, crop); return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : poor ? { poor: true } : null;
 }
-const BUILD_V = '2026-11-03.138';
+const BUILD_V = '2026-11-03.139';
 // sons de cada lugar: ondas na praia, pássaros na serra e no sítio, crianças no bairro escolar (com 'Sons do sítio' ligado)
 setInterval(() => { if (!G.S || !AMB || document.hidden) return; const x = CAM.x, y = CAM.y; if (x > 1150) SND.wave(); else if (y > 3930) { if (Math.random() < 0.7) SND.bird(); } else if (y > 2330 && y < 2930 && G.S.serv && (G.S.serv.parque || G.S.serv.campo)) { if (Math.random() < 0.4) SND.kids(); } else if (Math.hypot((x - LAKE.x) / LAKE.rx, (y - LAKE.y) / LAKE.ry) < 1.6 && G.S.land.sul) { if (Math.random() < 0.3) SND.splash(); } }, 3200);
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
@@ -2511,13 +2511,13 @@ $('icHelper').src = icon('helper'); $('icMove').src = icon('move'); $('icRoad').
 let SH = null;
 function openSheet(type, arg) { SH = { type, arg }; $('sheet').hidden = false; renderSheet(); }
 function closeSheet() { SH = null; $('sheet').hidden = true; }
-function treasPill(S) { const el = $('hTreas'); if (!el) return; const on = S && cvOn(S) && S.cv; el.hidden = !on; if (!on) return; const t = Math.floor(S.cv.t || 0); el.querySelector('#hTreasN').textContent = innerWidth < 560 && t >= 10000 ? (t / 1000).toFixed(t >= 100000 ? 0 : 1) + 'k' : t.toLocaleString(); el.querySelector('#hTreasD').textContent = '+' + cvInc(S) + '/min · 👥' + (residents(S).length + (typeof cbPop === 'function' ? cbPop(S) : 0)); if (G.treasLast != null && t > G.treasLast) { el.classList.add('up'); clearTimeout(G.treasT); G.treasT = setTimeout(() => el.classList.remove('up'), 900); } G.treasLast = t; }
+function treasPill(S) { const el = $('hTreas'); if (!el) return; const on = S && cvOn(S) && S.cv; el.hidden = !on; if (!on) return; const t = Math.floor(S.cv.t || 0); el.querySelector('#hTreasN').textContent = fmtK(t); el.querySelector('#hTreasD').textContent = '+' + cvInc(S) + '/min · 👥' + (residents(S).length + (typeof cbPop === 'function' ? cbPop(S) : 0)); if (G.treasLast != null && t > G.treasLast) { el.classList.add('up'); clearTimeout(G.treasT); G.treasT = setTimeout(() => el.classList.remove('up'), 900); } G.treasLast = t; }
 setInterval(() => { if (G.S) treasPill(G.S); }, 1000);
 setInterval(() => { const el = $('dMenu'); if (!el || !G.S || SH) return; const n = jornalNew(G.S); el.textContent = n ? (n > 20 ? '20+' : String(n)) : ''; }, 5000);
 function refresh() {
   const S = G.S; if (!S) return;
   $('hLvlN').textContent = S.lvl; const lo = LV[S.lvl - 1] || 0, hi = LV[S.lvl] || lo + 1; $('hLvl').style.setProperty('--p', clamp((S.xp - lo) / (hi - lo) * 100, 0, 100));
-  $('hCoinsN').textContent = S.coins; treasPill(S);
+  $('hCoinsN').textContent = fmtK(S.coins); treasPill(S);
   const now = nowS(), can = S.orders.filter(o => o.w <= now && has(S, Object.fromEntries(o.it))).length; $('dOrders').textContent = can || '';
   if (SH) renderSheet();
 }
@@ -2916,6 +2916,7 @@ $('sBody').addEventListener('click', e => {
 // ---------- desenho ----------
 let BG = null, BGKEY = '', BGT = 0;
 function seeded(n) { let a = n >>> 0; return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function fmtK(v) { v = Math.floor(+v || 0); const a = Math.abs(v), t = (n, d) => String(+(n).toFixed(d)); return a < 1000 ? String(v) : a < 1e4 ? t(v / 1e3, 1) + 'K' : a < 1e6 ? Math.floor(v / 1e3) + 'K' : a < 1e9 ? t(v / 1e6, 2) + 'M' : t(v / 1e9, 2) + 'B'; }
 function rr(g, x, y, w, h, r) { g.beginPath(); if (g.roundRect) g.roundRect(x, y, w, h, r); else g.rect(x, y, w, h); }
 function bush(g, x, y, s, c1 = '#3f8f2e', c2 = '#5cb844') { g.fillStyle = 'rgba(0,0,0,.15)'; g.beginPath(); g.ellipse(x, y + 4, 20 * s, 6 * s, 0, 0, 6.283); g.fill();
   g.fillStyle = 'rgba(20,70,15,.6)'; for (const [dx, dy, r] of [[-10, -6, 12.5], [10, -6, 12.5], [0, -12, 14.5]]) { g.beginPath(); g.arc(x + dx * s, y + dy * s + 1.5 * s, r * s, 0, 6.283); g.fill(); }
