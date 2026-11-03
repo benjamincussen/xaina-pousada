@@ -19,7 +19,7 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 | `cidade2.js` | Tráfico y transporte (parada, metro), presupuesto (`S.ci.tax`, `S.ci.fund`), desastres leves (`S.ci.dz`, `S.ci.dis`), turismo y hotel, luces de noche y dibujos de los monumentos (`monArt`). Se engancha en `window.CI.H` de cidade.js. |
 | `cidade3.js` | Educación (escuela, universidad, ★4 necesita educación), contaminación (`CI.smog`), mapa de cobertura (`G.ciMap`), ordenanzas (`S.ci.ord`) y guía de primeros pasos. |
 | `tecno.js` | Fábrica de chips, data center y laboratorio de IA (`S.tech`: chips, srv, prog, ver, subs). Usa la energía y el agua que sobran de la ciudad. Ficha `tecno`. |
-| `arte.js` | Dibujos de casas, edificios, negocios y lotes de la ciudad (`cbArt`, `ciArt`) y miniaturas para el zoom lejos (`cbFar`, `ciFar`, `ciPlFar`). |
+| `arte.js` | Dibujos de casas, edificios, negocios y lotes de la ciudad (`cbArt`, `ciArt`), estilos de barrio (`S.sty`, acción `cbSty`), rascacielos ★5, horizonte de noche y miniaturas para el zoom lejos (`cbFar`, `ciFar`, `ciPlFar`). |
 | `cobrador.js` | Hasta 3 cobradores (`S.cob`) que cobran 🔨, colonias y caja de la ciudad cada 5 min con 5% de comisión. |
 | `equipo.js` | Equipo de la ciudad (`S.eq`): Marta, Rosa, Ada, Tomás y Clara trabajan cada 10 min y recuperan hasta 12 h al abrir; billetera, metas de ahorro, barrios planificados, parque tecnológico, informe. |
 | `poniente.js` | Tierras del Poniente: 64 terrenos nuevos (`pon0`…`pon63`) al oeste, con suelo dibujado aparte y cámara ampliada (`EXT.bounds`). |
@@ -34,7 +34,7 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 - **Publicar:** `granja/tests/pushloop.sh "<resumen>"`. Rebasa sobre main, pone versión = main + 1, reemplaza `## Versión 0 (sesión …` en PLAN.md y pushea a main y a la rama actual (edita la línea de atribución del commit con la sesión actual).
 
 ## Estado
-- Versión **129**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles, ciudad SimCity (zonas, luz/agua, servicios, aprobación, tráfico, presupuesto, desastres leves, turismo, noche, monumentos dibujados), Lúcia que ordena todo y sola, casas con dibujos nuevos, tecnología e IA, educación, contaminación, mapa y ordenanzas, cobradores y dibujos de verdad con el zoom lejos, equipo de la ciudad que trabaja solo.
+- Versión **130**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles, ciudad SimCity (zonas, luz/agua, servicios, aprobación, tráfico, presupuesto, desastres leves, turismo, noche, monumentos dibujados), Lúcia que ordena todo y sola, casas con dibujos nuevos, tecnología e IA, educación, contaminación, mapa y ordenanzas, cobradores y dibujos de verdad con el zoom lejos, equipo de la ciudad que trabaja solo.
 
 ## Próxima ronda pedida ("dale con todo", estilo SimCity)
 1. ✅ Zonas que crecen solas con medidor RCI (v122, `cidade.js`).

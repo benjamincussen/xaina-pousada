@@ -8,7 +8,8 @@ const ordOf = S => { const C = ciOf(S); if (!C.ord || typeof C.ord !== 'object')
 const ORD = { rec: { u: 40, ic: '♻️' }, bici: { u: 30, ic: '🚲' }, festa: { u: 60, ic: '🎉' }, code: { u: 80, ic: '👩‍💻' }, luz: { u: 50, ic: '💡' } };
 // ---------- educação ----------
 const edu = (v, i) => v[i] && (v[i].edu || v[i].uni);
-H.mx.push((S, t, i) => edu(cov(S), i) ? 4 : 3);
+H.mx.push((S, t, i) => edu(cov(S), i) ? 5 : 3);
+H.mx.push((S, t, i) => t.k !== 'i' && cov(S)[i] && cov(S)[i].uni && (lval(S)[i] || 0) >= 0.1 && ciOf(S).ap >= 65 ? 5 : 4);
 H.gM.push((S, t, i) => cov(S)[i] && cov(S)[i].uni ? 1.2 : 1);
 H.apM.push(S => ciOf(S).z.some(t => t.lv) ? 5 * Math.max(pct(S, 'edu'), pct(S, 'uni')) : 0);
 H.ops.push((S, o) => { const C = ciOf(S), v = cov(S), d = demand(S); if (C.z.some((t, i) => t.lv === 3 && d[t.k] > 0 && !edu(v, i))) o.push(['opSchool', 8]); });

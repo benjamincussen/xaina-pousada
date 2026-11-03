@@ -918,3 +918,10 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Ada con fondo propio**: el equipo empieza con el 20% de las monedas para obras y el 25% para tecnología, y cada turno el 30% de lo que entra a la billetera va al fondo tecnológico. Ada arma primero central y agua en su parque, después chips, data center, robots, universidad, laboratorio, más fábricas de chips según la demanda, más data centers, celulares y autos; vende chips mientras no tiene dónde usarlos.
 - La ficha 💻 lista las fábricas desde el grupo `tech` (cualquier extensión puede sumar edificios).
 - Prueba: `tests/tecno2.js`.
+
+## Versión 130 (sesión "Corsario"): barrios con estilo, rascacielos ★5 y horizonte de noche
+
+- **Estilos de barrio** por terreno (`S.sty`): **clásico** (el de siempre), **colonial** (paredes claras, tejas, arcos sobre las ventanas), **moderno** (casas blancas de techo plano con vidrio, madera y paneles solares; edificios de vidrio con balcones) y **playa** (colores pastel, techos blancos o turquesa, palmeras). La arquitecta Lúcia elige uno nuevo al ordenar un terreno sin estilo (también "Ordenar todo" y "Lúcia sola"); en el 🔨 hay una tarjeta 🎨 para cambiarlo por terreno (acción `cbSty`). Vale para las casas del 🔨 y los lotes residenciales de la 🏙️, también en las miniaturas de lejos.
+- **Rascacielos ★5**: los lotes residenciales y comerciales llegan a ★5 con universidad cerca, valor del suelo ≥ 10% (plaza, parque o monumento) y aprobación ≥ 65%. Residencial: torre de vidrio con jardín en la azotea (90 vecinos, 560/h). Comercial: torre con corona dorada, antena y nombre (VENTO TOWER, BRISA PLAZA, TORRE SOL; 55 empleos, 820/h). La industria sigue hasta ★4. La escuela permite hasta ★4 (antes también) y la universidad hasta ★5.
+- **Horizonte de noche**: luces rojas de avión que titilan en los edificios altos y reflectores que se mueven en los rascacielos.
+- Meta nueva: tener un rascacielos ★5. Prueba: `tests/estilo.js`.
