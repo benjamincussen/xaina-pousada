@@ -552,7 +552,7 @@ const roadBonus = S => Math.min(10, Math.floor(((S.roads && S.roads.length) || 0
 const decoBonus = S => Object.keys(DECOS).filter(k => S.deco && S.deco[k]).length * 5 + roadBonus(S) + popBonus(S);
 function roadOk(S, gx, gy) { const x = gx * RD + RD / 2, y = gy * RD + RD / 2; if (x < 20 || y < 50 || x > WW - 20 || y > WH - 20) return false; for (const [k, Ld] of Object.entries(LANDS)) if (!S.land[k] && inR({ x, y }, Ld.r)) return false; return true; }
 captureDefaults.later = true;
-const HELPER_NAMES = ['Juca', 'Nina', 'Tonho', 'Bia', 'Lalo', 'Cris', 'Duda', 'Zeca', 'Rosa', 'Davi', 'Lia', 'Beto', 'Mel', 'Caio', 'Iara', 'Téo', 'Vico', 'Nalu', 'Pipo', 'Tati', 'Gael', 'Lola', 'Kadu', 'Mira'], HELPER_LOOKS = ['cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4'], hireCost = n => [0, 400, 900, 1600, 2400, 3200, 4200, 5500, 7000, 8500, 10000, 12000, 14000, 16000, 18000, 20000, 22000, 24000, 26000, 28000, 30000, 32000, 34000, 36000][n] || 0;
+const HELPER_NAMES = ['Juca', 'Nina', 'Tonho', 'Bia', 'Lalo', 'Cris', 'Duda', 'Zeca', 'Rosa', 'Davi', 'Lia', 'Beto', 'Mel', 'Caio', 'Iara', 'Téo', 'Vico', 'Nalu', 'Pipo', 'Tati', 'Gael', 'Lola', 'Kadu', 'Mira', 'Leo', 'Ana', 'Rui', 'Bela', 'Dani', 'Fê', 'Gabi', 'Hugo', 'Ivo', 'Jade', 'Kiko', 'Luna', 'Max', 'Nana', 'Otto', 'Pri'], HELPER_LOOKS = ['cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4', 'cap', 'cap2', 'cap3', 'cap4'], hireCost = n => n > 0 && n < 40 ? Math.round(150 * n + 8 * n * n) : 0; // contratar ficou bem mais barato (até 40 ajudantes)
 // oficios da equipe: todo = faz de tudo; scout = vê o que falta, entrega e vende sobras; pedidos = faz nos prédios; sembrador = planta e alimenta os animais; recolector = colhe e recolhe tudo
 const ROLES = ['todo', 'scout', 'pedidos', 'planta', 'colhe', 'cidade', 'industria', 'vende'], ROLE_IC = { todo: '⭐', scout: '🔍', pedidos: '📋', planta: '🌱', colhe: '🧺', cidade: '🏙️', industria: '🏭', vende: '💰' }, IND_BLD = ['racaoFab', 'usina', 'tecidos', 'serraria', 'torrefacao', 'olaria', 'cantera', 'ferraria', 'mina', 'joalheria', 'estufa', 'porto', 'doceria', 'cozinha', 'pizzaria'];
 function roleOf(S, hh) { const r = S.helper.roles && S.helper.roles[hh]; if (ROLES.includes(r)) return r; const n = hCount(S); if (n < 4) return 'todo'; return ['scout', 'pedidos', 'planta', 'colhe', 'colhe', 'planta', 'colhe', 'pedidos', 'cidade', 'colhe', 'planta', 'cidade', 'pedidos', 'colhe', 'cidade', 'planta', 'industria', 'colhe', 'industria', 'planta', 'industria', 'vende', 'industria', 'cidade'][hh] || 'colhe'; }
@@ -692,7 +692,7 @@ function happyRaw(S) { let h = 30 + (typeof cbHappy === 'function' ? cbHappy(S) 
   for (const [k, V] of Object.entries(SERV)) if (S.serv && S.serv[k]) h += V.hp; h += (S.bal ? 6 : 0) + (S.ref ? 6 : 0) + (S.obs ? 8 : 0) + Object.keys(S.pets || {}).filter(k => k === 'papagaio' || k === 'coruja').length * 0 + (S.tele ? 8 : 0) + (voteOn(S, 'v_trees', Date.now()) || voteOn(S, 'v_music', Date.now()) ? 10 : 0) + ((S.roads || []).length >= 20 ? 3 : 0) + ((S.homes || []).length >= 4 ? 5 : 0) + (S.cine ? 8 : 0) + decorHp(S) + (S.casa || 0) * 5 + Object.keys(S.pets || {}).length * 3 + (S.cityHp || 0) + (S.bus ? 8 : 0) + (S.train ? 8 : 0) + ((S.farol || 0) >= 4 ? 15 : 0) + Math.min(10, Math.floor(jobsInfo(S).emp / 10)); return Math.min(100, h); }
 const cityMult = S => 0.5 + happy(S) / 100;
 function rentNow(S, k, now) { const c = S.city[k]; if (!c || c.e > now) return 0; const per = Math.floor((now - c.c) / (RENT_EVERY * 1000)); return Math.round(Math.min(per, RENT_CAP) * PROJ[k].inc * cityMult(S)); }
-const SHIFTS = [{ min: 20, cost: 25 }, { min: 60, cost: 60 }, { min: 1440, cost: 900 }];
+const SHIFTS = [{ min: 20, cost: 10 }, { min: 60, cost: 25 }, { min: 1440, cost: 300 }];
 const HELPER_ORDERS = 8, SHIFT = { cost: 25, min: 20 }, HELPER_HOME = { x: 196, y: 262 };
 const PENS = {
   galinheiro: { n: 'Galinheiro', lvl: 1, feed: 'racaoG', out: 'ovo', t: 90, count: 3, xp: 2, x: 125, y: 790, w: 210, h: 140 },
@@ -2144,7 +2144,7 @@ function helperTask(S, now, role, hh) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; logHelper(S, now, hh | 0, a, crop); return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : poor ? { poor: true } : null;
 }
-const BUILD_V = '2026-11-03.135';
+const BUILD_V = '2026-11-03.136';
 // sons de cada lugar: ondas na praia, pássaros na serra e no sítio, crianças no bairro escolar (com 'Sons do sítio' ligado)
 setInterval(() => { if (!G.S || !AMB || document.hidden) return; const x = CAM.x, y = CAM.y; if (x > 1150) SND.wave(); else if (y > 3930) { if (Math.random() < 0.7) SND.bird(); } else if (y > 2330 && y < 2930 && G.S.serv && (G.S.serv.parque || G.S.serv.campo)) { if (Math.random() < 0.4) SND.kids(); } else if (Math.hypot((x - LAKE.x) / LAKE.rx, (y - LAKE.y) / LAKE.ry) < 1.6 && G.S.land.sul) { if (Math.random() < 0.3) SND.splash(); } }, 3200);
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)

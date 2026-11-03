@@ -961,3 +961,20 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **`window.EXT_READY`**: el cargador de `index.html` marca cuando terminaron de cargar todos los archivos. La recuperación de la ciudad (`cidade.js`) y la del equipo (`equipo.js`) esperan esa marca. Antes, si la partida se abría rápido, la ciudad se ponía al día sola con solo 4 horas, sin tecnología ni gráficos, y Lúcia podía quedar apagada.
 - El equipo también enciende a **Lúcia sola** desde su reloj (no solo al migrar).
 - **Rosa cuida lo tuyo**: para hacer lugar a un servicio solo demuele lotes vacíos de la ciudad, lotes chicos pintados por ella misma o casas y negocios chicos construidos por el equipo (Tomás, Rosa, Lino, Iris). Nunca lo que construiste tú.
+
+## Versión 136 (sesión "Corsario"): campo y producción rural, Nico el granjero, donaciones, ayudantes baratos y más luz y agua
+
+- **Nuevo `agro.js`** (🔨 → 🚜 Campo y producción), en cualquier terreno propio:
+  - **Campo** (3.000): planta solo, eligiendo lo que necesitan las fábricas del campo (o lo de más valor); produce más con cada nivel.
+  - **Corral** (5.000): gallinas, vacas u ovejas (huevo, leche, lana), se cambia en su ficha.
+  - **Silo** (4.000): el depósito regional (1.000 + 600 por nivel). La producción rural no llena tu granero.
+  - **Fábricas del campo**: copias del molino, panadería, quesería, tejeduría, dulcería, cocina, tostadora, chocolatería, bodega, fábrica de ración y usina, que trabajan solas con las recetas de siempre (una línea por nivel).
+  - **Cooperativa**: vende de a poco los productos terminados y el excedente cuando el silo pasa del 80%. Botones "Mandar al granero" y "Vender todo".
+  - Todo sube hasta ★5 (más producción, más líneas). Avanza también mientras el juego está cerrado (hasta 12 h).
+- **Nico** (🚜 granjero) en el equipo: abre una zona rural en un terreno libre y arma silo, campos, corrales y fábricas en orden, y después mejora lo más bajo y amplía el silo cuando se llena.
+- **Donar al equipo**: 10.000, 100.000 o 1.000.000 desde la ficha 👥; el equipo trabaja en el momento.
+- **Más iniciativa**: con más caja, cada personaje hace más cosas por turno (Rosa pinta hasta 16 lotes y pone hasta 8 servicios, Tomás construye hasta 10, Marta compra hasta 6 terrenos, Nico hasta 8 obras). Tomás mejora casas desde 30.000 de caja.
+- **Niveles del equipo**: cada personaje sube de nivel (hasta 10) con los trabajos hechos.
+- **Ayudantes**: contratar cuesta mucho menos (el 10.º: 2.300 en vez de 10.000) y se pueden tener hasta **40**; los turnos cuestan 10, 25 y 300 (antes 25, 60 y 900).
+- **Más luz y agua**: molino de viento y torre de agua abastecen 16 zonas (antes 12); central y planta de agua 60 (antes 40).
+- Prueba: `tests/agro.js`.
