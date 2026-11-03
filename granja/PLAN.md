@@ -988,3 +988,16 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Granja solar** (7.000, energía limpia para 24 zonas, sin humo); Rosa la prefiere a los molinos.
 - **Campesinos** trabajando en los campos (más cuantos más niveles tenga el campo).
 - Prueba nueva: `tests/ritmo.js` (30 minutos por ritmo; `TES=1` simula un tesoro como el de Benjamin). Turbo con tesoro: lotes 12 → 22, servicios 9 → 20, terrenos 19 → 21 en 30 minutos.
+
+## Versión 138 (sesión "Corsario"): bienestar con encargados por región y expansión solo con vecinos contentos
+
+- **Nuevo `bienestar.js`**: un encargado por región, que actúa al principio de cada turno, antes que el resto del equipo: 💗 **Sofía** (Centro, coordina), **Pedro** (Poniente), **Amaya** (Norte) y **Joel** (Sur).
+  1. **Escuchar**: cada uno calcula la felicidad de cada lote de su región (luz, agua, bomberos, policía, hospital, escuela, emergencias, humo, tráfico, valor del suelo) y arma la lista de pedidos ordenada por cuánta felicidad da cada uno.
+  2. **Buscar recursos**: la parte de bienestar de la caja del equipo (18%) se reparte por región según sus lotes. Si a una región no le alcanza, el encargado le pide a la región vecina que más tenga (queda en la bitácora). Si la aprobación está debajo de la meta, puede usar la caja de todo el equipo.
+  3. **Entregar**: pone el servicio que falta junto a los lotes que lo piden (central solar o grande, agua, bomberos, policía, hospital, escuela o universidad, parada o metro, parque o plaza, hotel), y una camioneta 💗 lleva la entrega en el mapa.
+  - Cada encargado construye primero su **Centro vecinal** (+2 de aprobación cada uno, hasta 4).
+  - Sofía usa además las palancas de la ciudad cuando la aprobación está baja: resuelve todas las emergencias, activa las ordenanzas que suben la aprobación (fiestas, ciclovías, escuela de programación y reciclaje si hay humo), sube los fondos de los servicios al 150% y baja el impuesto si hace falta.
+- **Meta de aprobación** (70, 80, 90 o 100%; de fábrica 80%): por debajo de la meta, Marta no compra terrenos y Rosa no abre barrios nuevos (ni pinta lotes si la aprobación está debajo de 60% en una ciudad grande). Primero vecinos contentos, después crecer.
+- Ficha 😊 Bienestar (tarjeta arriba de la 🏙️): aprobación y meta, felicidad, pedidos, caja y última entrega de cada región.
+- Prueba: `tests/bienestar.js`: ciudad de 66 lotes en 4 regiones con aprobación 55% → 77, 95 y 100% en 3 turnos; felicidad por región de ~30% a ~98%; recién entonces vuelve a comprar terrenos.
+- **Rendimiento con equipo grande**: Tomás ya no le pide a Lúcia reordenar cada vez que construye si Lúcia está en modo automático, y Rosa, cuando le falta lugar, solo le avisa a Lúcia (antes cada reordenamiento de un terreno grande tardaba ~1 s y se repetía en la recuperación). El cálculo de obstáculos del juego base tiene una memoria corta de 250 ms, la búsqueda de lugar confía en su índice espacial y la recuperación usa pasos de 10 minutos. Recuperación de 12 h con ciudad de 400 lotes: de ~35 s a ~6,5 s (con la carga de la página).

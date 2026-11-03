@@ -1990,7 +1990,8 @@ const ARCH = { name: 'Lúcia', cost: 600, lvl: 5, max: 3, every: 90, noFor: 1800
 const ARCH_IC = { road: '🛣️', lamp: '🏮', trees: '🌳', flowers: '🌷', bench: '🪑', fountain: '⛲', statue: '🗿', gazebo: '🛖', pinwheel: '🌀', tidy: '📐', paint: '🎨', big: '🏠', deco: '✨', orchard: '🍊' };
 const archHome = S => S.land.bairro ? [740, 2120] : S.land.vila ? [520, 1610] : [330, 980];
 // retângulos ocupados do mapa (para não passar rua nem enfeite por cima de nada)
-function archRects(S) { applyLayout(S); const rs = [], add = (x, y, w, h) => rs.push({ x, y, w, h });
+function archRects(S) { const m = archRects._m, t = performance.now(); if (m && m.S === S && t - m.t < 250) return m.r.slice(); const r = archRects0(S); archRects._m = { S, t, r }; return r.slice(); } // memória curta: o cálculo se repetia centenas de vezes seguidas
+function archRects0(S) { applyLayout(S); const rs = [], add = (x, y, w, h) => rs.push({ x, y, w, h });
   for (const B of Object.values(BUILD)) if (okB(S, B) && dupOwned(S, B)) { const r = bRect(B); add(r.x - 6, r.y - 6, r.w + 12, r.h + 12); }
   for (const P of Object.values(PENS)) add(P.x - P.w / 2 - 6, P.y - P.h / 2 - 6, P.w + 12, P.h + 12);
   for (const H of [HOUSE, BARN]) add(H.x - H.w / 2 - 10, H.y - H.h - 60, H.w + 20, H.h + 80); add(BOARD.x - BOARD.w / 2, BOARD.y - BOARD.h - 10, BOARD.w, BOARD.h + 20);
@@ -2144,7 +2145,7 @@ function helperTask(S, now, role, hh) {
       S.helper.x = r.x + r.w / 2; S.helper.y = r.y + r.h / 2 + 18; res.role = role; logHelper(S, now, hh | 0, a, crop); return res; } if (res.msg === L('barnFull')) blocked = true; }
   return blocked ? { full: true } : poor ? { poor: true } : null;
 }
-const BUILD_V = '2026-11-03.137';
+const BUILD_V = '2026-11-03.138';
 // sons de cada lugar: ondas na praia, pássaros na serra e no sítio, crianças no bairro escolar (com 'Sons do sítio' ligado)
 setInterval(() => { if (!G.S || !AMB || document.hidden) return; const x = CAM.x, y = CAM.y; if (x > 1150) SND.wave(); else if (y > 3930) { if (Math.random() < 0.7) SND.bird(); } else if (y > 2330 && y < 2930 && G.S.serv && (G.S.serv.parque || G.S.serv.campo)) { if (Math.random() < 0.4) SND.kids(); } else if (Math.hypot((x - LAKE.x) / LAKE.rx, (y - LAKE.y) / LAKE.ry) < 1.6 && G.S.land.sul) { if (Math.random() < 0.3) SND.splash(); } }, 3200);
 // atualização automática: quando sai versão nova, recarrega sozinho assim que ninguém estiver mexendo (sem botão)
