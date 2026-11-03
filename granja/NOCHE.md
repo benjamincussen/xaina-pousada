@@ -20,7 +20,7 @@ Lo que quiere ver en la mañana: el mapa mucho más grande (triple o cuádruple 
 7. ✅ (v131, parcial) **Más empleados:** jardinero (árboles y plazas donde hay humo), repartidor (abastece negocios con el granero), director de turismo (hoteles), jefe de tránsito.
 8. ✅ (v132) **Tren de pasajeros** a las ciudades vecinas y aeropuerto con vuelos a las islas.
 9. ✅ (v133) **Rendimiento:** recuperación de 12 h con 400 lotes y 300 construcciones en menos de 5 s.
-10. **Informe final** visual de la noche (capturas y números) para Benjamin.
+10. ✅ **Informe final** visual de la noche: https://claude.ai/artifact/MFDwa71BmuDCxTjsQpxxRr
 
 ## Bitácora
 - **04:10Z · v126** — Equipo de la ciudad (`equipo.js`) y cobradores al 2%. Prueba `noche.js` 10 h: terrenos 16 → 29, lotes 30 → 32–73 según balance, vecinos 204 → 670–1450, recuperación ~1,6 s. Pendiente: economía más fuerte (el equipo gasta casi todo lo que entra) y mapa más grande.
@@ -33,3 +33,14 @@ Lo que quiere ver en la mañana: el mapa mucho más grande (triple o cuádruple 
 - **11:12Z · v133** — Presupuestos por persona (Rosa 45%, Clara 13%, Marta 12%, Iris 12%, Tomás 10%, Lino 8%; 30% para Ada; servicios esenciales con la caja de todos; caja ociosa pasa a Rosa) y rendimiento: recuperación de 12 h con 300 lotes de 25 s a 2,4 s (pasos de 5 min, índice espacial, cachés). noche.js 10 h: recuperación ~3 s, aprobación 51–72%, data center con 36 servidores, monedas ~183k. Próximo: informe final visual (ítem 10) y pulir lo que se vea en noche.js.
 - **12:11Z · v134** — Gráficos de la ciudad (📈: vecinos, monedas, aprobación, lotes, terrenos, renta, servidores; un punto por hora, también durante la recuperación) y Lúcia sola encendida por defecto en partidas con equipo (en la prueba ordena 68 elementos con 17 calles a los ~70 s de abrir). Se corrigió noche.js (la primera sesión seguía viva). noche.js 10 h: 11 puntos en los gráficos, vecinos 268 → 1.196, aprobación 63%, data center con 36 servidores, monedas ~181k. Próximo (13:10): pulir y probar todo junto; 14:10: última ronda con informe final, borrar la agenda.
 - **13:18Z · v135** — Pulido y prueba completa: las recuperaciones esperan `EXT_READY` (si la partida se abría antes de cargar todo, la ciudad se ponía al día sola con 4 h máximo y sin gráficos), el equipo enciende a Lúcia desde su reloj, y Rosa solo demuele lotes vacíos o cosas hechas por el equipo (nunca lo del jugador). Batería completa de 17 pruebas en verde, co-op incluido. noche.js 10 h: recuperación ~2,9 s, 11 puntos en gráficos, Lúcia ordena 70 elementos con 16 calles. Próximo (14:10): última ronda con informe final y borrar la agenda.
+- **14:15Z · cierre** — Agenda borrada (`trig_019M2p2RGt6w2WhfseTzMAeV`). Informe visual publicado (privado): https://claude.ai/artifact/MFDwa71BmuDCxTjsQpxxRr
+
+## Resumen final de la noche
+- 10 versiones (126 → 135) en 10 rondas, todas publicadas en `main` con su prueba.
+- Dentro del juego: equipo autónomo de 8 personajes (Marta, Rosa, Ada, Tomás, Clara, Lino, Beto, Iris) más Lúcia ordenando sola y los cobradores al 2%; trabajan cada 10 minutos y recuperan hasta 12 horas al abrir, con informe y gráficos.
+- El mapa pasó de 39 a 103 terrenos (Tierras del Poniente).
+- Ciudad: economía más rentable, valor del suelo, reurbanización, estilos de barrio, rascacielos ★5, horizonte nocturno, calles con vida, tren y aeropuerto.
+- Tecnología: fondo propio de Ada, fábricas de robots, autos eléctricos y celulares, valor de Brisa IA.
+- Rendimiento: recuperación de 12 h con ciudad enorme en ~2,4 s; 17 pruebas automáticas en verde (co-op incluido).
+- Limitación: no tenemos la partida real de Benjamin; los números son de `noche.js`. En su teléfono el equipo trabaja cuando abre el juego (máximo 12 h recuperadas).
+
