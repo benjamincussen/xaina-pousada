@@ -795,3 +795,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Cada construcción rinde monedas por hora: se cobra tocándola o con "Cobrar todo" (acumula hasta 4 h). Se mejora hasta ★5 (+50% por nivel) y se demuele con 50% de devolución. Cada una igual que repites cuesta +4%.
 - Valida que el lugar esté libre (edificios, parcelas, lotes, servicios, caminos y otras construcciones) y dentro de un terreno comprado. Tope de 300 construcciones.
 - **Experiencia:** construir, mejorar y cobrar dan XP. **Nivel máximo: 60** (antes 40).
+
+## Versión 0 (sesión "Corsario"): vecinos y empleos de lo que construyes, barrios temáticos y 4 terrenos libres al oeste
+
+- **Población y empleos:** lo que construyes con 🔨 suma vecinos (casa 4, casona 8, edificio 20, ×nivel) y empleos (café 3, tienda 4, pizzería 6, cine 10, banco 15, huerta 2, granja 4, fábrica 12, ×nivel). Entran en `jobsInfo`, que pasa por el Concejo, los impuestos y la felicidad, y en el contador 👥 del HUD.
+- **Barrios temáticos:** 3 o más construcciones del mismo grupo a menos de 450 forman un barrio con cartel: residencial +20%, zona comercial +25%, polo industrial +25%.
+- **Mapa más grande al oeste:** XMIN pasa de −4500 a −6000, con 4 terrenos enormes y libres para construir: Llanura Libre (nivel 18, 12.000), Colinas Libres (20, 16.000), Valle Libre (22, 20.000) y Costa Oeste (24, 24.000).

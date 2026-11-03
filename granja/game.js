@@ -430,6 +430,10 @@ const LANDS = {
   serraOeste: { ext: 1, lvl: 24, cost: 26000, r: { x: -4480, y: 40, w: 1460, h: 1610 }, sx: -3750, sy: 1000 },
   minasOuro: { ext: 1, lvl: 24, cost: 28000, r: { x: -4480, y: 1680, w: 1460, h: 1720 }, sx: -3750, sy: 2600 },
   rancho: { ext: 1, lvl: 22, cost: 22000, r: { x: -4480, y: 3430, w: 1460, h: 1460 }, sx: -3750, sy: 4200 },
+  livre1: { ext: 1, lvl: 18, cost: 12000, r: { x: -5980, y: 40, w: 1460, h: 2260 }, sx: -5250, sy: 1150 },
+  livre2: { ext: 1, lvl: 20, cost: 16000, r: { x: -5980, y: 2330, w: 1460, h: 2260 }, sx: -5250, sy: 3450 },
+  livre3: { ext: 1, lvl: 22, cost: 20000, r: { x: -5980, y: 4620, w: 1460, h: 2260 }, sx: -5250, sy: 5750 },
+  livre4: { ext: 1, lvl: 24, cost: 24000, r: { x: -5980, y: 6910, w: 1460, h: 2450 }, sx: -5250, sy: 8100 },
   deserto: { ext: 1, lvl: 25, cost: 30000, r: { x: -4480, y: 4960, w: 1460, h: 1900 }, sx: -3750, sy: 5900 },
   bosque: { ext: 1, lvl: 23, cost: 24000, r: { x: -2980, y: 6400, w: 1460, h: 1460 }, sx: -2250, sy: 7100 },
   vulcao: { ext: 1, lvl: 25, cost: 32000, r: { x: -4480, y: 6880, w: 1460, h: 1240 }, sx: -3750, sy: 7700 },
@@ -704,7 +708,7 @@ const pk = k => (PENS[k] && PENS[k].kind) || k;
 const BARN = { x: 548, y: 205, w: 124, h: 96 }, HOUSE = { x: 96, y: 205, w: 120, h: 86 }, BOARD = { x: 320, y: 905, w: 120, h: 70 };
 const LV = [0, 12, 35, 70, 120, 190, 280, 400, 550, 750, 1000, 1300];
 for (let l = 12; l < 60; l++) LV.push(LV[l - 1] + 300 + (l - 11) * 160); // níveis até 60
-const MAXPLOTS = 140, FIELD1 = 12, PLOT0 = 6, WW = 1500, WH = 9400, XMIN = -4500, XMAX = 3000, WTOT = XMAX - XMIN;
+const MAXPLOTS = 140, FIELD1 = 12, PLOT0 = 6, WW = 1500, WH = 9400, XMIN = -6000, XMAX = 3000, WTOT = XMAX - XMIN;
 const plotRect = i => i >= 124 ? { x: 120 + ((i - 124) % 8) * 104, y: 8060 + Math.floor((i - 124) / 8) * 90, w: 96, h: 72 } : i >= 108 ? { x: 120 + ((i - 108) % 8) * 104, y: 6560 + Math.floor((i - 108) / 8) * 90, w: 96, h: 72 } : i >= 84 ? { x: -1400 + ((i - 84) % 8) * 104, y: 5200 + Math.floor((i - 84) / 8) * 90, w: 96, h: 72 } : i >= 60 ? { x: -2900 + ((i - 60) % 8) * 104, y: 300 + Math.floor((i - 60) / 8) * 90, w: 96, h: 72 } : i >= 36 ? { x: -1400 + ((i - 36) % 8) * 104, y: 300 + Math.floor((i - 36) / 8) * 90, w: 96, h: 72 } : i < FIELD1 ? { x: 168 + FIELD.dx + (i % 3) * 104, y: 290 + FIELD.dy + Math.floor(i / 3) * 82, w: 96, h: 72 } : { x: 100 + ((i - FIELD1) % 6) * 104 + (i - FIELD1 >= 6 * 2 ? 0 : 0), y: 3000 + Math.floor((i - FIELD1) / 6) * 82, w: 96, h: 72 };
 const plotCost = np => np < FIELD1 ? Math.round(25 * Math.pow(1.55, np - PLOT0)) : 150 + (np - FIELD1) * 30;
 const plotLand = i => i < FIELD1 ? null : i < 36 ? 'lavoura' : i < 60 ? 'oeste' : i < 84 ? 'vale' : i < 108 ? 'campoSul' : i < 124 ? 'cacau' : 'vinhedo', plotOk = (S, i) => i < FIELD1 || !!(S.land && S.land[plotLand(i)]);
@@ -1009,7 +1013,7 @@ function drawTruck(g, x, y, d, T) { g.save(); g.translate(x, y); g.scale(d, 1); 
 const dupSum = S => Object.values(S.dup || {}).reduce((a, b) => a + b, 0);
 const JOBS_AT = { eolico: 10, torre: 20, torre2: 40, estadio: 30, cinema2: 15, aeroporto: 60, cargo: 30, chale: 6, piscina: 6, camping: 4 }, JOBS_SV = { shopping: 25, hospital: 30, posto: 8, colegio: 10, prefeitura: 8, biblio: 4, aquario: 6, creche: 6, deposito: 14, clube: 20, ferrovia: 10, crecheSul: 8, parqueAlto: 4, visitantes: 15, universidade: 60, esqui: 20, guarda: 10, termas: 12, museu: 12 };
 const taxNow = (S, now) => { if (!(S.serv && S.serv.prefeitura) || !S.land.escolar) return 0; if (!S.taxAt) return 0; const mins = Math.min(120, Math.max(0, (now - S.taxAt) / 60000)); return Math.floor(mins * jobsInfo(S).emp * 0.25); };
-function jobsInfo(S) { const now = Date.now(); let jobs = 0; for (const [k, n] of Object.entries(JOBS_AT)) if (S.city && S.city[k] && S.city[k].e <= now) jobs += n; for (const [k, n] of Object.entries(JOBS_SV)) if (S.serv && S.serv[k]) jobs += n; const adults = residents(S).filter(id => id < 200 || id >= 300).length, emp = Math.min(jobs, adults); return { jobs, adults, emp, pct: adults ? Math.round(emp / adults * 100) : 0 }; }
+function jobsInfo(S) { const now = Date.now(); let jobs = 0; for (const [k, n] of Object.entries(JOBS_AT)) if (S.city && S.city[k] && S.city[k].e <= now) jobs += n; for (const [k, n] of Object.entries(JOBS_SV)) if (S.serv && S.serv[k]) jobs += n; jobs += typeof cbJobs === 'function' ? cbJobs(S) : 0; const adults = residents(S).filter(id => id < 200 || id >= 300).length + (typeof cbPop === 'function' ? cbPop(S) : 0), emp = Math.min(jobs, adults); return { jobs, adults, emp, pct: adults ? Math.round(emp / adults * 100) : 0 }; }
 const GOALS = [
   ['g_babies10', S => (S.babies || 0) >= 10, 1500],
   ['g_arch', S => !!(S.arch && S.arch.on), 400], ['g_irrig', S => !!S.irrig, 500], ['g_sul', S => !!S.land.bairroSul, 2000], ['g_plots100', S => S.np >= 100, 2500], ['g_rail', S => !!(S.serv && S.serv.ferrovia), 3000], ['g_cacau', S => !!S.land.cacau, 3000], ['g_lago', S => !!(S.serv && S.serv.clube), 3000],
@@ -2505,7 +2509,7 @@ $('icHelper').src = icon('helper'); $('icMove').src = icon('move'); $('icRoad').
 let SH = null;
 function openSheet(type, arg) { SH = { type, arg }; $('sheet').hidden = false; renderSheet(); }
 function closeSheet() { SH = null; $('sheet').hidden = true; }
-function treasPill(S) { const el = $('hTreas'); if (!el) return; const on = S && cvOn(S) && S.cv; el.hidden = !on; if (!on) return; const t = Math.floor(S.cv.t || 0); el.querySelector('#hTreasN').textContent = innerWidth < 560 && t >= 10000 ? (t / 1000).toFixed(t >= 100000 ? 0 : 1) + 'k' : t.toLocaleString(); el.querySelector('#hTreasD').textContent = '+' + cvInc(S) + '/min · 👥' + residents(S).length; if (G.treasLast != null && t > G.treasLast) { el.classList.add('up'); clearTimeout(G.treasT); G.treasT = setTimeout(() => el.classList.remove('up'), 900); } G.treasLast = t; }
+function treasPill(S) { const el = $('hTreas'); if (!el) return; const on = S && cvOn(S) && S.cv; el.hidden = !on; if (!on) return; const t = Math.floor(S.cv.t || 0); el.querySelector('#hTreasN').textContent = innerWidth < 560 && t >= 10000 ? (t / 1000).toFixed(t >= 100000 ? 0 : 1) + 'k' : t.toLocaleString(); el.querySelector('#hTreasD').textContent = '+' + cvInc(S) + '/min · 👥' + (residents(S).length + (typeof cbPop === 'function' ? cbPop(S) : 0)); if (G.treasLast != null && t > G.treasLast) { el.classList.add('up'); clearTimeout(G.treasT); G.treasT = setTimeout(() => el.classList.remove('up'), 900); } G.treasLast = t; }
 setInterval(() => { if (G.S) treasPill(G.S); }, 1000);
 setInterval(() => { const el = $('dMenu'); if (!el || !G.S || SH) return; const n = jornalNew(G.S); el.textContent = n ? (n > 20 ? '20+' : String(n)) : ''; }, 5000);
 function refresh() {
