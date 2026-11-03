@@ -833,3 +833,8 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - **Recreación en 🔨:** plaza ⛲ (3000, +15% a 380), parque 🌳 (6000, +20% a 450) y juegos infantiles 🛝 (4000, +15% a 350). Suben la renta de todo lo que está dentro del círculo (se ve punteado), hasta +30%. La arquitecta los ubica junto a las casas al ordenar.
 - **12 metas nuevas** (en `GOALS`, desde construir.js): 10/50/150 construcciones, los 3 tipos de barrio, 6 calles, 3 lugares de recreación, 3.000 vecinos, los 6 monumentos, 5 colonias, conquistar una ciudad, nivel 80 y nivel 100. Premios de 5.000 a 200.000.
+
+## Versión 0 (sesión "Corsario"): barrios con vida y quién construyó qué
+
+- Vecinos caminando por las veredas de las calles de la arquitecta (hasta 6 por calle, de ida y vuelta) y autitos en las calles largas.
+- Co-op: cada construcción guarda quién la hizo ("Construido por …" en su ficha) y el panel 🔨 muestra el conteo por jugador cuando juegan dos.
