@@ -38,8 +38,8 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 3. ✅ Policía, bomberos y hospital con radio; incendios, robos y enfermos de dibujo animado (v122).
 4. ✅ Opinión de los vecinos: globitos y barra de aprobación (v122).
 5. ✅ Tráfico y transporte, presupuesto e impuestos, desastres leves, turismo, luces de noche y dibujos de los monumentos (v123, `cidade2.js`).
-7. ✅ Cobradores automáticos y miniaturas para el zoom lejos (v125).
 6. ✅ Lúcia ordena todo y sola, casas nuevas, tecnología e IA, educación, contaminación, mapa de cobertura y ordenanzas (v124).
+7. ✅ Cobradores automáticos y miniaturas para el zoom lejos (v125).
 
 ## Ideas para la ronda siguiente
 - Tren entre la ciudad y las ciudades vecinas de `mundo.js`; aeropuerto que trae turistas de otras ciudades.
