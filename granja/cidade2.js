@@ -19,8 +19,8 @@ H.up.push(upkeep);
 H.ops.push((S, o) => { if (tax(S) >= 13) o.push(['opTax', (tax(S) - 9) * 1.5]); if (fund(S) === 0.5 && ciOf(S).p.length) o.push(['opFund', 5]); });
 // ---------- trânsito e transporte ----------
 let TC = { k: null };
-function traffic(S) { const C = ciOf(S), v = cov(S), k = C.n + '|' + C.z.reduce((a, t) => a + t.lv, 0) + '|' + C.p.length + '|' + fund(S); if (TC.S === S && TC.k === k) return TC.v;
-  const d = C.z.map(t => t.lv ? C.z.reduce((a, u) => a + (u.lv && Math.abs(u.x - t.x) < 420 && Math.abs(u.y - t.y) < 420 ? u.lv : 0), 0) : 0), jam = d.map((x, i) => x >= 20 && !(v[i] && v[i].tr));
+function traffic(S) { const C = ciOf(S), v = cov(S), k = C.n + '|' + C.z.reduce((a, t) => a + t.lv, 0) + '|' + C.p.length + '|' + fund(S) + '|' + (H.jamT || []).reduce((a, f) => a + f(S), 0); if (TC.S === S && TC.k === k) return TC.v;
+  const th = 20 + (H.jamT || []).reduce((a, f) => a + f(S), 0), d = C.z.map(t => t.lv ? C.z.reduce((a, u) => a + (u.lv && Math.abs(u.x - t.x) < 420 && Math.abs(u.y - t.y) < 420 ? u.lv : 0), 0) : 0), jam = d.map((x, i) => x >= th && !(v[i] && v[i].tr));
   TC = { S, k, v: { d, jam } }; return TC.v; }
 const jamShare = S => { const T = traffic(S), n = ciOf(S).z.filter(t => t.lv).length; return n ? T.jam.filter(Boolean).length / n : 0; };
 H.yM.push((S, t, i) => traffic(S).jam[i] ? 0.85 : (t.k === 'c' && cov(S)[i] && cov(S)[i].tr ? 1.1 : 1));
@@ -29,7 +29,7 @@ H.apM.push(S => -10 * jamShare(S));
 H.ops.push((S, o) => { const j = jamShare(S); if (j > 0) o.push(['opTraf', 4 + j * 12]); });
 // ---------- turismo ----------
 function tour(S) { const C = ciOf(S), cb = S.cb || [], mon = cb.filter(b => MONK.includes(b.k)).length, lz = cb.filter(b => LZK.includes(b.k)).length, cl = C.z.reduce((a, t) => a + (t.k === 'c' ? t.lv : 0), 0), hot = C.p.filter(p => p.k === 'hotel').length;
-  let sc = 25 * mon + 6 * lz + 1.5 * cl + Math.max(0, C.ap - 50) * 0.6; if (cb.some(b => b.k === 'aeroInt')) sc *= 1.5; if (C.p.some(p => p.k === 'metro')) sc *= 1.15; const cap = 30 + 80 * hot; return { n: Math.round(Math.min(cap, sc)), cap, sc: Math.round(sc), hot }; }
+  let sc = 25 * mon + 6 * lz + 1.5 * cl + Math.max(0, C.ap - 50) * 0.6; if (cb.some(b => b.k === 'aeroInt')) sc *= 1.5; sc *= (H.tourM || []).reduce((m, f) => m * f(S), 1); if (C.p.some(p => p.k === 'metro')) sc *= 1.15; const cap = 30 + 80 * hot; return { n: Math.round(Math.min(cap, sc)), cap, sc: Math.round(sc), hot }; }
 H.inc.push(S => tour(S).n * 4);
 H.ops.push((S, o) => { const T = tour(S); if (T.sc > T.cap + 10) o.push(['opHotel', 6]); });
 // ---------- desastres leves ----------
@@ -139,5 +139,5 @@ Object.assign(TX.es, { ciG_tr: '🚦 Transporte (contra el tráfico)', ciG_tu: '
   g_tur100: 'Recibir 100 turistas', g_metro: 'Construir una estación de metro', g_jam0: '20 zonas construidas sin atascos', n_ci2: 'Ciudad: tráfico, presupuesto, turismo y noche', n_ci2D: 'En 🏙️: paradas de autobús y metro contra el tráfico, presupuesto con impuesto y fondos de los servicios, turistas y hoteles, desastres leves (tornadito, temblor, apagón; se pueden desactivar), luces de noche en edificios y calles y dibujos nuevos para los 6 monumentos.' });
 if (typeof NEWS === 'object' && Array.isArray(NEWS) && !NEWS.some(n => n[0] === 'n_ci2')) NEWS.unshift(['n_ci2', 'cidade']);
 if (typeof GOALS === 'object' && Array.isArray(GOALS) && !GOALS.some(g => g[0] === 'g_tur100')) GOALS.push(['g_tur100', S => S.ci && tour(S).n >= 100, 30000], ['g_metro', S => S.ci && ciOf(S).p.some(p => p.k === 'metro'), 15000], ['g_jam0', S => S.ci && ciOf(S).z.filter(t => t.lv).length >= 20 && jamShare(S) === 0, 20000]);
-window.ciTour = tour; window.ciTraffic = S => ({ share: jamShare(S), jam: traffic(S).jam.filter(Boolean).length });
+CI.traffic = traffic; CI.tour = tour; CI.jamShare = jamShare; CI.upkeep = upkeep; window.ciTour = tour; window.ciTraffic = S => ({ share: jamShare(S), jam: traffic(S).jam.filter(Boolean).length });
 })();
