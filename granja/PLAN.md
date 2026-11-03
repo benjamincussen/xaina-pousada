@@ -801,3 +801,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Población y empleos:** lo que construyes con 🔨 suma vecinos (casa 4, casona 8, edificio 20, ×nivel) y empleos (café 3, tienda 4, pizzería 6, cine 10, banco 15, huerta 2, granja 4, fábrica 12, ×nivel). Entran en `jobsInfo`, que pasa por el Concejo, los impuestos y la felicidad, y en el contador 👥 del HUD.
 - **Barrios temáticos:** 3 o más construcciones del mismo grupo a menos de 450 forman un barrio con cartel: residencial +20%, zona comercial +25%, polo industrial +25%.
 - **Mapa más grande al oeste:** XMIN pasa de −4500 a −6000, con 4 terrenos enormes y libres para construir: Llanura Libre (nivel 18, 12.000), Colinas Libres (20, 16.000), Valle Libre (22, 20.000) y Costa Oeste (24, 24.000).
+
+## Versión 0 (sesión "Corsario"): niveles hasta 200
+
+- `LV` llega a 200: después del 60, cada nivel pide ~4,5% más de experiencia que el anterior (nivel 61: 8.300 XP; nivel 100: 46.000 XP por nivel).
+- Cada 10 niveles hay un premio especial de 1000 × nivel monedas (nivel 70: 70.000), con aviso.
+- Construir con 🔨 da la mitad de experiencia que antes, para que subir siga siendo un desafío.
