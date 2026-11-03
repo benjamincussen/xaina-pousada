@@ -1029,3 +1029,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 - Al elegir algo para construir (ciudad 🏙️, construir 🔨, campo 🚜 o adornos), después de colocarlo la ficha **vuelve a abrirse sola en el mismo lugar** (misma posición de la lista), lista para comprar lo siguiente. Si cancelas, no se vuelve a abrir. Las zonas y los campos siguen en modo de pintar varios seguidos; los adornos vuelven a la ficha al tocar "Listo".
 - Prueba: `tests/multi.js` (colegio, parque infantil y una casa seguidos: se colocan y la ficha vuelve abierta donde estaba).
+
+## Versión 142 (sesión "Corsario"): silenciar de verdad y la ciudad usa la plata del Concejo
+
+- **Sonido**: botón nuevo **🔇 Silenciar todo** en el menú (apaga efectos, música y sonidos del campo; antes solo había música y sonidos del campo, y los efectos seguían sonando). Tecla **M** en el computador. En el computador viene silenciado de fábrica; en el celular no cambia nada. Se recuerda en cada navegador.
+- **La plata del 🏛️ Concejo ya no se queda parada**: Clara pasaba como máximo 12.000 por turno del tesoro del Concejo al equipo; ahora pasa el 25% de lo que haya por encima de 15.000 (mínimo 12.000). Con 600.000 en el Concejo, en 30 minutos de turbo el tesoro baja a ~14.000 y la ciudad pasa de 17 a 22 terrenos, 47 zonas, 55 servicios, 43 edificios y 26 del campo (`tests/solo.js rich`).
+- Cuando un presupuesto llega al tope (300.000), lo que sobra va mitad a Rosa (ciudad) y mitad a Nico (campo y fábricas); antes iba todo a Rosa.
