@@ -796,7 +796,7 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - Valida que el lugar esté libre (edificios, parcelas, lotes, servicios, caminos y otras construcciones) y dentro de un terreno comprado. Tope de 300 construcciones.
 - **Experiencia:** construir, mejorar y cobrar dan XP. **Nivel máximo: 60** (antes 40).
 
-## Versión 0 (sesión "Corsario"): vecinos y empleos de lo que construyes, barrios temáticos y 4 terrenos libres al oeste
+## Versión 116 (sesión "Corsario"): vecinos y empleos de lo que construyes, barrios temáticos y 4 terrenos libres al oeste
 
 - **Población y empleos:** lo que construyes con 🔨 suma vecinos (casa 4, casona 8, edificio 20, ×nivel) y empleos (café 3, tienda 4, pizzería 6, cine 10, banco 15, huerta 2, granja 4, fábrica 12, ×nivel). Entran en `jobsInfo`, que pasa por el Concejo, los impuestos y la felicidad, y en el contador 👥 del HUD.
 - **Barrios temáticos:** 3 o más construcciones del mismo grupo a menos de 450 forman un barrio con cartel: residencial +20%, zona comercial +25%, polo industrial +25%.
