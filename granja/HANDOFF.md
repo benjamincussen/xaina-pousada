@@ -15,22 +15,23 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 | `mundo.js` | Océano del este (x > 3000) con ciudades vecinas, colonias (casas y negocios), flotas, diplomacia, islas del tesoro, Concejo, Villa Aurora y milicia. Plan: `PLAN-MUNDO.md`. |
 | `negocios.js` | Banco, mercado grande, escuela de oficios, chocolatería. |
 | `construir.js` | 🔨: construir donde quieras (`S.cb`), zonas, recreación, monumentos, calles de la arquitecta (`S.cbst`, acción `cbArr`), abastecer (`cbSup`), metas grandes, `cbPop`/`cbJobs`/`cbHappy`/`cbPrest`. |
-| `index.html` | Carga: relay.js, p2p.js, game.js, mundo.js, negocios.js, construir.js. |
+| `cidade.js` | 🏙️ SimCity: zonas R/C/I que crecen solas (`S.ci.z`), demanda, luz y agua con capacidad, policía/bomberos/hospital con radio (`S.ci.p`), emergencias (`S.ci.ev`), aprobación (`S.ci.ap`) y globitos de opinión. Un paso por minuto en `EXT.tick` (host). |
+| `index.html` | Carga: relay.js, p2p.js, game.js, mundo.js, negocios.js, construir.js, cidade.js. |
 
 ## Pruebas (Playwright; chromium ya instalado; `NODE_PATH=$(npm root -g)`)
 - **Servidor:** `python3 -m http.server 8767` desde la raíz del repo.
 - **Broker para co-op:** aedes + ws en `ws://127.0.0.1:8885/mqtt` (instalar `mqtt@5.10.4 aedes@0.51.3 ws@8.18.0`).
-- **Pruebas en `granja/tests/`:** `smoke.js`, `fuzz.js`, `look.js` (helper), `oldsave.js`, `coopnew.js`, `i18n.js`, `mundo6.js`, `cb.js`, `arr.js`. Algunas guardan capturas junto al archivo.
-- **Publicar:** `granja/tests/pushloop.sh "<resumen>"`. Rebasa sobre main, pone versión = main + 1 y reemplaza `## Versión 0 (sesión …` en PLAN.md.
+- **Pruebas en `granja/tests/`:** `smoke.js`, `fuzz.js`, `look.js` (helper), `oldsave.js`, `coopnew.js`, `i18n.js`, `mundo6.js`, `cb.js`, `arr.js`, `cidade.js`. Algunas guardan capturas junto al archivo.
+- **Publicar:** `granja/tests/pushloop.sh "<resumen>"`. Rebasa sobre main, pone versión = main + 1, reemplaza `## Versión 0 (sesión …` en PLAN.md y pushea a main y a la rama actual (edita la línea de atribución del commit con la sesión actual).
 
 ## Estado
-- Versión **121**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles.
+- Versión **122**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles, ciudad SimCity (zonas, luz/agua, servicios, aprobación).
 
 ## Próxima ronda pedida ("dale con todo", estilo SimCity)
-1. **Zonas que crecen solas:** pintar residencial, comercial o industrial; los edificios aparecen y crecen según la demanda; medidor de demanda RCI.
-2. **Electricidad y agua:** centrales, torres de agua y cobertura. Sin servicio rinden menos (⚡/💧 apagado).
-3. **Policía, bomberos y hospital con radio de cobertura:** incendios y robos de dibujo animado donde no hay cobertura.
-4. **Opinión de los vecinos:** globitos con pedidos y barra de aprobación.
+1. ✅ Zonas que crecen solas con medidor RCI (v122, `cidade.js`).
+2. ✅ Electricidad y agua con cobertura y capacidad (v122).
+3. ✅ Policía, bomberos y hospital con radio; incendios, robos y enfermos de dibujo animado (v122).
+4. ✅ Opinión de los vecinos: globitos y barra de aprobación (v122).
 5. Después:
    - tráfico y transporte;
    - presupuesto e impuestos;

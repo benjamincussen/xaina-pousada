@@ -26,12 +26,12 @@ EOF
   sed -i "s/$cur/2026-11-03.$n/" granja/version.json; sed -i "s/var FALL = '2026-11-03\.[0-9]*'/var FALL = '2026-11-03.$n'/" granja/index.html; sed -i "0,/2026-11-03\.[0-9]*/s//2026-11-03.$n/" granja/game.js
   sed -i "s/^## Versión 0 (sesión \"Corsario\"/## Versión $n (sesión \"Corsario\"/" granja/PLAN.md
   [ "$(grep -c 'function worldB' granja/game.js)" = 1 ] || { echo "worldB perdido"; exit 3; }
-  node --check granja/game.js && node --check granja/mundo.js || exit 4
+  node --check granja/game.js && node --check granja/mundo.js && node --check granja/cidade.js || exit 4
   git add -A granja; git commit -q -m "Granja v$n (mundo.js): $SUBJ
 
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-Claude-Session: https://claude.ai/code/session_01Ej8pJTSfK1Ud7hiAHfHrtX" || true
-  if git push -q origin HEAD:main 2>/dev/null; then git push -q -u origin claude/corsario-online-multiplayer-99ajaw 2>/dev/null; echo "pushed v$n"; exit 0; fi
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Ej8pJRuBw1GQCjAd4NzR9W" || true
+  if git push -q origin HEAD:main 2>/dev/null; then git push -q -u origin "$(git rev-parse --abbrev-ref HEAD)" 2>/dev/null; echo "pushed v$n"; exit 0; fi
   sleep 2
 done
 echo "no pude pushear"; exit 1
