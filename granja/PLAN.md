@@ -955,3 +955,9 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Nuevo `stats.js`**: un punto por hora de vecinos, monedas, aprobación, lotes construidos, terrenos, renta de la ciudad por hora y servidores (hasta 96 puntos). También se toman puntos durante la recuperación del equipo (uno por cada hora que el juego estuvo cerrado), así a la mañana se ve cómo creció todo durante la noche. Ficha 📈 con gráficos de línea (máximo, mínimo, último valor y cuánto subió), botón en la 🏙️ y en el informe "Mientras no estabas". Los puntos fuera de orden se intercalan.
 - **Lúcia sola** queda encendida por defecto en las partidas con equipo (desde el nivel 20), así ordena en manzanas con calles todo lo que esté desordenado unos segundos después de abrir el juego. Aparece en la ficha 👥 con su interruptor.
 - `tests/noche.js` ahora cierra la primera sesión antes de reabrir (antes seguía corriendo y a veces hacía la recuperación por su cuenta, lo que explicaba una corrida rara de 24 s).
+
+## Versión 135 (sesión "Corsario"): la recuperación espera a que cargue todo y Rosa cuida lo tuyo
+
+- **`window.EXT_READY`**: el cargador de `index.html` marca cuando terminaron de cargar todos los archivos. La recuperación de la ciudad (`cidade.js`) y la del equipo (`equipo.js`) esperan esa marca. Antes, si la partida se abría rápido, la ciudad se ponía al día sola con solo 4 horas, sin tecnología ni gráficos, y Lúcia podía quedar apagada.
+- El equipo también enciende a **Lúcia sola** desde su reloj (no solo al migrar).
+- **Rosa cuida lo tuyo**: para hacer lugar a un servicio solo demuele lotes vacíos de la ciudad, lotes chicos pintados por ella misma o casas y negocios chicos construidos por el equipo (Tomás, Rosa, Lino, Iris). Nunca lo que construiste tú.

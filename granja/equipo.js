@@ -37,7 +37,7 @@ function turn0(S, now) { const E = eqOf(S), rs = mkRS(obst(S)); const keep = E.r
   // 🗺️ Rosa: serviços onde falta e zonas onde há demanda
   if (on('alc')) { const v = cov(S), d = demand(S); let done = 0;
     const redevelop = (k, near) => { const fk = PL[k].k, R2 = PL[k].rad * 0.8, cand = [];
-      C.z.forEach((t, i) => { if (t.lv <= 1 && !C.ev.some(e => e.i === i)) cand.push(['z', t, Math.hypot(t.x - near.x, t.y - near.y)]); }); (S.cb || []).forEach(b => { const cg = CAT()[b.k] && CAT()[b.k].g; if ((cg === 'casa' || cg === 'neg') && (b.lv || 1) <= 2) cand.push(['b', b, Math.hypot(b.x - near.x, b.y - near.y) + 150]); });
+      C.z.forEach((t, i) => { if ((t.lv === 0 || (t.lv <= 1 && t.by === 'Rosa')) && !C.ev.some(e => e.i === i)) cand.push(['z', t, Math.hypot(t.x - near.x, t.y - near.y)]); }); (S.cb || []).forEach(b => { const cg = CAT()[b.k] && CAT()[b.k].g; if ((cg === 'casa' || cg === 'neg') && (b.lv || 1) <= 2 && ['Tomás', 'Rosa', 'Lino', 'Iris'].includes(b.by)) cand.push(['b', b, Math.hypot(b.x - near.x, b.y - near.y) + 150]); });
       cand.sort((a, b) => a[2] - b[2]); for (const [kind, o, dd] of cand.slice(0, 6)) { if (dd > R2 + 150) break; const arr = kind === 'z' ? C.z : S.cb, i = arr.indexOf(o); arr.splice(i, 1); const tmp = mkRS(obst(S)), q = findNear(S, tmp, fk, o.x, o.y, 180); arr.splice(i, 0, o);
         if (q && A('alc', kind === 'z' ? { a: 'ciDelZ', i } : { a: 'cbDel', i }, 'demo', kind === 'z' ? 'z' + o.k : o.k)) { rs.reset(obst(S)); return q; } } return null; };
     E.bad = E.bad || {}; const missOf = g => { const vv = cov(S); return C.z.filter((t, i) => !(vv[i] && (vv[i][g] || (g === 'edu' && vv[i].uni)))); };
@@ -89,7 +89,7 @@ function turn0(S, now) { const E = eqOf(S), rs = mkRS(obst(S)); const keep = E.r
   E.idle = E.idle || {}; for (const r of ['inm', 'cons', 'tur', 'jar']) { if (did.includes(r)) E.idle[r] = 0; else if ((E.idle[r] = (E.idle[r] || 0) + 1) >= 12 && (E.bw[r] || 0) > 5000) { const d = E.bw[r] / 2; E.bw[r] -= d; E.bw.alc = (E.bw.alc || 0) + d; E.idle[r] = 0; } }
   E.endC = S.coins; E.walEnd = E.wal; return did.length; }
 // ---------- relógio: a cada 10 min, e recuperação quando o jogo esteve fechado ----------
-EXT.tick.unshift((S, now) => { if (!S.eq) { if (S.lvl >= 20) eqOf(S); else return false; } const E = S.eq; if (!Object.values(E.on).some(Boolean)) { E.at = now; return false; } const gap = now - (E.at || now); if (gap < TURN) return false;
+EXT.tick.unshift((S, now) => { if (!window.EXT_READY) return false; if (S.arrAuto == null && S.lvl >= 20) S.arrAuto = 1; if (!S.eq) { if (S.lvl >= 20) eqOf(S); else return false; } const E = S.eq; if (!Object.values(E.on).some(Boolean)) { E.at = now; return false; } const gap = now - (E.at || now); if (gap < TURN) return false;
   const n = Math.min(MAXT, Math.floor(gap / TURN)), t0 = now - n * TURN; if (n <= 1) { E.at = now; turn(S, now); return true; }
   const snap = () => ({ c: Math.round(S.coins), pop: typeof cbPop === 'function' ? cbPop(S) : 0, land: Object.keys(S.land).filter(k => S.land[k]).length, z: S.ci ? S.ci.z.length : 0, zb: S.ci ? S.ci.z.filter(t => t.lv).length : 0, p: S.ci ? S.ci.p.length : 0, cb: (S.cb || []).length, ver: S.tech ? S.tech.ver || 0 : 0, srv: S.tech ? S.tech.srv || 0 : 0 });
   if (window.statSample) statSample(S, t0); const n0 = Object.assign({}, E.n), b0 = snap(), l0 = E.log.length ? E.log[E.log.length - 1][0] : 0, sub0 = E.sub || 0;

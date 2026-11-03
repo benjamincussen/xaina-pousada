@@ -9,6 +9,7 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 - **Tokens:** trabajar por rondas grandes pero cuidando los tokens.
 
 ## Archivos
+- `index.html` pone `window.EXT_READY = true` cuando cargaron todos los archivos; las recuperaciones (ciudad y equipo) esperan esa marca.
 | Archivo | Qué contiene |
 |---|---|
 | `game.js` | El juego base. `apply(S, a, now)` cambia el estado (co-op host-authoritative). Hooks `EXT` (ver `PLAN-EXT.md`) y `worldB()` (límites de cámara y noche, ampliables con `EXT.bounds`). |
@@ -37,7 +38,7 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 - **Publicar:** `granja/tests/pushloop.sh "<resumen>"`. Rebasa sobre main, pone versión = main + 1, reemplaza `## Versión 0 (sesión …` en PLAN.md y pushea a main y a la rama actual (edita la línea de atribución del commit con la sesión actual).
 
 ## Estado
-- Versión **134**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles, ciudad SimCity (zonas, luz/agua, servicios, aprobación, tráfico, presupuesto, desastres leves, turismo, noche, monumentos dibujados), Lúcia que ordena todo y sola, casas con dibujos nuevos, tecnología e IA, educación, contaminación, mapa y ordenanzas, cobradores y dibujos de verdad con el zoom lejos, equipo de la ciudad que trabaja solo.
+- Versión **135**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles, ciudad SimCity (zonas, luz/agua, servicios, aprobación, tráfico, presupuesto, desastres leves, turismo, noche, monumentos dibujados), Lúcia que ordena todo y sola, casas con dibujos nuevos, tecnología e IA, educación, contaminación, mapa y ordenanzas, cobradores y dibujos de verdad con el zoom lejos, equipo de la ciudad que trabaja solo.
 
 ## Próxima ronda pedida ("dale con todo", estilo SimCity)
 1. ✅ Zonas que crecen solas con medidor RCI (v122, `cidade.js`).
