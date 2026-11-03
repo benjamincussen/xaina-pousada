@@ -21,16 +21,18 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 | `tecno.js` | Fábrica de chips, data center y laboratorio de IA (`S.tech`: chips, srv, prog, ver, subs). Usa la energía y el agua que sobran de la ciudad. Ficha `tecno`. |
 | `arte.js` | Dibujos de casas, edificios, negocios y lotes de la ciudad (`cbArt`, `ciArt`) y miniaturas para el zoom lejos (`cbFar`, `ciFar`, `ciPlFar`). |
 | `cobrador.js` | Hasta 3 cobradores (`S.cob`) que cobran 🔨, colonias y caja de la ciudad cada 5 min con 5% de comisión. |
-| `index.html` | Carga: relay.js, p2p.js, game.js, mundo.js, negocios.js, construir.js, cidade.js, cidade2.js, cidade3.js, tecno.js, arte.js, cobrador.js. |
+| `equipo.js` | Equipo de la ciudad (`S.eq`): Marta, Rosa, Ada, Tomás y Clara trabajan cada 10 min y recuperan hasta 12 h al abrir; billetera, metas de ahorro, barrios planificados, parque tecnológico, informe. |
+| `NOCHE.md` | Plan, backlog y bitácora de la noche autónoma. |
+| `index.html` | Carga: relay.js, p2p.js, game.js, mundo.js, negocios.js, construir.js, cidade.js, cidade2.js, cidade3.js, tecno.js, arte.js, cobrador.js, equipo.js. |
 
 ## Pruebas (Playwright; chromium ya instalado; `NODE_PATH=$(npm root -g)`)
 - **Servidor:** `python3 -m http.server 8767` desde la raíz del repo.
 - **Broker para co-op:** aedes + ws en `ws://127.0.0.1:8885/mqtt` (instalar `mqtt@5.10.4 aedes@0.51.3 ws@8.18.0`).
-- **Pruebas en `granja/tests/`:** `smoke.js`, `fuzz.js`, `look.js` (helper), `oldsave.js`, `coopnew.js`, `i18n.js`, `mundo6.js`, `cb.js`, `arr.js`, `cidade.js`, `cidade2.js`, `cidade3.js`, `cobrador.js`. Algunas guardan capturas junto al archivo.
+- **Pruebas en `granja/tests/`:** `smoke.js`, `fuzz.js`, `look.js` (helper), `oldsave.js`, `coopnew.js`, `i18n.js`, `mundo6.js`, `cb.js`, `arr.js`, `cidade.js`, `cidade2.js`, `cidade3.js`, `cobrador.js`, `noche.js` (noche simulada: `node tests/noche.js 10`), `equipo_ui.js`. Algunas guardan capturas junto al archivo.
 - **Publicar:** `granja/tests/pushloop.sh "<resumen>"`. Rebasa sobre main, pone versión = main + 1, reemplaza `## Versión 0 (sesión …` en PLAN.md y pushea a main y a la rama actual (edita la línea de atribución del commit con la sesión actual).
 
 ## Estado
-- Versión **125**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles, ciudad SimCity (zonas, luz/agua, servicios, aprobación, tráfico, presupuesto, desastres leves, turismo, noche, monumentos dibujados), Lúcia que ordena todo y sola, casas con dibujos nuevos, tecnología e IA, educación, contaminación, mapa y ordenanzas, cobradores y dibujos de verdad con el zoom lejos.
+- Versión **126**: nivel máximo 200, Concejo, mundo con 15 ciudades y colonias, construir libre con arquitecta y calles, ciudad SimCity (zonas, luz/agua, servicios, aprobación, tráfico, presupuesto, desastres leves, turismo, noche, monumentos dibujados), Lúcia que ordena todo y sola, casas con dibujos nuevos, tecnología e IA, educación, contaminación, mapa y ordenanzas, cobradores y dibujos de verdad con el zoom lejos, equipo de la ciudad que trabaja solo.
 
 ## Próxima ronda pedida ("dale con todo", estilo SimCity)
 1. ✅ Zonas que crecen solas con medidor RCI (v122, `cidade.js`).
@@ -40,6 +42,7 @@ Para la próxima sesión de Claude Code. El juego es `granja/`, publicado en Git
 5. ✅ Tráfico y transporte, presupuesto e impuestos, desastres leves, turismo, luces de noche y dibujos de los monumentos (v123, `cidade2.js`).
 6. ✅ Lúcia ordena todo y sola, casas nuevas, tecnología e IA, educación, contaminación, mapa de cobertura y ordenanzas (v124).
 7. ✅ Cobradores automáticos y miniaturas para el zoom lejos (v125).
+8. ✅ Equipo de la ciudad autónomo (v126). Lo que sigue está en `NOCHE.md`.
 
 ## Ideas para la ronda siguiente
 - Tren entre la ciudad y las ciudades vecinas de `mundo.js`; aeropuerto que trae turistas de otras ciudades.

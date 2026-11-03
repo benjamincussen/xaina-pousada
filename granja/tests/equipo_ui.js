@@ -1,0 +1,4 @@
+(async () => { const { b, A, errs } = await require('./look.js')({ lvl: 30, coins: 200000, land: { leste: 1, sul: 1, colina: 1, vila: 1, bairro: 1, escolar: 1, praia: 1, cidade: 1, centro: 1, livre1: 1 } });
+  console.log(await A.evaluate(() => { const S = G.S, r = act({ a: 'eqNow' }); openSheet('equipo'); const h1 = document.getElementById('sheet').innerText.length; act({ a: 'eqTog', r: 'inm', on: 0 }); act({ a: 'eqRes', v: 0.5 }); openSheet('cidade'); const h2 = document.getElementById('sheet').innerText.includes('👥'); return JSON.stringify({ ok: r.ok, msg: r.msg, eq: !!S.eq, h1, h2, inm: S.eq.on.inm, res: S.eq.res, log: S.eq.log.length }); }));
+  await A.evaluate(() => openSheet('equipo')); await A.waitForTimeout(300); await A.screenshot({ path: __dirname + '/eq_sheet.png' });
+  console.log('errs', errs.length, errs.slice(0, 3)); await b.close(); })();

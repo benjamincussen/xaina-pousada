@@ -45,7 +45,7 @@ function ownedAt(S, x, y) { if (x > 20 && x < 1480 && y > 120 && y < 1000) retur
 function freeAt(S, k, x, y) { const C = CAT[k]; if (!ownedAt(S, x - C.w / 2, y) || !ownedAt(S, x + C.w / 2, y) || !ownedAt(S, x, y - C.h)) return false; const box = { x: x - C.w / 2 - 6, y: y - C.h - 30, w: C.w + 12, h: C.h + 36 }, hit = r => box.x < r.x + r.w && box.x + box.w > r.x && box.y < r.y + r.h && box.y + box.h > r.y;
   let rs = []; try { rs = archRects(S); } catch (e) {} if (rs.some(hit)) return false; for (const r of stOf(S)) if (hit(r)) return false; for (const b of cbOf(S)) { if (b === G.cbSkip || (G.arrSkip && G.arrSkip.has(b))) continue; const B = CAT[b.k]; if (hit({ x: b.x - B.w / 2 - 6, y: b.y - B.h - 30, w: B.w + 12, h: B.h + 36 })) return false; }
   try { if (x > 0 && x < WW && typeof roadOk === 'function' && !roadOk(S, Math.floor(x / RD), Math.floor(y / RD))) return false; } catch (e) {} return true; }
-window.cbFree = freeAt;
+window.cbFree = freeAt; window.cbPrice = priceOf;
 // ---------- ações ----------
 EXT.apply.push({ pre: 'cb', fn: (S, a, now, out, fail) => { const L0 = cbOf(S);
   if (a.a === 'cbPut') { const C = CAT[a.k]; if (!C) return fail(''); if (L0.length >= MAXB) return fail(L('cbMax')); if (C.g === 'mon' && L0.some(b => b.k === a.k)) return fail(L('monOne')); const x = Math.round(+a.x), y = Math.round(+a.y); if (!isFinite(x) || !isFinite(y) || !freeAt(S, a.k, x, y)) return fail(L('cbNoSpot')); const c = priceOf(S, a.k); if (S.coins < c) return fail(L('noCoins')); S.coins -= c; L0.push({ k: a.k, x, y, at: now, lv: 1, t: now, by: a.by ? String(a.by).slice(0, 16) : undefined }); addXp(S, Math.max(5, Math.round(c / 120)), out); out.fx.push(['coins', -c]); out.fx.push(['cbBuilt', a.k]); return true; }

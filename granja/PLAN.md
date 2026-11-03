@@ -877,6 +877,20 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 
 ## Versión 125 (sesión "Corsario"): cobradores y dibujos de verdad con el zoom lejos
 
-- **Cobradores (`cobrador.js`)**: hasta 3 (15.000, 50.000 y 120.000). El 1 cobra las construcciones del 🔨, el 2 también las colonias de las islas y el 3 también la caja de la 🏙️. Pasan cada 5 minutos (tick del host, usando las mismas acciones `cbAllCol`, `muCollect` y `ciCol`) y se quedan con el 5%. Cartel en el 🔨, en la 🏙️ y en el 🌍 (si hay colonias) con la última vuelta, el total y "Cobrar ahora". Se ven caminando por los barrios con traje y bolsa de monedas, y avisan cuánto juntaron. Estado en `S.cob` (`n`, `at`, `tot`, `last`).
+- **Cobradores (`cobrador.js`)**: hasta 3 (15.000, 50.000 y 120.000). El 1 cobra las construcciones del 🔨, el 2 también las colonias de las islas y el 3 también la caja de la 🏙️. Pasan cada 5 minutos (tick del host, usando las mismas acciones `cbAllCol`, `muCollect` y `ciCol`) y se quedan con el 2%. Cartel en el 🔨, en la 🏙️ y en el 🌍 (si hay colonias) con la última vuelta, el total y "Cobrar ahora". Se ven caminando por los barrios con traje y bolsa de monedas, y avisan cuánto juntaron. Estado en `S.cob` (`n`, `at`, `tot`, `last`).
 - **Zoom lejos con dibujos**: antes, con el zoom muy alejado, lo construido con 🔨, los lotes de la 🏙️ y sus servicios se pintaban como rectángulos del color del techo. Ahora cada dibujo se guarda una vez como miniatura (sprite a media resolución, por tipo, nivel y color) y se pega de un golpe: se ve igual que de cerca sin hacer más lento el juego. Lotes vacíos: recuadro del color de la zona.
 - Prueba nueva: `tests/cobrador.js` (contrata los 3, cobra construcciones, colonias y ciudad, verifica la vuelta automática y saca fotos de lejos y de cerca).
+
+## Versión 126 (sesión "Corsario"): equipo de la ciudad que trabaja solo (también con el juego cerrado)
+
+- **Nuevo `equipo.js`**, personajes con cargo que trabajan cada 10 minutos (tick del host) y, cuando el juego estuvo cerrado, recuperan hasta 12 horas al abrirlo (turno a turno: pasos de la ciudad, Concejo, cobradores y equipo), y muestran el informe **"Mientras no estabas"** (monedas, terrenos, lotes, servicios, construcciones, vecinos, servidores, modelos de IA, tesoro invertido y quién trabajó).
+  - 🏠 **Marta** (inmobiliaria): compra el terreno más barato disponible cuando la billetera alcanza.
+  - 🗺️ **Rosa** (alcaldesa): pone luz, agua, bomberos, policía, hospital, escuela y paradas donde el mapa de cobertura está rojo (el más grande si faltan muchos, cerca de los lotes sin servicio; si no hay lugar, le pide a Lúcia que compacte el terreno). Pinta zonas donde hay demanda y, cuando el barrio se llena, **abre un barrio planificado** en un terreno vacío con núcleo de servicios en el centro y zonas alrededor. Baja o sube el impuesto según la aprobación.
+  - 💻 **Ada** (tecnología): arma un **parque tecnológico** en otro terreno (universidad, fábrica de chips, data center, laboratorio de IA, más data centers cuando se llenan), le pone central y agua si algo queda parado, lanza los modelos y vende chips sobrantes.
+  - 🔨 **Tomás** (obras): construye casas y negocios con 🔨 en terrenos libres (no en los barrios ni el parque), le pide a Lúcia que ordene y mejora lo más bajo cuando sobra mucho.
+  - 💰 **Clara** (tesorera): cobra lo que no cubren los cobradores, trae una parte del **tesoro del Concejo** para las obras (hasta 10% del excedente, máx. 12.000 por turno), contrata cobradores y resuelve emergencias.
+- **Billetera del equipo:** empieza con el 25% de las monedas y suma el 70% de lo que entra (el 30% siempre se guarda; se puede cambiar a 10% o 50%). **Metas de ahorro:** cuando alguien necesita algo caro, los demás esperan.
+- Ficha 👥 con cada personaje (encender/apagar, trabajos hechos), reserva, "Trabajar ahora", bitácora y el informe. Tarjeta arriba en la 🏙️ y botón en el 🔨. Los personajes se ven trabajando en el mapa con su ícono y nombre.
+- Se activa solo en partidas desde el nivel 20.
+- **Cobradores al 2%** (antes 5%).
+- Pruebas: `tests/noche.js` (noche simulada) y `tests/equipo_ui.js`.
