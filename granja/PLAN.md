@@ -925,3 +925,10 @@ Pedido de Benjamin: un mapa bien grande, más casas y comprar terrenos sin parar
 - **Rascacielos ★5**: los lotes residenciales y comerciales llegan a ★5 con universidad cerca, valor del suelo ≥ 10% (plaza, parque o monumento) y aprobación ≥ 65%. Residencial: torre de vidrio con jardín en la azotea (90 vecinos, 560/h). Comercial: torre con corona dorada, antena y nombre (VENTO TOWER, BRISA PLAZA, TORRE SOL; 55 empleos, 820/h). La industria sigue hasta ★4. La escuela permite hasta ★4 (antes también) y la universidad hasta ★5.
 - **Horizonte de noche**: luces rojas de avión que titilan en los edificios altos y reflectores que se mueven en los rascacielos.
 - Meta nueva: tener un rascacielos ★5. Prueba: `tests/estilo.js`.
+
+## Versión 131 (sesión "Corsario"): calles con vida y tres empleados más
+
+- **Nuevo `calles.js`**: semáforos (verde, amarillo, rojo) y pasos de cebra en cada cruce de las calles de la arquitecta; **feria del barrio** junto a cada plaza o parque un día de cada tres del juego (puestos con toldos y productos, gente paseando, +4 de aprobación); **fuegos artificiales** sobre la ciudad de noche cuando la aprobación es de 85% o más; **vecinos caminando** entre los edificios de la 🏙️ (hasta 14, algunos con bolsa de compras).
+- **Autobuses que paran**: llegan a la parada, esperan 3 segundos mientras suben dos pasajeros y siguen.
+- **Equipo**: 🌳 **Lino** (jardinero: plazas o parques donde hay humo y donde falta valor del suelo para llegar a ★5), 📦 **Beto** (repartidor: abastece cafés, tiendas, pizzerías y fábricas con el granero para que rindan el doble) e 🏨 **Iris** (turismo: hoteles cuando los turistas no caben y monumentos cuando sobra mucho dinero). Los roles nuevos empiezan encendidos también en equipos que ya existían.
+- Prueba: `tests/calles.js`.

@@ -1,0 +1,34 @@
+// Sítio do Vento — Vida nas ruas: semáforos e faixas de pedestre nos cruzamentos da arquiteta, feiras perto das praças, fogos quando a aprovação está alta e vizinhos caminhando.
+(function () {
+const near = (x, y, m) => Math.abs(x - CAM.x) < innerWidth / CAM.z / 2 + m && Math.abs(y - CAM.y) < innerHeight / CAM.z / 2 + m;
+const circ = (g, x, y, r, c) => { g.fillStyle = c; g.beginPath(); g.arc(x, y, r, 0, 6.283); g.fill(); };
+// ---------- cruzamentos ----------
+let XC = { n: -1 };
+function crosses(S) { const st = S.cbst || []; if (XC.S === S && XC.n === st.length) return XC.v; const H = st.filter(r => r.w > r.h), V = st.filter(r => r.w <= r.h), v = [];
+  for (const h of H) for (const q of V) if (q.x < h.x + h.w && q.x + q.w > h.x && q.y < h.y + h.h && q.y + q.h > h.y) v.push({ x: q.x, y: h.y, w: q.w, h: h.h }); XC = { S, n: st.length, v }; return v; }
+EXT.draw0.push((g, S) => { if (!S || !S.cbst || CAM.z < 0.35) return; for (const c of crosses(S)) { if (!near(c.x, c.y, 120)) continue;
+  g.fillStyle = 'rgba(255,255,255,.85)'; for (let k = 0; k < 6; k++) { g.fillRect(c.x + c.w + 8 + k * 0, c.y + 4 + k * 9, 22, 5); g.fillRect(c.x - 30, c.y + 4 + k * 9, 22, 5); } } });
+EXT.draw.push((g, S, T) => { if (!S || !S.cbst || CAM.z < 0.35) return; const ph = (T % 12) / 12, col = ph < 0.45 ? '#2fd05a' : ph < 0.55 ? '#ffd23f' : '#e0533d';
+  for (const c of crosses(S)) { if (!near(c.x, c.y, 120)) continue; for (const [px, py] of [[c.x - 14, c.y - 10], [c.x + c.w + 14, c.y + c.h + 10]]) { g.fillStyle = '#3a3f48'; g.fillRect(px - 2, py - 44, 4, 44); rr(g, px - 7, py - 66, 14, 26, 4); g.fill(); circ(g, px, py - 60, 3.2, col === '#e0533d' ? col : '#5a1f1a'); circ(g, px, py - 53, 3.2, col === '#ffd23f' ? col : '#5a4a1a'); circ(g, px, py - 46, 3.2, col === '#2fd05a' ? col : '#1a4a2a'); } } });
+// ---------- feiras: a cada 3 dias do jogo, de dia, perto das praças e parques ----------
+const DAY = 960000, feiraOn = now => Math.floor(now / DAY) % 3 === 1 && nightF(now) < 0.3;
+window.feiraOn = feiraOn;
+if (window.CI) CI.H.apM.push(S => feiraOn(Date.now()) && (S.cb || []).some(b => b.k === 'praca' || b.k === 'parque') ? 4 : 0);
+EXT.draw.push((g, S, T) => { if (!S || !S.cb || CAM.z < 0.35 || !feiraOn(Date.now()) || typeof kid !== 'function') return; const cs = [['#e0533d', '#fff'], ['#3d7fd6', '#fff'], ['#2f9e6e', '#ffd23f'], ['#ff8fb3', '#fff']], goods = ['🍎', '🧀', '🌽', '🍯', '🥖', '🌸'];
+  for (const b of S.cb) { if (b.k !== 'praca' && b.k !== 'parque') continue; const y0 = b.y + 70; if (!near(b.x, y0, 200)) continue;
+    for (let k = 0; k < 4; k++) { const x = b.x - 150 + k * 100, [c1, c2] = cs[(k + Math.abs(Math.round(b.x))) % 4]; g.fillStyle = '#8a5a2b'; g.fillRect(x - 32, y0 - 34, 4, 34); g.fillRect(x + 28, y0 - 34, 4, 34); g.fillStyle = '#c9a66b'; g.fillRect(x - 34, y0 - 14, 68, 14); for (let s = 0; s < 4; s++) { g.fillStyle = s % 2 ? c2 : c1; g.beginPath(); g.moveTo(x - 36 + s * 18, y0 - 34); g.lineTo(x - 18 + s * 18, y0 - 34); g.lineTo(x - 27 + s * 18, y0 - 48); g.closePath(); g.fill(); } g.font = '14px sans-serif'; g.textAlign = 'center'; g.fillText(goods[(k + Math.abs(Math.round(b.y))) % goods.length], x - 12, y0 - 17); g.fillText(goods[(k + 2 + Math.abs(Math.round(b.y))) % goods.length], x + 12, y0 - 17); }
+    for (let k = 0; k < 6; k++) { const a = T * 0.25 + k * 1.05, x = b.x + Math.cos(a) * 170, y = y0 + 22 + Math.sin(a) * 10; g.save(); g.translate(x, y); g.scale(1.25, 1.25); kid(g, 0, 0, ['#ff8fb3', '#ffd23f', '#7fc8e6', '#9b5de5', '#e0533d', '#2f9e6e'][k], T, k); g.restore(); }
+    g.fillStyle = 'rgba(58,36,18,.85)'; g.font = '900 13px Nunito, sans-serif'; const txt = L('feiraT'), w = g.measureText(txt).width + 18; rr(g, b.x - w / 2, y0 - 82, w, 22, 8); g.fill(); g.fillStyle = '#fff'; g.textAlign = 'center'; g.fillText(txt, b.x, y0 - 66); } });
+// ---------- fogos: de noite, com aprovação ≥ 85% ----------
+EXT.draw.push((g, S, T) => { const C = S && S.ci; if (!C || !C.z || C.ap < 85 || nightF(Date.now()) < 0.5 || CAM.z < 0.15) return; const b = C.z.filter(t => t.lv); if (!b.length) return; const cx = b.reduce((a, t) => a + t.x, 0) / b.length, cy = b.reduce((a, t) => a + t.y, 0) / b.length; if (!near(cx, cy, 1400)) return;
+  const cols = ['255,80,120', '255,210,63', '80,180,255', '120,255,140', '200,120,255']; g.save(); g.globalCompositeOperation = 'lighter';
+  for (let k = 0; k < 4; k++) { const ph = (T * 0.45 + k * 0.27) % 1, seed = Math.floor(T * 0.45 + k * 0.27) * 7 + k, bx = cx + Math.sin(seed * 1.7) * 420, vt = CAM.y - innerHeight / CAM.z / 2, vh = innerHeight / CAM.z, by = clamp(cy - 520 - Math.abs(Math.cos(seed)) * 260, vt + vh * 0.12, vt + vh * 0.45), col = cols[seed % cols.length];
+    if (ph < 0.25) { const u = ph / 0.25; circ(g, bx, by + (1 - u) * 400, 4, `rgba(${col},.9)`); continue; } const u = (ph - 0.25) / 0.75, r = 40 + u * 200; for (let p = 0; p < 24; p++) { const a = p / 24 * 6.283; circ(g, bx + Math.cos(a) * r, by + Math.sin(a) * r + u * u * 50, 6 * (1 - u) + 1.5, `rgba(${col},${1 - u})`); circ(g, bx + Math.cos(a) * r * 0.6, by + Math.sin(a) * r * 0.6 + u * u * 40, 3 * (1 - u) + 1, `rgba(255,255,255,${0.8 * (1 - u)})`); } }
+  g.restore(); });
+// ---------- vizinhos caminhando entre os prédios ----------
+EXT.draw.push((g, S, T) => { const C = S && S.ci; if (!C || !C.z || CAM.z < 0.35 || typeof kid !== 'function') return; const b = C.z.filter(t => t.lv); if (b.length < 3) return; const n = Math.min(14, Math.floor(b.length / 2)), cs = ['#e0533d', '#3d7fd6', '#2f9e6e', '#e6a92a', '#9b5de5', '#ff8fb3', '#7fc8e6'];
+  for (let k = 0; k < n; k++) { const tt = T / 9 + k * 2.3, i = (Math.floor(tt) * 7 + k * 13) % b.length, j = (i + 1 + k) % b.length, u = tt % 1, A = b[i], B = b[j], x = A.x + (B.x - A.x) * u, y = A.y + 30 + (B.y - A.y) * u; if (!near(x, y, 40)) continue; g.save(); g.translate(x, y); g.scale(1.3, 1.3); kid(g, 0, 0, cs[k % cs.length], T, k); g.restore(); if (k % 4 === 0) { g.fillStyle = '#8a5a2b'; g.fillRect(x + 8, y - 16, 2, 10); circ(g, x + 9, y - 6, 4, '#c8955a'); } } });
+Object.assign(TX.pt, { feiraT: '🧺 Feira do bairro', n_ruas: 'Ruas com vida e equipe maior', n_ruasD: 'Semáforos e faixas nos cruzamentos, ônibus que param no ponto, feiras perto das praças a cada 3 dias (+4 de aprovação), fogos de artifício com aprovação de 85% e vizinhos caminhando. E a equipe ganhou Lino (jardineiro), Beto (entregador) e Iris (turismo).' });
+Object.assign(TX.es, { feiraT: '🧺 Feria del barrio', n_ruas: 'Calles con vida y equipo más grande', n_ruasD: 'Semáforos y pasos de cebra en los cruces, autobuses que paran en la parada, ferias junto a las plazas cada 3 días (+4 de aprobación), fuegos artificiales con aprobación de 85% y vecinos caminando. Y el equipo sumó a Lino (jardinero), Beto (repartidor) e Iris (turismo).' });
+if (typeof NEWS === 'object' && Array.isArray(NEWS) && !NEWS.some(n => n[0] === 'n_ruas')) NEWS.unshift(['n_ruas', 'cidade']);
+})();
